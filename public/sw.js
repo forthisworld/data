@@ -5,7 +5,7 @@
  *  - API calls: network only (search, MCP, contributions must be live)
  * Bump VERSION to drop old caches.
  */
-const VERSION = 'v6';
+const VERSION = 'v7';
 const STATIC = `ftw-static-${VERSION}`;
 const PAGES = `ftw-pages-${VERSION}`;
 const PRECACHE = [

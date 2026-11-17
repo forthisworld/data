@@ -10,6 +10,10 @@
  * line-work differs, and the source leaves out some water and marsh) go to the neighbouring seat of
  * the same state, and islands and exclaves that touch no seat to the nearest one (scripts/lib/fill-gaps.mjs).
  *
+ * Where we have checked a state's assembly seats (scripts/lib/assembly-seats.mjs), its Lok Sabha seats
+ * are drawn from them instead: a Lok Sabha seat is by law a set of whole assembly seats, so the two
+ * layers then agree at every point. When a state is added there, run geo:ac for it and geo:pc again.
+ *
  * Left out: Assam and Jammu & Kashmir (except Ladakh). Their seats were redrawn by the 2023 and 2022
  * delimitations, after this file was made.
  *
@@ -20,6 +24,7 @@ import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'node:fs';
 import { resolve } from 'node:path';
 import mapshaper from 'mapshaper';
 import { fillGaps } from './lib/fill-gaps.mjs';
+import { assemblySeats, ASSEMBLY_STATES, UNNAMED } from './lib/assembly-seats.mjs';
 
 const ROOT = resolve(import.meta.dirname, '..');
 const COMMIT = 'b3fbbde595310b397a55d718e0958ce249a4fa1f';
@@ -83,15 +88,34 @@ const leftKm2 = filled.left.filter(x => drawn.has(x.slug)).reduce((s, x) => s + 
 for (const a of filled.apart.filter(x => x.km2 > 1)) console.log(`apart from every seat: ${a.km2.toFixed(1)} km2 at ${a.at.map(v => v.toFixed(3))} -> ${a.key} (${a.km.toFixed(1)} km away)`);
 if (leftKm2 > 1) throw new Error(`${leftKm2.toFixed(0)} km2 inside states with seats is still in no seat`);
 
+// States whose assembly seats we have: each Lok Sabha seat becomes the union of its assembly seats.
+// `measured` is what district overlap is measured on: the source shape, or the assembly-built shape.
+const measured = JSON.parse(clipped['clipped.json']);
+for (const slug of Object.keys(ASSEMBLY_STATES)) {
+    // Unrounded shapes: they end exactly on the state line, as the Lok Sabha seats of the next state do.
+    const { seats: acSeats } = await assemblySeats(slug, { quiet: true });
+    const joined = await mapshaper.applyCommands(`-i ac.json -filter "key.charAt(0) != '${UNNAMED}'" -dissolve pcKey -o pc.json`, { 'ac.json': JSON.stringify(acSeats) });
+    const built = new Map(JSON.parse(joined['pc.json']).features.map(f => [f.properties.pcKey, f.geometry]));
+    const ours = filled.seats.features.filter(f => f.properties.stateSlug === slug);
+    const unmatched = [...ours.filter(f => !built.has(f.properties.key)).map(f => f.properties.key), ...[...built.keys()].filter(k => !ours.some(f => f.properties.key === k))];
+    if (unmatched.length) throw new Error(`${slug}: assembly seats and Lok Sabha seats do not pair up: ${unmatched.join(', ')}`);
+    for (const f of ours) f.geometry = built.get(f.properties.key);
+    for (const f of measured.features) if (built.has(f.properties.key)) f.geometry = built.get(f.properties.key);
+    console.log(`${slug}: ${ours.length} Lok Sabha seats drawn from its assembly seats`);
+}
+
 const out = await mapshaper.applyCommands(
     [
         '-i filled.json name=seats',
+        // Seats built from assembly seats meet the next state's seats within a hair; close what is left.
+        '-clean target=seats',
         '-innerlines target=seats where="A.stateSlug == B.stateSlug" + name=lines',
         '-each target=lines "kind = \'pc\'"',
         '-o target=seats seats.json precision=0.0001',
         '-o target=lines lines.json precision=0.0001',
         // Which 2011 districts each seat overlaps, and by how much (for "who represents this district").
-        // Measured on the seat as the source draws it, so a filled gap never adds a district to a seat.
+        // Measured on the seat as the source draws it (or as built from assembly seats), so a filled gap
+        // never adds a district to a seat.
         '-i source.json name=src',
         '-i districts.json name=districts',
         '-each target=src "seatKm2 = this.area / 1e6"',
@@ -101,7 +125,7 @@ const out = await mapshaper.applyCommands(
         '-filter target=overlap "key != null && census2011Code != null && census2011Code != \'0\'"',
         '-o target=overlap overlap.json format=json',
     ].join(' '),
-    { 'filled.json': JSON.stringify(filled.seats), 'source.json': clipped['clipped.json'], 'districts.json': readFileSync(resolve(OUT, 'districts.geojson'), 'utf8') },
+    { 'filled.json': JSON.stringify(filled.seats), 'source.json': JSON.stringify(measured), 'districts.json': readFileSync(resolve(OUT, 'districts.geojson'), 'utf8') },
 );
 
 const seats = JSON.parse(out['seats.json']);
