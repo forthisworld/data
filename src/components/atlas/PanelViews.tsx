@@ -770,6 +770,8 @@ interface MpladsWork {
     stage?: string;
     completed?: { date?: string; amount: number };
     paid: number;
+    /** Who was paid, as the portal lists them. */
+    vendors?: { name: string; paid: number }[];
 }
 
 const pct = (a: number, b: number) => (b > 0 ? Math.round((a / b) * 100) : 0);
@@ -824,6 +826,9 @@ function MpladsSection({ info, sources }: { info: MpladsInfo; sources: SourceCit
                             <li key={w.id} className="rounded-lg border border-ftw-line p-2.5 text-[13px] leading-snug">
                                 <p className="font-medium">{w.description || w.activity}</p>
                                 <p className="mt-0.5 text-xs text-ftw-muted">{w.activity}{w.agency ? ` · ${w.agency}` : ''}</p>
+                                {w.vendors && w.vendors.length > 0 && (
+                                    <p className="mt-0.5 text-xs text-ftw-muted">Paid to {w.vendors.map(v => `${v.name} (${rupees(v.paid)})`).join(', ')}</p>
+                                )}
                                 <p className="mt-1 flex flex-wrap gap-x-3 text-xs tabular-nums">
                                     <span>{rupees(w.sanctioned?.amount ?? w.recommended.amount)} {w.sanctioned ? 'sanctioned' : 'recommended'}</span>
                                     <span className={w.paid ? '' : 'text-ftw-faint'}>{rupees(w.paid)} paid</span>

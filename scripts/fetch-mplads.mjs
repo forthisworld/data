@@ -11,11 +11,12 @@
  *    sanctioned and completed (count and amount), and payments made. Totals are checked against the
  *    portal's own list totals; the script stops if they disagree.
  *  - public/data/mplads/lok-sabha-18/<state>/<seat>.json for the states in WORK_STATES: every work, with
- *    what it is, the implementing agency, dates, amounts, stage and amount paid. Vendor names are not kept.
+ *    what it is, the implementing agency, dates, amounts, stage, and who was paid how much (vendor names as
+ *    the portal lists them).
  *
  * Raw responses (~280 MB) go to temp/mplads and are not committed.
  */
-import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs';
+import { readFileSync, writeFileSync, mkdirSync, existsSync, statSync } from 'node:fs';
 import { resolve } from 'node:path';
 
 const ROOT = resolve(import.meta.dirname, '..');
@@ -24,8 +25,10 @@ const DASHBOARD = 'https://mplads.mospi.gov.in/digigov/dashboard.html';
 const CACHE = resolve(ROOT, 'temp/mplads');
 const TERM = 18;
 const WORK_STATES = ['karnataka'];
-const today = new Date().toISOString().slice(0, 10);
 const reuse = process.argv.includes('--cached'); // re-run on the last download instead of fetching again
+// The date the data was read: today, or when the cached download was made.
+const cached = resolve(ROOT, 'temp/mplads/allocated.json');
+const today = (reuse && existsSync(cached) ? statSync(cached).mtime : new Date()).toISOString().slice(0, 10);
 
 const TILES = {
     allocated: "Allocated Limit for Hon'ble MPs",
@@ -135,7 +138,16 @@ writeFileSync(resolve(ROOT, `data/in/mplads/lok-sabha-${TERM}.json`), JSON.strin
 
 // ---- per-work lists for chosen states
 const paidByWork = new Map();
-for (const r of lists.paid.rows) paidByWork.set(r.WORK_RECOMMENDATION_DTL_ID, (paidByWork.get(r.WORK_RECOMMENDATION_DTL_ID) ?? 0) + (Number(r.FUND_DISBURSED_AMT) || 0));
+const vendorsByWork = new Map(); // work id -> Map(vendor name -> amount paid)
+for (const r of lists.paid.rows) {
+    const amt = Number(r.FUND_DISBURSED_AMT) || 0;
+    paidByWork.set(r.WORK_RECOMMENDATION_DTL_ID, (paidByWork.get(r.WORK_RECOMMENDATION_DTL_ID) ?? 0) + amt);
+    const name = (r.VENDOR_NAME ?? '').replace(/\s+/g, ' ').trim();
+    if (!name) continue;
+    if (!vendorsByWork.has(r.WORK_RECOMMENDATION_DTL_ID)) vendorsByWork.set(r.WORK_RECOMMENDATION_DTL_ID, new Map());
+    const v = vendorsByWork.get(r.WORK_RECOMMENDATION_DTL_ID);
+    v.set(name, (v.get(name) ?? 0) + amt);
+}
 const completedByWork = new Map(lists.completed.rows.map(r => [r.WORK_RECOMMENDATION_DTL_ID, r]));
 const activity = s => (s ?? '').replace(/^.*?-(?=\d+(\.\d+)?\s)/, '').replace(/\s+/g, ' ').trim();
 const ddmon = s => { const m = (s ?? '').match(/^(\d{2})-([A-Za-z]{3})-(\d{4})$/); if (!m) return undefined; const mon = 'JanFebMarAprMayJunJulAugSepOctNovDec'.indexOf(m[2]) / 3 + 1; return `${m[3]}-${String(mon).padStart(2, '0')}-${m[1]}`; };
@@ -156,6 +168,7 @@ for (const st of WORK_STATES) {
             stage: r.WORK_STAGE && r.WORK_STAGE !== 'NA' ? r.WORK_STAGE : undefined,
             ...(c ? { completed: { date: ddmon(c.ACTUAL_END_DATE), amount: round(Number(c.ACTUAL_AMOUNT) || 0) } } : {}),
             paid: round(paidByWork.get(r.WORK_RECOMMENDATION_DTL_ID) ?? 0),
+            ...(vendorsByWork.has(r.WORK_RECOMMENDATION_DTL_ID) ? { vendors: [...vendorsByWork.get(r.WORK_RECOMMENDATION_DTL_ID)].map(([name, paid]) => ({ name, paid: round(paid) })).sort((a, b) => b.paid - a.paid) } : {}),
         };
         if (!groups.has(seat.id)) groups.set(seat.id, []);
         groups.get(seat.id).push(w);
