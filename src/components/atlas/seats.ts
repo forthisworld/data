@@ -5,18 +5,22 @@
  * boundaries and lines are drawn only between seats, so seats never draw a border of their own.
  * Loaded the first time they are needed.
  *
- * Seats appear, and can be hovered and selected, from SEAT_ZOOM. Below it they are too small to
- * read or tap, so the state is the unit (Atlas.tsx).
+ * Seat lines appear, and seats can be hovered and selected, from SEAT_ZOOM: the same zoom for all
+ * three, so a line on the map always means "this can be selected". Below it the state is the unit
+ * (Atlas.tsx). Names come later (SEAT_NAME_ZOOM), when there is room for them.
  */
 import type maplibregl from 'maplibre-gl';
 
 type Bounds = [[number, number], [number, number]];
 export type SeatPrefix = 'pc' | 'ac';
 
-/** The zoom from which each kind of seat is drawn, named and selectable. */
-export const SEAT_ZOOM: Record<SeatPrefix, number> = { pc: 5.2, ac: 7.2 };
-/** Lines fade in a little before the unit becomes selectable. */
-export const LINE_LEAD = 0.4;
+/**
+ * The zoom from which each kind of seat is drawn and selectable. Lok Sabha seats: from the whole-country
+ * view, on a phone too. Assembly seats: from the view that fits one state, on a phone too.
+ */
+export const SEAT_ZOOM: Record<SeatPrefix, number> = { pc: 2.5, ac: 5 };
+/** The zoom from which seats are named. */
+const SEAT_NAME_ZOOM: Record<SeatPrefix, number> = { pc: 5.6, ac: 7.6 };
 
 export interface SeatGeo {
     bounds: Bounds;
@@ -64,11 +68,11 @@ export async function loadSeats(map: maplibregl.Map, prefix: SeatPrefix, files: 
     map.addLayer({ id: id('fill'), type: 'fill', source: sourceId, minzoom: from, layout: hidden, paint: {} }, before);
     map.addLayer({ id: id('selected-fill'), type: 'fill', source: sourceId, layout: hidden, paint: {} }, before);
     // Wider as you zoom in, so seat lines stay apart from the streets drawn at city zoom.
-    map.addLayer({ id: id('lines'), type: 'line', source: `${sourceId}-lines`, minzoom: from - LINE_LEAD, layout: hidden, paint: { 'line-width': ['interpolate', ['linear'], ['zoom'], 4, 0.4, 9, 1.3, 13, 2.2] } }, before);
+    map.addLayer({ id: id('lines'), type: 'line', source: `${sourceId}-lines`, minzoom: from, layout: hidden, paint: { 'line-width': ['interpolate', ['linear'], ['zoom'], 4, 0.4, 9, 1.3, 13, 2.2] } }, before);
     // The selected seat's own edge, as states and districts have.
     map.addLayer({ id: id('selected-line'), type: 'line', source: sourceId, layout: { ...hidden, 'line-join': 'round' }, paint: { 'line-width': ['case', ['boolean', ['feature-state', 'selected'], false], 2.5, 0] } }, before);
     map.addLayer({
-        id: id('labels'), type: 'symbol', source: sourceId, minzoom: from,
+        id: id('labels'), type: 'symbol', source: sourceId, minzoom: SEAT_NAME_ZOOM[prefix],
         layout: { ...hidden, 'text-field': ['get', 'name'], 'text-font': ['Noto Sans Regular'], 'text-size': ['interpolate', ['linear'], ['zoom'], 5.6, 10, 10, 13], 'text-max-width': 7, 'text-padding': 3 },
         paint: {},
     });

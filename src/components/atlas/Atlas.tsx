@@ -26,7 +26,7 @@ import Sheet, { PEEK_PX, useWide, type Snap } from './Sheet';
 import QuickSettings from './QuickSettings';
 import { addBasemap, paintBasemap, BASEMAP_GLYPHS, BASEMAP_PALETTE } from './basemap';
 import { PlaceView, RoadView, PersonView, RoadsView, SeatView, ROLE, shortName } from './PanelViews';
-import { loadSeats, paintSeats, showLines, seatFillLayers, SEAT_PALETTE, SEAT_ZOOM, LINE_LEAD, type SeatGeo, type SeatPrefix } from './seats';
+import { loadSeats, paintSeats, showLines, seatFillLayers, SEAT_PALETTE, SEAT_ZOOM, type SeatGeo, type SeatPrefix } from './seats';
 import { PLACE_ALIASES } from '@/lib/place-aliases';
 import { atlasPath, parseAtlasPath, type AtlasRoute } from '@/lib/atlas-route';
 
@@ -70,8 +70,9 @@ const INDIA_BOUNDS: LngLatBoundsLike = [[67.5, 6.2], [98.0, 37.6]];
 const DISTRICT_ZOOM = 5.2;
 const CITY_ZOOM = 8.5;
 /**
- * The zoom from which the unit inside a state (district or seat) is drawn, named and selectable.
- * Below it the state is the unit. Lines, names, hover and tap all follow this one number per mode.
+ * The zoom from which the unit inside a state (district or seat) is drawn and selectable. Below it
+ * the state is the unit. Lines, hover and tap all follow this one number per mode, so a line on the
+ * map always means "this can be selected".
  */
 const UNIT_ZOOM: Record<'districts' | SeatPrefix, number> = { districts: DISTRICT_ZOOM, ...SEAT_ZOOM };
 
@@ -399,7 +400,7 @@ export default function Atlas({ countryCode, countryName, data, initial }: Atlas
             map.addLayer({ id: 'states-selected-fill', type: 'fill', source: 'states', paint: {} });
             map.addLayer({ id: 'districts-fill', type: 'fill', source: 'districts', minzoom: DISTRICT_ZOOM, paint: {} });
             map.addLayer({ id: 'districts-selected-fill', type: 'fill', source: 'districts', paint: {} });
-            map.addLayer({ id: 'districts-line', type: 'line', source: 'districts', minzoom: DISTRICT_ZOOM - LINE_LEAD, paint: { 'line-width': ['interpolate', ['linear'], ['zoom'], 5, 0.5, 10, 1.2] } });
+            map.addLayer({ id: 'districts-line', type: 'line', source: 'districts', minzoom: DISTRICT_ZOOM, paint: { 'line-width': ['interpolate', ['linear'], ['zoom'], 5, 0.5, 10, 1.2] } });
             map.addLayer({ id: 'states-line', type: 'line', source: 'states', paint: { 'line-width': ['interpolate', ['linear'], ['zoom'], 3, 0.6, 8, 1.6] } });
             map.addLayer({ id: 'india-outline', type: 'line', source: 'india', paint: { 'line-width': ['interpolate', ['linear'], ['zoom'], 3, 1.2, 8, 2.2] } });
             for (const src of ['states', 'districts'] as const) {
@@ -530,7 +531,7 @@ export default function Atlas({ countryCode, countryName, data, initial }: Atlas
                 if (unit) return unit;
                 // No seat here although this state's seats are drawn (an area the seat map leaves empty):
                 // that is nothing, not the state. States with no seat shapes still open as states.
-                if (state && seats?.states.has(state.properties?.slug)) return undefined;
+                if (mode === 'districts' || (state && seats?.states.has(state.properties?.slug))) return undefined;
                 return state;
             };
             let hovered: { source: string; id: string | number } | null = null;
