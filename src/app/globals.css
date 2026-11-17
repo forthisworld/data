@@ -41,6 +41,18 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+  /* data.ftw surfaces (atlas, panels, light pages) */
+  --color-ftw-bg: var(--ftw-bg);
+  --color-ftw-surface: var(--ftw-surface);
+  --color-ftw-raised: var(--ftw-raised);
+  --color-ftw-line: var(--ftw-line);
+  --color-ftw-text: var(--ftw-text);
+  --color-ftw-muted: var(--ftw-muted);
+  --color-ftw-faint: var(--ftw-faint);
+  --color-ftw-accent: var(--ftw-accent);
+  --color-ftw-tolled: var(--ftw-tolled);
+  --color-ftw-free: var(--ftw-free);
+  --color-ftw-north: var(--ftw-north);
 }
 
 :root {
@@ -76,6 +88,19 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+
+  --ftw-bg: #eef1f4;
+  --ftw-surface: #ffffff;
+  --ftw-raised: #f5f7f9;
+  --ftw-line: #e2e6eb;
+  --ftw-text: #0f172a;
+  --ftw-muted: #5b6676;
+  --ftw-faint: #8b95a3;
+  --ftw-accent: #2563eb;
+  --ftw-tolled: #ea580c;
+  --ftw-free: #059669;
+  --ftw-north: #e11d48;
+  --ftw-halo: #ffffff;
 }
 
 .dark {
@@ -110,6 +135,19 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
+
+  --ftw-bg: #0b0f14;
+  --ftw-surface: #12171e;
+  --ftw-raised: #1a212a;
+  --ftw-line: #252d38;
+  --ftw-text: #e6eaef;
+  --ftw-muted: #9aa5b4;
+  --ftw-faint: #6b7686;
+  --ftw-accent: #60a5fa;
+  --ftw-tolled: #fb923c;
+  --ftw-free: #34d399;
+  --ftw-north: #fb7185;
+  --ftw-halo: #12171e;
 }
 
 @layer base {
@@ -121,47 +159,66 @@
   }
 }
 
-/* ---- Atlas (home map) labels: old-book lettering with a paper halo ---- */
+/* ---- Atlas map labels (HTML markers placed by collision) ---- */
 .atlas-label {
   pointer-events: none;
-  font-family: var(--font-atlas), Georgia, serif;
-  color: #3b2f23;
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  color: var(--ftw-text);
   white-space: nowrap;
-  text-shadow: 0 0 2px #fbf6e9, 0 0 3px #fbf6e9, 0 0 5px #fbf6e9;
+  text-shadow: 0 0 2px var(--ftw-halo), 0 0 4px var(--ftw-halo), 0 0 6px var(--ftw-halo);
   transition: opacity 200ms;
 }
 .atlas-label-state {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  font-size: 12px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  font-size: 11px;
   font-weight: 600;
-}
-.atlas-label-state em {
-  margin-top: 2px;
-  min-width: 18px;
-  height: 18px;
-  padding: 0 5px;
-  border-radius: 9px;
-  background: #1f3a4d;
-  color: #fbf6e9;
-  font-style: normal;
-  font-family: var(--font-geist-sans), sans-serif;
-  font-size: 10px;
-  line-height: 18px;
-  letter-spacing: 0;
-  text-align: center;
-  text-shadow: none;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ftw-muted);
 }
 .atlas-label-district {
   font-size: 12px;
-  font-style: italic;
-  color: #5b4a3a;
+  font-weight: 500;
+  color: var(--ftw-text);
 }
-.atlas-zoomed .atlas-label-state { opacity: 0.45; font-size: 15px; }
+.atlas-zoomed .atlas-label-state { opacity: 0.5; font-size: 13px; }
+.atlas-road {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  pointer-events: auto;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
+}
+.atlas-road i {
+  width: 10px;
+  height: 10px;
+  border-radius: 9999px;
+  background: var(--road);
+  box-shadow: 0 0 0 2px var(--ftw-halo), 0 0 0 5px color-mix(in srgb, var(--road) 25%, transparent);
+}
+.atlas-road span { color: var(--road); }
+.atlas-zoomed-city .atlas-road i { display: none; }
 @media (max-width: 640px) {
-  .atlas-label-state { font-size: 9px; letter-spacing: 0.06em; }
-  .atlas-label-state em { min-width: 15px; height: 15px; line-height: 15px; font-size: 9px; }
+  .atlas-label-state { font-size: 9px; letter-spacing: 0.08em; }
+}
+
+/* MapLibre's scale bar: left of the compass, moving with it */
+.atlas .maplibregl-ctrl-bottom-right {
+  bottom: var(--ctrl-bottom, 16px);
+  right: 76px;
+  visibility: var(--ctrl-visible, visible);
+  transition: bottom 200ms;
+}
+.atlas .maplibregl-ctrl-bottom-right .maplibregl-ctrl { margin: 0 0 4px 0; }
+@media (max-width: 640px) { .atlas .maplibregl-ctrl-bottom-right { right: 70px; } }
+/* MapLibre's scale bar, restyled */
+.maplibregl-ctrl-scale {
+  background: transparent !important;
+  border-color: var(--ftw-muted) !important;
+  color: var(--ftw-muted) !important;
+  font: 500 10px var(--font-geist-sans), system-ui, sans-serif !important;
+  text-shadow: 0 0 2px var(--ftw-halo);
 }

@@ -4,13 +4,13 @@ export default function manifest(): MetadataRoute.Manifest {
     return {
         name: 'data.ftw: an open atlas of public money',
         short_name: 'data.ftw',
-        description: "India's governance data on a map: toll roads, who built them, what they cost and what they earned, with every fact linked to its source.",
+        description: "An open atlas of public money in India: what was built, what it cost, who answers for it, and what is still unknown, with every fact linked to its source.",
         start_url: '/in',
         scope: '/',
         display: 'standalone',
         orientation: 'any',
-        background_color: '#bcd8e3',
-        theme_color: '#1f3a4d',
+        background_color: '#eef1f4',
+        theme_color: '#eef1f4',
         categories: ['government', 'news', 'reference'],
         icons: [
             { src: '/icons/icon-192.png', sizes: '192x192', type: 'image/png', purpose: 'any' },

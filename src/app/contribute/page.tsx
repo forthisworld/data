@@ -47,27 +47,27 @@ const WAYS = [
 
 export default function ContributePage() {
     return (
-        <div className="min-h-screen bg-[#f6f1e4] text-[#2f261d]">
+        <div className="min-h-screen bg-ftw-bg text-ftw-text">
             <div className="container mx-auto max-w-4xl px-4 py-12">
-                <p className="text-sm text-[#6f5d49]"><Link href="/in" className="hover:underline">← Back to the atlas</Link></p>
-                <h1 className="mt-3 font-[family-name:var(--font-atlas)] text-4xl">Help build the atlas</h1>
-                <p className="mt-3 max-w-2xl text-[#4a3b2c]">
+                <p className="text-sm text-ftw-muted"><Link href="/in" className="hover:underline">← Back to the atlas</Link></p>
+                <h1 className="mt-3 text-4xl font-semibold tracking-tight">Help build the atlas</h1>
+                <p className="mt-3 max-w-2xl text-ftw-muted">
                     data.ftw is only as good as its sources. Four ways to help; you don&apos;t need to write code for three of them.
                     By contributing you agree that data is published under the ODbL and code under the MIT licence.
                 </p>
 
                 <div className="mt-10 grid gap-5 md:grid-cols-2">
                     {WAYS.map(({ icon: Icon, title, body, links }) => (
-                        <section key={title} className="rounded-lg border border-[#6f5d49]/40 bg-[#fbf6e9] p-5">
-                            <h2 className="flex items-center gap-2 font-[family-name:var(--font-atlas)] text-2xl">
-                                <Icon className="h-5 w-5 text-[#1f3a4d]" /> {title}
+                        <section key={title} className="rounded-lg border border-ftw-line bg-ftw-surface p-5">
+                            <h2 className="flex items-center gap-2 text-xl font-semibold tracking-tight">
+                                <Icon className="h-5 w-5 text-ftw-accent" /> {title}
                             </h2>
-                            <p className="mt-2 text-sm leading-relaxed text-[#4a3b2c]">{body}</p>
+                            <p className="mt-2 text-sm leading-relaxed text-ftw-muted">{body}</p>
                             {links.length > 0 && (
                                 <ul className="mt-4 space-y-1.5 text-sm">
                                     {links.map(({ href, label, icon: L }) => (
                                         <li key={href}>
-                                            <a href={href} className="inline-flex items-center gap-1.5 font-medium text-[#1f3a4d] hover:underline"
+                                            <a href={href} className="inline-flex items-center gap-1.5 font-medium text-ftw-accent hover:underline"
                                                 {...(href.startsWith('http') ? { target: '_blank', rel: 'noopener noreferrer' } : {})}>
                                                 <L className="h-4 w-4" /> {label}
                                             </a>

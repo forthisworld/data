@@ -1,27 +1,31 @@
 'use client';
 
 /**
- * The home screen: a full-screen political map of India in the style of an old
- * school atlas, with a search bar at the bottom. Zooming in reveals more:
- *   country  - states in atlas colours, state names, a mark on states with records
- *   state    - district borders and the larger districts' names
- *   district - every district name
- * Selecting a state or district opens a card with what is published for it.
+ * The app: a full-screen map of India with everything else on top of it.
+ *   - Zooming in reveals more: states, then districts and their names, then roads up close.
+ *   - Toll roads are drawn on the map (OpenStreetMap geometry, coloured tolled / toll-free).
+ *   - Selecting a place, road or person opens the panel: a tall card on the left on wide
+ *     screens, a drawer from the bottom on phones. The selection is kept in the URL (?v=...).
+ *   - Search at the bottom covers places, roads and people, client-side, so it works offline.
  *
- * Boundaries only, no basemap tiles: a basemap draws its own international
- * borders, which could contradict the official boundary of India that the
- * outline follows (see public/geo/in/ATTRIBUTION.md).
+ * Boundaries come from one official-outline topology (public/geo/in/ATTRIBUTION.md). There is
+ * no basemap yet: a basemap's own borders could contradict that outline. A street basemap with
+ * its borders removed is the next step.
  */
 
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 import maplibregl, { type LngLatBoundsLike, type MapGeoJSONFeature } from 'maplibre-gl';
 import 'maplibre-gl/dist/maplibre-gl.css';
 import Fuse from 'fuse.js';
-import { Search, X, Route, FileText, HandHeart, Bot, Loader2, MapPin, User, ArrowUpRight } from 'lucide-react';
-import type { AtlasRegion } from '@/services/country.service';
-import type { SearchResult } from '@/types';
+import { Search, X, MapPin, User, Route as RouteIcon, Plus, Minus } from 'lucide-react';
+import type { AtlasData } from '@/services/country.service';
+import CompassMark from '@/components/CompassMark';
+import { useTheme } from '@/lib/theme';
+import Sheet, { PEEK_PX, useWide, type Snap } from './Sheet';
+import QuickSettings from './QuickSettings';
+import { PlaceView, RoadView, PersonView, ROLE, shortName } from './PanelViews';
+import { PLACE_ALIASES } from '@/lib/place-aliases';
 
 type Geom = GeoJSON.Polygon | GeoJSON.MultiPolygon;
 type Bounds = [[number, number], [number, number]];
@@ -35,6 +39,11 @@ interface Place {
     bounds: Bounds;
 }
 
+type View =
+    | { kind: 'place'; place: Place }
+    | { kind: 'road'; slug: string }
+    | { kind: 'person'; slug: string };
+
 interface Label {
     name: string;
     kind: 'state' | 'district';
@@ -44,149 +53,204 @@ interface Label {
     lngLat: [number, number];
 }
 
+interface RouteInfo {
+    slug: string;
+    bounds: Bounds;
+    labelAt: [number, number];
+    districts: Set<string>;
+    states: Set<string>;
+}
+
 const INDIA_BOUNDS: LngLatBoundsLike = [[67.5, 6.2], [98.0, 37.6]];
 const DISTRICT_ZOOM = 5.2;
+const CITY_ZOOM = 8.5;
 
-// An old-atlas palette: pastel inks on a pale sea.
-const SEA = '#bcd8e3';
-const INKS = ['#f2d79b', '#cfe2a8', '#f1bfae', '#d8c8e6', '#f7e8a6', '#b9dccd'];
-const LINE = { outline: '#4a3b2c', state: '#6f5d49', district: '#a3927b', selected: '#b4271a' };
+const PALETTE = {
+    light: {
+        sea: '#e3e8ee', land: '#fbfbfa', landData: '#eef3fd', stateLine: '#c2c9d2', districtLine: '#d9dee5', outline: '#6b7584',
+        hover: '#0f172a', hoverOpacity: 0.05, select: '#2563eb', selectOpacity: 0.07,
+        tolled: '#ea580c', free: '#059669', casing: '#ffffff',
+    },
+    dark: {
+        sea: '#0b0f14', land: '#161c24', landData: '#18233a', stateLine: '#344150', districtLine: '#232c37', outline: '#8b95a3',
+        hover: '#ffffff', hoverOpacity: 0.06, select: '#60a5fa', selectOpacity: 0.12,
+        tolled: '#fb923c', free: '#34d399', casing: '#0b0f14',
+    },
+};
+type Palette = typeof PALETTE.light;
 
-function bboxOf(geom: Geom): Bounds {
+function bboxOf(geom: Geom | GeoJSON.MultiLineString): Bounds {
     let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
-    const rings = geom.type === 'Polygon' ? geom.coordinates : geom.coordinates.flat();
-    for (const ring of rings) for (const [x, y] of ring) {
+    const pts = geom.type === 'Polygon' ? geom.coordinates.flat() : geom.type === 'MultiPolygon' ? geom.coordinates.flat(2) : geom.coordinates.flat();
+    for (const [x, y] of pts) {
         if (x < minX) minX = x; if (y < minY) minY = y;
         if (x > maxX) maxX = x; if (y > maxY) maxY = y;
     }
     return [[minX, minY], [maxX, maxY]];
 }
+const union = (a: Bounds, b: Bounds): Bounds => [[Math.min(a[0][0], b[0][0]), Math.min(a[0][1], b[0][1])], [Math.max(a[1][0], b[1][0]), Math.max(a[1][1], b[1][1])]];
 
-/** Greedy map colouring: states that share a border get different inks. */
-function colourStates(features: GeoJSON.Feature<Geom, { slug: string }>[]): Record<string, number> {
-    const owners = new Map<string, Set<string>>();
-    for (const f of features) {
-        const rings = f.geometry.type === 'Polygon' ? f.geometry.coordinates : f.geometry.coordinates.flat();
-        for (const ring of rings) for (const [x, y] of ring) {
-            const k = `${x.toFixed(3)},${y.toFixed(3)}`;
-            if (!owners.has(k)) owners.set(k, new Set());
-            owners.get(k)!.add(f.properties.slug);
-        }
-    }
-    const adj = new Map<string, Set<string>>(features.map(f => [f.properties.slug, new Set()]));
-    for (const set of owners.values()) {
-        if (set.size < 2) continue;
-        for (const a of set) for (const b of set) if (a !== b) adj.get(a)!.add(b);
-    }
-    const order = [...adj.keys()].sort((a, b) => adj.get(b)!.size - adj.get(a)!.size);
-    const colour: Record<string, number> = {};
-    for (const s of order) {
-        const used = new Set([...adj.get(s)!].map(n => colour[n]).filter(c => c !== undefined));
-        let c = 0;
-        while (used.has(c) && c < INKS.length - 1) c++;
-        colour[s] = c;
-    }
-    return colour;
-}
-
-function labelsFromFeatures(states: GeoJSON.FeatureCollection, districts: GeoJSON.FeatureCollection): Label[] {
-    const centre = (b: Bounds): [number, number] => [(b[0][0] + b[1][0]) / 2, (b[0][1] + b[1][1]) / 2];
-    const area = (b: Bounds) => Math.abs((b[1][0] - b[0][0]) * (b[1][1] - b[0][1])) * 11000;
-    return [
-        ...(states.features as GeoJSON.Feature<Geom, Record<string, string>>[]).map(f => {
-            const b = bboxOf(f.geometry);
-            return { name: f.properties.name, kind: 'state' as const, stateSlug: f.properties.slug, area: area(b), lngLat: centre(b) };
-        }),
-        ...(districts.features as GeoJSON.Feature<Geom, Record<string, string>>[]).map(f => {
-            const b = bboxOf(f.geometry);
-            return { name: f.properties.name, kind: 'district' as const, stateSlug: f.properties.stateSlug, code: f.properties.census2011Code, area: area(b), lngLat: centre(b) };
-        }),
-    ];
-}
-
-/** Districts big enough to label at this zoom (smaller ones appear as you zoom in). */
+/** Districts big enough to name at this zoom (smaller ones appear as you zoom in). */
 const districtAreaThreshold = (zoom: number) => 25000 / Math.pow(2.6, zoom - DISTRICT_ZOOM);
+
+function applyPalette(map: maplibregl.Map, p: Palette) {
+    const set = (layer: string, prop: string, value: unknown) => { if (map.getLayer(layer)) map.setPaintProperty(layer, prop, value); };
+    set('sea', 'background-color', p.sea);
+    set('states-fill', 'fill-color', ['case', ['boolean', ['feature-state', 'data'], false], p.landData, p.land]);
+    set('hover-shade', 'fill-color', p.hover);
+    set('hover-shade', 'fill-opacity', ['case', ['boolean', ['feature-state', 'hover'], false], p.hoverOpacity, 0]);
+    set('districts-fill', 'fill-color', p.hover);
+    set('districts-fill', 'fill-opacity', ['case', ['boolean', ['feature-state', 'hover'], false], p.hoverOpacity, 0]);
+    for (const src of ['states', 'districts']) {
+        set(`${src}-selected-fill`, 'fill-color', p.select);
+        set(`${src}-selected-fill`, 'fill-opacity', ['case', ['boolean', ['feature-state', 'selected'], false], p.selectOpacity, 0]);
+        set(`${src}-selected`, 'line-color', p.select);
+    }
+    set('districts-line', 'line-color', p.districtLine);
+    set('states-line', 'line-color', p.stateLine);
+    set('india-outline', 'line-color', p.outline);
+    set('routes-casing', 'line-color', p.casing);
+    const road = ['match', ['get', 'tolling'], 'toll_free', p.free, p.tolled];
+    set('routes-line', 'line-color', road);
+    set('routes-selected', 'line-color', road);
+}
 
 interface AtlasProps {
     countryCode: string;
     countryName: string;
-    regions: Record<string, AtlasRegion>;
+    data: AtlasData;
 }
 
-export default function Atlas({ countryCode, countryName, regions }: AtlasProps) {
-    const router = useRouter();
+export default function Atlas({ countryCode, countryName, data }: AtlasProps) {
+    const { regions, roads, people } = data;
+    const { choice, dark, setTheme } = useTheme();
+    const wide = useWide();
+
     const container = useRef<HTMLDivElement>(null);
     const mapRef = useRef<maplibregl.Map | null>(null);
-    const markersRef = useRef<{ states: maplibregl.Marker[]; districts: maplibregl.Marker[] }>({ states: [], districts: [] });
+    const markersRef = useRef<{ states: maplibregl.Marker[]; districts: maplibregl.Marker[]; roads: maplibregl.Marker[] }>({ states: [], districts: [], roads: [] });
     const selectedRef = useRef<{ source: string; id: string } | null>(null);
+    const routesRef = useRef(new Map<string, RouteInfo>());
+    const wideRef = useRef(wide);
+    const darkRef = useRef(dark);
+    wideRef.current = wide;
+    darkRef.current = dark;
 
     const [ready, setReady] = useState(false);
     const [loadError, setLoadError] = useState(false);
     const [places, setPlaces] = useState<Place[]>([]);
-    const [selected, setSelected] = useState<Place | null>(null);
+    const [view, setView] = useState<View | null>(null);
+    const [snap, setSnap] = useState<Snap>('half');
     const [query, setQuery] = useState('');
-    const [records, setRecords] = useState<SearchResult[]>([]);
-    const [searching, setSearching] = useState(false);
     const [searchOpen, setSearchOpen] = useState(false);
+    const [bearing, setBearing] = useState(0);
 
-    const fuse = useMemo(() => new Fuse(places, { keys: ['name', 'state'], threshold: 0.3 }), [places]);
-    const placeMatches = query.length >= 2 ? fuse.search(query, { limit: 6 }).map(r => r.item) : [];
+    const roadBySlug = useMemo(() => new Map(roads.map(r => [r.slug, r])), [roads]);
+    const personBySlug = useMemo(() => new Map(people.map(p => [p.slug, p])), [people]);
+    const placeName = useCallback((slug: string) => regions[slug]?.name ?? places.find(p => p.kind === 'state' && p.stateSlug === slug)?.name ?? slug, [regions, places]);
 
-    // Records (people, toll roads, ...) from the site's search API.
-    useEffect(() => {
-        if (query.length < 2) { setRecords([]); return; }
-        const t = setTimeout(async () => {
-            setSearching(true);
-            try {
-                const res = await fetch(`/api/search?country=${countryCode}&q=${encodeURIComponent(query)}`);
-                const data = await res.json();
-                setRecords(Array.isArray(data) ? data.filter((r: SearchResult) => r.type !== 'region').slice(0, 6) : []);
-            } catch {
-                setRecords([]);
-            } finally {
-                setSearching(false);
-            }
-        }, 180);
-        return () => clearTimeout(t);
-    }, [query, countryCode]);
+    // ---------- search (all client-side) ----------
+    type Item = { type: 'place' | 'road' | 'person'; label: string; sub: string; extra: string[]; place?: Place; slug?: string };
+    const items = useMemo<Item[]>(() => [
+        ...roads.map(r => ({ type: 'road' as const, label: shortName(r.name), sub: `Toll road · ${r.regionIds.map(placeName).join(', ')}`, extra: [r.name, r.officialName ?? '', r.operatorCompany ?? ''], slug: r.slug })),
+        ...people.map(p => ({ type: 'person' as const, label: p.name, sub: [ROLE[p.role] || p.role, p.party].filter(Boolean).join(' · '), extra: [p.party ?? '', p.role], slug: p.slug })),
+        ...places.map(p => {
+            const aka = p.kind === 'district' ? PLACE_ALIASES[`${p.stateSlug}/${p.name}`] ?? [] : [];
+            return {
+                type: 'place' as const, label: p.name, extra: aka, place: p,
+                sub: p.kind === 'district'
+                    ? `District · ${p.state}${aka.length ? ` · also ${aka.join(', ')}` : ''}`
+                    : regions[p.stateSlug]?.level === 'union_territory' ? 'Union territory' : 'State',
+            };
+        }),
+    ], [roads, people, places, regions, placeName]);
+    const fuse = useMemo(() => new Fuse(items, { keys: [{ name: 'label', weight: 3 }, { name: 'extra', weight: 1 }], threshold: 0.25, ignoreLocation: true }), [items]);
+    const matches = query.trim().length >= 2 ? fuse.search(query.trim(), { limit: 8 }).map(r => r.item) : [];
 
-    const selectPlace = useCallback((place: Place, fly = true) => {
+    // ---------- selection ----------
+    const padding = useCallback(() => {
+        const h = window.innerHeight;
+        return wideRef.current
+            ? { top: 96, bottom: 110, left: 440 + 56, right: 80 }
+            : { top: 80, bottom: Math.round(h * 0.52) + 24, left: 28, right: 28 };
+    }, []);
+
+    const clearHighlights = useCallback(() => {
         const map = mapRef.current;
         if (!map) return;
         if (selectedRef.current) map.setFeatureState(selectedRef.current, { selected: false });
+        selectedRef.current = null;
+        if (map.getLayer('routes-selected')) map.setFilter('routes-selected', ['==', ['get', 'slug'], '']);
+    }, []);
+
+    const openPlace = useCallback((place: Place, fly = true) => {
+        const map = mapRef.current;
+        if (!map) return;
+        clearHighlights();
         selectedRef.current = place.kind === 'state' ? { source: 'states', id: place.stateSlug } : { source: 'districts', id: place.code! };
         map.setFeatureState(selectedRef.current, { selected: true });
-        setSelected(place);
+        setView({ kind: 'place', place });
+        setSnap('half');
         setQuery('');
         setSearchOpen(false);
-        // Leave room for the card (left on wide screens, above the search bar on phones).
-        const wide = window.innerWidth >= 640;
-        if (fly) map.fitBounds(place.bounds, { padding: { top: 80, bottom: wide ? 120 : 320, left: wide ? 360 : 30, right: 40 }, maxZoom: place.kind === 'district' ? 7.5 : 6.5, duration: 900 });
-    }, []);
+        if (fly) map.fitBounds(place.bounds, { padding: padding(), maxZoom: place.kind === 'district' ? 9 : 7, duration: 900 });
+    }, [clearHighlights, padding]);
 
-    const clearSelection = useCallback(() => {
+    const openRoad = useCallback((slug: string, fly = true) => {
         const map = mapRef.current;
-        if (map && selectedRef.current) map.setFeatureState(selectedRef.current, { selected: false });
-        selectedRef.current = null;
-        setSelected(null);
-    }, []);
+        if (!map || !roadBySlug.has(slug)) return;
+        clearHighlights();
+        if (map.getLayer('routes-selected')) map.setFilter('routes-selected', ['==', ['get', 'slug'], slug]);
+        setView({ kind: 'road', slug });
+        setSnap('half');
+        setQuery('');
+        setSearchOpen(false);
+        const r = routesRef.current.get(slug);
+        if (fly && r) map.fitBounds(r.bounds, { padding: padding(), maxZoom: 12, duration: 1100 });
+    }, [clearHighlights, padding, roadBySlug]);
 
+    const openPerson = useCallback((slug: string, fly = true) => {
+        const map = mapRef.current;
+        const person = personBySlug.get(slug);
+        if (!map || !person) return;
+        clearHighlights();
+        setView({ kind: 'person', slug });
+        setSnap('half');
+        setQuery('');
+        setSearchOpen(false);
+        const home = person.regionId ? places.find(p => p.kind === 'state' && p.stateSlug === person.regionId) : undefined;
+        if (home) {
+            selectedRef.current = { source: 'states', id: home.stateSlug };
+            map.setFeatureState(selectedRef.current, { selected: true });
+            if (fly) map.fitBounds(home.bounds, { padding: padding(), maxZoom: 7, duration: 900 });
+        }
+    }, [clearHighlights, padding, personBySlug, places]);
+
+    const closeView = useCallback(() => {
+        clearHighlights();
+        setView(null);
+    }, [clearHighlights]);
+
+    // Map callbacks are bound once; route them to the latest handlers.
+    const handlers = useRef({ openPlace, openRoad, closeView });
+    handlers.current = { openPlace, openRoad, closeView };
+
+    // ---------- the map ----------
     useEffect(() => {
         if (!container.current) return;
+        const pal = PALETTE[darkRef.current ? 'dark' : 'light'];
         const map = new maplibregl.Map({
             container: container.current,
-            style: { version: 8, sources: {}, layers: [{ id: 'sea', type: 'background', paint: { 'background-color': SEA } }] },
+            style: { version: 8, sources: {}, layers: [{ id: 'sea', type: 'background', paint: { 'background-color': pal.sea } }] },
             bounds: INDIA_BOUNDS,
-            fitBoundsOptions: { padding: { top: 70, bottom: 110, left: 20, right: 20 } },
             maxBounds: [[40, -10], [125, 50]],
             minZoom: 2.5,
-            maxZoom: 10,
-            dragRotate: false,
-            pitchWithRotate: false,
+            maxZoom: 13,
+            maxPitch: 0,
             attributionControl: false,
         });
-        map.touchZoomRotate.disableRotation();
-        map.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'top-right');
+        map.addControl(new maplibregl.ScaleControl({ maxWidth: 96, unit: 'metric' }), 'bottom-right');
+        map.on('rotate', () => setBearing(map.getBearing()));
         mapRef.current = map;
 
         map.on('load', async () => {
@@ -199,112 +263,129 @@ export default function Atlas({ countryCode, countryName, regions }: AtlasProps)
                 setLoadError(true);
                 return;
             }
-            let labels: Label[];
-            try {
-                const lj = await fetch(`/geo/${countryCode}/labels.geojson`).then(r => { if (!r.ok) throw new Error(); return r.json(); });
-                labels = (lj.features as GeoJSON.Feature<GeoJSON.Point, Record<string, string | number>>[]).map(f => ({
-                    name: String(f.properties.name), kind: f.properties.kind as 'state' | 'district', stateSlug: String(f.properties.stateSlug),
-                    code: f.properties.census2011Code ? String(f.properties.census2011Code) : undefined,
-                    area: Number(f.properties.areaKm2 ?? 0), lngLat: f.geometry.coordinates as [number, number],
-                }));
-            } catch {
-                labels = labelsFromFeatures(states, districts);
-            }
+            const [labelJson, routeJson] = await Promise.all(['labels', 'routes'].map(f =>
+                fetch(`/geo/${countryCode}/${f}.geojson`).then(r => (r.ok ? r.json() : null)).catch(() => null)
+            ));
+            const labels: Label[] = (labelJson?.features ?? []).map((f: GeoJSON.Feature<GeoJSON.Point, Record<string, string | number>>) => ({
+                name: String(f.properties.name), kind: f.properties.kind as 'state' | 'district', stateSlug: String(f.properties.stateSlug),
+                code: f.properties.census2011Code ? String(f.properties.census2011Code) : undefined,
+                area: Number(f.properties.areaKm2 ?? 0), lngLat: f.geometry.coordinates as [number, number],
+            }));
 
-            const colours = colourStates(states.features as GeoJSON.Feature<Geom, { slug: string }>[]);
-            map.addSource('states', { type: 'geojson', data: states, promoteId: 'slug' });
-            map.addSource('districts', { type: 'geojson', data: districts, promoteId: 'census2011Code' });
-            map.addSource('india', { type: 'geojson', data: india });
-            for (const [slug, c] of Object.entries(colours)) map.setFeatureState({ source: 'states', id: slug }, { ink: c });
-
-            map.addLayer({
-                id: 'states-fill', type: 'fill', source: 'states',
-                paint: {
-                    'fill-color': ['match', ['coalesce', ['feature-state', 'ink'], 0], ...INKS.flatMap((c, i) => [i, c]), INKS[0]] as unknown as string,
-                },
-            });
-            map.addLayer({
-                id: 'hover-shade', type: 'fill', source: 'states',
-                paint: { 'fill-color': '#000', 'fill-opacity': ['case', ['boolean', ['feature-state', 'hover'], false], 0.07, 0] },
-            });
-            map.addLayer({
-                id: 'districts-fill', type: 'fill', source: 'districts', minzoom: DISTRICT_ZOOM,
-                paint: { 'fill-color': '#000', 'fill-opacity': ['case', ['boolean', ['feature-state', 'hover'], false], 0.08, 0] },
-            });
-            map.addLayer({
-                id: 'districts-line', type: 'line', source: 'districts', minzoom: DISTRICT_ZOOM - 0.4,
-                paint: { 'line-color': LINE.district, 'line-width': 0.7, 'line-dasharray': [3, 2] },
-            });
-            map.addLayer({
-                id: 'states-line', type: 'line', source: 'states',
-                paint: { 'line-color': LINE.state, 'line-width': ['interpolate', ['linear'], ['zoom'], 3, 0.6, 7, 1.6] },
-            });
-            map.addLayer({
-                id: 'india-outline', type: 'line', source: 'india',
-                paint: { 'line-color': LINE.outline, 'line-width': ['interpolate', ['linear'], ['zoom'], 3, 1.6, 7, 3] },
-            });
-            // Selection drawn as an outline, the way an atlas would mark it.
-            for (const src of ['states', 'districts'] as const) {
-                map.addLayer({
-                    id: `${src}-selected`, type: 'line', source: src,
-                    paint: { 'line-color': LINE.selected, 'line-width': ['case', ['boolean', ['feature-state', 'selected'], false], 2.5, 0] },
+            // Roads: tag each section with whether it is tolled, and work out where to label it.
+            const routes: GeoJSON.FeatureCollection<GeoJSON.MultiLineString> = routeJson ?? { type: 'FeatureCollection', features: [] };
+            routes.features = routes.features.filter(f => roadBySlug.has(f.properties?.slug));
+            for (const f of routes.features) {
+                const slug = f.properties!.slug as string;
+                f.properties!.tolling = roadBySlug.get(slug)!.tolling?.status ?? 'tolled';
+                const b = bboxOf(f.geometry);
+                const prev = routesRef.current.get(slug);
+                const longest = f.geometry.coordinates.reduce((a, l) => (l.length > a.length ? l : a), [] as GeoJSON.Position[]);
+                routesRef.current.set(slug, {
+                    slug,
+                    bounds: prev ? union(prev.bounds, b) : b,
+                    labelAt: prev?.labelAt ?? (longest[Math.floor(longest.length / 2)] as [number, number]),
+                    districts: new Set([...(prev?.districts ?? []), ...(f.properties!.districts as string[])]),
+                    states: new Set([...(prev?.states ?? []), ...(f.properties!.states as string[])]),
                 });
             }
 
-            // Search index
+            map.addSource('states', { type: 'geojson', data: states, promoteId: 'slug' });
+            map.addSource('districts', { type: 'geojson', data: districts, promoteId: 'census2011Code' });
+            map.addSource('india', { type: 'geojson', data: india });
+            map.addSource('routes', { type: 'geojson', data: routes });
+
+            // States with something on record get a light tint.
+            const withData = new Set(Object.values(regions).filter(r => r.tollRoads.length || r.people.length).map(r => r.slug));
+            for (const r of routesRef.current.values()) r.states.forEach(s => withData.add(s));
+            for (const slug of withData) map.setFeatureState({ source: 'states', id: slug }, { data: true });
+
+            map.addLayer({ id: 'states-fill', type: 'fill', source: 'states', paint: {} });
+            map.addLayer({ id: 'hover-shade', type: 'fill', source: 'states', paint: {} });
+            map.addLayer({ id: 'states-selected-fill', type: 'fill', source: 'states', paint: {} });
+            map.addLayer({ id: 'districts-fill', type: 'fill', source: 'districts', minzoom: DISTRICT_ZOOM, paint: {} });
+            map.addLayer({ id: 'districts-selected-fill', type: 'fill', source: 'districts', paint: {} });
+            map.addLayer({ id: 'districts-line', type: 'line', source: 'districts', minzoom: DISTRICT_ZOOM - 0.4, paint: { 'line-width': ['interpolate', ['linear'], ['zoom'], 5, 0.5, 10, 1.2] } });
+            map.addLayer({ id: 'states-line', type: 'line', source: 'states', paint: { 'line-width': ['interpolate', ['linear'], ['zoom'], 3, 0.6, 8, 1.6] } });
+            map.addLayer({ id: 'india-outline', type: 'line', source: 'india', paint: { 'line-width': ['interpolate', ['linear'], ['zoom'], 3, 1.2, 8, 2.2] } });
+            for (const src of ['states', 'districts'] as const) {
+                map.addLayer({ id: `${src}-selected`, type: 'line', source: src, paint: { 'line-width': ['case', ['boolean', ['feature-state', 'selected'], false], 2, 0] } });
+            }
+            const roadWidth = (base: number) => ['interpolate', ['exponential', 1.6], ['zoom'], 4, base, 9, base * 2.2, 13, base * 4.5];
+            map.addLayer({ id: 'routes-casing', type: 'line', source: 'routes', layout: { 'line-cap': 'round', 'line-join': 'round' }, paint: { 'line-width': roadWidth(3.4) as unknown as number } });
+            map.addLayer({ id: 'routes-line', type: 'line', source: 'routes', layout: { 'line-cap': 'round', 'line-join': 'round' }, paint: { 'line-width': roadWidth(1.6) as unknown as number } });
+            map.addLayer({
+                id: 'routes-selected', type: 'line', source: 'routes', filter: ['==', ['get', 'slug'], ''],
+                layout: { 'line-cap': 'round', 'line-join': 'round' }, paint: { 'line-width': roadWidth(3) as unknown as number, 'line-opacity': 0.9 },
+            });
+            // A wide invisible line so roads are easy to tap.
+            map.addLayer({ id: 'routes-hit', type: 'line', source: 'routes', paint: { 'line-width': 22, 'line-opacity': 0 } });
+            applyPalette(map, pal);
+
             setPlaces([
                 ...(states.features as GeoJSON.Feature<Geom, Record<string, string>>[]).map(f => ({
                     kind: 'state' as const, name: f.properties.name, stateSlug: f.properties.slug, bounds: bboxOf(f.geometry),
                 })),
-                ...(districts.features as GeoJSON.Feature<Geom, Record<string, string>>[]).map(f => ({
-                    kind: 'district' as const, name: f.properties.name, state: f.properties.state, stateSlug: f.properties.stateSlug,
-                    code: f.properties.census2011Code, bounds: bboxOf(f.geometry),
-                })),
+                ...(districts.features as GeoJSON.Feature<Geom, Record<string, string>>[])
+                    .filter(f => f.properties.census2011Code && f.properties.census2011Code !== '0')
+                    .map(f => ({
+                        kind: 'district' as const, name: f.properties.name, state: f.properties.state, stateSlug: f.properties.stateSlug,
+                        code: f.properties.census2011Code, bounds: bboxOf(f.geometry),
+                    })),
             ]);
 
-            // State labels, with a mark on states that have published records.
+            // ---- labels: roads first, then districts (once zoomed in), then states ----
+            const roadLabels = [...routesRef.current.values()].map(r => {
+                const road = roadBySlug.get(r.slug)!;
+                const el = document.createElement('button');
+                el.type = 'button';
+                el.className = 'atlas-label atlas-road';
+                el.style.setProperty('--road', road.tolling?.status === 'toll_free' ? 'var(--ftw-free)' : 'var(--ftw-tolled)');
+                el.innerHTML = '<i></i><span></span>';
+                el.querySelector('span')!.textContent = shortName(road.name);
+                el.setAttribute('aria-label', `${road.name}: open`);
+                el.addEventListener('click', e => { e.stopPropagation(); handlers.current.openRoad(r.slug); });
+                markersRef.current.roads.push(new maplibregl.Marker({ element: el, anchor: 'left', offset: [-5, 0] }).setLngLat(r.labelAt).addTo(map));
+                return { el, at: r.labelAt, w: shortName(road.name).length * 7 + 24 };
+            });
             const stateLabels = labels.filter(x => x.kind === 'state').map(l => {
-                const r = regions[l.stateSlug];
-                const n = r ? r.tollRoads.length + r.people.length : 0;
                 const el = document.createElement('div');
                 el.className = 'atlas-label atlas-label-state';
-                el.innerHTML = `<span>${l.name}</span>${n ? `<em title="${n} published record${n === 1 ? '' : 's'}">${n}</em>` : ''}`;
-                const marker = new maplibregl.Marker({ element: el, anchor: 'center' }).setLngLat(l.lngLat).addTo(map);
-                markersRef.current.states.push(marker);
-                return { label: l, el, records: n };
+                el.textContent = l.name;
+                markersRef.current.states.push(new maplibregl.Marker({ element: el, anchor: 'center' }).setLngLat(l.lngLat).addTo(map));
+                return { label: l, el, data: withData.has(l.stateSlug) };
             });
             const districtLabels = labels.filter(x => x.kind === 'district').sort((a, b) => b.area - a.area);
 
-            // Place labels the way an atlas does: biggest places first, skip any that would
-            // overlap one already placed. Smaller places appear as you zoom in.
             const layoutLabels = () => {
                 const z = map.getZoom();
                 const zoomed = z >= DISTRICT_ZOOM;
                 container.current?.classList.toggle('atlas-zoomed', zoomed);
+                container.current?.classList.toggle('atlas-zoomed-city', z >= CITY_ZOOM);
                 const small = window.innerWidth < 640;
                 const placed: [number, number, number, number][] = [];
-                const fits = (x: number, y: number, w: number, h: number) => {
-                    const box: [number, number, number, number] = [x - w / 2, y - h / 2, x + w / 2, y + h / 2];
+                const fits = (x: number, y: number, w: number, h: number, ax: 'center' | 'left' = 'center') => {
+                    const x0 = ax === 'left' ? x : x - w / 2;
+                    const box: [number, number, number, number] = [x0, y - h / 2, x0 + w, y + h / 2];
                     if (placed.some(p => box[0] < p[2] && box[2] > p[0] && box[1] < p[3] && box[3] > p[1])) return false;
                     placed.push(box);
                     return true;
                 };
-                const statePx = zoomed ? 15 : small ? 9 : 12;
-                const stateOrder = [...stateLabels].sort((a, b) => (b.records ? 1 : 0) - (a.records ? 1 : 0) || b.label.area - a.label.area);
-
-                // Districts take priority once zoomed in; state names fade behind them.
+                for (const r of roadLabels) {
+                    const p = map.project(r.at);
+                    r.el.style.display = fits(p.x - 6, p.y, r.w, 20, 'left') ? '' : 'none';
+                }
                 markersRef.current.districts.forEach(m => m.remove());
                 markersRef.current.districts = [];
                 if (zoomed) {
                     const b = map.getBounds();
                     const min = districtAreaThreshold(z);
-                    // The selected district is always named.
                     const sel = selectedRef.current?.source === 'districts' ? selectedRef.current.id : null;
                     const ordered = sel ? [...districtLabels.filter(l => l.code === sel), ...districtLabels.filter(l => l.code !== sel)] : districtLabels;
                     for (const l of ordered) {
                         if ((l.area < min && l.code !== sel) || !b.contains(l.lngLat)) continue;
                         const p = map.project(l.lngLat);
-                        if (!fits(p.x, p.y, l.name.length * 6.6 + 8, 18)) continue;
+                        if (!fits(p.x, p.y, l.name.length * 6.8 + 8, 18)) continue;
                         const el = document.createElement('div');
                         el.className = 'atlas-label atlas-label-district';
                         el.textContent = l.name;
@@ -312,45 +393,47 @@ export default function Atlas({ countryCode, countryName, regions }: AtlasProps)
                         if (markersRef.current.districts.length >= 150) break;
                     }
                 }
-                for (const s of stateOrder) {
-                    // Tiny territories with long names wait until you zoom in, unless they have records.
-                    if (!s.records && s.label.area < 5000 && z < DISTRICT_ZOOM) { s.el.style.display = 'none'; continue; }
+                const px = zoomed ? 13 : small ? 9 : 11;
+                for (const s of [...stateLabels].sort((a, b) => Number(b.data) - Number(a.data) || b.label.area - a.label.area)) {
+                    if (!s.data && s.label.area < 5000 && !zoomed) { s.el.style.display = 'none'; continue; }
                     const p = map.project(s.label.lngLat);
-                    const w = s.label.name.length * statePx * 0.78 + 8;
-                    const h = statePx * 1.5 + (s.records ? 20 : 0);
-                    s.el.style.display = fits(p.x, p.y, w, h) ? '' : 'none';
+                    s.el.style.display = fits(p.x, p.y, s.label.name.length * px * 0.82 + 10, px * 1.6) ? '' : 'none';
                 }
             };
             map.on('moveend', layoutLabels);
             layoutLabels();
 
-            // Hover
+            // ---- hover and click: roads win over districts, districts over states ----
+            const hit = (p: maplibregl.PointLike): MapGeoJSONFeature | undefined =>
+                map.queryRenderedFeatures(p, { layers: ['routes-hit'] })[0] ??
+                map.queryRenderedFeatures(p, { layers: map.getZoom() >= DISTRICT_ZOOM ? ['districts-fill'] : ['hover-shade'] })[0];
             let hovered: { source: string; id: string | number } | null = null;
             const clearHover = () => {
                 if (hovered) map.setFeatureState(hovered, { hover: false });
                 hovered = null;
                 map.getCanvas().style.cursor = '';
             };
-            const hit = (p: maplibregl.PointLike): MapGeoJSONFeature | undefined =>
-                map.queryRenderedFeatures(p, { layers: map.getZoom() >= DISTRICT_ZOOM ? ['districts-fill', 'hover-shade'] : ['hover-shade'] })[0];
             map.on('mousemove', e => {
                 const f = hit(e.point);
-                if (!f || f.id === undefined) return clearHover();
+                if (!f) return clearHover();
+                map.getCanvas().style.cursor = 'pointer';
+                if (f.layer.id === 'routes-hit' || f.id === undefined) { if (hovered) { map.setFeatureState(hovered, { hover: false }); hovered = null; } return; }
                 const source = f.layer.id === 'districts-fill' ? 'districts' : 'states';
                 if (!hovered || hovered.id !== f.id || hovered.source !== source) {
                     clearHover();
                     hovered = { source, id: f.id };
                     map.setFeatureState(hovered, { hover: true });
+                    map.getCanvas().style.cursor = 'pointer';
                 }
-                map.getCanvas().style.cursor = 'pointer';
             });
             map.on('mouseout', clearHover);
             map.on('click', e => {
                 const f = hit(e.point);
-                if (!f) return clearSelection();
+                if (!f) return handlers.current.closeView();
                 const p = f.properties as Record<string, string>;
+                if (f.layer.id === 'routes-hit') return handlers.current.openRoad(p.slug, false);
                 const geom = f.geometry as Geom;
-                selectPlace(
+                handlers.current.openPlace(
                     f.layer.id === 'districts-fill'
                         ? { kind: 'district', name: p.name, state: p.state, stateSlug: p.stateSlug, code: p.census2011Code, bounds: bboxOf(geom) }
                         : { kind: 'state', name: p.name, stateSlug: p.slug, bounds: bboxOf(geom) },
@@ -359,183 +442,207 @@ export default function Atlas({ countryCode, countryName, regions }: AtlasProps)
             });
 
             map.resize();
-            map.fitBounds(INDIA_BOUNDS, { padding: { top: 70, bottom: 110, left: 20, right: 20 }, animate: false });
+            map.fitBounds(INDIA_BOUNDS, { padding: { top: 80, bottom: 110, left: 20, right: 20 }, animate: false });
             container.current?.setAttribute('data-ready', 'true');
             setReady(true);
         });
 
         const markers = markersRef.current;
         return () => {
-            markers.states.forEach(m => m.remove());
-            markers.districts.forEach(m => m.remove());
+            [...markers.states, ...markers.districts, ...markers.roads].forEach(m => m.remove());
             map.remove();
             mapRef.current = null;
         };
-        // regions and countryCode are fixed for the page's lifetime
+        // The map is created once; data and country are fixed for the page's lifetime.
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    const region = selected ? regions[selected.stateSlug] : undefined;
-    const fmt = (n: number) => n.toLocaleString('en-IN');
+    // Theme: repaint, don't rebuild.
+    useEffect(() => {
+        const map = mapRef.current;
+        if (map && ready) applyPalette(map, PALETTE[dark ? 'dark' : 'light']);
+    }, [dark, ready]);
+
+    // Open whatever the URL names (?v=road:nice-bmic, state:karnataka, district:572, person:...).
+    useEffect(() => {
+        if (!ready || !places.length) return;
+        const v = new URLSearchParams(window.location.search).get('v');
+        if (!v) return;
+        const [kind, id] = [v.slice(0, v.indexOf(':')), v.slice(v.indexOf(':') + 1)];
+        if (kind === 'road') openRoad(id);
+        else if (kind === 'person') openPerson(id);
+        else {
+            const p = places.find(x => (kind === 'state' && x.kind === 'state' && x.stateSlug === id) || (kind === 'district' && x.kind === 'district' && x.code === id));
+            if (p) openPlace(p);
+        }
+        // Only on first load.
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [ready, places.length]);
+
+    // Keep the URL in step with the panel, so any view can be shared.
+    useEffect(() => {
+        if (!ready) return;
+        const v = !view ? null
+            : view.kind === 'road' ? `road:${view.slug}`
+            : view.kind === 'person' ? `person:${view.slug}`
+            : view.place.kind === 'state' ? `state:${view.place.stateSlug}` : `district:${view.place.code}`;
+        const url = new URL(window.location.href);
+        if (v) url.searchParams.set('v', v); else url.searchParams.delete('v');
+        window.history.replaceState(null, '', url);
+    }, [view, ready]);
+
+    // ---------- what the panel shows ----------
+    const panel = (() => {
+        if (!view) return null;
+        if (view.kind === 'road') {
+            const road = roadBySlug.get(view.slug);
+            return road ? { key: `road:${road.slug}`, body: <RoadView road={road} country={countryCode} stateNames={road.regionIds.map(placeName)} /> } : null;
+        }
+        if (view.kind === 'person') {
+            const person = personBySlug.get(view.slug);
+            return person ? { key: `person:${person.slug}`, body: <PersonView person={person} country={countryCode} regionName={person.regionId ? placeName(person.regionId) : undefined} /> } : null;
+        }
+        const pl = view.place;
+        const inPlace = roads.filter(r => {
+            const route = routesRef.current.get(r.slug);
+            return pl.kind === 'district' ? !!route?.districts.has(pl.code!) : r.regionIds.includes(pl.stateSlug) || !!route?.states.has(pl.stateSlug);
+        });
+        const here = people.filter(p => p.regionId === pl.stateSlug || (p.regionIds ?? []).includes(pl.stateSlug));
+        return {
+            key: `place:${pl.kind}:${pl.code ?? pl.stateSlug}`,
+            body: <PlaceView place={pl} region={regions[pl.stateSlug]} roads={inPlace} people={here} country={countryCode} onRoad={s => openRoad(s)} onPerson={s => openPerson(s)} />,
+        };
+    })();
+
+    // Where the bottom-right controls sit: above the search bar, or above the drawer at peek.
+    const drawerOpen = !wide && !!panel;
+    const ctrlHidden = drawerOpen && snap !== 'peek';
+    const ctrlBottom = wide ? 16 : drawerOpen ? PEEK_PX + 12 : 100;
+    const north = Math.abs(bearing) > 0.5;
 
     return (
-        <div className="atlas relative h-[100dvh] w-full overflow-hidden" style={{ background: SEA }}>
+        <div className="atlas relative h-[100dvh] w-full overflow-hidden bg-ftw-bg text-ftw-text"
+            style={{ ['--ctrl-bottom' as string]: `${ctrlBottom}px`, ['--ctrl-visible' as string]: ctrlHidden ? 'hidden' : 'visible' }}>
             {/* h-full, not absolute: maplibre-gl.css sets .maplibregl-map { position: relative } */}
             <div ref={container} className="h-full w-full" />
 
-            {/* Title cartouche */}
-            <div className="pointer-events-none absolute left-3 top-3 z-10 sm:left-5 sm:top-5">
-                <div className="pointer-events-auto rounded-md border-2 border-double border-[#6f5d49] bg-[#fbf6e9]/95 px-4 py-2 shadow-sm">
-                    <p className="font-[family-name:var(--font-atlas)] text-2xl leading-none text-[#3b2f23] sm:text-3xl">{countryName}</p>
-                    <p className="mt-1 font-[family-name:var(--font-atlas)] text-xs italic text-[#6f5d49]">
-                        an open atlas of public money · <Link href="/" className="not-italic hover:underline">data.ftw</Link>
-                    </p>
+            {/* Brand */}
+            <div className="pointer-events-none absolute inset-x-3 top-3 z-20 flex items-start justify-between sm:inset-x-4 sm:top-4">
+                <a href={`/${countryCode}`} className="pointer-events-auto flex h-11 items-center gap-2.5 rounded-full border border-ftw-line bg-ftw-surface/95 pl-2 pr-4 shadow-sm backdrop-blur">
+                    <CompassMark className="h-7 w-7 text-ftw-text" />
+                    <span className="text-[15px] font-semibold tracking-tight">data.ftw</span>
+                    <span className="h-4 w-px bg-ftw-line" />
+                    <span className="text-sm text-ftw-muted">{countryName}</span>
+                </a>
+                <div className="pointer-events-auto">
+                    <QuickSettings country={countryCode} theme={choice} onTheme={setTheme} />
                 </div>
             </div>
 
-            {/* Corner menu */}
-            <nav className="absolute left-3 top-[5.5rem] z-10 flex gap-1.5 sm:left-auto sm:right-16 sm:top-5" aria-label="Sections">
-                {[
-                    { href: `/${countryCode}/infrastructure/toll-roads`, label: 'Toll roads', icon: Route },
-                    { href: `/${countryCode}/info-requests`, label: 'RTI', icon: FileText },
-                    { href: '/contribute', label: 'Contribute', icon: HandHeart },
-                    { href: '/connect', label: 'Use with AI', icon: Bot },
-                ].map(({ href, label, icon: Icon }) => (
-                    <Link key={href} href={href} title={label}
-                        className="flex items-center gap-1.5 rounded-md border border-[#6f5d49]/40 bg-[#fbf6e9]/95 px-2.5 py-2 text-xs font-medium text-[#3b2f23] shadow-sm hover:bg-white">
-                        <Icon className="h-4 w-4" /><span className="hidden lg:inline">{label}</span>
-                    </Link>
-                ))}
-            </nav>
-
-            {/* Selection card */}
-            {selected && (
-                <aside className="absolute bottom-[5.5rem] left-3 right-3 z-20 max-h-[45dvh] overflow-y-auto rounded-lg border border-[#6f5d49]/50 bg-[#fbf6e9] p-4 text-[#3b2f23] shadow-xl sm:left-5 sm:right-auto sm:top-28 sm:bottom-auto sm:w-80 sm:max-h-[calc(100dvh-13rem)]">
-                    <div className="flex items-start justify-between gap-3">
-                        <div>
-                            <h2 className="font-[family-name:var(--font-atlas)] text-2xl leading-tight">{selected.name}</h2>
-                            <p className="text-xs text-[#6f5d49]">
-                                {selected.kind === 'district'
-                                    ? `District of ${selected.state} · Census 2011 code ${selected.code}`
-                                    : region?.level === 'union_territory' ? 'Union territory' : 'State or union territory'}
-                                {selected.kind === 'state' && region?.capital ? ` · capital ${region.capital}` : ''}
-                            </p>
-                        </div>
-                        <button onClick={clearSelection} aria-label="Close" className="rounded p-1 text-[#6f5d49] hover:bg-black/5"><X className="h-4 w-4" /></button>
-                    </div>
-
-                    {selected.kind === 'district' && (
-                        <p className="mt-3 text-sm text-[#6f5d49]">Nothing is published at district level yet. Showing {selected.state}:</p>
-                    )}
-
-                    {region ? (
-                        <div className="mt-3 space-y-3 text-sm">
-                            {region.population && (
-                                <p>
-                                    <span className="text-[#6f5d49]">Population </span>
-                                    <strong>{fmt(region.population)}</strong>
-                                    <span className="text-xs text-[#6f5d49]"> ({region.populationAsOf}{region.populationSource?.url && <>, <a href={region.populationSource.url} target="_blank" rel="noopener noreferrer" className="underline">source</a></>})</span>
-                                </p>
-                            )}
-                            <div>
-                                <p className="mb-1 text-xs uppercase tracking-wide text-[#6f5d49]">Toll roads</p>
-                                {region.tollRoads.length ? region.tollRoads.map(t => (
-                                    <Link key={t.slug} href={`/${countryCode}/infrastructure/toll-roads/${t.slug}`} className="flex items-center justify-between gap-2 py-0.5 hover:underline">
-                                        <span>{t.name}</span>
-                                        <span className={`shrink-0 text-xs ${t.tolling === 'toll_free' ? 'text-emerald-700' : 'text-[#6f5d49]'}`}>{t.tolling === 'toll_free' ? 'toll-free' : t.tolling ?? ''}</span>
-                                    </Link>
-                                )) : <p className="text-[#6f5d49]">None published yet.</p>}
-                            </div>
-                            <div>
-                                <p className="mb-1 text-xs uppercase tracking-wide text-[#6f5d49]">People</p>
-                                {region.people.length ? region.people.map(p => (
-                                    <Link key={p.slug} href={`/${countryCode}/person/${p.slug}`} className="block py-0.5 hover:underline">
-                                        {p.name} <span className="text-xs uppercase text-[#6f5d49]">{p.role}</span>
-                                    </Link>
-                                )) : <p className="text-[#6f5d49]">None published yet.</p>}
-                            </div>
-                            <Link href={`/${countryCode}/${region.slug}`} className="inline-flex items-center gap-1 font-medium text-[#1f3a4d] hover:underline">
-                                Open {region.name} <ArrowUpRight className="h-3.5 w-3.5" />
-                            </Link>
-                        </div>
-                    ) : (
-                        <p className="mt-3 text-sm text-[#6f5d49]">
-                            Nothing published for {selected.kind === 'district' ? selected.state : selected.name} yet.{' '}
-                            <Link href="/contribute" className="underline">Help add it</Link>.
-                        </p>
-                    )}
-                </aside>
+            {/* Legend, wide screens with nothing open (phones: in the menu) */}
+            {wide && !panel && ready && (
+                <div className="absolute bottom-4 left-4 z-10 space-y-1.5 rounded-xl border border-ftw-line bg-ftw-surface/95 px-3 py-2.5 text-xs text-ftw-muted shadow-sm backdrop-blur">
+                    <p className="flex items-center gap-2"><span className="h-1 w-6 rounded-full bg-ftw-tolled" />Tolled road</p>
+                    <p className="flex items-center gap-2"><span className="h-1 w-6 rounded-full bg-ftw-free" />Toll-free road</p>
+                    <p className="flex items-center gap-2"><span className="h-3 w-6 rounded-sm border border-ftw-accent/40 bg-ftw-accent/10" />State with records</p>
+                </div>
             )}
 
-            {/* Search, at the bottom */}
-            <div className="absolute inset-x-3 bottom-[max(0.75rem,env(safe-area-inset-bottom))] z-30 mx-auto max-w-2xl">
-                {searchOpen && query.length >= 2 && (
-                    <div className="mb-2 max-h-[50dvh] overflow-y-auto rounded-lg border border-[#6f5d49]/50 bg-[#fbf6e9] text-sm text-[#3b2f23] shadow-xl">
-                        {placeMatches.length > 0 && (
-                            <div className="p-1">
-                                <p className="px-3 pt-2 text-[11px] uppercase tracking-wide text-[#6f5d49]">Places</p>
-                                {placeMatches.map(m => (
-                                    <button key={`${m.kind}-${m.code ?? m.stateSlug}`} onClick={() => selectPlace(m)}
-                                        className="flex w-full items-center justify-between gap-2 rounded px-3 py-2 text-left hover:bg-black/5">
-                                        <span className="flex items-center gap-2"><MapPin className="h-4 w-4 text-[#6f5d49]" />{m.name}</span>
-                                        <span className="text-xs text-[#6f5d49]">{m.kind === 'district' ? `district · ${m.state}` : 'state / UT'}</span>
-                                    </button>
-                                ))}
-                            </div>
-                        )}
-                        {records.length > 0 && (
-                            <div className="border-t border-[#6f5d49]/20 p-1">
-                                <p className="px-3 pt-2 text-[11px] uppercase tracking-wide text-[#6f5d49]">Records</p>
-                                {records.map(r => (
-                                    <button key={r.path} onClick={() => router.push(r.path)}
-                                        className="flex w-full items-center justify-between gap-2 rounded px-3 py-2 text-left hover:bg-black/5">
-                                        <span className="flex items-center gap-2">{r.type === 'person' ? <User className="h-4 w-4 text-[#6f5d49]" /> : <Route className="h-4 w-4 text-[#6f5d49]" />}{r.name}</span>
-                                        <span className="truncate text-xs text-[#6f5d49]">{r.description}</span>
-                                    </button>
-                                ))}
-                            </div>
-                        )}
-                        {!searching && placeMatches.length === 0 && records.length === 0 && (
-                            <p className="px-4 py-3 text-[#6f5d49]">Nothing found for “{query}”.</p>
-                        )}
+            {/* Panel / drawer */}
+            {panel && (
+                <Sheet wide={wide} snap={snap} onSnap={setSnap} onClose={closeView} viewKey={panel.key}>
+                    {panel.body}
+                    <p className="border-t border-ftw-line px-5 py-3 text-[11px] text-ftw-faint">
+                        Map: roads © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer" className="underline">OpenStreetMap contributors</a>,
+                        boundaries <a href="https://github.com/datameet/maps" target="_blank" rel="noopener noreferrer" className="underline">DataMeet</a>.
+                    </p>
+                </Sheet>
+            )}
+
+            {/* Zoom, compass (north / home) */}
+            <div className="absolute right-3 z-20 flex flex-col items-center gap-2 transition-[bottom] duration-200 sm:right-4"
+                style={{ bottom: ctrlBottom, visibility: ctrlHidden ? 'hidden' : 'visible' }}>
+                {wide && (
+                    <div className="flex flex-col overflow-hidden rounded-full border border-ftw-line bg-ftw-surface/95 shadow-sm backdrop-blur">
+                        <button onClick={() => mapRef.current?.zoomIn()} aria-label="Zoom in" className="flex h-10 w-11 items-center justify-center text-ftw-text hover:bg-ftw-raised"><Plus className="h-4 w-4" /></button>
+                        <span className="mx-2.5 h-px bg-ftw-line" />
+                        <button onClick={() => mapRef.current?.zoomOut()} aria-label="Zoom out" className="flex h-10 w-11 items-center justify-center text-ftw-text hover:bg-ftw-raised"><Minus className="h-4 w-4" /></button>
                     </div>
                 )}
-                <div className="relative">
-                    <Search className="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-[#6f5d49]" />
-                    <input
-                        value={query}
-                        onChange={e => { setQuery(e.target.value); setSearchOpen(true); }}
-                        onFocus={() => setSearchOpen(true)}
-                        onKeyDown={e => {
-                            if (e.key === 'Escape') { setQuery(''); setSearchOpen(false); }
-                            if (e.key === 'Enter') {
-                                if (placeMatches[0]) selectPlace(placeMatches[0]);
-                                else if (records[0]) router.push(records[0].path);
-                            }
-                        }}
-                        placeholder="Search places, toll roads, people…"
-                        aria-label="Search the atlas"
-                        className="h-14 w-full rounded-full border-2 border-[#6f5d49]/60 bg-[#fbf6e9] pl-12 pr-12 text-base text-[#3b2f23] shadow-lg placeholder:text-[#8a7864] focus:border-[#1f3a4d] focus:outline-none"
-                    />
-                    {searching ? (
-                        <Loader2 className="absolute right-4 top-1/2 h-5 w-5 -translate-y-1/2 animate-spin text-[#6f5d49]" />
-                    ) : query && (
-                        <button onClick={() => setQuery('')} aria-label="Clear search" className="absolute right-4 top-1/2 -translate-y-1/2 text-[#6f5d49]"><X className="h-5 w-5" /></button>
-                    )}
-                </div>
-                <p className="mt-1.5 text-center text-[10px] text-[#4a3b2c]/80">
-                    Boundaries: <a href="https://github.com/datameet/maps" target="_blank" rel="noopener noreferrer" className="underline">DataMeet</a> (2011 districts, CC BY 2.5 IN) ·{' '}
-                    <a href="/geo/in/ATTRIBUTION.md" className="underline">details</a> · every fact links to its source
-                </p>
+                <button
+                    onClick={() => {
+                        const map = mapRef.current;
+                        if (!map) return;
+                        if (north) map.easeTo({ bearing: 0, duration: 500 });
+                        else map.fitBounds(INDIA_BOUNDS, { padding: { top: 80, bottom: 110, left: wide && panel ? 496 : 20, right: 20 }, duration: 900 });
+                    }}
+                    title={north ? 'Point north' : `Show all of ${countryName}`}
+                    aria-label={north ? 'Point the map north' : `Show all of ${countryName}`}
+                    className="flex h-12 w-12 items-center justify-center rounded-full border border-ftw-line bg-ftw-surface/95 shadow-md backdrop-blur hover:bg-ftw-raised">
+                    {/* The mark turns with the map, so its red needle always points north. */}
+                    <span className="block" style={{ transform: `rotate(${-bearing}deg)` }}>
+                        <CompassMark className="h-9 w-9 text-ftw-text" />
+                    </span>
+                </button>
             </div>
 
-            {!ready && !loadError && (
-                <div className="pointer-events-none absolute inset-0 z-0 flex items-center justify-center font-[family-name:var(--font-atlas)] text-lg italic text-[#4a3b2c]">
-                    Unrolling the map…
+            {/* Search, at the bottom (phones: hidden while the drawer is open) */}
+            {!drawerOpen && (
+                <div className="absolute bottom-[max(1rem,env(safe-area-inset-bottom))] z-30 flex justify-center px-3"
+                    style={{ left: wide && panel ? 472 : 0, right: wide ? 76 : 0 }}>
+                    <div className="w-full max-w-xl">
+                        {searchOpen && query.trim().length >= 2 && (
+                            <div className="mb-2 max-h-[50dvh] overflow-y-auto rounded-2xl border border-ftw-line bg-ftw-surface p-1.5 text-sm shadow-[0_8px_40px_rgba(0,0,0,0.15)]">
+                                {matches.length ? matches.map(m => (
+                                    <button key={`${m.type}-${m.slug ?? m.place?.code ?? m.place?.stateSlug}`}
+                                        onClick={() => m.type === 'place' ? openPlace(m.place!) : m.type === 'road' ? openRoad(m.slug!) : openPerson(m.slug!)}
+                                        className="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left hover:bg-ftw-raised">
+                                        <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-ftw-raised">
+                                            {m.type === 'road' ? <RouteIcon className="h-4 w-4 text-ftw-tolled" /> : m.type === 'person' ? <User className="h-4 w-4 text-ftw-muted" /> : <MapPin className="h-4 w-4 text-ftw-muted" />}
+                                        </span>
+                                        <span className="min-w-0">
+                                            <span className="block truncate font-medium">{m.label}</span>
+                                            <span className="block truncate text-xs text-ftw-muted">{m.sub}</span>
+                                        </span>
+                                    </button>
+                                )) : <p className="px-4 py-3 text-ftw-muted">Nothing found for “{query.trim()}”.</p>}
+                            </div>
+                        )}
+                        <div className="relative">
+                            <Search className="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-ftw-muted" />
+                            <input
+                                value={query}
+                                onChange={e => { setQuery(e.target.value); setSearchOpen(true); }}
+                                onFocus={() => setSearchOpen(true)}
+                                onKeyDown={e => {
+                                    if (e.key === 'Escape') { setQuery(''); setSearchOpen(false); }
+                                    if (e.key === 'Enter' && matches[0]) {
+                                        const m = matches[0];
+                                        if (m.type === 'place') openPlace(m.place!); else if (m.type === 'road') openRoad(m.slug!); else openPerson(m.slug!);
+                                    }
+                                }}
+                                placeholder="Search a place, road or person"
+                                aria-label="Search the atlas"
+                                className="h-14 w-full rounded-full border border-ftw-line bg-ftw-surface pl-12 pr-12 text-base text-ftw-text shadow-[0_4px_24px_rgba(0,0,0,0.10)] placeholder:text-ftw-faint focus:border-ftw-accent focus:outline-none"
+                            />
+                            {query && (
+                                <button onClick={() => setQuery('')} aria-label="Clear search" className="absolute right-4 top-1/2 -translate-y-1/2 text-ftw-muted"><X className="h-5 w-5" /></button>
+                            )}
+                        </div>
+                        <p className="mt-1.5 text-center text-[10px] text-ftw-faint">
+                            Roads © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer" className="underline">OpenStreetMap contributors</a> ·
+                            boundaries <a href="https://github.com/datameet/maps" target="_blank" rel="noopener noreferrer" className="underline">DataMeet</a> ·{' '}
+                            <Link href="/licences" className="underline">licences</Link>
+                        </p>
+                    </div>
                 </div>
             )}
+
+            {!ready && !loadError && (
+                <div className="pointer-events-none absolute inset-0 z-0 flex items-center justify-center text-sm text-ftw-muted">Loading the map…</div>
+            )}
             {loadError && (
-                <div className="absolute inset-0 z-20 flex items-center justify-center text-sm text-[#4a3b2c]">Map boundaries could not be loaded.</div>
+                <div className="absolute inset-0 z-20 flex items-center justify-center text-sm text-ftw-muted">Map boundaries could not be loaded.</div>
             )}
         </div>
     );

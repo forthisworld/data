@@ -4,7 +4,7 @@ Built by `scripts/build-geo.mjs` (`npm run geo:build`) from the DataMeet India c
 [maps repository](https://github.com/datameet/maps), pinned to commit
 `b3fbbde595310b397a55d718e0958ce249a4fa1f` (11 May 2022).
 
-All four files are cut from **one set of polygons**, the Census 2011 districts, simplified once, so
+The four boundary files are cut from **one set of polygons**, the Census 2011 districts, simplified once, so
 a border shared by two layers is exactly the same line in both.
 
 | File | How it is made | Source | Licence |
@@ -13,8 +13,9 @@ a border shared by two layers is exactly the same line in both.
 | `states.geojson` | 36 states and union territories: the 2011 districts merged by the state each one is in today | same district file; `States/Admin2.shp` (CC BY 4.0) decides which state each district is in, supplies the state names, and supplies one line (see below) | CC BY 2.5 India, CC BY 4.0 |
 | `india.geojson` | national outline: all of the above merged | same district file | CC BY 2.5 India |
 | `labels.geojson` | one point inside each state and each district, with its area in km², for placing names | derived from the files above | as above |
+| `routes.geojson` | toll roads as lines, one feature per section, with the 2011 districts and states each passes through | OpenStreetMap ways pinned in `scripts/routes.json`, fetched by `scripts/build-routes.mjs` (`npm run geo:routes`) | ODbL 1.0, © OpenStreetMap contributors |
 
-Attribution: *India boundaries by the [DataMeet India community](http://datameet.org/).*
+Attribution: *India boundaries by the [DataMeet India community](http://datameet.org/). Roads © [OpenStreetMap contributors](https://www.openstreetmap.org/copyright).*
 
 Notes:
 

@@ -6,7 +6,7 @@
  */
 
 import { getCountryData, findEntity } from '@/lib/data/store';
-import { CountryConfig, Overview } from '@/types';
+import { CountryConfig, Overview, Person, TollRoad } from '@/types';
 
 export async function getCountryConfig(countryCode: string): Promise<CountryConfig> {
     const d = getCountryData(countryCode);
@@ -87,6 +87,22 @@ export async function getAtlasRegions(countryCode: string): Promise<Record<strin
             ];
         })
     );
+}
+
+/**
+ * Everything the atlas needs to work on its own (search, panel, offline): the
+ * regions, and the full published road and people records. Small for now; split
+ * per state and load on demand once it grows.
+ */
+export interface AtlasData {
+    regions: Record<string, AtlasRegion>;
+    roads: TollRoad[];
+    people: Person[];
+}
+
+export async function getAtlasData(countryCode: string): Promise<AtlasData> {
+    const d = getCountryData(countryCode);
+    return { regions: await getAtlasRegions(countryCode), roads: d?.tollRoads ?? [], people: d?.persons ?? [] };
 }
 
 export async function isCountrySupported(countryCode: string): Promise<boolean> {

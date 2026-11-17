@@ -13,7 +13,8 @@
     "postinstall": "npm run -s data:index",
     "data:index": "tsx scripts/gen-data-index.ts",
     "data:validate": "tsx scripts/validate-data.ts",
-    "geo:build": "node scripts/build-geo.mjs"
+    "geo:build": "node scripts/build-geo.mjs",
+    "geo:routes": "node scripts/build-routes.mjs"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.30.0",

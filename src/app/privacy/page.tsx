@@ -10,7 +10,8 @@ import {
     Cookie,
     Eye,
     Database,
-    Scale
+    Scale,
+    HardDrive
 } from 'lucide-react';
 
 export const metadata = {
@@ -63,6 +64,27 @@ export default function PrivacyPage() {
                         </CardContent>
                     </Card>
 
+                    {/* On your device */}
+                    <Card>
+                        <CardHeader>
+                            <CardTitle className="flex items-center gap-2">
+                                <HardDrive className="h-5 w-5" />
+                                Stored on your device
+                            </CardTitle>
+                        </CardHeader>
+                        <CardContent className="space-y-3">
+                            <p>Two things, both kept only in your browser and never sent to us:</p>
+                            <ul className="list-disc list-inside text-sm space-y-1 text-muted-foreground">
+                                <li>The theme you pick in the atlas menu (light, dark or automatic), in local storage.</li>
+                                <li>An offline copy of the map files and the pages you have opened, so the atlas works without a connection (the app&apos;s service worker).</li>
+                            </ul>
+                            <p className="text-sm text-muted-foreground">
+                                Neither is a cookie and neither identifies you, which is why there is no consent banner. Clearing
+                                this site&apos;s data in your browser removes both.
+                            </p>
+                        </CardContent>
+                    </Card>
+
                     {/* No Tracking */}
                     <Card className="border-blue-500/30 bg-gradient-to-br from-blue-500/5 to-transparent">
                         <CardHeader>
@@ -108,7 +130,9 @@ export default function PrivacyPage() {
                                 <div className="p-4 rounded-lg bg-muted/50">
                                     <h4 className="font-medium mb-2">When you contribute data</h4>
                                     <p className="text-sm text-muted-foreground">
-                                        Information you submit through our data contribution forms (with your consent)
+                                        A contribution becomes a public pull request on GitHub, with the change and the sources you
+                                        give. Don&apos;t include personal details you don&apos;t want published. To limit abuse, the
+                                        server counts requests per IP address in memory for an hour; it does not store them.
                                     </p>
                                 </div>
                             </div>
@@ -208,7 +232,7 @@ export default function PrivacyPage() {
 
                 {/* Last Updated */}
                 <p className="text-center text-sm text-muted-foreground mt-8">
-                    Last updated: January 2026
+                    Last updated: November 2026
                 </p>
             </div>
         </div>

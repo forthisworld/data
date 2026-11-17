@@ -63,7 +63,11 @@ npm run data:validate
 npm run build
 ```
 
-- Map boundaries are built from DataMeet's open data by `npm run geo:build` (see `public/geo/in/ATTRIBUTION.md`).
+- Map boundaries are built from DataMeet's open data by `npm run geo:build`; toll roads are drawn from OpenStreetMap
+  by `npm run geo:routes` (to draw a new road, add its OSM ways to `scripts/routes.json`). See
+  `public/geo/in/ATTRIBUTION.md`.
+- The atlas is `src/components/atlas/`: `Atlas.tsx` (map, search, URL state), `PanelViews.tsx` (what the panel shows),
+  `Sheet.tsx` (side panel / phone drawer). Colours are the `--ftw-*` tokens in `src/app/globals.css` (light and dark).
 - The MCP endpoint is `src/app/api/mcp`; a local stdio server lives in `mcp-server/` (`cd mcp-server && npm install
   && npx tsc`, then run `node dist/index.js`; set `FTW_SITE_URL` to send contributions).
 - Contributions open pull requests through `src/lib/contrib/contribute.ts`; the server needs `GITHUB_CONTRIB_TOKEN`.

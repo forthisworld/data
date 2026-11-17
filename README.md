@@ -4,9 +4,10 @@ An open atlas of public money in India, by [ForThisWorld](https://forthis.world)
 each one, who built it, what it cost, who sanctioned it, how much it has earned, and why it is still tolled. Every
 number links to its source, and claims are kept apart from findings. Anything unknown becomes an RTI question.
 
-The home screen is a map of India: zoom in for districts, search for any state, district, toll road or person at
-the bottom, and select a place to see what is published for it. It installs as an app (PWA) and works offline once
-visited.
+The atlas is the app: a map of India in light or dark, where zooming in reveals districts and the roads on record.
+Search at the bottom finds any state, district (including renamed ones, e.g. Bengaluru), road or person; selecting
+one opens a side panel (a drawer on phones) with every figure's grade and source, and what is still unknown. Views
+can be shared as links (`/in?v=road:nice-bmic`). It installs as an app (PWA) and works offline once visited.
 
 Status and next steps: [PLAN.md](PLAN.md).
 
@@ -29,7 +30,7 @@ entry in Cursor's `mcp.json`. The site's `/connect` page has the details and sta
 | `src/` | The website (Next.js 15, Tailwind, MapLibre): the atlas, state pages, toll roads, people, the RTI tracker, `/connect` |
 | `src/app/api/` | `search`, `mcp` (MCP over HTTP), `contributions` (sourced change → pull request), `research` (read-only, token) |
 | `data/in/` | The published record: reviewed JSON, each fact with its citation. Rules in [data/SOURCING.md](data/SOURCING.md) |
-| `public/geo/in/` | Map boundaries built from DataMeet by `npm run geo:build`; licences in its ATTRIBUTION.md |
+| `public/geo/in/` | Map boundaries built from DataMeet by `npm run geo:build`, toll roads from OpenStreetMap by `npm run geo:routes`; licences in its ATTRIBUTION.md |
 | `scripts/scrapers/` | Source adapters (NHAI TIS, data.gov.in, Gazette, MCA); they write overlays for review, never the published files |
 | `mcp-server/` | A local (stdio) MCP server over a clone's `data/`; contributions go to the site's `/api/contributions` |
 
@@ -56,4 +57,4 @@ pull request by hand.
 - **Data:** [Open Database License (ODbL) 1.0](LICENSE-DATA). You can use it for anything, including commercial use,
   with attribution. If you publish a changed copy of the database, it must also be ODbL. See
   [data/LICENSE.md](data/LICENSE.md). Cited source documents keep their own terms. Map boundaries keep DataMeet's
-  licences (`public/geo/in/ATTRIBUTION.md`).
+  licences, and roads drawn on the map are © OpenStreetMap contributors (ODbL) (`public/geo/in/ATTRIBUTION.md`).

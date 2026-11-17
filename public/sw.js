@@ -5,7 +5,7 @@
  *  - API calls: network only (search, MCP, contributions must be live)
  * Bump VERSION to drop old caches.
  */
-const VERSION = 'v1';
+const VERSION = 'v2';
 const STATIC = `ftw-static-${VERSION}`;
 const PAGES = `ftw-pages-${VERSION}`;
 const PRECACHE = [
@@ -14,6 +14,7 @@ const PRECACHE = [
     '/geo/in/districts.geojson',
     '/geo/in/india.geojson',
     '/geo/in/labels.geojson',
+    '/geo/in/routes.geojson',
     '/icons/icon-192.png',
     '/icons/icon-512.png',
 ];
