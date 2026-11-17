@@ -26,7 +26,7 @@ import Sheet, { PEEK_PX, useWide, type Snap } from './Sheet';
 import QuickSettings from './QuickSettings';
 import { addBasemap, paintBasemap, BASEMAP_GLYPHS, BASEMAP_PALETTE } from './basemap';
 import { PlaceView, RoadView, PersonView, RoadsView, SeatView, ROLE, shortName } from './PanelViews';
-import { loadSeats, paintSeats, showLines, seatFillLayers, SEAT_PALETTE, type SeatGeo, type SeatPrefix } from './seats';
+import { loadSeats, paintSeats, showLines, seatFillLayers, SEAT_PALETTE, SEAT_ZOOM, LINE_LEAD, type SeatGeo, type SeatPrefix } from './seats';
 import { PLACE_ALIASES } from '@/lib/place-aliases';
 import { atlasPath, parseAtlasPath, type AtlasRoute } from '@/lib/atlas-route';
 
@@ -69,6 +69,11 @@ interface RouteInfo {
 const INDIA_BOUNDS: LngLatBoundsLike = [[67.5, 6.2], [98.0, 37.6]];
 const DISTRICT_ZOOM = 5.2;
 const CITY_ZOOM = 8.5;
+/**
+ * The zoom from which the unit inside a state (district or seat) is drawn, named and selectable.
+ * Below it the state is the unit. Lines, names, hover and tap all follow this one number per mode.
+ */
+const UNIT_ZOOM: Record<'districts' | SeatPrefix, number> = { districts: DISTRICT_ZOOM, ...SEAT_ZOOM };
 
 const PALETTE = {
     light: {
@@ -160,6 +165,8 @@ export default function Atlas({ countryCode, countryName, data, initial }: Atlas
     const [acLoaded, setAcLoaded] = useState(false);
     const seatLoad = useRef<Partial<Record<SeatPrefix, Promise<Map<string, SeatGeo>>>>>({});
     const relayout = useRef<() => void>(() => {});
+    // Per kind of seat, once loaded: the fill layers to hit-test and the states that have seat shapes.
+    const seatHit = useRef<Partial<Record<SeatPrefix, { layers: string[]; states: Set<string> }>>>({});
 
     const roadBySlug = useMemo(() => new Map(roads.map(r => [r.slug, r])), [roads]);
     const personBySlug = useMemo(() => new Map(people.map(p => [p.slug, p])), [people]);
@@ -222,6 +229,8 @@ export default function Atlas({ countryCode, countryName, data, initial }: Atlas
         selectedRef.current = place.kind === 'state' ? { source: 'states', id: place.stateSlug } : { source: 'districts', id: place.code! };
         map.setFeatureState(selectedRef.current, { selected: true });
         setView({ kind: 'place', place });
+        // A district is drawn only with district lines; show them, so its edge and name are on the map.
+        if (place.kind === 'district') setMode('districts');
         setSnap('half');
         setQuery('');
         setSearchOpen(false);
@@ -271,7 +280,10 @@ export default function Atlas({ countryCode, countryName, data, initial }: Atlas
             ? loadSeats(map, 'pc', { polys: `/geo/${countryCode}/pc.geojson`, lines: `/geo/${countryCode}/pc-lines.geojson` }, pal, 'states-line')
             : Promise.all(Object.keys(assemblies).map(st => loadSeats(map, 'ac', { polys: `/geo/${countryCode}/ac/${st}.geojson`, lines: `/geo/${countryCode}/ac/${st}-lines.geojson` }, pal, 'states-line', `ac-${st}`)))
                 .then(all => { setAcLoaded(true); return new Map(all.flatMap(g => [...g])); })
-        ).then(merge);
+        ).then(geo => {
+            seatHit.current[prefix] = { layers: seatFillLayers(map, prefix), states: new Set([...geo.keys()].map(k => k.slice(0, k.indexOf(':')))) };
+            return merge(geo);
+        });
         return seatLoad.current[prefix]!;
     }, [countryCode, assemblies]);
 
@@ -387,7 +399,7 @@ export default function Atlas({ countryCode, countryName, data, initial }: Atlas
             map.addLayer({ id: 'states-selected-fill', type: 'fill', source: 'states', paint: {} });
             map.addLayer({ id: 'districts-fill', type: 'fill', source: 'districts', minzoom: DISTRICT_ZOOM, paint: {} });
             map.addLayer({ id: 'districts-selected-fill', type: 'fill', source: 'districts', paint: {} });
-            map.addLayer({ id: 'districts-line', type: 'line', source: 'districts', minzoom: DISTRICT_ZOOM - 0.4, paint: { 'line-width': ['interpolate', ['linear'], ['zoom'], 5, 0.5, 10, 1.2] } });
+            map.addLayer({ id: 'districts-line', type: 'line', source: 'districts', minzoom: DISTRICT_ZOOM - LINE_LEAD, paint: { 'line-width': ['interpolate', ['linear'], ['zoom'], 5, 0.5, 10, 1.2] } });
             map.addLayer({ id: 'states-line', type: 'line', source: 'states', paint: { 'line-width': ['interpolate', ['linear'], ['zoom'], 3, 0.6, 8, 1.6] } });
             map.addLayer({ id: 'india-outline', type: 'line', source: 'india', paint: { 'line-width': ['interpolate', ['linear'], ['zoom'], 3, 1.2, 8, 2.2] } });
             for (const src of ['states', 'districts'] as const) {
@@ -485,14 +497,42 @@ export default function Atlas({ countryCode, countryName, data, initial }: Atlas
                 }
             };
             map.on('moveend', layoutLabels);
+            // Also while the map moves (a few times a second), so names keep up instead of jumping in at the end.
+            let lastLayout = 0;
+            map.on('move', () => {
+                const t = performance.now();
+                if (t - lastLayout < 160) return;
+                lastLayout = t;
+                layoutLabels();
+            });
             relayout.current = layoutLabels;
             layoutLabels();
 
-            // ---- hover and click: roads win over districts, districts over states ----
-            const hit = (p: maplibregl.PointLike): MapGeoJSONFeature | undefined =>
-                map.queryRenderedFeatures(p, { layers: ['routes-hit'] })[0] ??
-                (modeRef.current !== 'districts' && seatFillLayers(map, modeRef.current).length ? map.queryRenderedFeatures(p, { layers: seatFillLayers(map, modeRef.current) })[0] : undefined) ??
-                map.queryRenderedFeatures(p, { layers: map.getZoom() >= DISTRICT_ZOOM && modeRef.current === 'districts' ? ['districts-fill'] : ['hover-shade'] })[0];
+            // ---- hover and click: roads win over the unit in view (district or seat), the unit over states ----
+            // Seat and district shapes do not meet exactly everywhere. A point that falls in a crack takes
+            // the unit a few pixels away, in the same state, and never the whole state by accident.
+            const unitAt = (pt: maplibregl.Point, layers: string[], stateSlug?: string): MapGeoJSONFeature | undefined => {
+                for (const r of [0, 4, 9]) {
+                    const found = map.queryRenderedFeatures(r ? [[pt.x - r, pt.y - r], [pt.x + r, pt.y + r]] : pt, { layers });
+                    const f = r && stateSlug ? found.find(x => x.properties?.stateSlug === stateSlug) : found[0];
+                    if (f) return f;
+                }
+            };
+            const hit = (pt: maplibregl.Point): MapGeoJSONFeature | undefined => {
+                const road = map.queryRenderedFeatures(pt, { layers: ['routes-hit'] })[0];
+                if (road) return road;
+                const mode = modeRef.current;
+                const state = map.queryRenderedFeatures(pt, { layers: ['hover-shade'] })[0];
+                if (map.getZoom() < UNIT_ZOOM[mode]) return state;
+                const seats = mode === 'districts' ? undefined : seatHit.current[mode];
+                const layers = mode === 'districts' ? ['districts-fill'] : seats?.layers ?? [];
+                const unit = layers.length ? unitAt(pt, layers, state?.properties?.slug) : undefined;
+                if (unit) return unit;
+                // No seat here although this state's seats are drawn (an area the seat map leaves empty):
+                // that is nothing, not the state. States with no seat shapes still open as states.
+                if (state && seats?.states.has(state.properties?.slug)) return undefined;
+                return state;
+            };
             let hovered: { source: string; id: string | number } | null = null;
             const clearHover = () => {
                 if (hovered) map.setFeatureState(hovered, { hover: false });

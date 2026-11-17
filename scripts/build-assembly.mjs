@@ -8,7 +8,9 @@
  *
  * As with Lok Sabha seats (build-constituencies.mjs), every seat is clipped to the state on OUR state
  * boundaries and lines are drawn only between seats, so nothing here can disagree with the official
- * outline. Each seat also records its Lok Sabha seat (from the file's PC number, which is fixed by the
+ * outline. Strips of the state that no seat covers (the two files' line-work differs) go to the
+ * neighbouring seat (scripts/lib/fill-gaps.mjs). An area the file draws without a seat number is left
+ * empty, with its edge drawn: the file does not say whose seat it is. Each seat also records its Lok Sabha seat (from the file's PC number, which is fixed by the
  * 2008 delimitation order) and the 2011 districts it overlaps.
  *
  * Writes public/geo/<country>/ac/<state>.geojson and ac/<state>-lines.geojson.
@@ -16,6 +18,7 @@
 import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'node:fs';
 import { resolve } from 'node:path';
 import mapshaper from 'mapshaper';
+import { fillGaps } from './lib/fill-gaps.mjs';
 
 const ROOT = resolve(import.meta.dirname, '..');
 const COMMIT = 'b3fbbde595310b397a55d718e0958ce249a4fa1f';
@@ -44,30 +47,48 @@ const states = JSON.parse(readFileSync(resolve(GEO, 'states.geojson'), 'utf8'));
 const own = { ...states, features: states.features.filter(f => f.properties.slug === state) };
 if (!own.features.length) throw new Error(`No state ${state} in states.geojson`);
 
-const out = await mapshaper.applyCommands(
+/** Shapes the file draws with no seat number: kept while lines are drawn, never shown as a seat. */
+const UNNAMED = '?';
+const clipped = await mapshaper.applyCommands(
     [
         `-i ${CACHE}.shp name=ac`,
-        `-filter target=ac "ST_NAME == '${cfg.file}' && AC_NO > 0"`,
+        `-filter target=ac "ST_NAME == '${cfg.file}'"`,
         '-clean target=ac',
         '-i state.json name=state',
         '-clip target=ac state',
-        `-each target=ac "key = '${state}:' + AC_NO, acNo = AC_NO, name = AC_NAME, pcKey = '${state}:${cfg.stCode}-' + PC_NO, stateSlug = '${state}'"`,
+        `-each target=ac "key = AC_NO > 0 ? '${state}:' + AC_NO : '${UNNAMED}' + this.id, acNo = AC_NO, name = AC_NAME, pcKey = '${state}:${cfg.stCode}-' + PC_NO, stateSlug = '${state}'"`,
         '-filter-fields target=ac key,acNo,name,pcKey,stateSlug',
         '-filter target=ac "this.area > 0"',
+        '-o target=ac ac.json',
+    ].join(' '),
+    { 'state.json': JSON.stringify(own) },
+);
+const filled = await fillGaps({ seats: JSON.parse(clipped['ac.json']), states: own, hold: key => key.startsWith(UNNAMED) });
+const unnamed = filled.seats.features.filter(f => f.properties.key.startsWith(UNNAMED));
+const leftKm2 = filled.left.reduce((s, x) => s + x.km2, 0);
+// A piece that touches no seat (an exclave) stays empty: we do not guess its seat. Anything more is a fault.
+if (leftKm2 > 20) throw new Error(`${state}: ${leftKm2.toFixed(1)} km2 of the state is still in no seat`);
+
+const out = await mapshaper.applyCommands(
+    [
+        '-i filled.json name=ac',
         '-innerlines target=ac + name=lines',
+        `-filter target=ac "key.charAt(0) != '${UNNAMED}'"`,
         '-each target=lines "kind = \'ac\'"',
         '-o target=ac ac.json precision=0.0001',
         '-o target=lines lines.json precision=0.0001',
-        // Which 2011 districts each seat overlaps (5% of either, as for Lok Sabha seats).
+        // Which 2011 districts each seat overlaps (5% of either, as for Lok Sabha seats). Measured on the
+        // seat as the source draws it, so a filled gap never adds a district to a seat.
+        '-i source.json name=src',
         '-i districts.json name=districts',
-        '-each target=ac "seatKm2 = this.area / 1e6"',
+        '-each target=src "seatKm2 = this.area / 1e6"',
         '-each target=districts "districtKm2 = this.area / 1e6"',
-        '-union target=ac,districts fields=key,seatKm2,census2011Code,districtKm2 name=overlap',
+        '-union target=src,districts fields=key,seatKm2,census2011Code,districtKm2 name=overlap',
         '-each target=overlap "km2 = this.area / 1e6"',
         '-filter target=overlap "key != null && census2011Code != null"',
         '-o target=overlap overlap.json format=json',
     ].join(' '),
-    { 'state.json': JSON.stringify(own), 'districts.json': readFileSync(resolve(GEO, 'districts.geojson'), 'utf8') },
+    { 'filled.json': JSON.stringify(filled.seats), 'source.json': clipped['ac.json'], 'districts.json': readFileSync(resolve(GEO, 'districts.geojson'), 'utf8') },
 );
 
 const seats = JSON.parse(out['ac.json']);
@@ -96,4 +117,5 @@ for (const f of seats.features) {
 mkdirSync(resolve(GEO, 'ac'), { recursive: true });
 writeFileSync(resolve(GEO, `ac/${state}.geojson`), JSON.stringify(seats));
 writeFileSync(resolve(GEO, `ac/${state}-lines.geojson`), JSON.stringify(lines));
-console.log(`ac/${state}.geojson: ${seats.features.length} seats; ${lines.features.length} lines`);
+console.log(`ac/${state}.geojson: ${seats.features.length} seats; ${lines.features.length} lines; ${filled.filledKm2.toFixed(1)} km2 of gaps given to the neighbouring seat, ${leftKm2.toFixed(2)} km2 left empty (pieces that touch no seat)`);
+if (unnamed.length) console.log(`left empty: ${unnamed.length} area(s) the source draws with no seat number`);

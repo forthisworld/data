@@ -4,11 +4,19 @@
  * ac/<state>-lines.geojson, from scripts/build-assembly.mjs). Every seat is clipped to our state
  * boundaries and lines are drawn only between seats, so seats never draw a border of their own.
  * Loaded the first time they are needed.
+ *
+ * Seats appear, and can be hovered and selected, from SEAT_ZOOM. Below it they are too small to
+ * read or tap, so the state is the unit (Atlas.tsx).
  */
 import type maplibregl from 'maplibre-gl';
 
 type Bounds = [[number, number], [number, number]];
 export type SeatPrefix = 'pc' | 'ac';
+
+/** The zoom from which each kind of seat is drawn, named and selectable. */
+export const SEAT_ZOOM: Record<SeatPrefix, number> = { pc: 5.2, ac: 7.2 };
+/** Lines fade in a little before the unit becomes selectable. */
+export const LINE_LEAD = 0.4;
 
 export interface SeatGeo {
     bounds: Bounds;
@@ -21,11 +29,11 @@ export interface SeatGeo {
 export interface SeatPalette { line: string; select: string; selectOpacity: number; hover: string; hoverOpacity: number; label: string; halo: string }
 
 export const SEAT_PALETTE: Record<'light' | 'dark', SeatPalette> = {
-    light: { line: '#9aa5b4', select: '#2563eb', selectOpacity: 0.09, hover: '#0f172a', hoverOpacity: 0.05, label: '#475569', halo: '#ffffff' },
-    dark: { line: '#4b5768', select: '#60a5fa', selectOpacity: 0.14, hover: '#ffffff', hoverOpacity: 0.06, label: '#a5b0bf', halo: '#0b0f14' },
+    light: { line: '#7d8999', select: '#2563eb', selectOpacity: 0.09, hover: '#0f172a', hoverOpacity: 0.05, label: '#475569', halo: '#ffffff' },
+    dark: { line: '#5f6d82', select: '#60a5fa', selectOpacity: 0.14, hover: '#ffffff', hoverOpacity: 0.06, label: '#a5b0bf', halo: '#0b0f14' },
 };
 
-const layers = (x: SeatPrefix) => [`${x}-fill`, `${x}-selected-fill`, `${x}-lines`, `${x}-labels`];
+const layers = (x: SeatPrefix) => [`${x}-fill`, `${x}-selected-fill`, `${x}-selected-line`, `${x}-lines`, `${x}-labels`];
 
 function bboxOf(g: GeoJSON.Polygon | GeoJSON.MultiPolygon): Bounds {
     let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity;
@@ -52,11 +60,15 @@ export async function loadSeats(map: maplibregl.Map, prefix: SeatPrefix, files: 
     map.addSource(`${sourceId}-lines`, { type: 'geojson', data: lines });
     const hidden = { visibility: 'none' as const };
     const id = (kind: string) => (sourceId === prefix ? `${prefix}-${kind}` : `${prefix}-${kind}--${sourceId}`);
-    map.addLayer({ id: id('fill'), type: 'fill', source: sourceId, layout: hidden, paint: {} }, before);
+    const from = SEAT_ZOOM[prefix];
+    map.addLayer({ id: id('fill'), type: 'fill', source: sourceId, minzoom: from, layout: hidden, paint: {} }, before);
     map.addLayer({ id: id('selected-fill'), type: 'fill', source: sourceId, layout: hidden, paint: {} }, before);
-    map.addLayer({ id: id('lines'), type: 'line', source: `${sourceId}-lines`, layout: hidden, paint: { 'line-width': ['interpolate', ['linear'], ['zoom'], 4, 0.4, 9, 1.3] } }, before);
+    // Wider as you zoom in, so seat lines stay apart from the streets drawn at city zoom.
+    map.addLayer({ id: id('lines'), type: 'line', source: `${sourceId}-lines`, minzoom: from - LINE_LEAD, layout: hidden, paint: { 'line-width': ['interpolate', ['linear'], ['zoom'], 4, 0.4, 9, 1.3, 13, 2.2] } }, before);
+    // The selected seat's own edge, as states and districts have.
+    map.addLayer({ id: id('selected-line'), type: 'line', source: sourceId, layout: { ...hidden, 'line-join': 'round' }, paint: { 'line-width': ['case', ['boolean', ['feature-state', 'selected'], false], 2.5, 0] } }, before);
     map.addLayer({
-        id: id('labels'), type: 'symbol', source: sourceId, minzoom: prefix === 'ac' ? 7.6 : 5.6,
+        id: id('labels'), type: 'symbol', source: sourceId, minzoom: from,
         layout: { ...hidden, 'text-field': ['get', 'name'], 'text-font': ['Noto Sans Regular'], 'text-size': ['interpolate', ['linear'], ['zoom'], 5.6, 10, 10, 13], 'text-max-width': 7, 'text-padding': 3 },
         paint: {},
     });
@@ -73,7 +85,8 @@ export function seatLayers(map: maplibregl.Map, prefix?: SeatPrefix): string[] {
 export function paintSeats(map: maplibregl.Map, p: SeatPalette) {
     for (const id of seatLayers(map)) {
         const set = (prop: string, value: unknown) => map.setPaintProperty(id, prop, value);
-        if (/-selected-fill/.test(id)) { set('fill-color', p.select); set('fill-opacity', ['case', ['boolean', ['feature-state', 'selected'], false], p.selectOpacity, 0]); }
+        if (/-selected-line/.test(id)) set('line-color', p.select);
+        else if (/-selected-fill/.test(id)) { set('fill-color', p.select); set('fill-opacity', ['case', ['boolean', ['feature-state', 'selected'], false], p.selectOpacity, 0]); }
         else if (/-fill/.test(id)) { set('fill-color', p.hover); set('fill-opacity', ['case', ['boolean', ['feature-state', 'hover'], false], p.hoverOpacity, 0]); }
         else if (/-lines/.test(id)) set('line-color', p.line);
         else if (/-labels/.test(id)) { set('text-color', p.label); set('text-halo-color', p.halo); set('text-halo-width', 1.3); }
@@ -82,7 +95,8 @@ export function paintSeats(map: maplibregl.Map, p: SeatPalette) {
 
 /** Which lines show inside states: 2011 districts, Lok Sabha seats or assembly seats. */
 export function showLines(map: maplibregl.Map, mode: 'districts' | SeatPrefix) {
-    for (const id of seatLayers(map)) map.setLayoutProperty(id, 'visibility', id.startsWith(`${mode}-`) ? 'visible' : 'none');
+    // The selected seat stays marked whichever lines show, so an open panel always has its place on the map.
+    for (const id of seatLayers(map)) map.setLayoutProperty(id, 'visibility', id.startsWith(`${mode}-`) || id.includes('-selected-') ? 'visible' : 'none');
     for (const id of ['districts-line', 'districts-fill']) if (map.getLayer(id)) map.setLayoutProperty(id, 'visibility', mode === 'districts' ? 'visible' : 'none');
 }
 
