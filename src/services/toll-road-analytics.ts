@@ -264,8 +264,15 @@ export function estimateRecoveryProgress(road: TollRoad): RecoveryProgress {
 
     const recoveredPct = Math.round((cumulative.total / projectCost) * 100);
     const recoveredPctLow = Math.round((cumulative.totalLow / projectCost) * 100);
-    const uncertain = cumulative.confidence !== 'reported';
-    const rangeTxt = uncertain ? `${recoveredPctLow}-${recoveredPct}%` : `~${recoveredPct}%`;
+    if (cumulative.confidence === 'reported') {
+        // Both numbers are established (court/audit/official/filing); this is arithmetic, not an estimate.
+        const verdict =
+            `Toll collected in ${cumulative.fromYear}–${cumulative.toYear} was ${recoveredPct}% of the original project cost. ` +
+            `This compares the two cited figures only; the concession's own recovery formula also added returns, maintenance and other costs.`;
+        return { recoveredPct, recoveredPctLow, cumulativeRevenue: cumulative, projectCost, verdict };
+    }
+    // Past this point the total includes estimated years.
+    const rangeTxt = recoveredPctLow !== recoveredPct ? `${recoveredPctLow}-${recoveredPct}%` : `~${recoveredPct}%`;
     let verdict: string;
     if (recoveredPct >= 100) {
         verdict = `Tolls have likely recovered somewhere between ${rangeTxt} of the stated project cost - well past any reasonable recovery threshold, which is precisely why the official recovery accounting needs to be published`;
@@ -286,7 +293,9 @@ export function getDataGaps(road: TollRoad): DataGap[] {
     const operator = road.concession?.operator ?? road.operatorCompany ?? 'the concessionaire';
     const authority = road.concession?.grantingAuthority ?? 'the competent authority';
 
-    const hasReportedRevenue = (road.annualRevenue ?? []).some(e => e.revenue?.value);
+    const hasReportedRevenue =
+        (road.annualRevenue ?? []).some(e => e.revenue?.value && isEstablished(e.revenue.basis)) ||
+        (road.collections ?? []).some(c => /toll/i.test(c.label) && isEstablished(c.amount.basis));
     if (!hasReportedRevenue) {
         gaps.push({
             id: 'annual-revenue',

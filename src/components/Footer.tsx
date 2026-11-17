@@ -71,7 +71,7 @@ const Footer = () => {
           <div>
             <h4 className="font-semibold mb-3">Legal</h4>
             <p className="text-sm text-muted-foreground">
-              All data sourced from official public records.
+              Every fact links to its source; claims are labelled as claims.
               For informational purposes only.
             </p>
           </div>

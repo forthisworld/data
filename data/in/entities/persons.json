@@ -5,10 +5,14 @@
         "name": "Narendra Modi",
         "slug": "narendra-modi",
         "role": "pm",
-        "roles": ["pm", "mp"],
+        "roles": [
+            "pm"
+        ],
         "party": "BJP",
         "description": "Prime Minister of India, in his third term since June 2024 (previously 2014-2019 and 2019-2024). Chief Minister of Gujarat from October 2001 to May 2014.",
-        "tenure": { "start": "2014-05" },
+        "tenure": {
+            "start": "2014-05"
+        },
         "sources": [
             {
                 "id": "pmindia-profile",
@@ -27,8 +31,9 @@
         "name": "Amit Shah",
         "slug": "amit-shah",
         "role": "minister",
-        "roles": ["minister", "mp"],
-        "party": "BJP",
+        "roles": [
+            "minister"
+        ],
         "description": "Union Home Minister.",
         "sources": [
             {
@@ -48,12 +53,14 @@
         "name": "Rahul Gandhi",
         "slug": "rahul-gandhi",
         "role": "mp",
-        "roles": ["mp"],
+        "roles": [
+            "mp"
+        ],
         "party": "INC",
-        "constituency": "Rae Bareli",
-        "regionId": "uttar-pradesh",
-        "description": "Leader of the Opposition in the Lok Sabha, recognised by the Speaker on 26 June 2024 with effect from 9 June 2024. MP for Rae Bareli; he also won Wayanad in 2024 and resigned that seat.",
-        "tenure": { "start": "2024-06-09" },
+        "description": "Congress MP, recognised by the Speaker as Leader of the Opposition in the Lok Sabha with effect from 9 June 2024. Marked two years in the role in June 2026.",
+        "tenure": {
+            "start": "2024-06-09"
+        },
         "sources": [
             {
                 "id": "tribune-lop-2024",
@@ -62,7 +69,17 @@
                 "date": "2024-06-26",
                 "type": "news",
                 "url": "https://www.tribuneindia.com/news/india/speaker-recognises-rahul-as-ls-lop-634385",
-                "note": "Reports the Lok Sabha Secretariat notification under Section 2 of the Salary and Allowances of Leaders of Opposition in Parliament Act, 1977."
+                "note": "Quotes the Lok Sabha Secretariat notification: with effect from June 9, under Section 2 of the Salary and Allowances of Leaders of Opposition in Parliament Act 1977.",
+                "retrievedAt": "2026-11-17"
+            },
+            {
+                "id": "newsarena-lop-2026",
+                "title": "Rahul Gandhi marks two years as LoP, pledges to keep fighting",
+                "publisher": "News Arena India",
+                "date": "2026-06",
+                "type": "news",
+                "url": "https://newsarenaindia.com/nation/rahul-gandhi-marks-two-years-as-lop-pledges-to-keep-fighting/80906",
+                "retrievedAt": "2026-11-17"
             }
         ],
         "lastVerified": "2026-11-17"
@@ -73,11 +90,14 @@
         "name": "Yogi Adityanath",
         "slug": "yogi-adityanath",
         "role": "cm",
-        "roles": ["cm", "mla"],
-        "party": "BJP",
+        "roles": [
+            "cm"
+        ],
         "regionId": "uttar-pradesh",
-        "description": "Chief Minister of Uttar Pradesh, sworn in for a second consecutive term on 25 March 2022.",
-        "tenure": { "start": "2022-03-25" },
+        "description": "Chief Minister of Uttar Pradesh. Took oath for a second term on 25 March 2022 at the Ekana stadium in Lucknow; reported acting as Chief Minister in August 2026.",
+        "tenure": {
+            "start": "2022-03-25"
+        },
         "sources": [
             {
                 "id": "bt-yogi-2022",
@@ -85,7 +105,17 @@
                 "publisher": "Business Today",
                 "date": "2022-03-25",
                 "type": "news",
-                "url": "https://www.businesstoday.in/latest/politics/story/yogi-adityanath-takes-oath-as-uttar-pradesh-cm-for-a-historic-second-term-327351-2022-03-25"
+                "url": "https://www.businesstoday.in/latest/politics/story/yogi-adityanath-takes-oath-as-uttar-pradesh-cm-for-a-historic-second-term-327351-2022-03-25",
+                "retrievedAt": "2026-11-17"
+            },
+            {
+                "id": "indiatv-yogi-2026-08",
+                "title": "CM Yogi orders time-bound disposal of 5-year-old revenue cases, directs tighter crime and festival monitoring",
+                "publisher": "India TV News",
+                "date": "2026-08-29",
+                "type": "news",
+                "url": "https://www.indiatvnews.com/uttar-pradesh/cm-yogi-adityanath-orders-time-bound-disposal-of-5-year-old-revenue-cases-directs-tighter-crime-and-festival-monitoring-2026-08-29-1052758",
+                "retrievedAt": "2026-11-17"
             }
         ],
         "lastVerified": "2026-11-17"
@@ -96,11 +126,15 @@
         "name": "Suvendu Adhikari",
         "slug": "suvendu-adhikari",
         "role": "cm",
-        "roles": ["cm", "mla"],
+        "roles": [
+            "cm"
+        ],
         "party": "BJP",
         "regionId": "west-bengal",
-        "description": "Chief Minister of West Bengal, sworn in on 9 May 2026 as the state's first BJP Chief Minister.",
-        "tenure": { "start": "2026-05-09" },
+        "description": "Sworn in on 9 May 2026 as Chief Minister of West Bengal, the state's first BJP Chief Minister.",
+        "tenure": {
+            "start": "2026-05-09"
+        },
         "sources": [
             {
                 "id": "air-suvendu-2026",
@@ -120,11 +154,15 @@
         "name": "C. Joseph Vijay",
         "slug": "joseph-vijay",
         "role": "cm",
-        "roles": ["cm", "mla"],
+        "roles": [
+            "cm"
+        ],
         "party": "TVK",
         "regionId": "tamil-nadu",
-        "description": "Chief Minister of Tamil Nadu, sworn in on 10 May 2026, heading a TVK-led coalition with the Congress.",
-        "tenure": { "start": "2026-05-10" },
+        "description": "Sworn in as Chief Minister of Tamil Nadu on 10 May 2026, leading the first government in six decades not led by a Dravidian party; his government then won a confidence vote in the Assembly.",
+        "tenure": {
+            "start": "2026-05-10"
+        },
         "sources": [
             {
                 "id": "scroll-vijay-2026",
@@ -133,6 +171,14 @@
                 "date": "2026-05-10",
                 "type": "news",
                 "url": "https://scroll.in/latest/1092734/vijay-sworn-in-as-tamil-nadu-cm-state-gets-first-government-led-by-non-dravidian-party-in-6-decades",
+                "retrievedAt": "2026-11-17"
+            },
+            {
+                "id": "statesman-vijay-trust",
+                "title": "Vijay govt wins confidence vote, secures more than halfway mark of 118 in TN Assembly",
+                "publisher": "The Statesman",
+                "type": "news",
+                "url": "https://www.thestatesman.com/india/vijay-govt-wins-confidence-vote-secures-more-than-halfway-mark-of-118-in-tn-assembly-1503593539.html",
                 "retrievedAt": "2026-11-17"
             }
         ],
@@ -144,11 +190,15 @@
         "name": "V. D. Satheesan",
         "slug": "vd-satheesan",
         "role": "cm",
-        "roles": ["cm", "mla"],
+        "roles": [
+            "cm"
+        ],
         "party": "INC",
         "regionId": "kerala",
-        "description": "Chief Minister of Kerala, sworn in on 18 May 2026 as head of a Congress-led UDF government.",
-        "tenure": { "start": "2026-05-18" },
+        "description": "Congress leader, sworn in on 18 May 2026 as Chief Minister of Kerala.",
+        "tenure": {
+            "start": "2026-05-18"
+        },
         "sources": [
             {
                 "id": "air-satheesan-2026",

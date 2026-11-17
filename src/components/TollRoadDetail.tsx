@@ -153,17 +153,19 @@ export default function TollRoadDetail({ config, tollRoad: road, countryCode, in
                     <section className="rounded-xl border border-sky-500/30 bg-sky-500/5 p-6">
                         <h2 className="flex items-center gap-2 text-xl font-semibold text-sky-300 mb-1">
                             <BrainCircuit className="h-5 w-5" />
-                            Estimated intelligence
+                            {recovery.cumulativeRevenue?.confidence === 'reported' ? 'Cost vs. collections' : 'Estimated intelligence'}
                         </h2>
                         <p className="text-xs text-slate-500 mb-6">
-                            Derived by this platform from the cited data. These are estimates, not official figures.
+                            {recovery.cumulativeRevenue?.confidence === 'reported'
+                                ? 'Both figures are from the cited court and audit records; the percentage is simple arithmetic on them.'
+                                : 'Derived by this platform from the cited data. These are estimates, not official figures.'}
                         </p>
 
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
                             {recovery.cumulativeRevenue && (
                                 <div className="rounded-lg border border-slate-700 bg-slate-800/50 p-4">
                                     <p className="flex items-center gap-2 text-xs text-slate-400 uppercase tracking-wide">
-                                        <TrendingUp className="h-4 w-4 text-sky-400" /> Est. cumulative tolls
+                                        <TrendingUp className="h-4 w-4 text-sky-400" /> {recovery.cumulativeRevenue.confidence === 'reported' ? 'Toll collected' : 'Est. cumulative tolls'}
                                     </p>
                                     <p className="text-lg font-semibold text-white mt-1">
                                         {formatMoney(recovery.cumulativeRevenue.totalLow)}
@@ -187,7 +189,7 @@ export default function TollRoadDetail({ config, tollRoad: road, countryCode, in
                             )}
                             {recovery.recoveredPct !== null && (
                                 <div className="rounded-lg border border-slate-700 bg-slate-800/50 p-4">
-                                    <p className="text-xs text-slate-400 uppercase tracking-wide">Est. cost recovered</p>
+                                    <p className="text-xs text-slate-400 uppercase tracking-wide">{recovery.cumulativeRevenue?.confidence === 'reported' ? 'Collected vs. cost' : 'Est. cost recovered'}</p>
                                     <p className={`text-lg font-semibold mt-1 ${recovery.recoveredPct >= 100 ? 'text-red-300' : 'text-white'}`}>
                                         ~{recovery.recoveredPctLow ?? recovery.recoveredPct}
                                         {recovery.recoveredPctLow !== null && recovery.recoveredPctLow !== recovery.recoveredPct && `–${recovery.recoveredPct}`}%
@@ -209,14 +211,14 @@ export default function TollRoadDetail({ config, tollRoad: road, countryCode, in
 
                         <p className="text-sm text-slate-300 mb-4">{recovery.verdict}</p>
 
-                        <details className="text-sm text-slate-400">
+                        {recovery.cumulativeRevenue?.confidence !== 'reported' && <details className="text-sm text-slate-400">
                             <summary className="cursor-pointer text-sky-300 hover:text-sky-200">Assumptions behind these estimates</summary>
                             <ul className="mt-2 space-y-1 list-disc list-inside">
                                 {REVENUE_ASSUMPTIONS.map((a, i) => (
                                     <li key={i}>{a}</li>
                                 ))}
                             </ul>
-                        </details>
+                        </details>}
                     </section>
                 )}
 

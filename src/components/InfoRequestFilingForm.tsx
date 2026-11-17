@@ -65,7 +65,7 @@ export default function InfoRequestFilingForm({ config, countryCode, initialSubj
     };
 
     const generateMailtoLink = () => {
-        if (!selectedDepartment) return '';
+        if (!selectedDepartment?.email) return '';
 
         const to = selectedDepartment.email;
         const cc = config.ccEmail;
@@ -76,17 +76,29 @@ export default function InfoRequestFilingForm({ config, countryCode, initialSubj
     };
 
     const handleCopyEmail = async () => {
-        const emailContent = `To: ${selectedDepartment?.email}\nCC: ${config.ccEmail}\nSubject: ${customSubject}\n\n${customBody}`;
+        const emailContent = selectedDepartment?.email
+            ? `To: ${selectedDepartment.email}\nCC: ${config.ccEmail}\nSubject: ${customSubject}\n\n${customBody}`
+            : `${customSubject}\n\n${customBody}`;
         await navigator.clipboard.writeText(emailContent);
         setCopied(true);
         setTimeout(() => setCopied(false), 2000);
     };
 
     const handleSendEmail = () => {
+        if (selectedDepartment?.filingMethod === 'online_portal' && selectedDepartment.filingUrl) {
+            window.open(selectedDepartment.filingUrl, '_blank', 'noopener,noreferrer');
+            return;
+        }
         const mailtoLink = generateMailtoLink();
         if (mailtoLink) {
             window.location.href = mailtoLink;
         }
+    };
+
+    const howToFile = (dept: InfoRequestDepartment): string => {
+        if (dept.filingMethod === 'online_portal') return `Submit online at ${dept.filingUrl ?? 'the official RTI portal'}, then paste the text below.`;
+        if (dept.filingMethod === 'post') return 'Send by post to the Public Information Officer with the prescribed fee. Copy the text below.';
+        return `Email ${dept.email} (CC ${config.ccEmail}).`;
     };
 
     return (
@@ -183,10 +195,10 @@ export default function InfoRequestFilingForm({ config, countryCode, initialSubj
                         {/* Email Preview */}
                         {selectedDepartment && (
                             <div className="rounded-lg bg-muted/50 p-4 space-y-2">
-                                <h4 className="font-medium text-sm">Email Preview</h4>
+                                <h4 className="font-medium text-sm">How to file</h4>
                                 <div className="text-sm space-y-1">
-                                    <p><span className="text-muted-foreground">To:</span> {selectedDepartment.email}</p>
-                                    <p><span className="text-muted-foreground">CC:</span> {config.ccEmail}</p>
+                                    <p>{howToFile(selectedDepartment)}</p>
+                                    {selectedDepartment.note && <p className="text-muted-foreground">{selectedDepartment.note}</p>}
                                     <p><span className="text-muted-foreground">Subject:</span> {customSubject}</p>
                                 </div>
                             </div>
@@ -194,14 +206,16 @@ export default function InfoRequestFilingForm({ config, countryCode, initialSubj
 
                         {/* Action Buttons */}
                         <div className="flex gap-3 pt-2">
-                            <Button
-                                onClick={handleSendEmail}
-                                disabled={!selectedDepartment}
-                                className="flex-1"
-                            >
-                                <Send className="h-4 w-4 mr-2" />
-                                Open in Email Client
-                            </Button>
+                            {selectedDepartment?.filingMethod !== 'post' && (
+                                <Button
+                                    onClick={handleSendEmail}
+                                    disabled={!selectedDepartment}
+                                    className="flex-1"
+                                >
+                                    <Send className="h-4 w-4 mr-2" />
+                                    {selectedDepartment?.filingMethod === 'online_portal' ? 'Open RTI portal' : 'Open in Email Client'}
+                                </Button>
+                            )}
                             <Button
                                 variant="outline"
                                 onClick={handleCopyEmail}

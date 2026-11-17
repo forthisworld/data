@@ -22,8 +22,11 @@ knowledge".
    party.
 4. **Claims about named people need a primary source** (an order, a gazette notice, a filing, an official page) or
    a dated report from an established outlet. Allegations are recorded as `claims[]`, with who made them and when.
-5. **The original URL always comes first.** `archiveUrl` (our R2 copy) and `sha256` are added once the archive is
-   live. Record `retrievedAt` when you check a source, and `locator` (paragraph or page) where possible.
+5. **Read it before you cite it.** `retrievedAt` (required) is the date someone actually read the source and found
+   the fact in it; a search-result summary doesn't count. The original URL always comes first. `archiveUrl` (our R2
+   copy) and `sha256` are added once the archive is live. Add a `locator` (paragraph or page) where possible.
+8. **"Current" needs a recent source.** For anyone described as holding an office now, cite a source from the last
+   six months, or describe the dated event instead ("sworn in on ...").
 6. **Unknowns are questions, not guesses.** Put them in `analysis.openQuestions`; they become RTI targets.
 7. **Analysis cites too.** Each `reasonsStillTolled` point lists the `sourceIds` it rests on.
 

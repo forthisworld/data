@@ -4,9 +4,13 @@
     "name": "NICE Road (Bengaluru Peripheral Road + Link Road)",
     "officialName": "Bangalore-Mysore Infrastructure Corridor (BMIC) Project - Peripheral Road and Link Road",
     "operatorCompany": "Nandi Infrastructure Corridor Enterprises Ltd",
-    "regionIds": ["karnataka"],
+    "regionIds": [
+        "karnataka"
+    ],
     "status": "operational",
-    "tolling": { "status": "tolled" },
+    "tolling": {
+        "status": "tolled"
+    },
     "concession": {
         "model": "BOT",
         "modelName": "Framework Agreement for an expressway, peripheral and link roads and townships, with toll and land-development rights",
@@ -53,28 +57,28 @@
         {
             "date": "2005-05-03",
             "title": "High Court orders the State to implement the agreement",
-            "description": "The Karnataka High Court dismisses one public-interest petition and allows two others, directing the State to execute the project as conceived and implement the Framework Agreement.",
-            "significance": "neutral",
-            "sourceId": "hc-2005"
-        },
-        {
-            "date": "2006-04-20",
-            "title": "Supreme Court upholds the Framework Agreement",
-            "description": "The State's appeals are dismissed. The court holds there was 'neither fraud nor misrepresentation on the part of Nandi or any member of the Consortium'.",
+            "description": "The Karnataka High Court dismisses one public-interest petition and allows two others, directing the State to execute the project as conceived and implement the Framework Agreement (as described by the Supreme Court in 2006).",
             "significance": "neutral",
             "sourceId": "sc-2006"
         },
         {
-            "date": "2016-12-01",
-            "title": "Legislature's House Committee reports",
-            "description": "A House Committee chaired by T.B. Jayachandra tables its report in December 2016. As reported, it found 756.33 acres diverted to real estate, recommended recovering toll collected since 2008, and recommended an investigation by the CBI, CVC or Enforcement Directorate.",
+            "date": "2006-04-20",
+            "title": "Supreme Court upholds the Framework Agreement",
+            "description": "The Supreme Court affirms the High Court, holding there was \"neither fraud nor misrepresentation on the part of Nandi or any member of the Consortium\".",
+            "significance": "neutral",
+            "sourceId": "sc-2006"
+        },
+        {
+            "date": "2016-12",
+            "title": "House Committee report tabled in the Assembly",
+            "description": "Tabled by Law and Parliamentary Affairs Minister T.B. Jayachandra. As reported, it recommends recovering Rs 1,350 crore of \"illegal\" toll collected by NICE since 2008, a high-level investigation by the CBI, CVC or Enforcement Directorate, and denotifying over 11,600 acres from acquisition; it says the company already has 605 acres more than it needs.",
             "significance": "negative",
             "sourceId": "house-committee-2016"
         },
         {
             "date": "2020-05-19",
             "title": "Supreme Court: no group housing at an interchange",
-            "description": "In BMICAPA v. Nandi Infrastructure Corridor Enterprise Ltd (2020 INSC 399), the Supreme Court sets aside a High Court ruling and upholds the planning authority's refusal of a group-housing proposal on land at Kommaghatta handed over for the project.",
+            "description": "The Supreme Court allows the appeals of the planning authority and the State, sets aside the High Court's 2019 judgment, and dismisses NICE's petitions over a group-housing scheme on 42 acres 30 guntas at interchanges 5/7 of the peripheral road (Kommaghatta), with liberty to approach the State under the Framework Agreement.",
             "significance": "neutral",
             "sourceId": "sc-2020"
         },
@@ -88,16 +92,33 @@
     ],
     "analysis": {
         "status": "disputed",
-        "summary": "NICE Road is tolled under a 1997 Framework Agreement that the Supreme Court upheld in 2006. A committee of the Karnataka legislature reported in 2016 that land was diverted to real estate and recommended recovering toll. The State is still reviewing the agreement. The agreement, the audited project cost and the company's year-by-year toll collections have not been published.",
-        "summarySourceIds": ["sc-2006", "house-committee-2016", "hans-2026-03"],
+        "summary": "NICE Road is tolled under a Framework Agreement signed with the Government of Karnataka on 3 April 1997. The High Court in 2005 directed the State to implement the agreement, and the Supreme Court affirmed that in 2006. In December 2016 a House Committee report tabled in the Assembly recommended recovering Rs 1,350 crore of toll collected since 2008 and an investigation. In March 2026 the PWD Minister told the Legislative Council a cabinet sub-committee was reviewing the agreement.",
+        "summarySourceIds": [
+            "sc-2006",
+            "sc-2020",
+            "house-committee-2016",
+            "hans-2026-03"
+        ],
         "reasonsStillTolled": [
             {
-                "text": "The Framework Agreement was upheld by the High Court (2005) and the Supreme Court (2006), so the State cannot end tolling unilaterally without renegotiating or terminating it.",
-                "sourceIds": ["hc-2005", "sc-2006"]
+                "text": "Toll collection rests on the 1997 Framework Agreement, which the courts upheld: the High Court directed the State to implement it (2005) and the Supreme Court affirmed that (2006).",
+                "sourceIds": [
+                    "sc-2006",
+                    "sc-2020"
+                ]
             },
             {
-                "text": "The House Committee's 2016 recommendations (recover toll, take back excess land, investigate) have not been acted on; the State formed a cabinet sub-committee to review the agreement, which was still reviewing it in March 2026.",
-                "sourceIds": ["house-committee-2016", "hans-2026-03"]
+                "text": "The concession period is 30 years under clause 3.5.1, extendable by mutual consent, according to the State in the 2005 High Court case.",
+                "sourceIds": [
+                    "hc-2005"
+                ]
+            },
+            {
+                "text": "The House Committee recommended recovering toll collected since 2008 (Dec 2016). As of March 2026 the State said a cabinet sub-committee was reviewing the agreement, toll policy and whether the agreement period is nearing completion.",
+                "sourceIds": [
+                    "house-committee-2016",
+                    "hans-2026-03"
+                ]
             }
         ],
         "openQuestions": [
@@ -131,9 +152,10 @@
             "publisher": "Supreme Court of India",
             "date": "2006-04-20",
             "type": "court_order",
-            "url": "https://www.caseon.in/case/state-of-karnataka-anr-vs-all-india-manufacturers-organization-ors",
-            "note": "Read on caseon.in (third-party copy of the judgment text); section 'The Background' and 'Fraud and Misrepresentation'.",
-            "retrievedAt": "2026-11-17"
+            "url": "https://indiankanoon.org/doc/348205/",
+            "note": "Background read verbatim (Indian Kanoon copy, first half; also caseon.in). That the appeals were dismissed is recorded by the Supreme Court in 2020 (sc-2020, para 4).",
+            "retrievedAt": "2026-11-17",
+            "locator": "\"The Background\"; \"Fraud and Misrepresentation\""
         },
         {
             "id": "hc-2005",
@@ -147,21 +169,24 @@
         },
         {
             "id": "sc-2020",
-            "title": "Bangalore Mysore Infrastructure Corridor Area Planning Authority & Anr v. Nandi Infrastructure Corridor Enterprise Ltd & Ors, 2020 INSC 399",
+            "title": "Bangalore Mysore Infrastructure Corridor Area Planning Authority & Anr v. Nandi Infrastructure Corridor Enterprise Ltd & Ors, Civil Appeals 2116-2128 of 2020, 2020 INSC 399",
             "publisher": "Supreme Court of India",
             "date": "2020-05-19",
             "type": "court_order",
-            "url": "https://main.sci.gov.in/supremecourt/2019/44237/44237_2019_32_1502_22157_Judgement_19-May-2020.pdf",
-            "note": "Outcome taken from case summaries; full text not yet read by us."
+            "url": "https://indiankanoon.org/doc/131238964/",
+            "note": "Read on Indian Kanoon. Official PDF: https://main.sci.gov.in/supremecourt/2019/44237/44237_2019_32_1502_22157_Judgement_19-May-2020.pdf",
+            "locator": "paras 1, 4, 51, 67, 69",
+            "retrievedAt": "2026-11-17"
         },
         {
             "id": "house-committee-2016",
-            "title": "Report of the House Committee on the BMIC project (chair T.B. Jayachandra), as reported",
-            "publisher": "Karnataka Legislature (reported by Deccan Herald and Deccan Chronicle)",
-            "date": "2016-12",
-            "type": "legislative_record",
-            "url": "https://www.deccanherald.com/content/584731/nice-diverted-756-acres-real.html",
-            "note": "The report itself is not online; findings as reported. Also: https://deccanchronicle.com/nation/current-affairs/031216/recover-toll-of-rs-1350-crore-from-nice-panel.html"
+            "title": "Recover toll of Rs 1350 crore from NICE: panel",
+            "publisher": "Deccan Chronicle (reporting the House Committee report tabled in the Karnataka Assembly)",
+            "date": "2016-12-03",
+            "type": "news",
+            "url": "https://deccanchronicle.com/nation/current-affairs/031216/recover-toll-of-rs-1350-crore-from-nice-panel.html",
+            "note": "The committee report itself is not online.",
+            "retrievedAt": "2026-11-17"
         },
         {
             "id": "hans-2026-03",

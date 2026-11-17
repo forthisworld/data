@@ -30,27 +30,25 @@
         "departments": [
             {
                 "id": "rti-online",
-                "name": "RTI Online Portal (Central Government)",
-                "email": "grievance-moha@gov.in",
-                "category": "central"
+                "name": "RTI Online (Central Government public authorities)",
+                "filingMethod": "online_portal",
+                "filingUrl": "https://rtionline.gov.in/",
+                "category": "central",
+                "note": "Official portal of the Department of Personnel & Training for RTI requests to central public authorities."
             },
             {
-                "id": "pmo",
-                "name": "Prime Minister's Office",
-                "email": "pmo-rti@gov.in",
-                "category": "central"
+                "id": "karnataka-pwd",
+                "name": "Public Works Department, Government of Karnataka",
+                "filingMethod": "post",
+                "category": "state",
+                "note": "File by post to the Public Information Officer with the prescribed fee. PIO address to be added from the department's RTI disclosure."
             },
             {
-                "id": "mof",
-                "name": "Ministry of Finance",
-                "email": "us.coord-dea@gov.in",
-                "category": "central"
-            },
-            {
-                "id": "election-commission",
-                "name": "Election Commission of India",
-                "email": "complaints@eci.gov.in",
-                "category": "central"
+                "id": "karnataka-dpar",
+                "name": "Department of Personnel and Administrative Reforms (Cabinet Section), Government of Karnataka",
+                "filingMethod": "post",
+                "category": "state",
+                "note": "File by post to the Public Information Officer with the prescribed fee."
             }
         ]
     },

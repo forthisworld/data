@@ -331,8 +331,12 @@ export interface InfoRequestTemplate {
 export interface InfoRequestDepartment {
   id: string;
   name: string;
-  email: string;
+  /** How a request reaches this authority. Only add an email the authority itself publishes for RTI. */
+  filingMethod: 'online_portal' | 'post' | 'email';
+  filingUrl?: string;
+  email?: string;
   category?: string;
+  note?: string;
 }
 
 // ============================================

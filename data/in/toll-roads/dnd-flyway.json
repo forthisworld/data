@@ -4,10 +4,17 @@
     "name": "DND Flyway (Delhi-Noida Direct)",
     "officialName": "Delhi Noida Direct Flyway (Delhi-NOIDA Bridge and Ashram Flyover)",
     "operatorCompany": "Noida Toll Bridge Company Ltd",
-    "regionIds": ["delhi", "uttar-pradesh"],
+    "regionIds": [
+        "delhi",
+        "uttar-pradesh"
+    ],
     "openedDate": "2001-02-06",
     "status": "operational",
-    "tolling": { "status": "toll_free", "since": "2016-10-26", "sourceId": "hc-2016" },
+    "tolling": {
+        "status": "toll_free",
+        "since": "2016-10-26",
+        "sourceId": "hc-2016"
+    },
     "concession": {
         "model": "BOT",
         "modelName": "Concession with a guaranteed 20% annual return on the 'Total Cost of Project'",
@@ -65,7 +72,10 @@
     ],
     "currentRates": [],
     "plazas": [
-        { "name": "Mayur Vihar toll plaza (11 lanes)", "location": "Delhi end" }
+        {
+            "name": "Mayur Vihar toll plaza (11 lanes)",
+            "location": "Delhi end"
+        }
     ],
     "timeline": [
         {
@@ -99,7 +109,7 @@
         {
             "date": "2016-10-26",
             "title": "Allahabad High Court ends tolling",
-            "description": "The High Court strikes down Articles 13 and 14 of the Concession Agreement and holds further toll collection illegal. The flyway is toll-free from this date.",
+            "description": "A Division Bench rules that NTBCL \"shall not impose any user fee/toll from the commuters\", holds Article 13 of the Concession Agreement \"bad and inoperative\", and severs Article 14. The flyway is toll-free from this date.",
             "significance": "positive",
             "sourceId": "hc-2016"
         },
@@ -128,15 +138,29 @@
     "analysis": {
         "status": "cost_recovered",
         "summary": "The DND Flyway has been toll-free since 26 Oct 2016. The Supreme Court upheld this in Dec 2024, finding that NTBCL had already recovered its construction cost and a fair profit, and that the 20%-return formula was unreasonable and against public policy. CAG found toll income of ₹892.51 crore over 2001-2016 against an original cost of ₹325.99 crore.",
-        "summarySourceIds": ["hc-2016", "sc-2024"],
+        "summarySourceIds": [
+            "hc-2016",
+            "sc-2024"
+        ],
         "reasonsStillTolled": [
             {
                 "text": "Tolls ended because the courts found the concessionaire had recovered its costs and profit, and that the contract's open-ended 20%-return formula was unreasonable and contrary to public policy.",
-                "sourceIds": ["hc-2016", "sc-2024"]
+                "sourceIds": [
+                    "hc-2016",
+                    "sc-2024"
+                ]
             },
             {
                 "text": "The 'Total Cost of Project' grew because unrecovered returns compounded at 20% a year, and items such as ₹11 crore in legal fees and ₹72.25 lakh in corporate gifts were added to it (CAG).",
-                "sourceIds": ["sc-2024"]
+                "sourceIds": [
+                    "sc-2024"
+                ]
+            },
+            {
+                "text": "CAG concluded that only around Rs 15 crore remained to be recovered as of 31 Mar 2016, and that NTBCL had made profits for 11 years, paid Rs 243.07 crore in dividends and repaid its debt; the Supreme Court adopted these conclusions (paras 83, 86). NTBCL's counsel argued the CAG report showed at least Rs 30 crore still recoverable (para 5(h)).",
+                "sourceIds": [
+                    "sc-2024"
+                ]
             }
         ],
         "openQuestions": [
@@ -159,12 +183,13 @@
         },
         {
             "id": "hc-2016",
-            "title": "Judgment in PIL No. 60214 of 2012, filed by the Federation of Noida Residents Welfare Associations",
-            "publisher": "High Court of Judicature at Allahabad",
-            "date": "2016-10-26",
+            "title": "Allahabad High Court scraps DND toll (Division Bench: Arun Tandon and Sunita Agarwal JJ), PIL No. 60214 of 2012",
+            "publisher": "LiveLaw, reporting the High Court of Judicature at Allahabad",
+            "date": "2016-10-27",
             "type": "court_order",
             "url": "https://www.livelaw.in/allahabad-high-court-scraps-dnd-toll",
-            "note": "Judgment as reported and linked by LiveLaw; the date and outcome are confirmed by the Supreme Court judgment (paras 2, 4.9)."
+            "note": "Judgment dated 26 Oct 2016 (date and PIL number confirmed by the Supreme Court judgment, paras 2 and 4.9-4.10). LiveLaw's judgment link is paywalled; we have read the report, not the judgment.",
+            "retrievedAt": "2026-11-17"
         },
         {
             "id": "livelaw-2025",

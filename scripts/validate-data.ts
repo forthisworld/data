@@ -18,6 +18,8 @@ function checkSources(sources: SourceCitation[] | undefined, where: string, erro
     for (const s of sources ?? []) {
         if (!s.id || !s.title || !s.publisher || !s.type) errors.push(`${where}: source ${s.id || '?'} needs id, title, publisher and type`);
         if (!s.url && !s.note) errors.push(`${where}: source ${s.id} has neither a url nor a note saying where to find it`);
+        // A source counts only once someone has actually read it (rule 5).
+        if (!s.retrievedAt || !/^\d{4}-\d{2}-\d{2}$/.test(s.retrievedAt)) errors.push(`${where}: source ${s.id} has no retrievedAt (YYYY-MM-DD): read it before citing it`);
         if (ids.has(s.id)) errors.push(`${where}: duplicate source id ${s.id}`);
         ids.add(s.id);
     }

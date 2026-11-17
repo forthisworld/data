@@ -176,9 +176,9 @@ export default function PrivacyPage() {
                                 reliability, or accuracy of this information.
                             </p>
                             <p>
-                                All government data is sourced from official public records including the Gazette of India,
-                                government websites, and responses to Right to Information (RTI) requests. Sources are
-                                cited wherever possible.
+                                Every published fact links to its source: court judgments, audit reports, the Gazette, census
+                                tables, government websites and RTI replies, and, where nothing better exists yet, named press
+                                reports. Statements by politicians or companies that we cannot confirm are shown as claims.
                             </p>
                             <p>
                                 Any action you take based on the information on this website is strictly at your own risk.
