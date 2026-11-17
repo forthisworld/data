@@ -224,8 +224,8 @@ export function RoadView({ road, country, stateNames }: { road: TollRoad; countr
                     </div>
                 ) : (
                     <ul className="space-y-2">
-                        <Gap><b>Project cost:</b> not established by any court, audit or filing yet.</Gap>
-                        <Gap><b>Toll collected:</b> not established yet. Every figure in circulation is someone&apos;s claim (below).</Gap>
+                        <Gap><b>Project cost:</b> no established figure on record here yet.</Gap>
+                        <Gap><b>Toll collected:</b> no established figure on record here yet{road.claims?.length ? '; the figures below are claims, not findings' : ''}.</Gap>
                     </ul>
                 )}
             </Section>

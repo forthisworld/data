@@ -252,6 +252,8 @@ export default function Atlas({ countryCode, countryName, data }: AtlasProps) {
         map.addControl(new maplibregl.ScaleControl({ maxWidth: 96, unit: 'metric' }), 'bottom-right');
         map.on('rotate', () => setBearing(map.getBearing()));
         mapRef.current = map;
+        // Handle for automated checks in development only.
+        if (process.env.NODE_ENV !== 'production') (window as unknown as { __atlasMap?: maplibregl.Map }).__atlasMap = map;
 
         map.on('load', async () => {
             let india: GeoJSON.FeatureCollection, states: GeoJSON.FeatureCollection, districts: GeoJSON.FeatureCollection;

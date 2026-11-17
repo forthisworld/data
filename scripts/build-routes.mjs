@@ -3,7 +3,7 @@
  * Draws toll roads on the map from OpenStreetMap (ODbL).
  *
  *   npm run geo:routes                 fetch the pinned ways in scripts/routes.json
- *   npm run geo:routes -- --discover   find the ways again by name, pin their IDs, then fetch
+ *   npm run geo:routes -- --discover   find the ways again by name (minus excludeWayIds), pin their IDs, then fetch
  *
  * Writes public/geo/<country>/routes.geojson: one feature per section of a road, with the
  * Census 2011 districts and the states it passes through (so selecting Bengaluru shows NICE Road
@@ -52,7 +52,8 @@ const config = JSON.parse(readFileSync(CONFIG, 'utf8'));
 if (discover) {
     for (const route of config.routes) for (const s of route.sections) {
         const r = await overpass(`(${s.discover};);out ids;`);
-        s.wayIds = r.elements.map(e => e.id).sort((a, b) => a - b);
+        const skip = new Set(s.excludeWayIds ?? []);
+        s.wayIds = r.elements.map(e => e.id).filter(id => !skip.has(id)).sort((a, b) => a - b);
         console.log(`${route.slug} / ${s.section}: ${s.wayIds.length} ways`);
     }
     writeFileSync(CONFIG, JSON.stringify(config, null, 2) + '\n');

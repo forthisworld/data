@@ -15,6 +15,11 @@ a border shared by two layers is exactly the same line in both.
 | `labels.geojson` | one point inside each state and each district, with its area in km², for placing names | derived from the files above | as above |
 | `routes.geojson` | toll roads as lines, one feature per section, with the 2011 districts and states each passes through | OpenStreetMap ways pinned in `scripts/routes.json`, fetched by `scripts/build-routes.mjs` (`npm run geo:routes`) | ODbL 1.0, © OpenStreetMap contributors |
 
+NICE Road's two sections are matched to OSM by name and position, not from the 1997 Framework Agreement (which is not
+public): the Peripheral Road is the ways named "NICE Road" (Hosur Road to Tumkur Road); the Link Road is the ways named
+"NICE Expressway" on the city side of the Peripheral Road, about 9.9 km each way. The ~2.8 km of "NICE Expressway"
+beyond the junction toward Mysore is left out, since this record does not cover the expressway.
+
 Attribution: *India boundaries by the [DataMeet India community](http://datameet.org/). Roads © [OpenStreetMap contributors](https://www.openstreetmap.org/copyright).*
 
 Notes:
