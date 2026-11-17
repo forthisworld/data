@@ -20,6 +20,7 @@ import * as nhaiTis from './sources/nhai-tis';
 import * as dataGov from './sources/data-gov-in';
 import * as gazette from './sources/gazette-india';
 import * as mca from './sources/mca-company';
+import { validateRoad as validateSourcing } from '../validate-data';
 
 config({ path: '.env.local' });
 
@@ -38,11 +39,8 @@ function loadCurated(): TollRoad[] {
 // --------------------------------------------
 
 function validateRoad(road: TollRoad): string[] {
-    const errors: string[] = [];
-
-    if (!road.id || !road.slug || !road.name) errors.push('missing id/slug/name');
-    if (!Array.isArray(road.regionIds) || road.regionIds.length === 0) errors.push('regionIds required');
-    if (!Array.isArray(road.sources) || road.sources.length === 0) errors.push('at least one source citation required');
+    // Sourcing rules (data/SOURCING.md) live in scripts/validate-data.ts.
+    const errors: string[] = validateSourcing(road);
 
     if (road.projectCost && road.funding?.length) {
         const fundingTotal = road.funding.reduce((sum, f) => sum + (f.amount.value || 0), 0);
@@ -53,10 +51,6 @@ function validateRoad(road: TollRoad): string[] {
                 `funding components sum to ${fundingTotal} but projectCost is ${road.projectCost.value} (>15% mismatch)`
             );
         }
-    }
-
-    for (const s of road.sources ?? []) {
-        if (!s.id || !s.title || !s.publisher) errors.push(`source ${s.id || '?'} missing id/title/publisher`);
     }
 
     return errors;
@@ -83,9 +77,26 @@ function mergeOverlays(road: TollRoad): { merged: TollRoad; changes: string[] } 
                 plaza.nhaiTisId = String(match.nhaiTisId);
                 changes.push(`linked plaza "${plaza.name}" to TIS id ${match.nhaiTisId}`);
                 if (match.rates.length > 0 && (merged.currentRates ?? []).length === 0) {
+                    const sourceId = `nhai-tis-${match.nhaiTisId}`;
+                    if (!merged.sources.some(s => s.id === sourceId)) {
+                        merged.sources.push({
+                            id: sourceId,
+                            title: `NHAI Toll Information System: plaza ${match.nhaiTisId}`,
+                            publisher: 'National Highways Authority of India',
+                            type: 'government_portal',
+                            url: `https://tis.nhai.gov.in/TollInformation.aspx?TollPlazaID=${match.nhaiTisId}`,
+                            retrievedAt: new Date().toISOString().slice(0, 10),
+                        });
+                    }
                     merged.currentRates = match.rates.map(r => ({
                         vehicleClass: r.vehicleClass,
-                        amount: { value: r.feeInRupees ?? 0, currency: 'INR', note: `Scraped from NHAI TIS (${match.effectiveDate ?? 'date unknown'})` },
+                        amount: {
+                            value: r.feeInRupees ?? 0,
+                            currency: 'INR',
+                            note: `NHAI TIS, effective ${match.effectiveDate ?? 'date unknown'}`,
+                            sourceId,
+                            basis: 'official_record' as const,
+                        },
                         trip: 'single' as const,
                     }));
                     changes.push(`populated currentRates from TIS`);

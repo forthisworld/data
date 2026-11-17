@@ -45,6 +45,9 @@ const sourceTypeIcons: Record<string, string> = {
     rti_response: '📨',
     annual_report: '📊',
     company_filing: '🏢',
+    audit_report: '🔎',
+    legislative_record: '🏛️',
+    statistics: '📈',
     government_portal: '🏛️',
     news: '📰',
 };
@@ -102,7 +105,7 @@ export default function TollRoadDetail({ config, tollRoad: road, countryCode, in
                     <section className="rounded-xl border border-amber-500/30 bg-amber-500/5 p-6">
                         <h2 className="flex items-center gap-2 text-xl font-semibold text-amber-300 mb-3">
                             <AlertTriangle className="h-5 w-5" />
-                            Why is this still a toll road?
+                            {road.tolling?.status === 'toll_free' ? 'Why did the tolls end?' : 'Why is this still a toll road?'}
                         </h2>
                         <p className="text-slate-300 mb-6 leading-relaxed">{road.analysis.summary}</p>
                         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -111,7 +114,13 @@ export default function TollRoadDetail({ config, tollRoad: road, countryCode, in
                                 <ul className="space-y-2">
                                     {road.analysis.reasonsStillTolled.map((reason, i) => (
                                         <li key={i} className="flex gap-2 text-sm text-slate-300">
-                                            <span className="text-amber-400 mt-0.5">▸</span>{reason}
+                                            <span className="text-amber-400 mt-0.5">▸</span>
+                                            <span>
+                                                {reason.text}{' '}
+                                                {reason.sourceIds.map(id => (
+                                                    <a key={id} href={`#source-${id}`} className="text-xs text-sky-400 hover:underline mr-1">[{id}]</a>
+                                                ))}
+                                            </span>
                                         </li>
                                     ))}
                                 </ul>
@@ -413,7 +422,7 @@ export default function TollRoadDetail({ config, tollRoad: road, countryCode, in
                     </p>
                     <ul className="space-y-3">
                         {road.sources.map(source => (
-                            <li key={source.id} className="flex gap-3 text-sm">
+                            <li key={source.id} id={`source-${source.id}`} className="flex gap-3 text-sm scroll-mt-24">
                                 <span className="shrink-0">{sourceTypeIcons[source.type] ?? '📄'}</span>
                                 <div>
                                     {source.url ? (

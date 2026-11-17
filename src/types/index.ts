@@ -12,6 +12,9 @@ export interface Entity {
   metadata?: Record<string, unknown>;
   createdAt?: string;
   updatedAt?: string;
+  /** Sources for the facts on this entity. Published entities need at least one. */
+  sources?: SourceCitation[];
+  lastVerified?: string;
 }
 
 export type EntityType = 'region' | 'person' | 'infrastructure' | 'organization' | 'project';
@@ -23,15 +26,20 @@ export interface Region extends Entity {
   type: 'region';
   level: RegionLevel;
   parentId?: string; // Reference to parent region
-  code?: string; // ISO code or local code
+  code?: string; // ISO 3166-2:IN subdivision code (without the "IN-" prefix)
+  /** State/district code used in Census 2011 tables. */
+  census2011Code?: string;
+  /** Approximate centre for placing the region on the map; not a surveyed point. */
   coordinates?: [number, number]; // [lat, lng]
   population?: number;
+  /** Which census or estimate `population` comes from, e.g. "Census 2011". */
+  populationAsOf?: string;
   area?: number; // in sq km
   capital?: string;
   children?: string[]; // Child region IDs
 }
 
-export type RegionLevel = 'country' | 'state' | 'district' | 'city' | 'town' | 'constituency';
+export type RegionLevel = 'country' | 'state' | 'union_territory' | 'district' | 'city' | 'town' | 'constituency';
 
 /**
  * Person entity - MPs, MLAs, ministers, billionaires, etc.
@@ -332,12 +340,14 @@ export interface InfoRequestDepartment {
 // ============================================
 
 /**
- * Citation for a piece of toll road data
+ * A source a fact rests on. `url` is always the original publisher's link;
+ * `archiveUrl` is our own copy (R2), for when the original moves or disappears.
  */
 export interface SourceCitation {
   id: string;
   title: string;
   publisher: string;
+  /** The original source. Always shown first. */
   url?: string;
   date?: string;
   note?: string;
@@ -345,12 +355,36 @@ export interface SourceCitation {
     | 'gazette'
     | 'concession_agreement'
     | 'court_order'
+    | 'audit_report'
+    | 'legislative_record'
+    | 'statistics'
     | 'rti_response'
     | 'annual_report'
     | 'company_filing'
     | 'government_portal'
     | 'news';
+  /** Our archived copy of the document (R2). */
+  archiveUrl?: string;
+  /** SHA-256 of the archived file, so anyone can check it matches. */
+  sha256?: string;
+  /** When we fetched / last checked the source (YYYY-MM-DD). */
+  retrievedAt?: string;
+  /** Where in the document the fact is, e.g. "para 59" or "p. 12". */
+  locator?: string;
 }
+
+/**
+ * How firmly a number is established. Only the first four count as
+ * established facts; `claim` and `reported` are shown with attribution and
+ * are never used in derived calculations.
+ */
+export type FactBasis =
+  | 'court_finding'   // stated as a finding by a court
+  | 'audit_finding'   // CAG or another statutory auditor
+  | 'official_record' // government record, gazette, census, legislature
+  | 'company_filing'  // the company's own audited/legal disclosure
+  | 'reported'        // reported by the press, not yet confirmed by a primary source
+  | 'claim';          // asserted by a named party (politician, company, litigant)
 
 /**
  * Monetary value with optional as-of date and caveat note
@@ -360,6 +394,41 @@ export interface MoneyValue {
   currency: string;
   asOf?: string;
   note?: string;
+  /** Id of the SourceCitation this value comes from. */
+  sourceId?: string;
+  basis?: FactBasis;
+  /** For basis 'claim': who made the claim. */
+  claimedBy?: string;
+}
+
+/**
+ * A statement in our own analysis. Every statement cites the sources it rests on.
+ */
+export interface AnalysisPoint {
+  text: string;
+  sourceIds: string[];
+}
+
+/**
+ * A figure asserted by a named party that we have not been able to confirm
+ * from a primary source. Shown with attribution; never used in calculations.
+ */
+export interface Claim {
+  text: string;
+  claimedBy: string;
+  date?: string;
+  amount?: MoneyValue;
+  sourceId: string;
+}
+
+/**
+ * Money collected over a period (tolls, or total income), e.g. from an audit.
+ */
+export interface CollectionTotal {
+  label: string;
+  from?: string;
+  to?: string;
+  amount: MoneyValue;
 }
 
 /**
@@ -409,6 +478,8 @@ export interface TollRevenueYear {
   year: number | string;
   revenue?: MoneyValue;
   trafficVehiclesPerDay?: number;
+  /** Source of the traffic figure. */
+  trafficSourceId?: string;
   note?: string;
 }
 
@@ -417,6 +488,7 @@ export interface TollRevenueYear {
  */
 export interface TollRate {
   vehicleClass: string;
+  section?: string;
   amount: MoneyValue;
   trip?: 'single' | 'return' | 'monthly_pass';
 }
@@ -448,7 +520,11 @@ export interface TollTimelineEvent {
 export interface RecoveryAnalysis {
   status: 'cost_recovered' | 'recovering' | 'disputed' | 'unknown';
   summary: string;
-  reasonsStillTolled: string[];
+  /** Sources the summary rests on. */
+  summarySourceIds?: string[];
+  /** Why the road is still tolled - or, once tolls end, why they ended. */
+  reasonsStillTolled: AnalysisPoint[];
+  /** Unknowns; each becomes an RTI target. */
   openQuestions: string[];
   estimatedCostRecoveredPct?: number;
 }
@@ -468,14 +544,24 @@ export interface TollRoad {
   lengthKm?: number;
   openedDate?: string;
   status?: 'operational' | 'under_construction' | 'planned' | 'closed';
+  /** Whether users pay today, and since when. */
+  tolling?: {
+    status: 'tolled' | 'toll_free';
+    since?: string;
+    sourceId?: string;
+  };
   concession?: ConcessionInfo;
   projectCost?: MoneyValue;
   funding?: FundingComponent[];
   annualRevenue?: TollRevenueYear[];
+  /** Totals collected over a period, e.g. from an audit. */
+  collections?: CollectionTotal[];
   currentRates?: TollRate[];
   plazas?: TollPlaza[];
   timeline?: TollTimelineEvent[];
   analysis?: RecoveryAnalysis;
+  /** Figures asserted by named parties that no primary source confirms yet. */
+  claims?: Claim[];
   sources: SourceCitation[];
   lastVerified?: string;
 }

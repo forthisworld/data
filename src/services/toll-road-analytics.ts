@@ -9,7 +9,7 @@
  * All functions are pure - no I/O - so they can run on server or client.
  */
 
-import { TollRoad, TollRevenueYear } from '@/types';
+import { FactBasis, TollRoad } from '@/types';
 
 export type DataConfidence = 'reported' | 'estimated' | 'unknown';
 
@@ -66,6 +66,11 @@ export const REVENUE_ASSUMPTIONS = [
 ];
 
 const COLLECTION_EFFICIENCY = 0.85;
+
+/** True for court/audit findings, official records and company filings. */
+export function isEstablished(basis: FactBasis | undefined): boolean {
+    return basis === 'court_finding' || basis === 'audit_finding' || basis === 'official_record' || basis === 'company_filing';
+}
 
 function toIntYear(year: number | string): number | null {
     const n = typeof year === 'number' ? year : parseInt(year, 10);
@@ -206,6 +211,22 @@ export function buildRevenueSeries(road: TollRoad, currentYear = new Date().getF
  * estimated year by 50% to give a conservative bound.
  */
 export function estimateCumulativeRevenue(road: TollRoad): CumulativeEstimate | null {
+    // An established total (court or audit finding, official record, filing) beats any estimate.
+    const established = (road.collections ?? []).filter(
+        c => /toll/i.test(c.label) && c.amount.value > 0 && isEstablished(c.amount.basis)
+    );
+    if (established.length > 0) {
+        const total = established.reduce((s, c) => s + c.amount.value, 0);
+        const years = established.flatMap(c => [c.from, c.to]).map(y => (y ? toIntYear(y.slice(0, 4)) : null)).filter((y): y is number => y !== null);
+        return {
+            total,
+            totalLow: total,
+            confidence: 'reported',
+            fromYear: years.length ? Math.min(...years) : openingYear(road),
+            toYear: years.length ? Math.max(...years) : new Date().getFullYear(),
+        };
+    }
+
     const series = buildRevenueSeries(road);
     const withRevenue = series.filter(y => y.revenue !== null);
     if (withRevenue.length === 0) return null;
@@ -230,7 +251,8 @@ export function estimateCumulativeRevenue(road: TollRoad): CumulativeEstimate | 
  * How much of the project cost has likely been recovered by tolls so far.
  */
 export function estimateRecoveryProgress(road: TollRoad): RecoveryProgress {
-    const projectCost = road.projectCost?.value ?? null;
+    // Claims and press reports never feed a calculation (data/SOURCING.md).
+    const projectCost = road.projectCost && isEstablished(road.projectCost.basis) ? road.projectCost.value : null;
     const cumulative = estimateCumulativeRevenue(road);
 
     if (!projectCost || !cumulative) {

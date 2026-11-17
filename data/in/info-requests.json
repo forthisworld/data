@@ -54,149 +54,60 @@
             }
         ]
     },
-    "requests": [
-        {
-            "id": "rti-001",
-            "title": "MPLAD Fund Utilization - Maharashtra 2023",
-            "description": "Requested details of MPLAD funds utilized by all MPs from Maharashtra for FY 2022-23",
-            "department": "Ministry of Statistics and Programme Implementation",
-            "status": "responded",
-            "filedBy": "platform",
-            "filedDate": "2024-08-15",
-            "responseDate": "2024-09-10",
-            "cost": {
-                "value": 10,
-                "currency": "INR"
-            },
-            "category": "spending",
-            "tags": [
-                "mplad",
-                "maharashtra",
-                "spending"
-            ],
-            "regionIds": [
-                "maharashtra"
-            ]
-        },
-        {
-            "id": "rti-002",
-            "title": "Highway Construction Costs - NH48",
-            "description": "Requested breakdown of construction costs for NH48 expansion project",
-            "department": "Ministry of Road Transport and Highways",
-            "status": "pending",
-            "filedBy": "platform",
-            "filedDate": "2024-11-20",
-            "cost": {
-                "value": 10,
-                "currency": "INR"
-            },
-            "category": "infrastructure",
-            "tags": [
-                "highways",
-                "infrastructure",
-                "spending"
-            ],
-            "regionIds": [
-                "maharashtra",
-                "karnataka"
-            ]
-        },
-        {
-            "id": "rti-003",
-            "title": "MLA Asset Declarations - Karnataka",
-            "description": "Community member filed RTI for asset declarations of Karnataka MLAs",
-            "department": "Karnataka Legislative Assembly",
-            "status": "responded",
-            "filedBy": "community",
-            "filedDate": "2024-06-10",
-            "responseDate": "2024-07-05",
-            "cost": {
-                "value": 10,
-                "currency": "INR"
-            },
-            "category": "representatives",
-            "tags": [
-                "mla",
-                "karnataka",
-                "assets"
-            ],
-            "regionIds": [
-                "karnataka"
-            ]
-        },
-        {
-            "id": "rti-004",
-            "title": "Mumbai Metro Line 3 Status",
-            "description": "Current status of Metro Line 3 underground work and expected completion date",
-            "department": "Mumbai Metro Rail Corporation",
-            "status": "filed",
-            "filedBy": "community",
-            "filedDate": "2024-12-01",
-            "category": "infrastructure",
-            "tags": [
-                "metro",
-                "mumbai",
-                "infrastructure"
-            ],
-            "regionIds": [
-                "maharashtra",
-                "mumbai"
-            ]
-        }
-    ],
+    "requests": [],
     "targets": [
         {
-            "id": "target-001",
-            "title": "MP Attendance Records - 17th Lok Sabha",
-            "description": "Complete attendance records for all MPs in the 17th Lok Sabha",
-            "department": "Lok Sabha Secretariat",
+            "id": "nice-framework-agreement",
+            "title": "NICE Road: copy of the 1997 Framework Agreement and all amendments",
+            "description": "Certified copy of the Framework Agreement dated 3 April 1997 between the Government of Karnataka and Nandi Infrastructure Corridor Enterprises Ltd, with all schedules, amendments and supplementary agreements, including the clauses on toll rates, toll period and termination.",
+            "department": "Public Works Department, Government of Karnataka",
             "estimatedCost": {
-                "value": 50,
+                "value": 10,
                 "currency": "INR"
             },
             "priority": "high",
-            "category": "representatives"
+            "category": "infrastructure"
         },
         {
-            "id": "target-002",
-            "title": "State-wise Infrastructure Spending FY24",
-            "description": "Breakdown of infrastructure spending by all states for FY 2023-24",
-            "department": "Ministry of Finance",
+            "id": "nice-toll-collections",
+            "title": "NICE Road: year-wise toll collected and project cost claimed",
+            "description": "Year-wise toll collected on the NICE Peripheral Road and Link Road since tolling began, as reported by the concessionaire to the State; and the project cost claimed by the concessionaire with any audit or review of it.",
+            "department": "Public Works Department, Government of Karnataka",
             "estimatedCost": {
-                "value": 100,
+                "value": 10,
                 "currency": "INR"
             },
             "priority": "high",
-            "category": "spending"
+            "category": "infrastructure"
         },
         {
-            "id": "target-003",
-            "title": "Smart City Fund Utilization",
-            "description": "Utilization of Smart City Mission funds across all 100 cities",
-            "department": "Ministry of Housing and Urban Affairs",
+            "id": "nice-cabinet-subcommittee",
+            "title": "NICE Road: cabinet sub-committee report and decision",
+            "description": "Copy of the report of the cabinet sub-committee headed by the Home Minister on the BMIC/NICE project, and the minutes of any Cabinet decision taken on it.",
+            "department": "Department of Personnel and Administrative Reforms (Cabinet Section), Government of Karnataka",
             "estimatedCost": {
-                "value": 200,
+                "value": 10,
                 "currency": "INR"
             },
             "priority": "medium",
-            "category": "spending"
+            "category": "infrastructure"
         }
     ],
     "stats": {
         "totalSpent": {
-            "value": 530,
+            "value": 0,
             "currency": "INR"
         },
         "totalNeeded": {
-            "value": 5000,
+            "value": 30,
             "currency": "INR"
         },
         "totalContributed": {
-            "value": 1000,
+            "value": 0,
             "currency": "INR"
         },
-        "totalFiled": 15,
-        "totalResponded": 10,
-        "totalPending": 5
+        "totalFiled": 0,
+        "totalResponded": 0,
+        "totalPending": 0
     }
 }

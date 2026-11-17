@@ -4,64 +4,15 @@
     "name": "Maharashtra",
     "metrics": [
         {
-            "key": "gsdp",
-            "label": "GSDP",
-            "value": 32240000000000,
-            "currency": "INR",
-            "year": "2023-24",
-            "trend": "up",
-            "trendValue": 7.2
-        },
-        {
             "key": "population",
             "label": "Population",
             "value": 112374333,
-            "year": 2024
-        },
-        {
-            "key": "area",
-            "label": "Area",
-            "value": 307713,
-            "unit": "sq km"
-        },
-        {
-            "key": "districts",
-            "label": "Districts",
-            "value": 36
-        },
-        {
-            "key": "lok_sabha_seats",
-            "label": "Lok Sabha Seats",
-            "value": 48
-        },
-        {
-            "key": "vidhan_sabha_seats",
-            "label": "Vidhan Sabha Seats",
-            "value": 288
-        },
-        {
-            "key": "national_highways_km",
-            "label": "National Highways",
-            "value": 7630,
-            "unit": "km"
-        },
-        {
-            "key": "state_highways_km",
-            "label": "State Highways",
-            "value": 33000,
-            "unit": "km"
+            "year": 2011,
+            "source": "Census of India 2011, Primary Census Abstract",
+            "sourceUrl": "https://censusindia.gov.in/nada/index.php/catalog/42555/download/46181/2011-IndiaState-0000.xlsx"
         }
     ],
-    "highlights": [
-        {
-            "title": "Samruddhi Mahamarg",
-            "description": "701 km expressway connecting Mumbai to Nagpur"
-        },
-        {
-            "title": "Mumbai Metro Expansion",
-            "description": "Multiple metro lines under construction across Mumbai"
-        }
-    ],
+    "highlights": [],
     "quickLinks": [
         {
             "label": "Districts",
