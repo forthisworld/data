@@ -34,6 +34,9 @@ const NavBar = () => {
   const pathParts = pathname.split('/').filter(Boolean);
   const countryCode = pathParts.length > 0 && /^[a-z]{2}$/.test(pathParts[0]) ? pathParts[0] : 'in';
 
+  // The atlas home (/in) is full-screen and has its own controls.
+  if (/^\/[a-z]{2}\/?$/.test(pathname)) return null;
+
   return (
     <nav className="flex items-center justify-between p-4 bg-white shadow-md">
       <div className="flex items-center space-x-4">

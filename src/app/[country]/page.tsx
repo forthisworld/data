@@ -1,33 +1,24 @@
-import { getCountryConfig, getOverview, getMapRegions } from '@/services/country.service';
-import { getAllInfoRequests } from '@/services/info-request.service';
-import Dashboard from '@/components/Dashboard';
 import { notFound } from 'next/navigation';
+import { getCountryConfig, getAtlasRegions } from '@/services/country.service';
+import AtlasLoader from '@/components/atlas/AtlasLoader';
 
 interface CountryPageProps {
-    params: Promise<{
-        country: string;
-    }>;
+    params: Promise<{ country: string }>;
 }
 
+/** The country's home: the atlas. */
 export default async function CountryPage({ params }: CountryPageProps) {
     const { country } = await params;
-
+    let config;
     try {
-        const [config, overview, infoRequests, mapRegions] = await Promise.all([
-            getCountryConfig(country),
-            getOverview(country),
-            getAllInfoRequests(country),
-            getMapRegions(country),
-        ]);
-
-        return <Dashboard config={config} overview={overview} infoRequests={infoRequests} mapRegions={mapRegions} />;
-    } catch (error) {
-        console.error('Error loading country data:', error);
+        config = await getCountryConfig(country);
+    } catch {
         notFound();
     }
+    const regions = await getAtlasRegions(country);
+    return <AtlasLoader countryCode={country} countryName={config.name} regions={regions} />;
 }
 
 export async function generateStaticParams() {
-    // Pre-render India
     return [{ country: 'in' }];
 }

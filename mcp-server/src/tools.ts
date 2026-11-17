@@ -3,12 +3,12 @@
  *
  * Design rules:
  * - Read tools read the published record (data/<country>/, see data/SOURCING.md).
- * - submit_contribution is the ONLY write, and it lands in the review queue
- *   (data/_contributions/) after machine validation. Published data is untouchable.
+ * - submit_contribution is the ONLY write: it goes to the site's /api/contributions,
+ *   which validates it and opens a pull request against the data branch.
  */
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { z } from "zod";
-import { loadCorpus, findBySlug, saveContribution, getContribution, Doc } from "./corpus.js";
+import { loadCorpus, findBySlug, Doc } from "./corpus.js";
 
 // Every number says where it comes from and how firm it is (data/SOURCING.md).
 const Basis = z.enum(["court_finding", "audit_finding", "official_record", "company_filing", "reported", "claim"]);
@@ -147,13 +147,13 @@ export function registerTools(server: McpServer) {
   // ---------------------------------------------------------
   server.tool(
     "submit_contribution",
-    "Submit a proposed change to the corpus. Lands in the review queue with automated validation - it does NOT modify published data directly. Every number needs a sourceId and a basis, and every source needs a URL and the date you read it (retrievedAt).",
+    "Propose a sourced change to one record. It is checked against the sourcing rules (data/SOURCING.md) and, if it passes, opened as a pull request against the data branch for human review. Nothing is published until it is merged. Every number needs a sourceId and a basis; every source needs a url and the date you read it (retrievedAt).",
     {
       country: z.enum(["in"]).default("in"),
       entity_slug: z.string().describe("Slug of the entity this contribution applies to"),
       entity_type: z.enum(["toll_road", "person", "infrastructure", "region"]),
-      patch_json: z.string().describe("JSON object of fields to add/update, e.g. {\"annualRevenue\":[...]}"),
-      sources_json: z.string().describe("JSON array of source citations supporting the change: [{id,title,publisher,url,date,type,retrievedAt}]"),
+      patch_json: z.string().describe("JSON object of fields to add/update, e.g. {\"collections\":[...]}"),
+      sources_json: z.string().describe("JSON array of sources: [{id,title,publisher,type,url,retrievedAt,date?,locator?}]"),
       submitter: z.string().describe("Your name or handle for attribution"),
       note: z.string().optional().describe("Why this change - context for reviewers"),
     },
@@ -166,71 +166,18 @@ export function registerTools(server: McpServer) {
       } catch (e) {
         return text(`Invalid JSON: ${String(e)}`);
       }
-
-      const issues: string[] = [];
-
-      // Gate 1: shape
-      if (entity_type === "toll_road") {
-        const parsed = z
-          .object({
-            annualRevenue: z.array(z.object({ year: z.union([z.number(), z.string()]), revenue: MoneyValue.optional(), trafficVehiclesPerDay: z.number().optional(), trafficSourceId: z.string().optional() })).optional(),
-            collections: z.array(z.object({ label: z.string(), from: z.string().optional(), to: z.string().optional(), amount: MoneyValue })).optional(),
-            projectCost: MoneyValue.optional(),
-          })
-          .passthrough()
-          .safeParse(patch);
-        if (!parsed.success) issues.push(...parsed.error.issues.map((i) => `patch.${i.path.join(".")}: ${i.message}`));
+      // Contributions go through the site, which validates them and opens the PR.
+      const site = (process.env.FTW_SITE_URL ?? "http://localhost:3000").replace(/\/$/, "");
+      try {
+        const res = await fetch(`${site}/api/contributions`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ country, entityType: entity_type, entitySlug: entity_slug, patch, sources, submitter, note }),
+        });
+        return text(JSON.stringify(await res.json(), null, 2));
+      } catch (e) {
+        return text(`Could not reach ${site}/api/contributions (${String(e)}). Set FTW_SITE_URL to the data.ftw site.`);
       }
-
-      // Gate 2: sources present, retrievable, and actually read
-      const srcArr = Array.isArray(sources) ? sources : [];
-      if (srcArr.length === 0) issues.push("At least one source citation is required");
-      for (const s of srcArr as { id?: string; title?: string; url?: string; retrievedAt?: string }[]) {
-        if (!s.id || !s.title) issues.push("Each source needs an id and a title");
-        if (!s.url) issues.push(`Source '${s.title ?? "?"}' has no URL - claims without retrievable sources are rejected`);
-        if (!s.retrievedAt) issues.push(`Source '${s.title ?? "?"}' has no retrievedAt (YYYY-MM-DD): say when you read it`);
-      }
-
-      // Gate 3: target entity must exist
-      const corpus = loadCorpus(country);
-      const list = entity_type === "toll_road" ? corpus.tollRoads : entity_type === "region" ? corpus.regions : corpus.entities;
-      if (!findBySlug(list, entity_slug)) issues.push(`Target entity '${entity_slug}' not found`);
-
-      if (issues.length > 0) {
-        return text(`REJECTED by automated validation:\n- ${issues.join("\n- ")}`);
-      }
-
-      const saved = saveContribution({
-        status: "pending",
-        country,
-        entityType: entity_type,
-        entitySlug: entity_slug,
-        patch,
-        sources: srcArr,
-        submitter,
-        note: note ?? "",
-        submittedAt: new Date().toISOString(),
-        checks: { schema: "pass", sourcesPresent: true, targetExists: true },
-      });
-      return text(
-        `Accepted into review queue: contribution ${saved.id}\n` +
-          `Status: pending review. Nothing is published until a reviewer merges it.\n` +
-          `Track it via get_contribution_status.`
-      );
-    }
-  );
-
-  // ---------------------------------------------------------
-  server.tool(
-    "get_contribution_status",
-    "Check the review status of a submitted contribution.",
-    {
-      contribution_id: z.string(),
-    },
-    async ({ contribution_id }) => {
-      const c = getContribution(contribution_id);
-      if (!c) return text("Not found");
-      return text(JSON.stringify(c, null, 2));
     }
   );
 }

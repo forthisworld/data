@@ -1,4 +1,4 @@
-import { getCountryConfig, getOverview, getMapRegions } from '@/services/country.service';
+import { getCountryConfig, getOverview } from '@/services/country.service';
 import { getInfoRequestsByRegion, getAllInfoRequests } from '@/services/info-request.service';
 import {
     resolvePath,
@@ -6,14 +6,13 @@ import {
     getPersons,
 } from '@/services/entity.service';
 import { getAllTollRoads, getTollRoadBySlug, getTollRoadsByRegion } from '@/services/toll-road.service';
-import Dashboard from '@/components/Dashboard';
 import EntityList from '@/components/EntityList';
 import EntityDetail from '@/components/EntityDetail';
 import RegionDashboard from '@/components/RegionDashboard';
 import CategoryView from '@/components/CategoryView';
 import TollRoadList from '@/components/TollRoadList';
 import TollRoadDetail from '@/components/TollRoadDetail';
-import { notFound } from 'next/navigation';
+import { notFound, redirect } from 'next/navigation';
 
 interface CatchAllPageProps {
     params: Promise<{
@@ -31,12 +30,8 @@ export default async function CatchAllPage({ params }: CatchAllPageProps) {
 
         switch (resolution.type) {
             case 'dashboard':
-                const [overview, allrequests, mapRegions] = await Promise.all([
-                    getOverview(country),
-                    getAllInfoRequests(country),
-                    getMapRegions(country),
-                ]);
-                return <Dashboard config={config} overview={overview} infoRequests={allrequests} mapRegions={mapRegions} />;
+                // The country home is the atlas at /<country>.
+                redirect(`/${country}`);
 
             case 'region':
                 const [regionOverview, regionRequests, regionRoads, people] = await Promise.all([
@@ -151,7 +146,8 @@ export default async function CatchAllPage({ params }: CatchAllPageProps) {
         }
     } catch (error) {
         // notFound() works by throwing; let it through rather than logging it as a failure.
-        if ((error as { digest?: string })?.digest?.startsWith('NEXT_HTTP_ERROR_FALLBACK')) throw error;
+        const digest = (error as { digest?: string })?.digest ?? '';
+        if (digest.startsWith('NEXT_HTTP_ERROR_FALLBACK') || digest.startsWith('NEXT_REDIRECT')) throw error;
         console.error('Error loading page data:', error);
         notFound();
     }

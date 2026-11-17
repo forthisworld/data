@@ -48,24 +48,44 @@ export async function getOverview(countryCode: string, regionPath?: string[]): P
     return d.overview;
 }
 
+export interface AtlasRegion {
+    slug: string;
+    name: string;
+    level: string;
+    capital?: string;
+    population?: number;
+    populationAsOf?: string;
+    populationSource?: { title: string; url?: string };
+    tollRoads: { slug: string; name: string; tolling?: 'tolled' | 'toll_free' }[];
+    people: { slug: string; name: string; role: string }[];
+}
+
 /**
- * One entry per region that has a page, with how much is published for it.
- * Keyed by slug, which matches the map's boundary files.
+ * What the atlas shows for each region that has a page, keyed by slug (which
+ * matches the map's boundary files). Only published, sourced facts.
  */
-export async function getMapRegions(countryCode: string): Promise<Record<string, { slug: string; name: string; tollRoads: number; people: number }>> {
+export async function getAtlasRegions(countryCode: string): Promise<Record<string, AtlasRegion>> {
     const d = getCountryData(countryCode);
     if (!d) return {};
     const linked = (e: { regionId?: string; regionIds?: string[] }, id: string) => e.regionId === id || (e.regionIds ?? []).includes(id);
     return Object.fromEntries(
-        d.regions.map(r => [
-            r.slug,
-            {
-                slug: r.slug,
-                name: r.name,
-                tollRoads: d.tollRoads.filter(t => linked(t, r.id)).length,
-                people: d.persons.filter(p => linked(p, r.id)).length,
-            },
-        ])
+        d.regions.map(r => {
+            const src = r.sources?.[0];
+            return [
+                r.slug,
+                {
+                    slug: r.slug,
+                    name: r.name,
+                    level: r.level,
+                    capital: r.capital,
+                    population: src ? r.population : undefined,
+                    populationAsOf: src ? r.populationAsOf : undefined,
+                    populationSource: src ? { title: src.title, url: src.url } : undefined,
+                    tollRoads: d.tollRoads.filter(t => linked(t, r.id)).map(t => ({ slug: t.slug, name: t.name, tolling: t.tolling?.status })),
+                    people: d.persons.filter(p => linked(p, r.id)).map(p => ({ slug: p.slug, name: p.name, role: p.role })),
+                } satisfies AtlasRegion,
+            ];
+        })
     );
 }
 

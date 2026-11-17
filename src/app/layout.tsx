@@ -1,8 +1,9 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import type { Metadata, Viewport } from "next";
+import { Geist, Geist_Mono, EB_Garamond } from "next/font/google";
 import "./globals.css";
 import NavBar from "@/components/NavBar";
 import Footer from "@/components/Footer";
+import ServiceWorker from "@/components/ServiceWorker";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -14,13 +15,32 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+// The atlas's labels and headings: an old-book serif.
+const atlasSerif = EB_Garamond({
+  variable: "--font-atlas",
+  subsets: ["latin"],
+});
+
 export const metadata: Metadata = {
   title: {
-    default: "data.ftw - India's Public Data Platform",
+    default: "data.ftw: an open atlas of public money",
     template: "%s | data.ftw",
   },
-  description: "Access transparent, open-source data about Indian government spending, infrastructure, and public representatives. File RTIs, contribute data, and explore public information.",
-  keywords: ["India", "government data", "RTI", "public spending", "open data", "transparency"],
+  description: "India's governance data on a map: toll roads, who built them, what they cost and what they earned, with every fact linked to its source. File RTIs, contribute data, or connect your AI assistant.",
+  keywords: ["India", "government data", "RTI", "toll roads", "open data", "transparency", "atlas"],
+  applicationName: "data.ftw",
+  appleWebApp: { capable: true, title: "data.ftw", statusBarStyle: "default" },
+  icons: {
+    icon: [{ url: "/icons/icon.svg", type: "image/svg+xml" }, { url: "/icons/icon-192.png", sizes: "192x192" }],
+    apple: "/icons/apple-touch-icon.png",
+  },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#1f3a4d",
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
 };
 
 export default function RootLayout({
@@ -31,7 +51,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col`}
+        className={`${geistSans.variable} ${geistMono.variable} ${atlasSerif.variable} antialiased min-h-screen flex flex-col`}
         suppressHydrationWarning
       >
         <NavBar />
@@ -39,8 +59,8 @@ export default function RootLayout({
           {children}
         </main>
         <Footer />
+        <ServiceWorker />
       </body>
     </html>
   );
 }
-

@@ -5,8 +5,8 @@
  * Claude Desktop, Cursor, GPT Researcher, the FTW Research Tool, etc.
  *
  * Read tools serve the published record (data/ in the data.ftw repo);
- * submit_contribution writes ONLY to the review queue (data/_contributions/).
- * Nothing reaches published data without machine validation + human review.
+ * submit_contribution sends the change to the site (FTW_SITE_URL), which
+ * validates it and opens a pull request against the data branch.
  *
  * Run: node dist/index.js   (stdio transport)
  *      DATA_DIR=/path/to/data.ftw/data node dist/index.js   (if run from elsewhere)

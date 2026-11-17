@@ -1,7 +1,14 @@
+'use client';
+
 import React from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 const Footer = () => {
+  const pathname = usePathname();
+  // The atlas home (/in) is full-screen and has its own controls.
+  if (/^\/[a-z]{2}\/?$/.test(pathname)) return null;
+
   return (
     <footer className="border-t bg-muted/30">
       <div className="container mx-auto px-4 py-8">
