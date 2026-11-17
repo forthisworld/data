@@ -53,7 +53,7 @@ The Right to Information Act, 2005 lets anyone ask a public authority for record
 
 ## 3. Improve the code
 
-The site is Next.js with MapLibre for the atlas; the published record is JSON in `data/`, bundled at build time.
+The site is written as a Next.js app and built with vinext (Vite) for Cloudflare Workers, with MapLibre for the atlas. It needs Node 22.18 or later. The published record is JSON in `data/`, bundled at build time.
 
 ```bash
 npm install          # also generates the data index

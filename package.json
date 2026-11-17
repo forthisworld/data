@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "vite dev",
+    "dev": "vite dev --port 3000",
     "predev": "npm run -s data:index",
     "build": "vite build",
     "prebuild": "npm run -s data:index",
