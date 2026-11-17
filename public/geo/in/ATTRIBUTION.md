@@ -25,7 +25,8 @@ Attribution: *India boundaries by the [DataMeet India community](http://datameet
 
 At city zoom the atlas also draws streets, water, parks and local place names from [OpenFreeMap](https://openfreemap.org)'s
 OpenStreetMap tiles (ODbL; OpenMapTiles schema), loaded from their servers. Their `boundary` layer and country/state
-names are not drawn, so the borders on the map are only the ones in this folder. At street zoom the simplified
+names are not drawn, so the borders on the map are only the ones in this folder. Credit shown on the map, as
+OpenFreeMap asks: *OpenFreeMap © OpenMapTiles Data from OpenStreetMap*. At street zoom the simplified
 outline can sit a little off the OSM coastline (e.g. Mumbai); less-simplified boundaries will fix that.
 
 Notes:

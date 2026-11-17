@@ -709,10 +709,7 @@ export default function Atlas({ countryCode, countryName, data, initial }: Atlas
             {panel && (
                 <Sheet wide={wide} snap={snap} onSnap={setSnap} onClose={closeView} viewKey={panel.key}>
                     {panel.body}
-                    <p className="border-t border-ftw-line px-5 py-3 text-[11px] text-ftw-faint">
-                        Map data © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer" className="underline">OpenStreetMap contributors</a>, street tiles <a href="https://openfreemap.org" target="_blank" rel="noopener noreferrer" className="underline">OpenFreeMap</a>,
-                        boundaries <a href="https://github.com/datameet/maps" target="_blank" rel="noopener noreferrer" className="underline">DataMeet</a>.
-                    </p>
+                    <p className="border-t border-ftw-line px-5 py-3 text-[11px] text-ftw-faint"><MapCredit /></p>
                 </Sheet>
             )}
 
@@ -786,11 +783,7 @@ export default function Atlas({ countryCode, countryName, data, initial }: Atlas
                                 <button onClick={() => setQuery('')} aria-label="Clear search" className="absolute right-4 top-1/2 -translate-y-1/2 text-ftw-muted"><X className="h-5 w-5" /></button>
                             )}
                         </div>
-                        <p className="mt-1.5 text-center text-[10px] text-ftw-faint">
-                            Map data © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer" className="underline">OpenStreetMap contributors</a>, tiles <a href="https://openfreemap.org" target="_blank" rel="noopener noreferrer" className="underline">OpenFreeMap</a> ·
-                            boundaries <a href="https://github.com/datameet/maps" target="_blank" rel="noopener noreferrer" className="underline">DataMeet</a> ·{' '}
-                            <Link href="/licences" className="underline">licences</Link>
-                        </p>
+                        <p className="mt-1.5 text-center text-[10px] text-ftw-faint"><MapCredit /></p>
                     </div>
                 </div>
             )}
@@ -802,5 +795,19 @@ export default function Atlas({ countryCode, countryName, data, initial }: Atlas
                 <div className="absolute inset-0 z-20 flex items-center justify-center text-sm text-ftw-muted">Map boundaries could not be loaded.</div>
             )}
         </div>
+    );
+}
+
+/**
+ * Map credits, shown wherever the map is. OpenFreeMap asks for exactly
+ * "OpenFreeMap © OpenMapTiles Data from OpenStreetMap", with links.
+ */
+function MapCredit() {
+    const a = (href: string, text: string) => <a href={href} target="_blank" rel="noopener noreferrer" className="underline">{text}</a>;
+    return (
+        <>
+            {a('https://openfreemap.org', 'OpenFreeMap')} {a('https://www.openmaptiles.org/', '© OpenMapTiles')} Data from {a('https://www.openstreetmap.org/copyright', 'OpenStreetMap')}
+            {' · '}boundaries {a('https://github.com/datameet/maps', 'DataMeet')}{' · '}<Link href="/licences" className="underline">licences</Link>
+        </>
     );
 }
