@@ -134,7 +134,8 @@ export async function resolvePath(countryCode: string, pathSegments: string[]): 
     }
 
     const region = await getRegionById(countryCode, first);
-    if (region) return { type: 'region', entity: region };
+    // No sub-pages under a region yet: /in/maharashtra/anything is a 404, not the region page.
+    if (region && rest.length === 0) return { type: 'region', entity: region };
 
     return { type: 'not_found' };
 }

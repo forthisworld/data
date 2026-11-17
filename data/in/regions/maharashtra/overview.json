@@ -13,21 +13,5 @@
         }
     ],
     "highlights": [],
-    "quickLinks": [
-        {
-            "label": "Districts",
-            "href": "/in/maharashtra/districts",
-            "icon": "map"
-        },
-        {
-            "label": "Infrastructure",
-            "href": "/in/infrastructure/roads/maharashtra",
-            "icon": "building"
-        },
-        {
-            "label": "Representatives",
-            "href": "/in/person?region=maharashtra",
-            "icon": "users"
-        }
-    ]
+    "quickLinks": []
 }

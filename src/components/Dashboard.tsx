@@ -50,7 +50,7 @@ export default function Dashboard({ config, overview, infoRequests, mapRegions }
               {config.name}&apos;s Data
             </h1>
             <p className="text-slate-400 text-lg">
-              Government spending, infrastructure & public data at your fingertips
+              Public money, infrastructure and the people responsible, with every fact linked to its source
             </p>
           </div>
 

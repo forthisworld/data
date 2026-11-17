@@ -30,11 +30,6 @@
             "icon": "users"
         },
         {
-            "label": "Government Spending",
-            "href": "/in/spending",
-            "icon": "wallet"
-        },
-        {
             "label": "Toll Roads",
             "href": "/in/infrastructure/toll-roads",
             "icon": "road"

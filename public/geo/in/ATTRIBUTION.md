@@ -18,8 +18,10 @@ Notes:
 - **Districts are 2011 boundaries.** Districts created since 2011 are not shown separately. Each 2011
   district is assigned to its current state by location (so Hyderabad is in Telangana, Leh in Ladakh).
   `census2011Code` is the Census 2011 district code.
-- **No basemap is used.** Third-party basemaps draw their own international borders, which may not
-  follow the Survey of India boundary that maps published in India are required to show.
+- **No basemap is used.** Third-party basemaps draw their own international borders. DataMeet describes
+  its India outline as following the official boundary of India as per the Survey of India; a basemap
+  could contradict it. The legal requirements for publishing maps of India are on the list for legal
+  review (PLAN.md).
 - These files are not part of the ODbL-licensed data.ftw database; they keep the licences above.
 - To replace them with current boundaries, use the Survey of India's administrative boundary
   release (district and sub-district, keyed by LGD code) once downloaded, and update `build-geo.mjs`.

@@ -59,10 +59,6 @@
             "title": "NICE Road: copy of the 1997 Framework Agreement and all amendments",
             "description": "Certified copy of the Framework Agreement dated 3 April 1997 between the Government of Karnataka and Nandi Infrastructure Corridor Enterprises Ltd, with all schedules, amendments and supplementary agreements, including the clauses on toll rates, toll period and termination.",
             "department": "Public Works Department, Government of Karnataka",
-            "estimatedCost": {
-                "value": 10,
-                "currency": "INR"
-            },
             "priority": "high",
             "category": "infrastructure"
         },
@@ -71,10 +67,6 @@
             "title": "NICE Road: year-wise toll collected and project cost claimed",
             "description": "Year-wise toll collected on the NICE Peripheral Road and Link Road since tolling began, as reported by the concessionaire to the State; and the project cost claimed by the concessionaire with any audit or review of it.",
             "department": "Public Works Department, Government of Karnataka",
-            "estimatedCost": {
-                "value": 10,
-                "currency": "INR"
-            },
             "priority": "high",
             "category": "infrastructure"
         },
@@ -83,10 +75,6 @@
             "title": "NICE Road: cabinet sub-committee report and decision",
             "description": "Copy of the report of the cabinet sub-committee headed by the Home Minister on the BMIC/NICE project, and the minutes of any Cabinet decision taken on it.",
             "department": "Department of Personnel and Administrative Reforms (Cabinet Section), Government of Karnataka",
-            "estimatedCost": {
-                "value": 10,
-                "currency": "INR"
-            },
             "priority": "medium",
             "category": "infrastructure"
         }
@@ -97,7 +85,7 @@
             "currency": "INR"
         },
         "totalNeeded": {
-            "value": 30,
+            "value": 0,
             "currency": "INR"
         },
         "totalContributed": {

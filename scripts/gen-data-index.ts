@@ -2,8 +2,8 @@
  * Generates src/lib/data/files.generated.ts: a static import of every JSON
  * file in the published record (data/<country>/...).
  *
- * The site reads data through this module instead of the filesystem, so the
- * same build works on Node and on Cloudflare Workers (no runtime fs).
+ * The site reads data through this module instead of the filesystem, so it
+ * needs no runtime fs (meant for Cloudflare Workers; not yet tested there).
  * Runs automatically before `dev` and `build`; run by hand with
  *   npm run data:index
  */

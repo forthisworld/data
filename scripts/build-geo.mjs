@@ -7,7 +7,7 @@
  * Output (simplified GeoJSON, committed to the repo):
  *   india.geojson      national outline, Survey of India boundary
  *   states.geojson     36 current states and UTs        { name, slug }
- *   districts.geojson  641 Census 2011 districts         { name, state, stateSlug, census2011Code }
+ *   districts.geojson  640 Census 2011 districts         { name, state, stateSlug, census2011Code }
  *
  * Districts are the 2011 boundaries: districts created since 2011 are not
  * shown separately. Each district is assigned to its CURRENT state by
@@ -60,7 +60,7 @@ try {
     await mapshaper.runCommands(
         `-i "${w('2011_Dist.shp')}" name=districts -i "${w('Admin2.shp')}" name=states ` +
         `-join target=districts source=states point-method fields=ST_NM prefix=cur_ ` +
-        `-target districts -simplify 6% keep-shapes ` +
+        `-target districts -filter "censuscode != 0" -simplify 6% keep-shapes ` +
         `-each "name=DISTRICT, state=cur_ST_NM || ST_NM, stateSlug=(${slugify.toString()})(cur_ST_NM || ST_NM), census2011Code=String(censuscode)" ` +
         `-filter-fields name,state,stateSlug,census2011Code ` +
         `-o "${o('districts.geojson')}" format=geojson precision=0.001`

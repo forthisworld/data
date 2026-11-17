@@ -2,7 +2,8 @@
  * The published record, read from data/<country>/ (see data/SOURCING.md).
  *
  * Data is bundled at build time through files.generated.ts, so nothing here
- * touches the filesystem or a database at request time. Everything is a
+ * touches the filesystem or a database at request time (meant to let the site
+ * run on Cloudflare Workers; not yet tested there). Everything is a
  * plain, synchronous lookup.
  */
 

@@ -24,7 +24,7 @@ npm run dev        # http://localhost:3000
 npm run data:validate   # every fact must cite a source it was read from (data/SOURCING.md)
 ```
 
-There is no database. The site reads the published record in `data/` through a module generated at build time (`npm run data:index`, run automatically by `dev`, `build` and `npm install`), so the same build runs on Node and on Cloudflare Workers.
+There is no database. The site reads the published record in `data/` through a module generated at build time (`npm run data:index`, run automatically by `dev`, `build` and `npm install`), so nothing reads the filesystem or a database at request time. That is meant to let the same build run on Cloudflare Workers; not yet tested there.
 
 ## Contributing data
 

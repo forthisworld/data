@@ -57,7 +57,19 @@ export async function POST(req: NextRequest) {
         return NextResponse.json({ error: `collection must be one of: ${COLLECTIONS.join(', ')}` }, { status: 400 });
     }
     const limit = Math.min(Math.max(body.limit ?? 20, 1), 200);
-    const filter = body.filter && typeof body.filter === 'object' ? body.filter : {};
-    const docs = rows(body.country ?? 'in', collection).filter(d => matches(d, filter)).slice(0, limit);
+    const { countryCode, ...filter } = body.filter && typeof body.filter === 'object' ? body.filter : {};
+    // The old MongoDB API accepted operators ($or, $regex, ...). Say so instead of silently matching nothing.
+    const unsupported = Object.entries(filter).filter(
+        ([k, v]) => k.startsWith('$') || (v !== null && typeof v === 'object' && !Array.isArray(v))
+    );
+    if (unsupported.length) {
+        return NextResponse.json(
+            { error: `Only equality filters are supported (field: value). Unsupported: ${unsupported.map(([k]) => k).join(', ')}` },
+            { status: 400 }
+        );
+    }
+    // Clients built for the MongoDB API pass the country as filter.countryCode.
+    const country = body.country ?? (typeof countryCode === 'string' ? countryCode : 'in');
+    const docs = rows(country, collection).filter(d => matches(d, filter)).slice(0, limit);
     return NextResponse.json({ collection, count: docs.length, docs });
 }

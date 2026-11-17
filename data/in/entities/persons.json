@@ -58,9 +58,6 @@
         ],
         "party": "INC",
         "description": "Congress MP, recognised by the Speaker as Leader of the Opposition in the Lok Sabha with effect from 9 June 2024. Marked two years in the role in June 2026.",
-        "tenure": {
-            "start": "2024-06-09"
-        },
         "sources": [
             {
                 "id": "tribune-lop-2024",
@@ -95,9 +92,6 @@
         ],
         "regionId": "uttar-pradesh",
         "description": "Chief Minister of Uttar Pradesh. Took oath for a second term on 25 March 2022 at the Ekana stadium in Lucknow; reported acting as Chief Minister in August 2026.",
-        "tenure": {
-            "start": "2022-03-25"
-        },
         "sources": [
             {
                 "id": "bt-yogi-2022",
@@ -202,7 +196,7 @@
         "sources": [
             {
                 "id": "air-satheesan-2026",
-                "title": "Congress leader VD Satheesan sworn in as Chief Minister of Keralam",
+                "title": "Prime Minister congratulates V. D. Satheesan on taking oath as Chief Minister of Keralam",
                 "publisher": "All India Radio News (newsonair.gov.in)",
                 "date": "2026-05-18",
                 "type": "news",

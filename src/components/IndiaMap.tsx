@@ -3,8 +3,8 @@
 /**
  * Zoomable, searchable map of India: states and UTs, and the 2011 districts
  * when zoomed in. Boundaries only, with no basemap tiles: a basemap would draw
- * its own international borders, which may not follow the Survey of India
- * boundary that maps published in India must show.
+ * its own international borders, which could contradict the official boundary
+ * of India that DataMeet's outline follows (see public/geo/in/ATTRIBUTION.md).
  *
  * Boundary files come from scripts/build-geo.mjs (public/geo/in/).
  */

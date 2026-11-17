@@ -86,7 +86,7 @@ export default function EntityDetail({ config, entity, countryCode }: EntityDeta
                                 {person.tenure && (
                                     <p className="text-slate-400 flex items-center gap-2 mt-2">
                                         <Calendar className="h-4 w-4" />
-                                        Since {person.tenure.start}
+                                        In office since {person.tenure.start}
                                         {person.tenure.end ? `, until ${person.tenure.end}` : ''}
                                     </p>
                                 )}
