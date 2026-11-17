@@ -1,4 +1,4 @@
-import { getCountryConfig, getOverview } from '@/services/country.service';
+import { getCountryConfig, getOverview, getMapRegions } from '@/services/country.service';
 import { getInfoRequestsByRegion, getAllInfoRequests } from '@/services/info-request.service';
 import {
     resolvePath,
@@ -31,11 +31,12 @@ export default async function CatchAllPage({ params }: CatchAllPageProps) {
 
         switch (resolution.type) {
             case 'dashboard':
-                const [overview, allrequests] = await Promise.all([
+                const [overview, allrequests, mapRegions] = await Promise.all([
                     getOverview(country),
-                    getAllInfoRequests(country)
+                    getAllInfoRequests(country),
+                    getMapRegions(country),
                 ]);
-                return <Dashboard config={config} overview={overview} infoRequests={allrequests} />;
+                return <Dashboard config={config} overview={overview} infoRequests={allrequests} mapRegions={mapRegions} />;
 
             case 'region':
                 const [regionOverview, regionRequests, regionRoads, people] = await Promise.all([

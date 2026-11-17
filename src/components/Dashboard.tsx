@@ -6,12 +6,21 @@ import MetricCard from './MetricCard';
 import RTITrackerWidget from './RTITrackerWidget';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
 import Link from 'next/link';
+import dynamic from 'next/dynamic';
+import type { MapRegionSummary } from './IndiaMap';
 import { Building, Users, Wallet, MapPin, TrendingUp, Route } from 'lucide-react';
+
+// MapLibre needs the browser (WebGL), so the map renders on the client only.
+const IndiaMap = dynamic(() => import('./IndiaMap'), {
+  ssr: false,
+  loading: () => <div className="h-[70vh] min-h-[420px] w-full rounded-xl border border-slate-700 bg-slate-900 animate-pulse" />,
+});
 
 interface DashboardProps {
   config: CountryConfig;
   overview: Overview;
   infoRequests?: InfoRequest[];
+  mapRegions?: Record<string, MapRegionSummary>;
 }
 
 const iconMap: Record<string, React.ElementType> = {
@@ -22,7 +31,7 @@ const iconMap: Record<string, React.ElementType> = {
   road: Route,
 };
 
-export default function Dashboard({ config, overview, infoRequests }: DashboardProps) {
+export default function Dashboard({ config, overview, infoRequests, mapRegions }: DashboardProps) {
   // Split metrics into primary (first 4) and secondary
   const primaryMetrics = overview.metrics.slice(0, 4);
   const secondaryMetrics = overview.metrics.slice(4, 8);
@@ -61,6 +70,13 @@ export default function Dashboard({ config, overview, infoRequests }: DashboardP
 
       {/* Main Content */}
       <div className="container mx-auto px-4 py-8">
+        {/* Map */}
+        {mapRegions && (
+          <section className="mb-8">
+            <IndiaMap countryCode={config.code} regions={mapRegions} />
+          </section>
+        )}
+
         {/* Quick Links */}
         {overview.quickLinks && overview.quickLinks.length > 0 && (
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">

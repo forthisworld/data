@@ -48,6 +48,27 @@ export async function getOverview(countryCode: string, regionPath?: string[]): P
     return d.overview;
 }
 
+/**
+ * One entry per region that has a page, with how much is published for it.
+ * Keyed by slug, which matches the map's boundary files.
+ */
+export async function getMapRegions(countryCode: string): Promise<Record<string, { slug: string; name: string; tollRoads: number; people: number }>> {
+    const d = getCountryData(countryCode);
+    if (!d) return {};
+    const linked = (e: { regionId?: string; regionIds?: string[] }, id: string) => e.regionId === id || (e.regionIds ?? []).includes(id);
+    return Object.fromEntries(
+        d.regions.map(r => [
+            r.slug,
+            {
+                slug: r.slug,
+                name: r.name,
+                tollRoads: d.tollRoads.filter(t => linked(t, r.id)).length,
+                people: d.persons.filter(p => linked(p, r.id)).length,
+            },
+        ])
+    );
+}
+
 export async function isCountrySupported(countryCode: string): Promise<boolean> {
     return getCountryData(countryCode) !== null;
 }
