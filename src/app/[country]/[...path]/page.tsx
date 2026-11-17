@@ -1,154 +1,82 @@
-import { getCountryConfig, getOverview } from '@/services/country.service';
-import { getInfoRequestsByRegion, getAllInfoRequests } from '@/services/info-request.service';
-import {
-    resolvePath,
-    getEntities,
-    getPersons,
-} from '@/services/entity.service';
-import { getAllTollRoads, getTollRoadBySlug, getTollRoadsByRegion } from '@/services/toll-road.service';
-import EntityList from '@/components/EntityList';
-import EntityDetail from '@/components/EntityDetail';
-import RegionDashboard from '@/components/RegionDashboard';
-import CategoryView from '@/components/CategoryView';
-import TollRoadList from '@/components/TollRoadList';
-import TollRoadDetail from '@/components/TollRoadDetail';
-import { notFound, redirect } from 'next/navigation';
+import type { Metadata } from 'next';
+import { notFound } from 'next/navigation';
+import { getCountryConfig, getAtlasData, type AtlasData } from '@/services/country.service';
+import AtlasLoader from '@/components/atlas/AtlasLoader';
+import { parseAtlasPath, type AtlasRoute } from '@/lib/atlas-route';
+import { places } from '@/lib/data/places.generated';
 
-interface CatchAllPageProps {
-    params: Promise<{
-        country: string;
-        path: string[];
-    }>;
+/**
+ * Every record has its own URL, and every URL opens the atlas with that record in the panel.
+ * The atlas draws on the client, so the server also renders the record's title and summary
+ * (for search engines, link previews and readers without JavaScript).
+ */
+
+interface Props {
+    params: Promise<{ country: string; path: string[] }>;
 }
 
-export default async function CatchAllPage({ params }: CatchAllPageProps) {
-    const { country, path } = await params;
-
-    try {
-        const config = await getCountryConfig(country);
-        const resolution = await resolvePath(country, path);
-
-        switch (resolution.type) {
-            case 'dashboard':
-                // The country home is the atlas at /<country>.
-                redirect(`/${country}`);
-
-            case 'region':
-                const [regionOverview, regionRequests, regionRoads, people] = await Promise.all([
-                    getOverview(country, [resolution.entity!.slug]),
-                    getInfoRequestsByRegion(country, resolution.entity!.slug),
-                    getTollRoadsByRegion(country, resolution.entity!.id),
-                    getPersons(country),
-                ]);
-
-                return (
-                    <RegionDashboard
-                        config={config}
-                        region={resolution.entity!}
-                        overview={regionOverview}
-                        countryCode={country}
-                        infoRequests={regionRequests}
-                        tollRoads={regionRoads.map(r => ({ slug: r.slug, name: r.name, tolling: r.tolling?.status }))}
-                        people={people
-                            .filter(p => p.regionId === resolution.entity!.id || p.regionIds?.includes(resolution.entity!.id))
-                            .map(p => ({ slug: p.slug, name: p.name, role: p.role, description: p.description }))}
-                    />
-                );
-
-            case 'person':
-                return (
-                    <EntityDetail
-                        config={config}
-                        entity={resolution.entity!}
-                        countryCode={country}
-                    />
-                );
-
-            case 'infrastructure':
-                return (
-                    <EntityDetail
-                        config={config}
-                        entity={resolution.entity!}
-                        countryCode={country}
-                    />
-                );
-
-            case 'toll_roads_list': {
-                const tollRoads = await getAllTollRoads(country);
-                return <TollRoadList config={config} tollRoads={tollRoads} countryCode={country} />;
-            }
-
-            case 'toll_road': {
-                const tollRoad = await getTollRoadBySlug(country, resolution.tollRoadSlug!);
-                if (!tollRoad) notFound();
-                const relatedRequests = await getAllInfoRequests(country);
-                return (
-                    <TollRoadDetail
-                        config={config}
-                        tollRoad={tollRoad}
-                        countryCode={country}
-                        infoRequests={relatedRequests}
-                    />
-                );
-            }
-
-            case 'category':
-                if (resolution.category === 'region') {
-                    const regions = await getEntities(country, 'region', resolution.filters);
-                    return (
-                        <EntityList
-                            config={config}
-                            entities={regions}
-                            category="region"
-                            countryCode={country}
-                        />
-                    );
-                }
-                if (resolution.category === 'person') {
-                    const persons = await getEntities(country, 'person', resolution.filters);
-                    return (
-                        <EntityList
-                            config={config}
-                            entities={persons}
-                            category="person"
-                            countryCode={country}
-                        />
-                    );
-                }
-                if (resolution.category === 'infrastructure') {
-                    const infra = await getEntities(country, 'infrastructure', resolution.filters);
-                    return (
-                        <EntityList
-                            config={config}
-                            entities={infra}
-                            category="infrastructure"
-                            countryCode={country}
-                        />
-                    );
-                }
-                // Infrastructure subcategory
-                const infraByCategory = await getEntities(country, 'infrastructure', {
-                    category: resolution.category as never,
-                    ...resolution.filters,
-                });
-                return (
-                    <CategoryView
-                        config={config}
-                        category={resolution.category!}
-                        entities={infraByCategory}
-                        countryCode={country}
-                    />
-                );
-
-            case 'not_found':
-            default:
-                notFound();
+/** What the server can say about a route; null when the record does not exist. */
+function describe(country: string, route: AtlasRoute, data: AtlasData): { title: string; summary: string } | null {
+    const known = places[country];
+    switch (route.kind) {
+        case 'home':
+            return { title: 'Atlas', summary: '' };
+        case 'roads':
+            return { title: 'Toll roads', summary: data.roads.map(r => r.name).join('; ') };
+        case 'road': {
+            const r = data.roads.find(x => x.slug === route.slug);
+            return r ? { title: r.name, summary: r.analysis?.summary ?? r.officialName ?? '' } : null;
         }
-    } catch (error) {
-        // notFound() works by throwing; let it through rather than logging it as a failure.
-        const digest = (error as { digest?: string })?.digest ?? '';
-        if (digest.startsWith('NEXT_HTTP_ERROR_FALLBACK') || digest.startsWith('NEXT_REDIRECT')) throw error;
-        console.error('Error loading page data:', error);
-        notFound();
+        case 'person': {
+            const p = data.people.find(x => x.slug === route.slug);
+            return p ? { title: p.name, summary: p.description ?? '' } : null;
+        }
+        case 'state': {
+            const name = known?.states[route.slug];
+            if (!name) return null;
+            return { title: name, summary: `What is on record for ${name}: roads, office-holders and open questions.` };
+        }
+        case 'district': {
+            const d = known?.districts[route.code];
+            if (!d || d[1] !== route.state) return null;
+            const state = known.states[d[1]] ?? d[1];
+            return { title: `${d[0]}, ${state}`, summary: `What is on record for ${d[0]} district (${state}), and what is still unknown.` };
+        }
     }
+}
+
+async function load(country: string, path: string[]) {
+    const route = parseAtlasPath(path);
+    if (!route) return null;
+    let config;
+    try {
+        config = await getCountryConfig(country);
+    } catch {
+        return null;
+    }
+    const data = await getAtlasData(country);
+    const about = describe(country, route, data);
+    return about ? { route, config, data, about } : null;
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+    const { country, path } = await params;
+    const r = await load(country, path);
+    if (!r) return {};
+    return { title: r.about.title, description: r.about.summary.slice(0, 300) || undefined };
+}
+
+export default async function AtlasRoutePage({ params }: Props) {
+    const { country, path } = await params;
+    const r = await load(country, path);
+    if (!r) notFound();
+    return (
+        <>
+            <article className="sr-only">
+                <h1>{r.about.title}</h1>
+                {r.about.summary && <p>{r.about.summary}</p>}
+            </article>
+            <AtlasLoader countryCode={country} countryName={r.config.name} data={r.data} initial={r.route} />
+        </>
+    );
 }

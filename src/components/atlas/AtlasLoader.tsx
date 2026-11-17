@@ -2,6 +2,7 @@
 
 import dynamic from 'next/dynamic';
 import type { AtlasData } from '@/services/country.service';
+import type { AtlasRoute } from '@/lib/atlas-route';
 
 // MapLibre needs the browser (WebGL), so the atlas renders on the client only.
 const Atlas = dynamic(() => import('./Atlas'), {
@@ -11,6 +12,6 @@ const Atlas = dynamic(() => import('./Atlas'), {
     ),
 });
 
-export default function AtlasLoader(props: { countryCode: string; countryName: string; data: AtlasData }) {
+export default function AtlasLoader(props: { countryCode: string; countryName: string; data: AtlasData; initial?: AtlasRoute }) {
     return <Atlas {...props} />;
 }

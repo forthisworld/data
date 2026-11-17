@@ -8,9 +8,10 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { ArrowUpRight, ChevronRight, CircleHelp, FileText, Plus, User, Route as RouteIcon } from 'lucide-react';
+import { ArrowUpRight, ChevronRight, CircleHelp, FileText, Plus, User, Route as RouteIcon, PenLine } from 'lucide-react';
 import type { FactBasis, MoneyValue, Person, SourceCitation, TollRoad } from '@/types';
 import type { AtlasRegion } from '@/services/country.service';
+import { estimateRecoveryProgress, getDataGaps, isEstablished, REVENUE_ASSUMPTIONS } from '@/services/toll-road-analytics';
 
 // ---------- formatting ----------
 
@@ -194,6 +195,8 @@ export function RoadView({ road, country, stateNames }: { road: TollRoad; countr
         ...(road.collections ?? []).map(x => ({ label: x.label, when: period(x.from, x.to), v: x.amount })),
     ].filter(f => f.v.basis !== 'claim');
     const events = road.timeline ?? [];
+    const recovery = estimateRecoveryProgress(road);
+    const gaps = getDataGaps(road);
 
     return (
         <article>
@@ -219,6 +222,7 @@ export function RoadView({ road, country, stateNames }: { road: TollRoad; countr
                                 <p className="text-[11px] leading-tight text-ftw-muted">{f.label}{f.when ? `, ${f.when}` : ''}</p>
                                 <p className="mt-1 text-lg font-semibold tabular-nums tracking-tight">{fmtInr(f.v)}<Cite ids={[f.v.sourceId]} sources={s} /></p>
                                 <div className="mt-1"><Basis basis={f.v.basis} /></div>
+                                {f.v.note && <p className="mt-1.5 text-[11px] leading-snug text-ftw-faint">{f.v.note}</p>}
                             </div>
                         ))}
                     </div>
@@ -229,6 +233,73 @@ export function RoadView({ road, country, stateNames }: { road: TollRoad; countr
                     </ul>
                 )}
             </Section>
+
+            {recovery.recoveredPct !== null && recovery.cumulativeRevenue && (
+                <Section title={recovery.cumulativeRevenue.confidence === 'reported' ? 'Collected against cost' : 'Estimate: collected against cost'}>
+                    <div className="flex items-baseline gap-2">
+                        <span className={`text-3xl font-semibold tabular-nums tracking-tight ${recovery.recoveredPct >= 100 ? 'text-ftw-tolled' : ''}`}>
+                            {recovery.recoveredPctLow !== null && recovery.recoveredPctLow !== recovery.recoveredPct ? `${recovery.recoveredPctLow}–` : ''}{recovery.recoveredPct}%
+                        </span>
+                        <span className="text-xs text-ftw-muted">of the project cost, {recovery.cumulativeRevenue.fromYear}–{recovery.cumulativeRevenue.toYear}</span>
+                    </div>
+                    <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-ftw-raised">
+                        <div className={`h-full rounded-full ${recovery.recoveredPct >= 100 ? 'bg-ftw-tolled' : 'bg-ftw-accent'}`} style={{ width: `${Math.min(100, recovery.recoveredPct)}%` }} />
+                    </div>
+                    <p className="mt-2 text-[13px] leading-snug text-ftw-muted">{recovery.verdict}</p>
+                    {recovery.cumulativeRevenue.confidence !== 'reported' && (
+                        <details className="mt-2 text-xs text-ftw-muted">
+                            <summary className="cursor-pointer font-medium text-ftw-accent">How this is estimated</summary>
+                            <ul className="mt-1.5 list-disc space-y-1 pl-4">{REVENUE_ASSUMPTIONS.map(x => <li key={x}>{x}</li>)}</ul>
+                        </details>
+                    )}
+                </Section>
+            )}
+
+            {(road.funding?.length ?? 0) > 0 && (
+                <Section title="Where the money came from">
+                    <ul className="space-y-2 text-[13px]">
+                        {road.funding!.map(f => (
+                            <li key={f.label} className="flex items-start justify-between gap-3">
+                                <span>{f.label}{f.note && <span className="block text-xs text-ftw-muted">{f.note}</span>}</span>
+                                <span className="shrink-0 text-right">
+                                    <span className="font-semibold tabular-nums">{f.amount.value > 0 ? fmtInr(f.amount) : 'unknown'}</span><Cite ids={[f.amount.sourceId]} sources={s} />
+                                    <span className="block"><Basis basis={f.amount.basis} /></span>
+                                </span>
+                            </li>
+                        ))}
+                    </ul>
+                </Section>
+            )}
+
+            {(road.annualRevenue?.length ?? 0) > 0 && (
+                <Section title="Year by year">
+                    <table className="w-full text-[13px] tabular-nums">
+                        <thead><tr className="text-left text-xs text-ftw-muted"><th className="pb-1 font-medium">Year</th><th className="pb-1 font-medium">Toll revenue</th><th className="pb-1 font-medium">Vehicles a day</th></tr></thead>
+                        <tbody>
+                            {road.annualRevenue!.map(y => (
+                                <tr key={String(y.year)} className="border-t border-ftw-line">
+                                    <td className="py-1.5">{y.year}</td>
+                                    <td className="py-1.5">{y.revenue ? <>{fmtInr(y.revenue)}<Cite ids={[y.revenue.sourceId]} sources={s} />{!isEstablished(y.revenue.basis) && <span className="ml-1"><Basis basis={y.revenue.basis} /></span>}</> : '–'}</td>
+                                    <td className="py-1.5">{y.trafficVehiclesPerDay?.toLocaleString('en-IN') ?? '–'}<Cite ids={[y.trafficSourceId]} sources={s} /></td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </Section>
+            )}
+
+            {(road.currentRates?.length ?? 0) > 0 && (
+                <Section title="Toll rates now">
+                    <ul className="space-y-1.5 text-[13px]">
+                        {road.currentRates!.map(r => (
+                            <li key={r.vehicleClass + (r.section ?? '') + (r.trip ?? '')} className="flex justify-between gap-3">
+                                <span>{r.vehicleClass}{r.section ? <span className="text-ftw-muted"> · {r.section}</span> : null}{r.trip && r.trip !== 'single' ? <span className="text-ftw-muted"> · {r.trip.replace('_', ' ')}</span> : null}</span>
+                                <span className="font-semibold tabular-nums">{fmtInr(r.amount)}<Cite ids={[r.amount.sourceId]} sources={s} /></span>
+                            </li>
+                        ))}
+                    </ul>
+                </Section>
+            )}
 
             {a && (
                 <Section title={free ? 'Why tolls ended' : 'Why it is still tolled'}>
@@ -260,9 +331,29 @@ export function RoadView({ road, country, stateNames }: { road: TollRoad; countr
                 </Section>
             )}
 
-            {(a?.openQuestions.length ?? 0) > 0 && (
+            {((a?.openQuestions.length ?? 0) > 0 || gaps.length > 0) && (
                 <Section title="What we don't know yet">
-                    <ul className="space-y-2">{a!.openQuestions.map(q => <Gap key={q}>{q}</Gap>)}</ul>
+                    {(a?.openQuestions.length ?? 0) > 0 && <ul className="space-y-2">{a!.openQuestions.map(q => <Gap key={q}>{q}</Gap>)}</ul>}
+                    {gaps.length > 0 && (
+                        <>
+                            <p className="mb-2 mt-4 text-xs font-medium text-ftw-muted">Ready-made RTI applications</p>
+                            <ul className="space-y-2">
+                                {gaps.map(g => (
+                                    <li key={g.id}>
+                                        <Link href={`/${country}/info-requests?${new URLSearchParams({ subject: g.rtiSubject, body: g.rtiBody, ...(g.departmentHint ? { dept: g.departmentHint } : {}) })}`}
+                                            className="group flex items-start gap-3 rounded-lg border border-ftw-line p-3 hover:bg-ftw-raised">
+                                            <PenLine className="mt-0.5 h-4 w-4 shrink-0 text-ftw-accent" />
+                                            <span className="min-w-0 flex-1 text-[13px] leading-snug">
+                                                <span className="block font-semibold">{g.label}</span>
+                                                <span className="block text-xs text-ftw-muted">{g.whyItMatters}</span>
+                                            </span>
+                                            <ChevronRight className="mt-0.5 h-4 w-4 text-ftw-faint group-hover:text-ftw-text" />
+                                        </Link>
+                                    </li>
+                                ))}
+                            </ul>
+                        </>
+                    )}
                     <Actions country={country} />
                 </Section>
             )}
@@ -298,11 +389,6 @@ export function RoadView({ road, country, stateNames }: { road: TollRoad; countr
             )}
 
             <Sources sources={s} lastVerified={road.lastVerified} />
-            <div className="border-t border-ftw-line px-5 py-4">
-                <Link href={`/${country}/infrastructure/toll-roads/${road.slug}`} className="inline-flex items-center gap-1 text-[13px] font-medium text-ftw-accent hover:underline">
-                    Full record <ArrowUpRight className="h-3.5 w-3.5" />
-                </Link>
-            </div>
         </article>
     );
 }
@@ -438,11 +524,39 @@ export function PersonView({ person, country, regionName }: { person: Person; co
                 <Actions country={country} />
             </Section>
             {person.sources && person.sources.length > 0 && <Sources sources={person.sources} lastVerified={person.lastVerified} />}
-            <div className="border-t border-ftw-line px-5 py-4">
-                <Link href={`/${country}/person/${person.slug}`} className="inline-flex items-center gap-1 text-[13px] font-medium text-ftw-accent hover:underline">
-                    Full profile <ArrowUpRight className="h-3.5 w-3.5" />
-                </Link>
-            </div>
+        </article>
+    );
+}
+
+// ---------- all roads ----------
+
+export function RoadsView({ roads, placeName, onRoad }: { roads: TollRoad[]; placeName: (slug: string) => string; onRoad: (slug: string) => void }) {
+    return (
+        <article>
+            <Header eyebrow="Toll roads" title="Every toll road on record"
+                sub={`${roads.length} so far. A road is added only when its facts can be cited.`} />
+            <Section title="On record">
+                <ul className="space-y-2">
+                    {roads.map(r => {
+                        const free = r.tolling?.status === 'toll_free';
+                        return (
+                            <li key={r.slug}>
+                                <button onClick={() => onRoad(r.slug)} className="group flex w-full items-center gap-3 rounded-lg bg-ftw-raised p-3 text-left hover:ring-1 hover:ring-ftw-line">
+                                    <RouteIcon className={`h-5 w-5 shrink-0 ${free ? 'text-ftw-free' : 'text-ftw-tolled'}`} />
+                                    <span className="min-w-0 flex-1">
+                                        <span className="block truncate text-sm font-semibold">{shortName(r.name)}</span>
+                                        <span className="block text-xs text-ftw-muted">
+                                            {r.regionIds.map(placeName).join(', ')} · {free ? `toll-free since ${fmtDate(r.tolling?.since)}` : 'tolled'} · {r.analysis?.openQuestions.length ?? 0} open questions
+                                        </span>
+                                    </span>
+                                    <ChevronRight className="h-4 w-4 text-ftw-faint group-hover:text-ftw-text" />
+                                </button>
+                            </li>
+                        );
+                    })}
+                </ul>
+                <div className="mt-3"><Link href="/contribute" className="inline-flex items-center gap-1.5 text-[13px] font-medium text-ftw-accent hover:underline"><Plus className="h-3.5 w-3.5" /> Add a toll road</Link></div>
+            </Section>
         </article>
     );
 }

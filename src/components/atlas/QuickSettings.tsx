@@ -12,7 +12,7 @@ import Link from 'next/link';
 import { Menu, X, Sun, Moon, Monitor, Route, FileText, HandHeart, Bot, Shield, Scale, Mail, Github } from 'lucide-react';
 import type { ThemeChoice } from '@/lib/theme';
 
-export default function QuickSettings({ country, theme, onTheme }: { country: string; theme: ThemeChoice; onTheme: (t: ThemeChoice) => void }) {
+export default function QuickSettings({ country, theme, onTheme, onRoads }: { country: string; theme: ThemeChoice; onTheme: (t: ThemeChoice) => void; onRoads: () => void }) {
     const [open, setOpen] = useState(false);
     const box = useRef<HTMLDivElement>(null);
 
@@ -53,7 +53,7 @@ export default function QuickSettings({ country, theme, onTheme }: { country: st
                     </div>
 
                     <p className="px-3 pb-1 pt-2 text-[11px] font-semibold uppercase tracking-[0.12em] text-ftw-muted">Explore and help</p>
-                    <Link href={`/${country}/infrastructure/toll-roads`} className={item}><Route className="h-4 w-4 text-ftw-muted" />All toll roads</Link>
+                    <button onClick={() => { setOpen(false); onRoads(); }} className={`${item} w-full text-left`}><Route className="h-4 w-4 text-ftw-muted" />All toll roads</button>
                     <Link href={`/${country}/info-requests`} className={item}><FileText className="h-4 w-4 text-ftw-muted" />RTI questions and drafts</Link>
                     <Link href="/contribute" className={item}><HandHeart className="h-4 w-4 text-ftw-muted" />Contribute</Link>
                     <Link href="/connect" className={item}><Bot className="h-4 w-4 text-ftw-muted" />Use with your AI assistant</Link>

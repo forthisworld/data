@@ -104,7 +104,7 @@ export default function InfoRequestFilingForm({ config, countryCode, initialSubj
     return (
         <div ref={formRef} id="file-rti" className="scroll-mt-24">
             {hasPrefill && (
-                <div className="mb-3 flex items-start gap-2 rounded-lg border border-sky-500/40 bg-sky-500/10 p-3 text-sm text-sky-200">
+                <div className="mb-3 flex items-start gap-2 rounded-lg border border-ftw-accent/30 bg-ftw-accent/10 p-3 text-sm text-ftw-text">
                     <Sparkles className="h-4 w-4 mt-0.5 shrink-0" />
                     <span>
                         Draft auto-generated from a data gap on the toll road page.

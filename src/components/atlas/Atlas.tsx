@@ -24,8 +24,9 @@ import CompassMark from '@/components/CompassMark';
 import { useTheme } from '@/lib/theme';
 import Sheet, { PEEK_PX, useWide, type Snap } from './Sheet';
 import QuickSettings from './QuickSettings';
-import { PlaceView, RoadView, PersonView, ROLE, shortName } from './PanelViews';
+import { PlaceView, RoadView, PersonView, RoadsView, ROLE, shortName } from './PanelViews';
 import { PLACE_ALIASES } from '@/lib/place-aliases';
+import { atlasPath, parseAtlasPath, type AtlasRoute } from '@/lib/atlas-route';
 
 type Geom = GeoJSON.Polygon | GeoJSON.MultiPolygon;
 type Bounds = [[number, number], [number, number]];
@@ -40,6 +41,7 @@ interface Place {
 }
 
 type View =
+    | { kind: 'roads' }
     | { kind: 'place'; place: Place }
     | { kind: 'road'; slug: string }
     | { kind: 'person'; slug: string };
@@ -119,9 +121,11 @@ interface AtlasProps {
     countryCode: string;
     countryName: string;
     data: AtlasData;
+    /** The view named by the URL the page was opened at. */
+    initial?: AtlasRoute;
 }
 
-export default function Atlas({ countryCode, countryName, data }: AtlasProps) {
+export default function Atlas({ countryCode, countryName, data, initial }: AtlasProps) {
     const { regions, roads, people } = data;
     const { choice, dark, setTheme } = useTheme();
     const wide = useWide();
@@ -225,6 +229,13 @@ export default function Atlas({ countryCode, countryName, data }: AtlasProps) {
             if (fly) map.fitBounds(home.bounds, { padding: padding(), maxZoom: 7, duration: 900 });
         }
     }, [clearHighlights, padding, personBySlug, places]);
+
+    const openRoads = useCallback(() => {
+        clearHighlights();
+        setView({ kind: 'roads' });
+        setSnap('half');
+        setSearchOpen(false);
+    }, [clearHighlights]);
 
     const closeView = useCallback(() => {
         clearHighlights();
@@ -465,37 +476,80 @@ export default function Atlas({ countryCode, countryName, data }: AtlasProps) {
         if (map && ready) applyPalette(map, PALETTE[dark ? 'dark' : 'light']);
     }, [dark, ready]);
 
-    // Open whatever the URL names (?v=road:nice-bmic, state:karnataka, district:572, person:...).
+    // ---------- URLs and the Back button ----------
+    // Each view has a path (src/lib/atlas-route.ts). Opening something pushes a history entry,
+    // so Back closes the panel (or returns to the previous view); views applied from the URL
+    // itself (first load, Back/Forward) replace instead of pushing.
+    const fromUrl = useRef(true);
+
+    const routeOf = useCallback((v: View | null): AtlasRoute =>
+        !v ? { kind: 'home' }
+            : v.kind === 'roads' ? { kind: 'roads' }
+            : v.kind === 'road' ? { kind: 'road', slug: v.slug }
+            : v.kind === 'person' ? { kind: 'person', slug: v.slug }
+            : v.place.kind === 'state' ? { kind: 'state', slug: v.place.stateSlug }
+            : { kind: 'district', state: v.place.stateSlug, code: v.place.code! }, []);
+
+    const applyRoute = useCallback((r: AtlasRoute) => {
+        fromUrl.current = true;
+        // If the route changes nothing (already showing it), no effect consumes the flag.
+        setTimeout(() => { fromUrl.current = false; }, 100);
+        switch (r.kind) {
+            case 'home': return closeView();
+            case 'roads': return openRoads();
+            case 'road': return openRoad(r.slug);
+            case 'person': return openPerson(r.slug);
+            case 'state':
+            case 'district': {
+                const p = places.find(x => r.kind === 'state'
+                    ? x.kind === 'state' && x.stateSlug === r.slug
+                    : x.kind === 'district' && x.code === r.code);
+                return p ? openPlace(p) : closeView();
+            }
+        }
+    }, [closeView, openPlace, openPerson, openRoad, openRoads, places]);
+
+    // First load: the route the server was asked for (or an old ?v= link).
     useEffect(() => {
         if (!ready || !places.length) return;
         const v = new URLSearchParams(window.location.search).get('v');
-        if (!v) return;
-        const [kind, id] = [v.slice(0, v.indexOf(':')), v.slice(v.indexOf(':') + 1)];
-        if (kind === 'road') openRoad(id);
-        else if (kind === 'person') openPerson(id);
-        else {
-            const p = places.find(x => (kind === 'state' && x.kind === 'state' && x.stateSlug === id) || (kind === 'district' && x.kind === 'district' && x.code === id));
-            if (p) openPlace(p);
+        if (v) {
+            const [kind, id] = [v.slice(0, v.indexOf(':')), v.slice(v.indexOf(':') + 1)];
+            const legacy: AtlasRoute | null = kind === 'road' ? { kind: 'road', slug: id } : kind === 'person' ? { kind: 'person', slug: id }
+                : kind === 'state' ? { kind: 'state', slug: id }
+                : kind === 'district' ? { kind: 'district', state: places.find(p => p.code === id)?.stateSlug ?? '', code: id } : null;
+            if (legacy) return applyRoute(legacy);
         }
+        applyRoute(initial ?? { kind: 'home' });
         // Only on first load.
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [ready, places.length]);
 
-    // Keep the URL in step with the panel, so any view can be shared.
+    useEffect(() => {
+        const onPop = () => {
+            const segs = window.location.pathname.split('/').filter(Boolean).slice(1);
+            applyRoute(parseAtlasPath(segs) ?? { kind: 'home' });
+        };
+        window.addEventListener('popstate', onPop);
+        return () => window.removeEventListener('popstate', onPop);
+    }, [applyRoute]);
+
     useEffect(() => {
         if (!ready) return;
-        const v = !view ? null
-            : view.kind === 'road' ? `road:${view.slug}`
-            : view.kind === 'person' ? `person:${view.slug}`
-            : view.place.kind === 'state' ? `state:${view.place.stateSlug}` : `district:${view.place.code}`;
-        const url = new URL(window.location.href);
-        if (v) url.searchParams.set('v', v); else url.searchParams.delete('v');
-        window.history.replaceState(null, '', url);
-    }, [view, ready]);
+        const path = atlasPath(countryCode, routeOf(view));
+        const replace = fromUrl.current;
+        fromUrl.current = false;
+        if (path === window.location.pathname && !window.location.search) return; // already there (first load, Back/Forward)
+        if (replace) window.history.replaceState(null, '', path);
+        else window.history.pushState(null, '', path);
+    }, [view, ready, countryCode, routeOf]);
 
     // ---------- what the panel shows ----------
     const panel = (() => {
         if (!view) return null;
+        if (view.kind === 'roads') {
+            return { key: 'roads', body: <RoadsView roads={roads} placeName={placeName} onRoad={s => openRoad(s)} /> };
+        }
         if (view.kind === 'road') {
             const road = roadBySlug.get(view.slug);
             return road ? { key: `road:${road.slug}`, body: <RoadView road={road} country={countryCode} stateNames={road.regionIds.map(placeName)} /> } : null;
@@ -537,7 +591,7 @@ export default function Atlas({ countryCode, countryName, data }: AtlasProps) {
                     <span className="text-sm text-ftw-muted">{countryName}</span>
                 </a>
                 <div className="pointer-events-auto">
-                    <QuickSettings country={countryCode} theme={choice} onTheme={setTheme} />
+                    <QuickSettings country={countryCode} theme={choice} onTheme={setTheme} onRoads={openRoads} />
                 </div>
             </div>
 

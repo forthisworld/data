@@ -52,4 +52,5 @@ data/*/toll-roads/_merged/
 
 # generated from data/ by scripts/gen-data-index.ts (npm run data:index)
 src/lib/data/files.generated.ts
+src/lib/data/places.generated.ts
 

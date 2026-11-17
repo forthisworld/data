@@ -1,86 +1,29 @@
 'use client';
 
-import React, { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Button } from '@/components/ui/button';
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from '@/components/ui/dialog';
-import { Shield } from 'lucide-react';
-import GlobalSearch from './GlobalSearch';
+import CompassMark from './CompassMark';
+import { isAtlasPathname } from '@/lib/atlas-route';
 
-const NavBar = () => {
-  const [dialogOpen, setDialogOpen] = useState(false);
-  const pathname = usePathname();
-
-  // Determine if we should show header search
-  // Hide on pages that have their own search:
-  // - Home page (/)
-  // - Country dashboard (e.g., /in) - uses Dashboard.tsx with GlobalSearch
-  // - Region pages (e.g., /in/maharashtra) - uses RegionDashboard.tsx with GlobalSearch
-  // Show on all other pages (e.g., /contribute, /privacy, /in/info-requests, /in/person/xyz)
-  const isHomePage = pathname === '/';
-  const isCountryDashboard = /^\/[a-z]{2}$/.test(pathname);
-  const isRegionPage = /^\/[a-z]{2}\/[a-z-]+$/.test(pathname) && !pathname.includes('/info-requests') && !pathname.includes('/person') && !pathname.includes('/infrastructure');
-  const showHeaderSearch = !isHomePage && !isCountryDashboard && !isRegionPage;
-
-  // Extract country code from path for global search
-  const pathParts = pathname.split('/').filter(Boolean);
-  const countryCode = pathParts.length > 0 && /^[a-z]{2}$/.test(pathParts[0]) ? pathParts[0] : 'in';
-
-  // The atlas home (/in) is full-screen and has its own controls.
-  if (/^\/[a-z]{2}\/?$/.test(pathname)) return null;
-
-  return (
-    <nav className="flex items-center justify-between p-4 bg-white shadow-md">
-      <div className="flex items-center space-x-4">
-        <Link href="/" className="text-2xl font-bold hover:opacity-80 transition-opacity">
-          data.ftw
-        </Link>
-        {showHeaderSearch && (
-          <div className="hidden md:block w-64">
-            <GlobalSearch countryCode={countryCode} variant="header" placeholder="Global search..." />
-          </div>
-        )}
-      </div>
-      <div className="flex items-center space-x-2 md:space-x-4">
-        <Link
-          href="/privacy"
-          className="hidden md:flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground transition-colors"
-        >
-          <Shield className="h-4 w-4" />
-          Privacy
-        </Link>
-        <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
-          <DialogTrigger asChild>
-            <Button variant="outline" size="sm">Missing Data?</Button>
-          </DialogTrigger>
-          <DialogContent>
-            <DialogHeader>
-              <DialogTitle>Found Some Data Missing?</DialogTitle>
-              <DialogDescription>
-                Help us improve! You can contribute data or report missing information.
-              </DialogDescription>
-            </DialogHeader>
-            <div className="flex gap-3 mt-4">
-              <Button asChild className="flex-1" onClick={() => setDialogOpen(false)}>
-                <Link href="/contribute">Contribute Data</Link>
-              </Button>
-              <Button asChild variant="outline" className="flex-1" onClick={() => setDialogOpen(false)}>
-                <Link href="/contact">Contact Us</Link>
-              </Button>
+/** Header for the pages outside the atlas (RTI, contribute, connect, privacy, licences, contact). */
+export default function NavBar() {
+    const pathname = usePathname();
+    if (pathname === '/' || isAtlasPathname(pathname)) return null;
+    const link = 'rounded-full px-3 py-1.5 text-sm text-ftw-muted hover:bg-ftw-raised hover:text-ftw-text';
+    return (
+        <nav className="sticky top-0 z-40 border-b border-ftw-line bg-ftw-surface/90 backdrop-blur">
+            <div className="container mx-auto flex h-14 max-w-5xl items-center justify-between gap-3 px-4">
+                <Link href="/in" className="flex items-center gap-2" title="Back to the atlas">
+                    <CompassMark className="h-7 w-7 text-ftw-text" />
+                    <span className="text-[15px] font-semibold tracking-tight text-ftw-text">data.ftw</span>
+                </Link>
+                <div className="flex items-center gap-1">
+                    <Link href="/in" className={`${link} hidden sm:inline`}>Atlas</Link>
+                    <Link href="/in/info-requests" className={link}>RTI</Link>
+                    <Link href="/contribute" className={link}>Contribute</Link>
+                    <Link href="/connect" className={`${link} hidden sm:inline`}>Use with AI</Link>
+                </div>
             </div>
-          </DialogContent>
-        </Dialog>
-      </div>
-    </nav>
-  );
-};
-
-export default NavBar;
+        </nav>
+    );
+}

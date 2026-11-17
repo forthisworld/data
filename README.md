@@ -7,7 +7,7 @@ number links to its source, and claims are kept apart from findings. Anything un
 The atlas is the app: a map of India in light or dark, where zooming in reveals districts and the roads on record.
 Search at the bottom finds any state, district (including renamed ones, e.g. Bengaluru), road or person; selecting
 one opens a side panel (a drawer on phones) with every figure's grade and source, and what is still unknown. Views
-can be shared as links (`/in?v=road:nice-bmic`). It installs as an app (PWA) and works offline once visited.
+has its own link (`/in/infrastructure/toll-roads/nice-bmic`, `/in/karnataka/district/572`), and the browser's Back button closes the panel. It installs as an app (PWA) and works offline once visited.
 
 Status and next steps: [PLAN.md](PLAN.md).
 
