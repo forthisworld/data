@@ -1,0 +1,192 @@
+{
+    "id": "nice-bmic",
+    "slug": "nice-bmic",
+    "name": "NICE Road (Bengaluru Peripheral Ring + Link Road)",
+    "officialName": "Bengaluru-Mysuru Infrastructure Corridor (BMIC) - Nandi Infrastructure Corridor Enterprises",
+    "operatorCompany": "Nandi Infrastructure Corridor Enterprises Ltd",
+    "regionIds": ["karnataka", "bengaluru"],
+    "lengthKm": 50,
+    "openedDate": "2005-01-01",
+    "status": "operational",
+    "concession": {
+        "model": "BOT",
+        "modelName": "Build-Own-Operate-Transfer with real-estate development rights",
+        "signingDate": "1997-04-01",
+        "operator": "Nandi Infrastructure Corridor Enterprises Ltd (NICE)",
+        "operatorType": "private",
+        "grantingAuthority": "Government of Karnataka",
+        "tollEndCondition": "Tolls continue until the concessionaire recovers full project cost plus agreed returns; the definition of 'project cost' (including land, financing and development obligations) has been disputed for over two decades",
+        "extensions": [
+            {
+                "date": "2016-01-01",
+                "description": "State-level reviews and correspondence extended/clarified toll collection pending resolution of cost-recovery accounting; successive governments have continued the arrangement",
+                "sourceId": "dh-hdk-pm"
+            }
+        ]
+    },
+    "projectCost": {
+        "value": 23000000000,
+        "currency": "INR",
+        "asOf": "1997",
+        "note": "Original corridor estimate (~Rs 2,300 crore in late-1990s terms). Actual spend on the operational peripheral road + link road is unverified publicly - this is one of the core open questions."
+    },
+    "funding": [
+        {
+            "source": "equity",
+            "label": "NICE consortium equity (Kalyani Group, VHB International, SAB International)",
+            "amount": { "value": 3000000000, "currency": "INR", "note": "Estimated; exact equity infusion not publicly disclosed" },
+            "note": "Consortium formed after 1995 US trade mission MoU"
+        },
+        {
+            "source": "debt",
+            "label": "IDBI-led institutional debt consortium",
+            "amount": { "value": 15000000000, "currency": "INR", "note": "Estimated; project was heavily leveraged and underwent corporate debt restructuring" },
+            "note": "Lenders included IDBI, ICICI and other institutions"
+        },
+        {
+            "source": "land_contribution",
+            "label": "Government of Karnataka land acquisition support (~20,000 acres, much of it farmland acquired under emergency provisions)",
+            "amount": { "value": 0, "currency": "INR", "note": "Value never independently audited in public domain; land was also used for township/real-estate development rights granted to BMICAPA" },
+            "note": "Land grant is central to the controversy: public land + acquisition powers were transferred to a private concessionaire"
+        }
+    ],
+    "annualRevenue": [
+        {
+            "year": "2017",
+            "trafficVehiclesPerDay": 800000,
+            "note": "~8 lakh vehicles/day reported on the operational Electronic City-Tumkur Road stretch (Economic Times, May 2017). Annual toll revenue not published by operator."
+        },
+        {
+            "year": "2024",
+            "note": "Car toll on the full operational stretch is roughly Rs 40-65 depending on entry/exit. Revenue figures require RTI/MCA verification."
+        }
+    ],
+    "currentRates": [
+        { "vehicleClass": "Car / Jeep / Van", "amount": { "value": 45, "currency": "INR", "note": "Approximate per-section rate; verify at plaza" }, "trip": "single" },
+        { "vehicleClass": "LCV", "amount": { "value": 75, "currency": "INR", "note": "Approximate" }, "trip": "single" },
+        { "vehicleClass": "Truck / Bus", "amount": { "value": 150, "currency": "INR", "note": "Approximate" }, "trip": "single" },
+        { "vehicleClass": "Two-wheeler", "amount": { "value": 0, "currency": "INR", "note": "Two-wheelers are not permitted/tolled on the corridor" }, "trip": "single" }
+    ],
+    "plazas": [
+        { "name": "Hosur Road Plaza", "location": "Electronic City junction, Bengaluru" },
+        { "name": "Bannerghatta interchange", "location": "Gottigere, Bengaluru" },
+        { "name": "Kanakapura Road interchange", "location": "Talaghattapura, Bengaluru" },
+        { "name": "Mysore Road Plaza", "location": "Kengeri, Bengaluru" },
+        { "name": "Tumkur Road Plaza", "location": "Near BIEC, Bengaluru" }
+    ],
+    "timeline": [
+        {
+            "date": "1995-01-01",
+            "title": "MoU signed during US trade mission",
+            "description": "Karnataka CM H.D. Deve Gowda's government signs MoU with a US-backed consortium (Kalyani Group + VHB International + SAB International) for the Bengaluru-Mysuru Infrastructure Corridor.",
+            "significance": "neutral"
+        },
+        {
+            "date": "1997-04-01",
+            "title": "Concession Agreement with Government of Karnataka",
+            "description": "BOT concession granting toll rights plus township/real-estate development rights along the corridor via BMICAPA (Bangalore Mysore Infrastructure Corridor Area Planning Authority).",
+            "significance": "neutral",
+            "sourceId": "bmic-ca"
+        },
+        {
+            "date": "2005-01-01",
+            "title": "Peripheral road sections open to traffic",
+            "description": "The 41 km Peripheral Road and 9 km Link Road become operational and tolled. The flagship 111 km Bengaluru-Mysuru expressway itself is never built.",
+            "significance": "positive"
+        },
+        {
+            "date": "2012-10-25",
+            "title": "Lokayukta orders probe into land acquisition",
+            "description": "Karnataka Lokayukta orders investigation into irregularities in land acquisition for the project, naming several former chief ministers.",
+            "significance": "negative",
+            "sourceId": "ndtv-lokayukta"
+        },
+        {
+            "date": "2016-01-01",
+            "title": "Cost-recovery dispute drags on",
+            "description": "Successive state governments review the concession; tolling continues amid disputes over what counts as recoverable 'project cost' and whether promised expressway milestones were met.",
+            "significance": "negative"
+        },
+        {
+            "date": "2019-03-01",
+            "title": "Only ~4 km of the expressway ever completed",
+            "description": "Reported status: 4 km of expressway, 41 km peripheral road, 8.5 km link road built out of the originally envisioned corridor (Deccan Herald).",
+            "significance": "negative",
+            "sourceId": "dh-kumaraswamy"
+        },
+        {
+            "date": "2023-03-01",
+            "title": "NHAI opens parallel Bengaluru-Mysuru Expressway (NH-275)",
+            "description": "The 118 km access-controlled NH-275 expressway effectively replaces the unbuilt portion of the BMIC vision; NICE tolls on the ring road continue.",
+            "significance": "neutral"
+        }
+    ],
+    "analysis": {
+        "status": "disputed",
+        "summary": "NICE Road remains tolled because its 1997 concession ties toll collection to recovery of a 'project cost' whose size and composition have been contested for decades - while only a fraction of the promised corridor (the ring road around Bengaluru) was ever built. The concession also bundled highly valuable real-estate development rights into the same contract, complicating any claim that tolls alone must cover costs.",
+        "reasonsStillTolled": [
+            "Open-ended BOT contract: tolls run until 'full project cost + agreed return' is recovered, with no fixed end date",
+            "The 'project cost' figure has never been independently audited in public and includes disputed land and financing components",
+            "Only ~54 km (ring road + link) of the planned ~160 km corridor materialised, but the concession was never terminated or renegotiated",
+            "Real-estate/township rights (BMICAPA) were part of the concessionaire's compensation, yet tolls continue alongside them",
+            "Political inertia: every state government since 1997 has inherited the contract and litigation risk instead of cancelling it"
+        ],
+        "openQuestions": [
+            "What is the audited total project cost actually claimed by NICE under the concession?",
+            "How much toll revenue has NICE collected cumulatively since 2005?",
+            "What returns have lenders and shareholders already received (debt servicing, refinancing, dividends)?",
+            "What was the market value of the land transferred/acquired under the concession, and what revenue did townships generate?",
+            "What exactly does the concession agreement say about termination if expressway milestones are missed?"
+        ],
+        "estimatedCostRecoveredPct": null
+    },
+    "sources": [
+        {
+            "id": "bmic-ca",
+            "title": "Concession Agreement between Government of Karnataka and Nandi Infrastructure Corridor Enterprises Ltd (1997)",
+            "publisher": "Government of Karnataka",
+            "type": "concession_agreement",
+            "url": "https://bmicapa.org",
+            "note": "Primary contract document; copies circulated in court records and legislative questions"
+        },
+        {
+            "id": "wiki-bmic",
+            "title": "Bengaluru-Mysuru Infrastructure Corridor - overview, consortium composition, traffic figures",
+            "publisher": "Wikipedia (aggregating Economic Times, NDTV, Deccan Herald reporting)",
+            "url": "https://en.wikipedia.org/wiki/Bengaluru%E2%80%93Mysore_Infrastructure_Corridor",
+            "type": "news"
+        },
+        {
+            "id": "ndtv-lokayukta",
+            "title": "Mysore infrastructure corridor project: Probe ordered against former Karnataka chief ministers",
+            "publisher": "NDTV",
+            "date": "2012-10-25",
+            "url": "http://www.ndtv.com/article/south/mysore-infrastructure-corridor-project-probe-ordered-against-former-karnataka-chief-ministers-284367",
+            "type": "news"
+        },
+        {
+            "id": "dh-kumaraswamy",
+            "title": "Kumaraswamy mum on NICE project he once opposed (construction status figures)",
+            "publisher": "Deccan Herald",
+            "date": "2018-11-16",
+            "url": "https://www.deccanherald.com/state/cm-mum-nice-project-he-once-703265.html",
+            "type": "news"
+        },
+        {
+            "id": "dh-hdk-pm",
+            "title": "NICE project: HDK to approach PM Modi with documents",
+            "publisher": "Deccan Herald",
+            "url": "https://www.deccanherald.com/india/karnataka/nice-project-hdk-to-approach-pm-modi-with-documents-1244036.html",
+            "type": "news"
+        },
+        {
+            "id": "et-traffic",
+            "title": "Now, BMRCL chalks out a 'NICE' plan for Namma Metro (800k vehicles/day)",
+            "publisher": "The Economic Times",
+            "date": "2017-05-08",
+            "url": "https://economictimes.indiatimes.com/news/industry/transportation/railways/now-bmrcl-chalks-out-a-nice-plan-for-namma-metro/articleshow/58570205.cms",
+            "type": "news"
+        }
+    ],
+    "lastVerified": "2026-08-21"
+}

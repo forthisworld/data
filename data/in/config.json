@@ -1,0 +1,49 @@
+{
+    "code": "in",
+    "name": "India",
+    "currency": "INR",
+    "currencySymbol": "₹",
+    "coordinates": [
+        20.5937,
+        78.9629
+    ],
+    "regionLevels": [
+        "country",
+        "state",
+        "district",
+        "city",
+        "constituency"
+    ],
+    "entityTypes": [
+        "region",
+        "person",
+        "infrastructure",
+        "organization"
+    ],
+    "personRoles": [
+        "mp",
+        "mla",
+        "minister",
+        "cm",
+        "pm",
+        "governor",
+        "mayor",
+        "billionaire"
+    ],
+    "infraCategories": [
+        "roads",
+        "highways",
+        "toll_roads",
+        "rail",
+        "metro",
+        "ports",
+        "airports",
+        "bridges",
+        "power"
+    ],
+    "features": {
+        "hasMap": true,
+        "hasSearch": true,
+        "hasSpending": true
+    }
+}

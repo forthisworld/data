@@ -1,6 +1,8 @@
-import React from 'react';
+'use client';
+
+import React, { useState } from 'react';
 import Link from 'next/link';
-import { Input } from '@/components/ui/input';
+import { usePathname } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import {
   Dialog,
@@ -10,32 +12,67 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
+import { Shield } from 'lucide-react';
+import GlobalSearch from './GlobalSearch';
 
 const NavBar = () => {
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const pathname = usePathname();
+
+  // Determine if we should show header search
+  // Hide on pages that have their own search:
+  // - Home page (/)
+  // - Country dashboard (e.g., /in) - uses Dashboard.tsx with GlobalSearch
+  // - Region pages (e.g., /in/maharashtra) - uses RegionDashboard.tsx with GlobalSearch
+  // Show on all other pages (e.g., /contribute, /privacy, /in/info-requests, /in/person/xyz)
+  const isHomePage = pathname === '/';
+  const isCountryDashboard = /^\/[a-z]{2}$/.test(pathname);
+  const isRegionPage = /^\/[a-z]{2}\/[a-z-]+$/.test(pathname) && !pathname.includes('/info-requests') && !pathname.includes('/person') && !pathname.includes('/infrastructure');
+  const showHeaderSearch = !isHomePage && !isCountryDashboard && !isRegionPage;
+
+  // Extract country code from path for global search
+  const pathParts = pathname.split('/').filter(Boolean);
+  const countryCode = pathParts.length > 0 && /^[a-z]{2}$/.test(pathParts[0]) ? pathParts[0] : 'in';
+
   return (
     <nav className="flex items-center justify-between p-4 bg-white shadow-md">
       <div className="flex items-center space-x-4">
-        <div className="text-2xl font-bold">Logo</div>
-        <Input type="search" placeholder="Search..." className="w-64" />
+        <Link href="/" className="text-2xl font-bold hover:opacity-80 transition-opacity">
+          data.ftw
+        </Link>
+        {showHeaderSearch && (
+          <div className="hidden md:block w-64">
+            <GlobalSearch countryCode={countryCode} variant="header" placeholder="Global search..." />
+          </div>
+        )}
       </div>
-      <div className="flex items-center space-x-4">
-        <Link href="/about/" className="text-gray-300 hover:text-white">
-          About
+      <div className="flex items-center space-x-2 md:space-x-4">
+        <Link
+          href="/privacy"
+          className="hidden md:flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground transition-colors"
+        >
+          <Shield className="h-4 w-4" />
+          Privacy
         </Link>
-        <Link href="/support/" className="text-gray-300 hover:text-white">
-          Support
-        </Link>
-        <Dialog>
+        <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
           <DialogTrigger asChild>
-            <Button variant="outline">Found Some Data Missing?</Button>
+            <Button variant="outline" size="sm">Missing Data?</Button>
           </DialogTrigger>
           <DialogContent>
             <DialogHeader>
               <DialogTitle>Found Some Data Missing?</DialogTitle>
               <DialogDescription>
-                Please let us know if you have found any data missing.
+                Help us improve! You can contribute data or report missing information.
               </DialogDescription>
             </DialogHeader>
+            <div className="flex gap-3 mt-4">
+              <Button asChild className="flex-1" onClick={() => setDialogOpen(false)}>
+                <Link href="/contribute">Contribute Data</Link>
+              </Button>
+              <Button asChild variant="outline" className="flex-1" onClick={() => setDialogOpen(false)}>
+                <Link href="/contact">Contact Us</Link>
+              </Button>
+            </div>
           </DialogContent>
         </Dialog>
       </div>

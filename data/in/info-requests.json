@@ -1,0 +1,202 @@
+{
+    "config": {
+        "enabled": true,
+        "displayName": "RTI",
+        "fullName": "Right to Information",
+        "ccEmail": "indatarequests@forthis.world",
+        "templates": [
+            {
+                "id": "general",
+                "name": "General Information Request",
+                "subject": "RTI Application - Request for Information",
+                "body": "To,\nThe Public Information Officer,\n[Department Name]\n\nSubject: Application under Right to Information Act, 2005\n\nSir/Madam,\n\nI would like to request the following information under the Right to Information Act, 2005:\n\n[YOUR REQUEST HERE]\n\nI am willing to pay the applicable fees as prescribed under the RTI Act.\n\nPlease provide the information at the earliest.\n\nThanking you,\n[YOUR NAME]\n[YOUR ADDRESS]\n[YOUR PHONE NUMBER]",
+                "category": "general"
+            },
+            {
+                "id": "spending",
+                "name": "Government Spending Details",
+                "subject": "RTI Application - Request for Expenditure Details",
+                "body": "To,\nThe Public Information Officer,\n[Department Name]\n\nSubject: Application under Right to Information Act, 2005 - Expenditure Details\n\nSir/Madam,\n\nI would like to request the following information under the Right to Information Act, 2005:\n\n1. Total budget allocated for [SCHEME/PROJECT NAME] for FY [YEAR]\n2. Actual expenditure incurred\n3. Breakdown of expenses by category\n4. List of beneficiaries (if applicable)\n5. Any pending utilization certificates\n\nI am willing to pay the applicable fees as prescribed under the RTI Act.\n\nThanking you,\n[YOUR NAME]\n[YOUR ADDRESS]\n[YOUR PHONE NUMBER]",
+                "category": "spending"
+            },
+            {
+                "id": "mp-mla",
+                "name": "MP/MLA Related Information",
+                "subject": "RTI Application - Elected Representative Details",
+                "body": "To,\nThe Public Information Officer,\n[Legislative Assembly/Parliament]\n\nSubject: Application under Right to Information Act, 2005 - Elected Representative Information\n\nSir/Madam,\n\nI would like to request the following information under the Right to Information Act, 2005:\n\n1. Attendance record of [MP/MLA NAME] in [House] sessions for [PERIOD]\n2. Questions raised and debates participated\n3. MPLAD/MLALAD fund utilization details\n4. Any pending asset declarations\n\nI am willing to pay the applicable fees as prescribed under the RTI Act.\n\nThanking you,\n[YOUR NAME]\n[YOUR ADDRESS]\n[YOUR PHONE NUMBER]",
+                "category": "representatives"
+            }
+        ],
+        "departments": [
+            {
+                "id": "rti-online",
+                "name": "RTI Online Portal (Central Government)",
+                "email": "grievance-moha@gov.in",
+                "category": "central"
+            },
+            {
+                "id": "pmo",
+                "name": "Prime Minister's Office",
+                "email": "pmo-rti@gov.in",
+                "category": "central"
+            },
+            {
+                "id": "mof",
+                "name": "Ministry of Finance",
+                "email": "us.coord-dea@gov.in",
+                "category": "central"
+            },
+            {
+                "id": "election-commission",
+                "name": "Election Commission of India",
+                "email": "complaints@eci.gov.in",
+                "category": "central"
+            }
+        ]
+    },
+    "requests": [
+        {
+            "id": "rti-001",
+            "title": "MPLAD Fund Utilization - Maharashtra 2023",
+            "description": "Requested details of MPLAD funds utilized by all MPs from Maharashtra for FY 2022-23",
+            "department": "Ministry of Statistics and Programme Implementation",
+            "status": "responded",
+            "filedBy": "platform",
+            "filedDate": "2024-08-15",
+            "responseDate": "2024-09-10",
+            "cost": {
+                "value": 10,
+                "currency": "INR"
+            },
+            "category": "spending",
+            "tags": [
+                "mplad",
+                "maharashtra",
+                "spending"
+            ],
+            "regionIds": [
+                "maharashtra"
+            ]
+        },
+        {
+            "id": "rti-002",
+            "title": "Highway Construction Costs - NH48",
+            "description": "Requested breakdown of construction costs for NH48 expansion project",
+            "department": "Ministry of Road Transport and Highways",
+            "status": "pending",
+            "filedBy": "platform",
+            "filedDate": "2024-11-20",
+            "cost": {
+                "value": 10,
+                "currency": "INR"
+            },
+            "category": "infrastructure",
+            "tags": [
+                "highways",
+                "infrastructure",
+                "spending"
+            ],
+            "regionIds": [
+                "maharashtra",
+                "karnataka"
+            ]
+        },
+        {
+            "id": "rti-003",
+            "title": "MLA Asset Declarations - Karnataka",
+            "description": "Community member filed RTI for asset declarations of Karnataka MLAs",
+            "department": "Karnataka Legislative Assembly",
+            "status": "responded",
+            "filedBy": "community",
+            "filedDate": "2024-06-10",
+            "responseDate": "2024-07-05",
+            "cost": {
+                "value": 10,
+                "currency": "INR"
+            },
+            "category": "representatives",
+            "tags": [
+                "mla",
+                "karnataka",
+                "assets"
+            ],
+            "regionIds": [
+                "karnataka"
+            ]
+        },
+        {
+            "id": "rti-004",
+            "title": "Mumbai Metro Line 3 Status",
+            "description": "Current status of Metro Line 3 underground work and expected completion date",
+            "department": "Mumbai Metro Rail Corporation",
+            "status": "filed",
+            "filedBy": "community",
+            "filedDate": "2024-12-01",
+            "category": "infrastructure",
+            "tags": [
+                "metro",
+                "mumbai",
+                "infrastructure"
+            ],
+            "regionIds": [
+                "maharashtra",
+                "mumbai"
+            ]
+        }
+    ],
+    "targets": [
+        {
+            "id": "target-001",
+            "title": "MP Attendance Records - 17th Lok Sabha",
+            "description": "Complete attendance records for all MPs in the 17th Lok Sabha",
+            "department": "Lok Sabha Secretariat",
+            "estimatedCost": {
+                "value": 50,
+                "currency": "INR"
+            },
+            "priority": "high",
+            "category": "representatives"
+        },
+        {
+            "id": "target-002",
+            "title": "State-wise Infrastructure Spending FY24",
+            "description": "Breakdown of infrastructure spending by all states for FY 2023-24",
+            "department": "Ministry of Finance",
+            "estimatedCost": {
+                "value": 100,
+                "currency": "INR"
+            },
+            "priority": "high",
+            "category": "spending"
+        },
+        {
+            "id": "target-003",
+            "title": "Smart City Fund Utilization",
+            "description": "Utilization of Smart City Mission funds across all 100 cities",
+            "department": "Ministry of Housing and Urban Affairs",
+            "estimatedCost": {
+                "value": 200,
+                "currency": "INR"
+            },
+            "priority": "medium",
+            "category": "spending"
+        }
+    ],
+    "stats": {
+        "totalSpent": {
+            "value": 530,
+            "currency": "INR"
+        },
+        "totalNeeded": {
+            "value": 5000,
+            "currency": "INR"
+        },
+        "totalContributed": {
+            "value": 1000,
+            "currency": "INR"
+        },
+        "totalFiled": 15,
+        "totalResponded": 10,
+        "totalPending": 5
+    }
+}

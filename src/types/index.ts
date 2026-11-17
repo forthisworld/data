@@ -1,0 +1,481 @@
+// Core entity types - generic and extensible
+
+/**
+ * Base entity interface - all data entities extend this
+ */
+export interface Entity {
+  id: string;
+  type: EntityType;
+  name: string;
+  slug: string; // URL-friendly identifier
+  description?: string;
+  metadata?: Record<string, unknown>;
+  createdAt?: string;
+  updatedAt?: string;
+}
+
+export type EntityType = 'region' | 'person' | 'infrastructure' | 'organization' | 'project';
+
+/**
+ * Region entity - countries, states, cities, districts, etc.
+ */
+export interface Region extends Entity {
+  type: 'region';
+  level: RegionLevel;
+  parentId?: string; // Reference to parent region
+  code?: string; // ISO code or local code
+  coordinates?: [number, number]; // [lat, lng]
+  population?: number;
+  area?: number; // in sq km
+  capital?: string;
+  children?: string[]; // Child region IDs
+}
+
+export type RegionLevel = 'country' | 'state' | 'district' | 'city' | 'town' | 'constituency';
+
+/**
+ * Person entity - MPs, MLAs, ministers, billionaires, etc.
+ */
+export interface Person extends Entity {
+  type: 'person';
+  role: PersonRole;
+  roles?: PersonRole[]; // Person can have multiple roles
+  party?: string;
+  constituency?: string;
+  regionId?: string; // Primary region association
+  regionIds?: string[]; // All associated regions
+  imageUrl?: string;
+  birthDate?: string;
+  contact?: {
+    email?: string;
+    phone?: string;
+    website?: string;
+  };
+  socialMedia?: {
+    twitter?: string;
+    facebook?: string;
+    instagram?: string;
+  };
+  tenure?: {
+    start: string;
+    end?: string;
+  };
+}
+
+export type PersonRole =
+  | 'mp'
+  | 'mla'
+  | 'minister'
+  | 'cm'
+  | 'pm'
+  | 'governor'
+  | 'mayor'
+  | 'councillor'
+  | 'billionaire'
+  | 'entrepreneur'
+  | 'other';
+
+/**
+ * Infrastructure entity - roads, rail, ports, airports, etc.
+ */
+export interface Infrastructure extends Entity {
+  type: 'infrastructure';
+  category: InfraCategory;
+  subCategory?: string;
+  regionId?: string;
+  regionIds?: string[]; // Can span multiple regions
+  status?: 'planned' | 'under_construction' | 'operational' | 'decommissioned';
+  cost?: {
+    value: number;
+    currency: string;
+  };
+  length?: number; // in km for roads/rail
+  capacity?: number;
+  operator?: string;
+  startDate?: string;
+  completionDate?: string;
+}
+
+export type InfraCategory =
+  | 'roads'
+  | 'highways'
+  | 'toll_roads'
+  | 'rail'
+  | 'metro'
+  | 'ports'
+  | 'airports'
+  | 'bridges'
+  | 'tunnels'
+  | 'power'
+  | 'water'
+  | 'telecom'
+  | 'other';
+
+/**
+ * Metric - a single data point with optional trend
+ */
+export interface Metric {
+  key: string;
+  label: string;
+  value: number | string;
+  unit?: string;
+  currency?: string;
+  year?: number | string;
+  trend?: 'up' | 'down' | 'stable';
+  trendValue?: number; // percentage change
+  source?: string;
+  sourceUrl?: string;
+}
+
+/**
+ * Country configuration - defines what's available for a country
+ */
+export interface CountryConfig {
+  code: string; // 'in' for India
+  name: string;
+  currency: string;
+  currencySymbol: string;
+  coordinates: [number, number];
+  regionLevels: RegionLevel[];
+  entityTypes: EntityType[];
+  personRoles: PersonRole[];
+  infraCategories: InfraCategory[];
+  features?: {
+    hasMap?: boolean;
+    hasSearch?: boolean;
+    hasSpending?: boolean;
+  };
+}
+
+/**
+ * Overview data for a country/region
+ */
+export interface Overview {
+  entityId: string;
+  entityType: EntityType;
+  name: string;
+  metrics: Metric[];
+  highlights?: {
+    title: string;
+    description: string;
+    link?: string;
+  }[];
+  quickLinks?: {
+    label: string;
+    href: string;
+    icon?: string;
+  }[];
+}
+
+/**
+ * Search result item
+ */
+export interface SearchResult {
+  id: string;
+  type: EntityType;
+  name: string;
+  slug: string;
+  description?: string;
+  path: string; // URL path to this entity
+  score?: number; // Search relevance score
+  highlights?: string[]; // Matched text snippets
+}
+
+/**
+ * Spending/Budget data
+ */
+export interface SpendingData {
+  entityId: string;
+  fiscalYear: string;
+  totalBudget: Metric;
+  allocations: {
+    category: string;
+    amount: number;
+    percentage: number;
+  }[];
+  revenue?: Metric;
+  expenditure?: Metric;
+  deficit?: Metric;
+}
+
+/**
+ * Generic filter options
+ */
+export interface Filters {
+  type?: EntityType;
+  role?: PersonRole;
+  category?: InfraCategory;
+  regionId?: string;
+  status?: string;
+  search?: string;
+  limit?: number;
+  offset?: number;
+  sortBy?: string;
+  sortOrder?: 'asc' | 'desc';
+}
+
+/**
+ * Paginated response
+ */
+export interface PaginatedResponse<T> {
+  data: T[];
+  total: number;
+  limit: number;
+  offset: number;
+  hasMore: boolean;
+}
+
+// ============================================
+// Information Request Types (RTI/FOI/FOIA)
+// ============================================
+
+/**
+ * A filed information request (RTI in India, FOI in UK, FOIA in USA)
+ */
+export interface InfoRequest {
+  id: string;
+  title: string;
+  description: string;
+  department: string;
+  departmentEmail?: string;
+  status: InfoRequestStatus;
+  filedBy: 'platform' | 'community' | string;
+  filedDate: string;
+  responseDate?: string;
+  cost?: {
+    value: number;
+    currency: string;
+  };
+  response?: string;
+  responseUrl?: string;
+  category?: string;
+  tags?: string[];
+  regionIds?: string[]; // Associated regions (e.g., ["maharashtra", "mumbai"])
+  personIds?: string[]; // Associated persons (e.g., ["devendra-fadnavis"])
+}
+
+export type InfoRequestStatus =
+  | 'draft'
+  | 'filed'
+  | 'pending'
+  | 'responded'
+  | 'appealed'
+  | 'rejected'
+  | 'closed';
+
+/**
+ * Planned information request targets
+ */
+export interface InfoRequestTarget {
+  id: string;
+  title: string;
+  description: string;
+  department: string;
+  estimatedCost?: {
+    value: number;
+    currency: string;
+  };
+  priority: 'high' | 'medium' | 'low';
+  category?: string;
+}
+
+/**
+ * Cost tracking statistics for information requests
+ */
+export interface InfoRequestStats {
+  totalSpent: {
+    value: number;
+    currency: string;
+  };
+  totalNeeded: {
+    value: number;
+    currency: string;
+  };
+  totalContributed: {
+    value: number;
+    currency: string;
+  };
+  totalFiled: number;
+  totalResponded: number;
+  totalPending: number;
+}
+
+/**
+ * Country-specific configuration for information requests
+ */
+export interface InfoRequestConfig {
+  enabled: boolean;
+  displayName: string;        // "RTI" for India, "FOI" for UK
+  fullName: string;           // "Right to Information" for India
+  ccEmail: string;            // e.g., "indatarequests@forthis.world"
+  templates: InfoRequestTemplate[];
+  departments: InfoRequestDepartment[];
+}
+
+export interface InfoRequestTemplate {
+  id: string;
+  name: string;
+  subject: string;
+  body: string;
+  category?: string;
+}
+
+export interface InfoRequestDepartment {
+  id: string;
+  name: string;
+  email: string;
+  category?: string;
+}
+
+// ============================================
+// Toll Road Types
+// ============================================
+
+/**
+ * Citation for a piece of toll road data
+ */
+export interface SourceCitation {
+  id: string;
+  title: string;
+  publisher: string;
+  url?: string;
+  date?: string;
+  note?: string;
+  type:
+    | 'gazette'
+    | 'concession_agreement'
+    | 'court_order'
+    | 'rti_response'
+    | 'annual_report'
+    | 'company_filing'
+    | 'government_portal'
+    | 'news';
+}
+
+/**
+ * Monetary value with optional as-of date and caveat note
+ */
+export interface MoneyValue {
+  value: number;
+  currency: string;
+  asOf?: string;
+  note?: string;
+}
+
+/**
+ * PPP/concession structure for a toll road
+ */
+export interface ConcessionInfo {
+  model: 'BOT' | 'DBFOT' | 'HAM' | 'EPC' | 'Annuity' | 'Other';
+  modelName?: string; // e.g. "Build-Own-Operate-Transfer"
+  signingDate?: string;
+  operator: string;
+  operatorType?: 'private' | 'psu' | 'joint_venture';
+  grantingAuthority: string;
+  termYears?: number;
+  /** Contractual condition for ending tolls, e.g. "until project cost + agreed return is recovered" */
+  tollEndCondition?: string;
+  scheduledEndDate?: string;
+  extensions?: {
+    date?: string;
+    description: string;
+    sourceId?: string;
+  }[];
+}
+
+export type FundingSourceType =
+  | 'equity'
+  | 'debt'
+  | 'government_grant'
+  | 'vgf'
+  | 'annuity'
+  | 'land_contribution'
+  | 'other';
+
+/**
+ * One component of the project funding structure
+ */
+export interface FundingComponent {
+  source: FundingSourceType;
+  label: string;
+  amount: MoneyValue;
+  note?: string;
+}
+
+/**
+ * Annual revenue/traffic record for a toll road
+ */
+export interface TollRevenueYear {
+  year: number | string;
+  revenue?: MoneyValue;
+  trafficVehiclesPerDay?: number;
+  note?: string;
+}
+
+/**
+ * Current toll rate for a vehicle class
+ */
+export interface TollRate {
+  vehicleClass: string;
+  amount: MoneyValue;
+  trip?: 'single' | 'return' | 'monthly_pass';
+}
+
+/**
+ * A physical toll plaza on the road
+ */
+export interface TollPlaza {
+  name: string;
+  location?: string;
+  coordinates?: [number, number];
+  nhaiTisId?: string; // For NHAI roads, links to TIS plaza page
+}
+
+/**
+ * Event in the road's history (signing, opening, disputes, extensions)
+ */
+export interface TollTimelineEvent {
+  date: string;
+  title: string;
+  description?: string;
+  significance?: 'positive' | 'negative' | 'neutral';
+  sourceId?: string;
+}
+
+/**
+ * The "why is this still tolled" analysis
+ */
+export interface RecoveryAnalysis {
+  status: 'cost_recovered' | 'recovering' | 'disputed' | 'unknown';
+  summary: string;
+  reasonsStillTolled: string[];
+  openQuestions: string[];
+  estimatedCostRecoveredPct?: number;
+}
+
+/**
+ * A toll road with full concession, funding, and revenue transparency data
+ */
+export interface TollRoad {
+  id: string;
+  slug: string;
+  name: string;
+  officialName?: string;
+  /** Operating company - used for MCA/company filing lookups */
+  operatorCompany?: string;
+  cin?: string; // Corporate Identity Number (MCA lookup key)
+  regionIds: string[];
+  lengthKm?: number;
+  openedDate?: string;
+  status?: 'operational' | 'under_construction' | 'planned' | 'closed';
+  concession?: ConcessionInfo;
+  projectCost?: MoneyValue;
+  funding?: FundingComponent[];
+  annualRevenue?: TollRevenueYear[];
+  currentRates?: TollRate[];
+  plazas?: TollPlaza[];
+  timeline?: TollTimelineEvent[];
+  analysis?: RecoveryAnalysis;
+  sources: SourceCitation[];
+  lastVerified?: string;
+}

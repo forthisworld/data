@@ -1,0 +1,184 @@
+[
+    {
+        "id": "narendra-modi",
+        "type": "person",
+        "name": "Narendra Modi",
+        "slug": "narendra-modi",
+        "role": "pm",
+        "roles": [
+            "pm",
+            "mp"
+        ],
+        "party": "BJP",
+        "constituency": "Varanasi",
+        "regionId": "uttar-pradesh",
+        "regionIds": [
+            "uttar-pradesh",
+            "gujarat"
+        ],
+        "description": "Prime Minister of India since 2014. Member of Parliament from Varanasi.",
+        "tenure": {
+            "start": "2014-05-26"
+        }
+    },
+    {
+        "id": "amit-shah",
+        "type": "person",
+        "name": "Amit Shah",
+        "slug": "amit-shah",
+        "role": "minister",
+        "roles": [
+            "minister",
+            "mp"
+        ],
+        "party": "BJP",
+        "constituency": "Gandhinagar",
+        "regionId": "gujarat",
+        "description": "Union Home Minister and MP from Gandhinagar, Gujarat.",
+        "tenure": {
+            "start": "2019-05-30"
+        }
+    },
+    {
+        "id": "rahul-gandhi",
+        "type": "person",
+        "name": "Rahul Gandhi",
+        "slug": "rahul-gandhi",
+        "role": "mp",
+        "roles": [
+            "mp"
+        ],
+        "party": "INC",
+        "constituency": "Wayanad",
+        "regionId": "kerala",
+        "regionIds": [
+            "kerala",
+            "uttar-pradesh"
+        ],
+        "description": "Member of Parliament from Wayanad, Kerala. Former Congress President."
+    },
+    {
+        "id": "mamata-banerjee",
+        "type": "person",
+        "name": "Mamata Banerjee",
+        "slug": "mamata-banerjee",
+        "role": "cm",
+        "roles": [
+            "cm",
+            "mla"
+        ],
+        "party": "TMC",
+        "constituency": "Bhowanipore",
+        "regionId": "west-bengal",
+        "description": "Chief Minister of West Bengal since 2011.",
+        "tenure": {
+            "start": "2011-05-20"
+        }
+    },
+    {
+        "id": "yogi-adityanath",
+        "type": "person",
+        "name": "Yogi Adityanath",
+        "slug": "yogi-adityanath",
+        "role": "cm",
+        "roles": [
+            "cm",
+            "mla"
+        ],
+        "party": "BJP",
+        "constituency": "Gorakhpur Urban",
+        "regionId": "uttar-pradesh",
+        "description": "Chief Minister of Uttar Pradesh since 2017.",
+        "tenure": {
+            "start": "2017-03-19"
+        }
+    },
+    {
+        "id": "mk-stalin",
+        "type": "person",
+        "name": "M. K. Stalin",
+        "slug": "mk-stalin",
+        "role": "cm",
+        "roles": [
+            "cm",
+            "mla"
+        ],
+        "party": "DMK",
+        "constituency": "Kolathur",
+        "regionId": "tamil-nadu",
+        "description": "Chief Minister of Tamil Nadu since 2021.",
+        "tenure": {
+            "start": "2021-05-07"
+        }
+    },
+    {
+        "id": "pinarayi-vijayan",
+        "type": "person",
+        "name": "Pinarayi Vijayan",
+        "slug": "pinarayi-vijayan",
+        "role": "cm",
+        "roles": [
+            "cm",
+            "mla"
+        ],
+        "party": "CPI(M)",
+        "constituency": "Dharmadom",
+        "regionId": "kerala",
+        "description": "Chief Minister of Kerala since 2016.",
+        "tenure": {
+            "start": "2016-05-25"
+        }
+    },
+    {
+        "id": "mukesh-ambani",
+        "type": "person",
+        "name": "Mukesh Ambani",
+        "slug": "mukesh-ambani",
+        "role": "billionaire",
+        "roles": [
+            "billionaire",
+            "entrepreneur"
+        ],
+        "regionId": "maharashtra",
+        "description": "Chairman and Managing Director of Reliance Industries. One of the richest people in Asia.",
+        "metadata": {
+            "netWorth": 116000000000,
+            "currency": "USD",
+            "company": "Reliance Industries"
+        }
+    },
+    {
+        "id": "gautam-adani",
+        "type": "person",
+        "name": "Gautam Adani",
+        "slug": "gautam-adani",
+        "role": "billionaire",
+        "roles": [
+            "billionaire",
+            "entrepreneur"
+        ],
+        "regionId": "gujarat",
+        "description": "Founder and Chairman of Adani Group. Major player in infrastructure and energy.",
+        "metadata": {
+            "netWorth": 84000000000,
+            "currency": "USD",
+            "company": "Adani Group"
+        }
+    },
+    {
+        "id": "ratan-tata",
+        "type": "person",
+        "name": "Ratan Tata",
+        "slug": "ratan-tata",
+        "role": "billionaire",
+        "roles": [
+            "billionaire",
+            "entrepreneur"
+        ],
+        "regionId": "maharashtra",
+        "description": "Chairman Emeritus of Tata Sons. Iconic business leader and philanthropist.",
+        "metadata": {
+            "company": "Tata Group"
+        }
+    }
+]

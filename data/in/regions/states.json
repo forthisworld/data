@@ -1,0 +1,172 @@
+[
+    {
+        "id": "maharashtra",
+        "type": "region",
+        "name": "Maharashtra",
+        "slug": "maharashtra",
+        "level": "state",
+        "parentId": "in",
+        "code": "MH",
+        "coordinates": [
+            19.7515,
+            75.7139
+        ],
+        "population": 112374333,
+        "area": 307713,
+        "capital": "Mumbai",
+        "description": "Maharashtra is a state in the western peninsular region of India."
+    },
+    {
+        "id": "karnataka",
+        "type": "region",
+        "name": "Karnataka",
+        "slug": "karnataka",
+        "level": "state",
+        "parentId": "in",
+        "code": "KA",
+        "coordinates": [
+            15.3173,
+            75.7139
+        ],
+        "population": 61095297,
+        "area": 191791,
+        "capital": "Bengaluru",
+        "description": "Karnataka is a state in the south western region of India."
+    },
+    {
+        "id": "tamil-nadu",
+        "type": "region",
+        "name": "Tamil Nadu",
+        "slug": "tamil-nadu",
+        "level": "state",
+        "parentId": "in",
+        "code": "TN",
+        "coordinates": [
+            11.1271,
+            78.6569
+        ],
+        "population": 72147030,
+        "area": 130058,
+        "capital": "Chennai",
+        "description": "Tamil Nadu is a state in southern India."
+    },
+    {
+        "id": "uttar-pradesh",
+        "type": "region",
+        "name": "Uttar Pradesh",
+        "slug": "uttar-pradesh",
+        "level": "state",
+        "parentId": "in",
+        "code": "UP",
+        "coordinates": [
+            26.8467,
+            80.9462
+        ],
+        "population": 199812341,
+        "area": 243290,
+        "capital": "Lucknow",
+        "description": "Uttar Pradesh is a state in northern India and the most populous state."
+    },
+    {
+        "id": "gujarat",
+        "type": "region",
+        "name": "Gujarat",
+        "slug": "gujarat",
+        "level": "state",
+        "parentId": "in",
+        "code": "GJ",
+        "coordinates": [
+            22.2587,
+            71.1924
+        ],
+        "population": 60439692,
+        "area": 196024,
+        "capital": "Gandhinagar",
+        "description": "Gujarat is a state on the western coast of India."
+    },
+    {
+        "id": "rajasthan",
+        "type": "region",
+        "name": "Rajasthan",
+        "slug": "rajasthan",
+        "level": "state",
+        "parentId": "in",
+        "code": "RJ",
+        "coordinates": [
+            27.0238,
+            74.2179
+        ],
+        "population": 68548437,
+        "area": 342239,
+        "capital": "Jaipur",
+        "description": "Rajasthan is a state in northwestern India, known for its deserts and palaces."
+    },
+    {
+        "id": "delhi",
+        "type": "region",
+        "name": "Delhi",
+        "slug": "delhi",
+        "level": "state",
+        "parentId": "in",
+        "code": "DL",
+        "coordinates": [
+            28.7041,
+            77.1025
+        ],
+        "population": 16787941,
+        "area": 1484,
+        "capital": "New Delhi",
+        "description": "Delhi is a union territory and contains New Delhi, the capital of India."
+    },
+    {
+        "id": "kerala",
+        "type": "region",
+        "name": "Kerala",
+        "slug": "kerala",
+        "level": "state",
+        "parentId": "in",
+        "code": "KL",
+        "coordinates": [
+            10.8505,
+            76.2711
+        ],
+        "population": 33406061,
+        "area": 38863,
+        "capital": "Thiruvananthapuram",
+        "description": "Kerala is a state on the southwestern Malabar Coast of India."
+    },
+    {
+        "id": "west-bengal",
+        "type": "region",
+        "name": "West Bengal",
+        "slug": "west-bengal",
+        "level": "state",
+        "parentId": "in",
+        "code": "WB",
+        "coordinates": [
+            22.9868,
+            87.855
+        ],
+        "population": 91276115,
+        "area": 88752,
+        "capital": "Kolkata",
+        "description": "West Bengal is a state in the eastern region of India."
+    },
+    {
+        "id": "telangana",
+        "type": "region",
+        "name": "Telangana",
+        "slug": "telangana",
+        "level": "state",
+        "parentId": "in",
+        "code": "TG",
+        "coordinates": [
+            18.1124,
+            79.0193
+        ],
+        "population": 35003674,
+        "area": 112077,
+        "capital": "Hyderabad",
+        "description": "Telangana is a state in southern India, formed in 2014."
+    }
+]

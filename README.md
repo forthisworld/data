@@ -1,49 +1,40 @@
-# Project Title
+# data.ftw
 
-This is a Next.js project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+An open, cited record of Indian governance data, by [ForThisWorld](https://forthis.world). It starts with toll roads:
+for each one, who built it, what it cost, who sanctioned it, how much it has earned, and why it is still tolled.
+Every number carries a source. Anything unknown becomes an RTI request that the platform files and tracks.
 
-## Project Overview
+Status and next steps: [PLAN.md](PLAN.md).
 
-This project is a web application that displays data on a map. It's built with Next.js and uses a variety of modern web technologies.
+## What's here
 
-## Tech Stack
+| Path | What |
+| :--- | :--- |
+| `src/` | The website (Next.js 15, shadcn/ui, Tailwind): country, state and region pages, toll roads, people, infrastructure, the RTI tracker |
+| `data/in/` | The published record: reviewed JSON, each fact with its citation. Schema in `src/types/index.ts` |
+| `scripts/scrapers/` | Source adapters (NHAI TIS, data.gov.in, Gazette, MCA); they write overlays for review, never the published files. See its README |
+| `mcp-server/` | MCP server so AI clients can search the record, list data gaps, draft RTIs and submit contributions for review |
 
-*   **Framework:** [Next.js](https://nextjs.org/)
-*   **UI Components:** [Shadcn/ui](https://ui.shadcn.com/)
-*   **Map:** [Leaflet](https://leafletjs.com/) & [React-Leaflet](https://react-leaflet.js.org/)
-*   **Fuzzy Search:** [Fuse.js](https://fusejs.io/)
-*   **Styling:** [Tailwind CSS](https://tailwindcss.com/)
-*   **Linting:** [ESLint](https://eslint.org/)
-*   **Language:** [TypeScript](https://www.typescriptlang.org/)
-
-## Folder Structure
-
-The project uses the Next.js App Router with the following structure:
-
-*   `/src/app/`: Contains the application's routes.
-    *   `layout.tsx`: The root layout.
-    *   `page.tsx`: The home page with a global map.
-    *   `[dataCategory]/[country]/page.tsx`: Dynamic route for country-level data.
-    *   `[dataCategory]/[country]/[state]/page.tsx`: Dynamic route for state-level data.
-    *   `[dataCategory]/[country]/[state]/[city]/page.tsx`: Dynamic route for city-level data.
-*   `/src/components/`: Contains reusable React components.
-    *   `NavBar.tsx`: The main navigation bar.
-    *   `MapComponent.tsx`: A dynamically imported Leaflet map component.
-    *   `Dashboard.tsx`: A placeholder for a stats table/chart.
-    *   `Footer.tsx`: The application footer.
-*   `/src/lib/`: Contains utility functions.
-*   `/public/`: Contains static assets.
-
-## Getting Started
-
-First, run the development server:
+## Running it
 
 ```bash
-npm run dev
+npm install
+npm run dev        # http://localhost:3000
+npx tsx scripts/scrapers/run-toll-roads.ts --validate
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Some pages (entities, regions, search) still read from MongoDB through `src/lib/repositories`. That database has
+been retired, and these reads are moving to the JSON in `data/` (see PLAN.md). Toll roads, RTI and overviews already
+read the files directly.
 
-## License
+## Contributing data
 
-This project is licensed under the GNU General Public License v3.0. See the [LICENSE](LICENSE) file for details.
+Copy a file in `data/in/toll-roads/`, fill in only what you can cite, and put unknowns in `analysis.openQuestions`.
+Run `--validate` and open a pull request. Every change to the record is reviewed.
+
+## Licence
+
+- **Code:** [MIT](LICENSE).
+- **Data:** [Open Database License (ODbL) 1.0](LICENSE-DATA). You can use it for anything, including commercial use,
+  with attribution. If you publish a changed copy of the database, it must also be ODbL. See
+  [data/LICENSE.md](data/LICENSE.md). Cited source documents keep their own terms.

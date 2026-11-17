@@ -1,0 +1,101 @@
+{
+    "entityId": "in",
+    "entityType": "region",
+    "name": "India",
+    "metrics": [
+        {
+            "key": "gdp",
+            "label": "GDP",
+            "value": 3730000000000,
+            "unit": "USD",
+            "year": 2024,
+            "trend": "up",
+            "trendValue": 6.5,
+            "source": "World Bank"
+        },
+        {
+            "key": "population",
+            "label": "Population",
+            "value": 1428000000,
+            "year": 2024,
+            "trend": "up",
+            "trendValue": 0.8
+        },
+        {
+            "key": "states",
+            "label": "States",
+            "value": 28
+        },
+        {
+            "key": "union_territories",
+            "label": "Union Territories",
+            "value": 8
+        },
+        {
+            "key": "budget",
+            "label": "Union Budget",
+            "value": 45000000000000,
+            "currency": "INR",
+            "year": "2024-25",
+            "source": "Ministry of Finance"
+        },
+        {
+            "key": "national_highways_km",
+            "label": "National Highways",
+            "value": 145000,
+            "unit": "km"
+        },
+        {
+            "key": "toll_plazas",
+            "label": "Toll Plazas",
+            "value": 830
+        },
+        {
+            "key": "lok_sabha_mps",
+            "label": "Lok Sabha MPs",
+            "value": 543
+        },
+        {
+            "key": "rajya_sabha_mps",
+            "label": "Rajya Sabha MPs",
+            "value": 245
+        }
+    ],
+    "highlights": [
+        {
+            "title": "Budget 2024-25 Announced",
+            "description": "Union Budget allocates ₹11.11 lakh crore for infrastructure development"
+        },
+        {
+            "title": "Highway Expansion",
+            "description": "10,000 km of new national highways planned for 2024-25"
+        }
+    ],
+    "quickLinks": [
+        {
+            "label": "States & UTs",
+            "href": "/in/region",
+            "icon": "map"
+        },
+        {
+            "label": "Infrastructure",
+            "href": "/in/infrastructure",
+            "icon": "building"
+        },
+        {
+            "label": "Representatives",
+            "href": "/in/person",
+            "icon": "users"
+        },
+        {
+            "label": "Government Spending",
+            "href": "/in/spending",
+            "icon": "wallet"
+        },
+        {
+            "label": "Toll Roads",
+            "href": "/in/infrastructure/toll-roads",
+            "icon": "road"
+        }
+    ]
+}

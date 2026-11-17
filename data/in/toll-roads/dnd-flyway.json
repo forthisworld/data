@@ -1,0 +1,148 @@
+{
+    "id": "dnd-flyway",
+    "slug": "dnd-flyway",
+    "name": "DND Flyway (Delhi-Noida Direct)",
+    "officialName": "Delhi Noida Direct Flyway",
+    "operatorCompany": "Noida Toll Bridge Company Ltd",
+    "cin": "L74899DL1996PLC077550",
+    "regionIds": ["delhi", "uttar-pradesh"],
+    "lengthKm": 9.2,
+    "openedDate": "2001-02-01",
+    "status": "operational",
+    "concession": {
+        "model": "BOT",
+        "modelName": "Build-Own-Operate-Transfer with defined cost-recovery + return cap",
+        "signingDate": "1996-04-01",
+        "operator": "Noida Toll Bridge Company Ltd (NTBCL, IL&FS group)",
+        "operatorType": "private",
+        "grantingAuthority": "New Okhla Industrial Development Authority (NOIDA), Govt of Uttar Pradesh",
+        "tollEndCondition": "Tolls were to end once the concessionaire recovered project cost plus a 20% return on paid-up share capital - a rare toll road with an explicit recovery formula",
+        "extensions": [
+            {
+                "date": "2012-01-01",
+                "description": "Concession agreement amended to include 'link road/approach' costs and other additions into recoverable project cost, pushing the recovery end-point further away",
+                "sourceId": "hc-allahabad-2016"
+            }
+        ]
+    },
+    "projectCost": {
+        "value": 3080000000,
+        "currency": "INR",
+        "asOf": "2001",
+        "note": "~Rs 308 crore initial project cost; the 'recoverable cost' was later expanded through amendments to several times this figure"
+    },
+    "funding": [
+        {
+            "source": "equity",
+            "label": "NTBCL equity (IL&FS-led; NOIDA took equity stake in lieu of land/cash contribution)",
+            "amount": { "value": 1000000000, "currency": "INR", "note": "Approximate composition" }
+        },
+        {
+            "source": "debt",
+            "label": "Term loans from financial institutions",
+            "amount": { "value": 2000000000, "currency": "INR", "note": "Approximate composition" }
+        },
+        {
+            "source": "land_contribution",
+            "label": "NOIDA land grant along the corridor (developed and sold as real estate)",
+            "amount": { "value": 0, "currency": "INR", "note": "Real-estate income was substantial but its offset against recoverable cost is disputed" }
+        }
+    ],
+    "annualRevenue": [
+        {
+            "year": "2015",
+            "revenue": { "value": 1200000000, "currency": "INR", "note": "~Rs 120 crore annual toll revenue reported around the time of litigation" },
+            "trafficVehiclesPerDay": 100000
+        },
+        {
+            "year": "2024",
+            "trafficVehiclesPerDay": 130000,
+            "note": "Car one-way toll ~Rs 55-65. NTBCL is listed so quarterly revenues are available via stock-exchange filings."
+        }
+    ],
+    "currentRates": [
+        { "vehicleClass": "Car / Jeep", "amount": { "value": 60, "currency": "INR", "note": "Approximate" }, "trip": "single" },
+        { "vehicleClass": "Two-wheeler", "amount": { "value": 0, "currency": "INR", "note": "Exempt" }, "trip": "single" },
+        { "vehicleClass": "Commercial vehicles", "amount": { "value": 110, "currency": "INR", "note": "Approximate" }, "trip": "single" }
+    ],
+    "plazas": [
+        { "name": "Mayur Vihar Plaza", "location": "Delhi end", "coordinates": [28.6046, 77.2925] },
+        { "name": "Noida Plaza", "location": "Noida end", "coordinates": [28.5849, 77.3133] }
+    ],
+    "timeline": [
+        {
+            "date": "1996-04-01",
+            "title": "Concession agreement signed with NOIDA",
+            "description": "BOT concession with an explicit exit: tolls end after recovering project cost plus 20% return on paid-up capital.",
+            "significance": "neutral"
+        },
+        {
+            "date": "2001-02-01",
+            "title": "Flyway opens",
+            "description": "The 9.2 km Delhi-Noida bridge and approaches open as India's first major urban BOT toll road.",
+            "significance": "positive"
+        },
+        {
+            "date": "2012-01-01",
+            "title": "Recoverable-cost definition expanded",
+            "description": "Amendments fold additional costs into the recoverable base even as cumulative collections far exceed the original Rs 308 crore outlay.",
+            "significance": "negative"
+        },
+        {
+            "date": "2016-10-24",
+            "title": "Allahabad High Court orders toll-free DND",
+            "description": "HC holds that NOIDA residents cannot be tolled and questions continued collection beyond cost recovery; Supreme Court proceedings follow and tolls continue during litigation.",
+            "significance": "positive",
+            "sourceId": "hc-allahabad-2016"
+        },
+        {
+            "date": "2020-01-01",
+            "title": "Tolling continues amid litigation",
+            "description": "Matter remains contested between NOIDA, NTBCL and petitioner groups; tolls continue while 'recoverable cost' accounting stays opaque.",
+            "significance": "negative"
+        }
+    ],
+    "analysis": {
+        "status": "disputed",
+        "summary": "DND is the clearest Indian example of a toll road that should have stopped charging by its own contract: it has an explicit cost-plus-20%-return formula, yet tolls continue because the definition of recoverable cost kept growing and litigation replaced enforcement.",
+        "reasonsStillTolled": [
+            "Contract amendments repeatedly enlarged what counts as 'project cost' eligible for recovery",
+            "Real-estate income from NOIDA-granted land is not clearly netted against recoverable cost",
+            "Litigation (Allahabad HC 2016 order, SC appeals) left the status quo - tolling - in place",
+            "NTBCL's listed status gives it standing and resources to defend continuation"
+        ],
+        "openQuestions": [
+            "What is NTBCL's current claimed unrecovered balance under the concession?",
+            "How much has been collected cumulatively since 2001 vs the original and amended cost bases?",
+            "What real-estate revenue has NTBCL earned from corridor land, and why isn't it offset against tolls?",
+            "What is the current legal status of the Allahabad HC toll-free order?"
+        ],
+        "estimatedCostRecoveredPct": null
+    },
+    "sources": [
+        {
+            "id": "hc-allahabad-2016",
+            "title": "Allahabad High Court judgment/order directing toll-free use of DND Flyway",
+            "publisher": "High Court of Judicature at Allahabad",
+            "date": "2016-10-24",
+            "type": "court_order",
+            "url": "https://www.allahabadhighcourt.in",
+            "note": "Widely reported; e.g., Times of India, The Hindu coverage dated Oct 25, 2016"
+        },
+        {
+            "id": "ntbcl-filings",
+            "title": "Noida Toll Bridge Company Ltd - BSE/NSE filings (quarterly revenue, concession amendments)",
+            "publisher": "BSE India / NSE India",
+            "type": "company_filing",
+            "url": "https://www.bseindia.com/stock-share-price/noida-toll-bridge-co-ltd/ntbcl/"
+        },
+        {
+            "id": "mca-ntbcl",
+            "title": "MCA company master data for CIN L74899DL1996PLC077550",
+            "publisher": "Ministry of Corporate Affairs",
+            "type": "company_filing",
+            "url": "https://www.mca.gov.in/mcafoportal/viewCompanyMasterData.do"
+        }
+    ],
+    "lastVerified": "2026-08-21"
+}
