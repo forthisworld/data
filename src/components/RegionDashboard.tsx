@@ -1,13 +1,14 @@
 'use client';
 
-import { CountryConfig, Entity, Overview, InfoRequest } from '@/types';
+import { CountryConfig, Entity, Overview, InfoRequest, Region } from '@/types';
+import { SourceList } from './Provenance';
 import GlobalSearch from './GlobalSearch';
 import MetricCard from './MetricCard';
 import BreadcrumbNav from './BreadcrumbNav';
 import RTITrackerWidget from './RTITrackerWidget';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
 import Link from 'next/link';
-import { Building, Users, MapPin, ChevronRight } from 'lucide-react';
+import { Users, ChevronRight, Route } from 'lucide-react';
 
 interface RegionDashboardProps {
     config: CountryConfig;
@@ -15,9 +16,11 @@ interface RegionDashboardProps {
     overview: Overview;
     countryCode: string;
     infoRequests?: InfoRequest[];
+    tollRoads?: { slug: string; name: string; tolling?: 'tolled' | 'toll_free' }[];
+    people?: { slug: string; name: string; role: string; description?: string }[];
 }
 
-export default function RegionDashboard({ config, region, overview, countryCode, infoRequests }: RegionDashboardProps) {
+export default function RegionDashboard({ config, region, overview, countryCode, infoRequests, tollRoads = [], people = [] }: RegionDashboardProps) {
     const primaryMetrics = overview.metrics.slice(0, 4);
     const secondaryMetrics = overview.metrics.slice(4);
 
@@ -47,6 +50,11 @@ export default function RegionDashboard({ config, region, overview, countryCode,
                         <p className="text-slate-400 text-lg">
                             {region.description || `Data and statistics for ${region.name}`}
                         </p>
+                        {(region as Region).capital && (
+                            <p className="text-slate-500 text-sm mt-1">
+                                {(region as Region).level === 'union_territory' ? 'Union territory' : 'State'} · Capital: {(region as Region).capital}
+                            </p>
+                        )}
                     </div>
 
                     {/* Search Bar */}
@@ -117,6 +125,65 @@ export default function RegionDashboard({ config, region, overview, countryCode,
                             ))}
                         </div>
                     </div>
+                )}
+
+                {/* What we have on this region */}
+                <div className="grid md:grid-cols-2 gap-4 mb-8">
+                    <Card className="bg-slate-800/50 border-slate-700">
+                        <CardHeader>
+                            <CardTitle className="text-white flex items-center gap-2"><Route className="h-5 w-5 text-emerald-400" /> Toll roads</CardTitle>
+                        </CardHeader>
+                        <CardContent>
+                            {tollRoads.length === 0 ? (
+                                <p className="text-sm text-slate-500">None published for {region.name} yet.</p>
+                            ) : (
+                                <ul className="space-y-2">
+                                    {tollRoads.map(r => (
+                                        <li key={r.slug}>
+                                            <Link href={`/${countryCode}/infrastructure/toll-roads/${r.slug}`} className="flex items-center justify-between gap-3 text-sm text-slate-200 hover:text-emerald-300">
+                                                <span>{r.name}</span>
+                                                <span className={r.tolling === 'toll_free' ? 'text-xs text-emerald-400' : 'text-xs text-slate-500'}>
+                                                    {r.tolling === 'toll_free' ? 'toll-free' : r.tolling === 'tolled' ? 'tolled' : ''}
+                                                </span>
+                                            </Link>
+                                        </li>
+                                    ))}
+                                </ul>
+                            )}
+                        </CardContent>
+                    </Card>
+                    <Card className="bg-slate-800/50 border-slate-700">
+                        <CardHeader>
+                            <CardTitle className="text-white flex items-center gap-2"><Users className="h-5 w-5 text-blue-400" /> People</CardTitle>
+                        </CardHeader>
+                        <CardContent>
+                            {people.length === 0 ? (
+                                <p className="text-sm text-slate-500">No one linked to {region.name} yet.</p>
+                            ) : (
+                                <ul className="space-y-2">
+                                    {people.map(p => (
+                                        <li key={p.slug}>
+                                            <Link href={`/${countryCode}/person/${p.slug}`} className="block text-sm text-slate-200 hover:text-blue-300">
+                                                {p.name} <span className="text-xs uppercase text-slate-500">{p.role}</span>
+                                            </Link>
+                                        </li>
+                                    ))}
+                                </ul>
+                            )}
+                        </CardContent>
+                    </Card>
+                </div>
+
+                {/* Sources for the region's own facts */}
+                {region.sources && region.sources.length > 0 && (
+                    <Card className="bg-slate-800/50 border-slate-700 mb-8">
+                        <CardHeader>
+                            <CardTitle className="text-white text-lg">Sources</CardTitle>
+                        </CardHeader>
+                        <CardContent>
+                            <SourceList sources={region.sources} lastVerified={region.lastVerified} />
+                        </CardContent>
+                    </Card>
                 )}
 
                 {/* RTI Tracker Widget */}

@@ -7,6 +7,7 @@ import {
     REVENUE_ASSUMPTIONS,
 } from '@/services/toll-road-analytics';
 import BreadcrumbNav from './BreadcrumbNav';
+import { BasisBadge, MoneyProvenance, SourceRef } from './Provenance';
 import {
     Route,
     FileText,
@@ -19,6 +20,8 @@ import {
     CalendarClock,
     BrainCircuit,
     TrendingUp,
+    Megaphone,
+    Coins,
 } from 'lucide-react';
 
 interface TollRoadDetailProps {
@@ -91,10 +94,22 @@ export default function TollRoadDetail({ config, tollRoad: road, countryCode, in
                     <p className="text-slate-400 max-w-3xl">{road.officialName}</p>
 
                     <dl className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
-                        <StatCard icon={<Route className="h-4 w-4" />} label="Length" value={road.lengthKm ? `${road.lengthKm} km` : '—'} />
-                        <StatCard icon={<Landmark className="h-4 w-4" />} label="Project cost" value={road.projectCost ? formatMoney(road.projectCost.value) : '—'} sub={road.projectCost?.asOf ? `as of ${road.projectCost.asOf}` : undefined} />
-                        <StatCard icon={<CalendarClock className="h-4 w-4" />} label="Opened" value={road.openedDate ?? '—'} />
-                        <StatCard icon={<Scale className="h-4 w-4" />} label="Recovery status" value={road.analysis?.status.replace('_', ' ') ?? 'unknown'} />
+                        <StatCard
+                            icon={<Scale className="h-4 w-4" />}
+                            label="Toll today"
+                            value={road.tolling?.status === 'toll_free' ? 'Toll-free' : road.tolling?.status === 'tolled' ? 'Tolled' : 'Unknown'}
+                            sub={road.tolling?.since ? `since ${road.tolling.since}` : undefined}
+                            provenance={<SourceRef id={road.tolling?.sourceId} />}
+                        />
+                        <StatCard
+                            icon={<Landmark className="h-4 w-4" />}
+                            label="Project cost"
+                            value={road.projectCost ? formatMoney(road.projectCost.value) : 'Not established'}
+                            sub={road.projectCost?.asOf ? `as of ${road.projectCost.asOf}` : undefined}
+                            provenance={<MoneyProvenance value={road.projectCost} />}
+                        />
+                        <StatCard icon={<CalendarClock className="h-4 w-4" />} label="Opened" value={road.openedDate ?? 'Not established'} />
+                        <StatCard icon={<Route className="h-4 w-4" />} label="Length" value={road.lengthKm ? `${road.lengthKm} km` : 'Not established'} />
                     </dl>
                 </div>
             </div>
@@ -222,6 +237,62 @@ export default function TollRoadDetail({ config, tollRoad: road, countryCode, in
                     </section>
                 )}
 
+                {/* Money collected: totals from courts, audits, records or filings */}
+                {road.collections && road.collections.length > 0 && (
+                    <section className="rounded-xl border border-slate-700 bg-slate-800/50 p-6">
+                        <h2 className="flex items-center gap-2 text-xl font-semibold text-white mb-1">
+                            <Coins className="h-5 w-5 text-emerald-400" />
+                            Money collected
+                        </h2>
+                        <p className="text-xs text-slate-500 mb-4">Totals as stated in the cited records.</p>
+                        <ul className="divide-y divide-slate-700/50">
+                            {road.collections.map((c, i) => (
+                                <li key={i} className="py-3 flex flex-col md:flex-row md:items-start gap-2 md:gap-6">
+                                    <div className="flex-1 min-w-0">
+                                        <p className="text-sm text-white">
+                                            {c.label}
+                                            <span className="text-slate-500">{c.from || c.to ? ` · ${[c.from, c.to].filter(Boolean).join('–')}` : ''}</span>
+                                        </p>
+                                        {c.amount.note && <p className="text-xs text-slate-500 mt-0.5">{c.amount.note}</p>}
+                                    </div>
+                                    <div className="md:text-right shrink-0">
+                                        <p className="text-sm font-semibold text-emerald-300">{formatMoney(c.amount.value)}</p>
+                                        <MoneyProvenance value={c.amount} />
+                                    </div>
+                                </li>
+                            ))}
+                        </ul>
+                    </section>
+                )}
+
+                {/* Claims: asserted by named parties, not confirmed by a primary source */}
+                {road.claims && road.claims.length > 0 && (
+                    <section className="rounded-xl border border-rose-500/30 bg-rose-500/5 p-6">
+                        <h2 className="flex items-center gap-2 text-xl font-semibold text-rose-200 mb-1">
+                            <Megaphone className="h-5 w-5" />
+                            Claims we haven&apos;t confirmed
+                        </h2>
+                        <p className="text-xs text-slate-400 mb-4">
+                            Figures stated publicly by a named person or party. No primary source we have read confirms them yet,
+                            so they are not used in any calculation on this page.
+                        </p>
+                        <ul className="space-y-4">
+                            {road.claims.map((c, i) => (
+                                <li key={i} className="rounded-lg border border-slate-700 bg-slate-900/40 p-4">
+                                    <div className="flex flex-wrap items-center gap-2 mb-2">
+                                        <BasisBadge basis="claim" />
+                                        <span className="text-xs text-slate-400">
+                                            {c.claimedBy}{c.date ? ` · ${c.date}` : ''}
+                                        </span>
+                                        <SourceRef id={c.sourceId} />
+                                    </div>
+                                    <p className="text-sm text-slate-200">{c.text}</p>
+                                </li>
+                            ))}
+                        </ul>
+                    </section>
+                )}
+
                 {/* Funding structure */}
                 {fundingTotal > 0 && (
                     <section className="rounded-xl border border-slate-700 bg-slate-800/50 p-6">
@@ -253,6 +324,7 @@ export default function TollRoadDetail({ config, tollRoad: road, countryCode, in
                                     </div>
                                     <span className="text-sm font-medium text-emerald-300 whitespace-nowrap">
                                         {f.amount.value > 0 ? formatMoney(f.amount.value) : 'not quantified'}
+                                        {f.amount.value > 0 && <span className="block"><MoneyProvenance value={f.amount} /></span>}
                                     </span>
                                 </div>
                             ))}
@@ -323,7 +395,8 @@ export default function TollRoadDetail({ config, tollRoad: road, countryCode, in
                                                 {rate.trip === 'monthly_pass' && <span className="ml-2 text-xs text-sky-300">monthly</span>}
                                             </td>
                                             <td className="py-2 text-right text-emerald-300">
-                                                {rate.amount.value > 0 ? formatMoney(rate.amount.value) : 'Free'}
+                                                {rate.amount.value > 0 ? formatMoney(rate.amount.value) : 'Free'}{' '}
+                                                <SourceRef id={rate.amount.sourceId} />
                                             </td>
                                         </tr>
                                     ))}
@@ -356,7 +429,11 @@ export default function TollRoadDetail({ config, tollRoad: road, countryCode, in
                                     />
                                     <p className="text-xs text-slate-500">{event.date}</p>
                                     <p className="text-sm font-medium text-white">{event.title}</p>
-                                    {event.description && <p className="text-sm text-slate-400 mt-1">{event.description}</p>}
+                                    {event.description && (
+                                        <p className="text-sm text-slate-400 mt-1">
+                                            {event.description} <SourceRef id={event.sourceId} />
+                                        </p>
+                                    )}
                                 </li>
                             ))}
                         </ol>
@@ -388,7 +465,7 @@ export default function TollRoadDetail({ config, tollRoad: road, countryCode, in
                             Missing data — file an RTI to close the gap
                         </h2>
                         <p className="text-xs text-slate-500 mb-6">
-                            Each estimate above can be replaced with an official figure. One RTI costs ₹10.
+                            Each of these can be answered by the public authority under the RTI Act.
                         </p>
                         <div className="space-y-4">
                             {dataGaps.map(gap => (
@@ -419,8 +496,8 @@ export default function TollRoadDetail({ config, tollRoad: road, countryCode, in
                 <section className="rounded-xl border border-slate-700 bg-slate-800/50 p-6">
                     <h2 className="text-xl font-semibold text-white mb-4">Sources</h2>
                     <p className="text-xs text-slate-500 mb-4">
-                        Every claim on this page traces to one of these documents. Figures marked approximate are
-                        estimates pending official verification.
+                        Every statement on this page links to one of these. The link goes to the original publisher; the date
+                        is when we last read it. How figures are graded: <a href="https://github.com/forthisworld/data/blob/main/data/SOURCING.md" className="text-sky-400 hover:underline" target="_blank" rel="noopener noreferrer">sourcing standard</a>.
                     </p>
                     <ul className="space-y-3">
                         {road.sources.map(source => (
@@ -435,10 +512,15 @@ export default function TollRoadDetail({ config, tollRoad: road, countryCode, in
                                         <span className="text-slate-200">{source.title}</span>
                                     )}
                                     <p className="text-xs text-slate-500">
-                                        {source.publisher}
+                                        <span className="text-slate-600">[{source.id}]</span> {source.publisher}
                                         {source.date ? ` · ${source.date}` : ''}
-                                        {source.note ? ` · ${source.note}` : ''}
+                                        {source.locator ? ` · ${source.locator}` : ''}
+                                        {source.retrievedAt ? ` · read ${source.retrievedAt}` : ''}
+                                        {source.archiveUrl && (
+                                            <> · <a href={source.archiveUrl} className="text-sky-400 hover:underline" target="_blank" rel="noopener noreferrer">archived copy</a></>
+                                        )}
                                     </p>
+                                    {source.note && <p className="text-xs text-slate-600 mt-0.5">{source.note}</p>}
                                 </div>
                             </li>
                         ))}
@@ -452,16 +534,18 @@ export default function TollRoadDetail({ config, tollRoad: road, countryCode, in
     );
 }
 
-function StatCard({ icon, label, value, sub }: { icon: React.ReactNode; label: string; value: string; sub?: string }) {
+function StatCard({ icon, label, value, sub, provenance }: { icon: React.ReactNode; label: string; value: string; sub?: string; provenance?: React.ReactNode }) {
+    const missing = value === 'Not established' || value === 'Unknown';
     return (
         <div className="rounded-xl border border-slate-700 bg-slate-800/50 p-4">
             <dt className="flex items-center gap-2 text-xs text-slate-400 uppercase tracking-wide">
                 <span className="text-emerald-400">{icon}</span>
                 {label}
             </dt>
-            <dd className="text-lg font-semibold text-white capitalize mt-1">
+            <dd className={`text-lg font-semibold mt-1 ${missing ? 'text-slate-500' : 'text-white'}`}>
                 {value}
-                {sub && <span className="block text-xs font-normal text-slate-500 normal-case">{sub}</span>}
+                {sub && <span className="block text-xs font-normal text-slate-500">{sub}</span>}
+                {provenance && <span className="block mt-1">{provenance}</span>}
             </dd>
         </div>
     );

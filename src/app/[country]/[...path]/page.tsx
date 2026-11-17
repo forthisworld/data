@@ -3,8 +3,9 @@ import { getInfoRequestsByRegion, getAllInfoRequests } from '@/services/info-req
 import {
     resolvePath,
     getEntities,
+    getPersons,
 } from '@/services/entity.service';
-import { getAllTollRoads, getTollRoadBySlug } from '@/services/toll-road.service';
+import { getAllTollRoads, getTollRoadBySlug, getTollRoadsByRegion } from '@/services/toll-road.service';
 import Dashboard from '@/components/Dashboard';
 import EntityList from '@/components/EntityList';
 import EntityDetail from '@/components/EntityDetail';
@@ -37,9 +38,11 @@ export default async function CatchAllPage({ params }: CatchAllPageProps) {
                 return <Dashboard config={config} overview={overview} infoRequests={allrequests} />;
 
             case 'region':
-                const [regionOverview, regionRequests] = await Promise.all([
+                const [regionOverview, regionRequests, regionRoads, people] = await Promise.all([
                     getOverview(country, [resolution.entity!.slug]),
-                    getInfoRequestsByRegion(country, resolution.entity!.slug)
+                    getInfoRequestsByRegion(country, resolution.entity!.slug),
+                    getTollRoadsByRegion(country, resolution.entity!.id),
+                    getPersons(country),
                 ]);
 
                 return (
@@ -49,6 +52,10 @@ export default async function CatchAllPage({ params }: CatchAllPageProps) {
                         overview={regionOverview}
                         countryCode={country}
                         infoRequests={regionRequests}
+                        tollRoads={regionRoads.map(r => ({ slug: r.slug, name: r.name, tolling: r.tolling?.status }))}
+                        people={people
+                            .filter(p => p.regionId === resolution.entity!.id || p.regionIds?.includes(resolution.entity!.id))
+                            .map(p => ({ slug: p.slug, name: p.name, role: p.role, description: p.description }))}
                     />
                 );
 

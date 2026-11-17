@@ -18,7 +18,7 @@ const statusStyles: Record<string, string> = {
 };
 
 const statusLabels: Record<string, string> = {
-    cost_recovered: 'Cost recovered - tolls should end',
+    cost_recovered: 'Cost recovered',
     disputed: 'Recovery disputed',
     recovering: 'Still recovering cost',
     unknown: 'Recovery status unknown',
@@ -49,7 +49,7 @@ export default function TollRoadList({ config, tollRoads, countryCode }: TollRoa
                         <div>
                             <h1 className="text-3xl md:text-4xl font-bold text-white">Toll Roads</h1>
                             <p className="text-slate-400">
-                                Who paid for them, who profits from them, and why the tolls never seem to end
+                                Who paid for them, who profits from them, and why some are still tolled
                             </p>
                         </div>
                     </div>
@@ -73,11 +73,20 @@ export default function TollRoadList({ config, tollRoads, countryCode }: TollRoa
                                 <ArrowRight className="h-5 w-5 text-slate-500 group-hover:text-emerald-400 shrink-0 mt-1" />
                             </div>
 
-                            {road.analysis && (
-                                <span className={`inline-block mb-3 rounded-full border px-3 py-1 text-xs font-medium ${statusStyles[road.analysis.status]}`}>
-                                    {statusLabels[road.analysis.status]}
-                                </span>
-                            )}
+                            <div className="flex flex-wrap gap-2 mb-3">
+                                {road.tolling && (
+                                    <span className={`inline-block rounded-full border px-3 py-1 text-xs font-medium ${road.tolling.status === 'toll_free' ? 'bg-emerald-500/15 text-emerald-300 border-emerald-500/30' : 'bg-slate-500/15 text-slate-200 border-slate-500/30'}`}>
+                                        {road.tolling.status === 'toll_free'
+                                            ? `Toll-free${road.tolling.since ? ` since ${road.tolling.since.slice(0, 4)}` : ''}`
+                                            : 'Tolled'}
+                                    </span>
+                                )}
+                                {road.analysis && (
+                                    <span className={`inline-block rounded-full border px-3 py-1 text-xs font-medium ${statusStyles[road.analysis.status]}`}>
+                                        {statusLabels[road.analysis.status]}
+                                    </span>
+                                )}
+                            </div>
 
                             <p className="text-sm text-slate-400 line-clamp-2 mb-4">{road.analysis?.summary}</p>
 
@@ -97,10 +106,12 @@ export default function TollRoadList({ config, tollRoads, countryCode }: TollRoa
                                     <dd className="text-white">{road.concession?.model ?? '—'}</dd>
                                 </div>
                                 <div>
-                                    <dt className="text-xs text-slate-500">Est. recovered</dt>
+                                    <dt className="text-xs text-slate-500">
+                                        {recovery.cumulativeRevenue?.confidence === 'reported' ? 'Collected vs. cost' : 'Est. recovered'}
+                                    </dt>
                                     <dd className={recovery.recoveredPct !== null && recovery.recoveredPct >= 100 ? 'text-red-300' : 'text-white'}>
                                         {recovery.recoveredPct !== null
-                                            ? `~${recovery.recoveredPctLow !== recovery.recoveredPct ? `${recovery.recoveredPctLow}–` : ''}${recovery.recoveredPct}%`
+                                            ? `${recovery.cumulativeRevenue?.confidence === 'reported' ? '' : '~'}${recovery.recoveredPctLow !== recovery.recoveredPct ? `${recovery.recoveredPctLow}–` : ''}${recovery.recoveredPct}%`
                                             : '—'}
                                     </dd>
                                 </div>

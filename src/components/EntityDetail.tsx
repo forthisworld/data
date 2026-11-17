@@ -7,6 +7,7 @@ import { Badge } from './ui/badge';
 import { Person, Infrastructure } from '@/types';
 import { User, Building, MapPin, Calendar, Globe, Phone, Mail, ExternalLink } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { SourceList } from './Provenance';
 
 interface EntityDetailProps {
     config: CountryConfig;
@@ -85,7 +86,8 @@ export default function EntityDetail({ config, entity, countryCode }: EntityDeta
                                 {person.tenure && (
                                     <p className="text-slate-400 flex items-center gap-2 mt-2">
                                         <Calendar className="h-4 w-4" />
-                                        Since {new Date(person.tenure.start).getFullYear()}
+                                        Since {person.tenure.start}
+                                        {person.tenure.end ? `, until ${person.tenure.end}` : ''}
                                     </p>
                                 )}
                             </div>
@@ -178,27 +180,14 @@ export default function EntityDetail({ config, entity, countryCode }: EntityDeta
                                 </Card>
                             )}
 
-                            {/* Billionaire metadata */}
-                            {person.role === 'billionaire' && person.metadata && (
-                                <Card className="bg-slate-800/50 border-slate-700">
-                                    <CardHeader>
-                                        <CardTitle className="text-white text-lg">Business</CardTitle>
-                                    </CardHeader>
-                                    <CardContent className="space-y-3">
-                                        {typeof person.metadata?.company === 'string' && (
-                                            <p className="text-slate-300">
-                                                <span className="text-slate-500">Company:</span> {person.metadata.company}
-                                            </p>
-                                        )}
-                                        {typeof person.metadata?.netWorth === 'number' && (
-                                            <p className="text-slate-300">
-                                                <span className="text-slate-500">Net Worth:</span>{' '}
-                                                {formatCurrency(person.metadata.netWorth, typeof person.metadata?.currency === 'string' ? person.metadata.currency : 'USD')}
-                                            </p>
-                                        )}
-                                    </CardContent>
-                                </Card>
-                            )}
+                            <Card className="bg-slate-800/50 border-slate-700">
+                                <CardHeader>
+                                    <CardTitle className="text-white text-lg">Sources</CardTitle>
+                                </CardHeader>
+                                <CardContent>
+                                    <SourceList sources={person.sources} lastVerified={person.lastVerified} />
+                                </CardContent>
+                            </Card>
                         </div>
                     </div>
                 </div>
@@ -278,7 +267,7 @@ export default function EntityDetail({ config, entity, countryCode }: EntityDeta
                                         <div className="flex justify-between py-2 border-b border-slate-700">
                                             <span className="text-slate-400">Cost</span>
                                             <span className="text-white font-medium">
-                                                {formatCurrency(infra.cost.value * 10000000, infra.cost.currency)}
+                                                {formatCurrency(infra.cost.value, infra.cost.currency)}
                                             </span>
                                         </div>
                                     )}
@@ -304,7 +293,15 @@ export default function EntityDetail({ config, entity, countryCode }: EntityDeta
                             </Card>
                         </div>
 
-                        <div>
+                        <div className="space-y-6">
+                            <Card className="bg-slate-800/50 border-slate-700">
+                                <CardHeader>
+                                    <CardTitle className="text-white text-lg">Sources</CardTitle>
+                                </CardHeader>
+                                <CardContent>
+                                    <SourceList sources={infra.sources} lastVerified={infra.lastVerified} />
+                                </CardContent>
+                            </Card>
                             {infra.regionIds && infra.regionIds.length > 0 && (
                                 <Card className="bg-slate-800/50 border-slate-700">
                                     <CardHeader>

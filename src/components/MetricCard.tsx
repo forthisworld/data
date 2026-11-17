@@ -34,6 +34,25 @@ function formatValue(value: number | string, currency?: string, unit?: string, c
     return formatted;
 }
 
+/** "2011 · Census of India 2011, ..." with the source linked when there's a URL. */
+function MetricSource({ metric, className }: { metric: Metric; className?: string }) {
+    if (!metric.source && !metric.year) return null;
+    return (
+        <p className={cn('text-[11px] text-slate-400 mt-1', className)}>
+            {metric.year}
+            {metric.year && metric.source ? ' · ' : ''}
+            {metric.source &&
+                (metric.sourceUrl ? (
+                    <a href={metric.sourceUrl} target="_blank" rel="noopener noreferrer" className="underline decoration-dotted hover:text-sky-300">
+                        {metric.source}
+                    </a>
+                ) : (
+                    metric.source
+                ))}
+        </p>
+    );
+}
+
 export default function MetricCard({ metric, config, variant = 'secondary' }: MetricCardProps) {
     const TrendIcon = metric.trend === 'up' ? TrendingUp : metric.trend === 'down' ? TrendingDown : Minus;
     const trendColor = metric.trend === 'up' ? 'text-green-400' : metric.trend === 'down' ? 'text-red-400' : 'text-slate-400';
@@ -52,6 +71,7 @@ export default function MetricCard({ metric, config, variant = 'secondary' }: Me
                             {metric.trendValue && <span className="text-xs">{metric.trendValue}%</span>}
                         </div>
                     )}
+                    <MetricSource metric={metric} />
                 </CardContent>
             </Card>
         );
@@ -81,9 +101,7 @@ export default function MetricCard({ metric, config, variant = 'secondary' }: Me
                         {metric.trendValue && <span className="text-xs">{metric.trendValue}%</span>}
                     </div>
                 )}
-                {metric.year && (
-                    <p className="text-xs text-slate-500 mt-1">{metric.year}</p>
-                )}
+                <MetricSource metric={metric} className="text-slate-500" />
             </CardContent>
         </Card>
     );

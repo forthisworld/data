@@ -28,7 +28,20 @@ export async function getOverview(countryCode: string, regionPath?: string[]): P
         if (overview) return overview;
         const region = findEntity(d.regions, slug);
         if (!region) throw new Error(`Region not found: ${regionPath.join('/')}`);
-        return { entityId: region.id, entityType: 'region', name: region.name, metrics: [], highlights: [], quickLinks: [] };
+        // No overview file: show the region's own sourced facts.
+        const src = region.sources?.[0];
+        const metrics: Overview['metrics'] =
+            region.population && src
+                ? [{
+                      key: 'population',
+                      label: 'Population',
+                      value: region.population,
+                      year: region.populationAsOf?.match(/\d{4}/)?.[0],
+                      source: src.title.startsWith('Census') ? 'Census of India 2011, Primary Census Abstract' : src.title,
+                      sourceUrl: src.url,
+                  }]
+                : [];
+        return { entityId: region.id, entityType: 'region', name: region.name, metrics, highlights: [], quickLinks: [] };
     }
 
     if (!d.overview) throw new Error(`Country overview not found for: ${countryCode}`);
