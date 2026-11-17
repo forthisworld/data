@@ -77,6 +77,14 @@
             "department": "Department of Personnel and Administrative Reforms (Cabinet Section), Government of Karnataka",
             "priority": "medium",
             "category": "infrastructure"
+        },
+        {
+            "id": "mplads-constituency-data",
+            "title": "MPLADS: every Lok Sabha seat's works and spending, as data",
+            "description": "From the eSAKSHI MPLADS portal, for every Lok Sabha constituency in the 17th and 18th Lok Sabha: funds entitled, released and spent; and each work recommended, with its sanction date, implementing agency, location, sanctioned cost, amount paid and status (sanctioned, ongoing, completed). Asked for in a machine-readable format (CSV or Excel), and whether MoSPI permits it to be republished as open data. The portal shows these figures to citizens but offers no download.",
+            "department": "Ministry of Statistics and Programme Implementation (MPLADS Division), via RTI Online",
+            "priority": "high",
+            "category": "representatives"
         }
     ],
     "stats": {

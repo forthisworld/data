@@ -45,6 +45,15 @@ function describe(country: string, route: AtlasRoute, data: AtlasData): { title:
                 summary: seat.member ? `${seat.name} is represented in the Lok Sabha by ${seat.member.name} (${seat.member.party}).` : `${seat.name} has no sitting member in the Lok Sabha.`,
             };
         }
+        case 'assembly': {
+            const house = data.assemblies[route.state];
+            const seat = house?.seats.find(x => x.id === `${route.state}:${route.number}`);
+            if (!house || !seat) return null;
+            return {
+                title: `${seat.name} (assembly), ${known?.states[route.state] ?? route.state}`,
+                summary: seat.member ? `${seat.name} is represented in the ${house.house} by ${seat.member.name} (${seat.member.party}).` : `${seat.name} has no sitting member in the ${house.house}.`,
+            };
+        }
         case 'district': {
             const d = known?.districts[route.code];
             if (!d || d[1] !== route.state) return null;

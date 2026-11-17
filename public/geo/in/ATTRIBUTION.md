@@ -14,6 +14,7 @@ a border shared by two layers is exactly the same line in both.
 | `india.geojson` | national outline: all of the above merged | same district file | CC BY 2.5 India |
 | `labels.geojson` | one point inside each state and each district, with its area in km², for placing names | derived from the files above | as above |
 | `pc.geojson`, `pc-lines.geojson` | Lok Sabha seats: each seat clipped to its state on `states.geojson`, so seat edges on a state border are the state line itself; lines are drawn only between seats in the same state. Assam and Jammu & Kashmir (except Ladakh) are left out because their seats were redrawn in 2023 and 2022 | `parliamentary-constituencies/india_pc_2019_simplified.geojson` (by Arun Ganesh), same pinned commit; built by `scripts/build-constituencies.mjs` (`npm run geo:pc`). One erratum fixed: seat 30 in Maharashtra is Mumbai South Central | CC0 1.0 |
+| `ac/<state>.geojson`, `ac/<state>-lines.geojson` | Assembly seats for states we have checked (Karnataka so far: 224 seats), clipped to the state on `states.geojson`, lines only between seats; each records its Lok Sabha seat and 2011 districts | `assembly-constituencies/India_AC.shp`, same pinned commit; built by `scripts/build-assembly.mjs` (`npm run geo:ac -- karnataka`). DataMeet warns of shifts in this file, so only states that pass the seat-count check are built | CC BY 2.5 India |
 | `routes.geojson` | toll roads as lines, one feature per section, with the 2011 districts and states each passes through | OpenStreetMap ways pinned in `scripts/routes.json`, fetched by `scripts/build-routes.mjs` (`npm run geo:routes`) | ODbL 1.0, © OpenStreetMap contributors |
 
 NICE Road's two sections are matched to OSM by name and position, not from the 1997 Framework Agreement (which is not
@@ -65,8 +66,7 @@ Notes:
   about 0.1% of the area each way, and its easternmost point is about 1.6 km short.
 - **No basemap borders are used.** Third-party basemaps draw their own international borders, which
   could contradict this outline, so the street layer at city zoom (OpenFreeMap) is drawn without its
-  boundary layer or country/state names. The legal requirements for publishing maps of India are on
-  the list for legal review (PLAN.md).
+  boundary layer or country/state names.
 - These files are not part of the ODbL-licensed data.ftw database; they keep the licences above.
 - To replace them with current boundaries, use the Survey of India's administrative boundary
   release (district and sub-district, keyed by LGD code) once downloaded, and update `build-geo.mjs`.

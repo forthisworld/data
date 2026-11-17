@@ -26,7 +26,7 @@ import Sheet, { PEEK_PX, useWide, type Snap } from './Sheet';
 import QuickSettings from './QuickSettings';
 import { addBasemap, paintBasemap, BASEMAP_GLYPHS, BASEMAP_PALETTE } from './basemap';
 import { PlaceView, RoadView, PersonView, RoadsView, SeatView, ROLE, shortName } from './PanelViews';
-import { loadSeats, paintSeats, showSeats, SEAT_PALETTE, type SeatGeo } from './seats';
+import { loadSeats, paintSeats, showLines, seatFillLayers, SEAT_PALETTE, type SeatGeo, type SeatPrefix } from './seats';
 import { PLACE_ALIASES } from '@/lib/place-aliases';
 import { atlasPath, parseAtlasPath, type AtlasRoute } from '@/lib/atlas-route';
 
@@ -129,7 +129,7 @@ interface AtlasProps {
 }
 
 export default function Atlas({ countryCode, countryName, data, initial }: AtlasProps) {
-    const { regions, roads, people, lokSabha } = data;
+    const { regions, roads, people, lokSabha, assemblies, mplads } = data;
     const { choice, dark, setTheme } = useTheme();
     const wide = useWide();
 
@@ -151,26 +151,37 @@ export default function Atlas({ countryCode, countryName, data, initial }: Atlas
     const [query, setQuery] = useState('');
     const [searchOpen, setSearchOpen] = useState(false);
     const [bearing, setBearing] = useState(0);
-    // What the lines inside states show: 2011 districts, or Lok Sabha seats.
-    const [mode, setMode] = useState<'districts' | 'seats'>('districts');
+    // What the lines inside states show: 2011 districts, Lok Sabha seats (pc) or assembly seats (ac).
+    const [mode, setMode] = useState<'districts' | SeatPrefix>('districts');
     const modeRef = useRef(mode);
     modeRef.current = mode;
+    // Bounds, districts and Lok Sabha seat of every seat loaded so far (both houses; ids do not clash).
     const [seatGeo, setSeatGeo] = useState<Map<string, SeatGeo> | null>(null);
-    const seatLoad = useRef<Promise<Map<string, SeatGeo>> | null>(null);
+    const [acLoaded, setAcLoaded] = useState(false);
+    const seatLoad = useRef<Partial<Record<SeatPrefix, Promise<Map<string, SeatGeo>>>>>({});
     const relayout = useRef<() => void>(() => {});
 
     const roadBySlug = useMemo(() => new Map(roads.map(r => [r.slug, r])), [roads]);
     const personBySlug = useMemo(() => new Map(people.map(p => [p.slug, p])), [people]);
     const seats = useMemo(() => lokSabha?.seats ?? [], [lokSabha]);
-    const seatById = useMemo(() => new Map(seats.map(x => [x.id, x])), [seats]);
+    const acSeats = useMemo(() => Object.values(assemblies).flatMap(h => h.seats), [assemblies]);
+    const seatById = useMemo(() => new Map([...seats, ...acSeats].map(x => [x.id, x])), [seats, acSeats]);
+    const acIds = useMemo(() => new Set(acSeats.map(x => x.id)), [acSeats]);
+    const isAc = useCallback((id: string) => acIds.has(id), [acIds]);
     const placeName = useCallback((slug: string) => regions[slug]?.name ?? places.find(p => p.kind === 'state' && p.stateSlug === slug)?.name ?? slug, [regions, places]);
 
     // ---------- search (all client-side) ----------
     type Item = { type: 'place' | 'road' | 'person' | 'seat'; label: string; sub: string; extra: string[]; place?: Place; slug?: string };
+
     const items = useMemo<Item[]>(() => [
         ...seats.map(x => ({
             type: 'seat' as const, label: x.member?.name ?? `${x.name} (vacant)`, slug: x.id,
             sub: `MP for ${x.name}, ${placeName(x.state)}${x.member ? ` · ${x.member.partyShort ?? x.member.party}` : ''}`,
+            extra: [x.name, x.member?.party ?? '', x.member?.partyShort ?? ''],
+        })),
+        ...acSeats.map(x => ({
+            type: 'seat' as const, label: x.member?.name ?? `${x.name} (vacant)`, slug: x.id,
+            sub: `MLA for ${x.name}, ${placeName(x.state)}${x.member ? ` · ${x.member.partyShort ?? x.member.party}` : ''}`,
             extra: [x.name, x.member?.party ?? '', x.member?.partyShort ?? ''],
         })),
         ...roads.map(r => ({ type: 'road' as const, label: shortName(r.name), sub: `Toll road · ${r.regionIds.map(placeName).join(', ')}`, extra: [r.name, r.officialName ?? '', r.operatorCompany ?? ''], slug: r.slug })),
@@ -184,7 +195,7 @@ export default function Atlas({ countryCode, countryName, data, initial }: Atlas
                     : regions[p.stateSlug]?.level === 'union_territory' ? 'Union territory' : 'State',
             };
         }),
-    ], [roads, people, places, regions, placeName, seats]);
+    ], [roads, people, places, regions, placeName, seats, acSeats]);
     const fuse = useMemo(() => new Fuse(items, { keys: [{ name: 'label', weight: 3 }, { name: 'extra', weight: 1 }], threshold: 0.25, ignoreLocation: true }), [items]);
     const matches = query.trim().length >= 2 ? fuse.search(query.trim(), { limit: 8 }).map(r => r.item) : [];
 
@@ -247,37 +258,46 @@ export default function Atlas({ countryCode, countryName, data, initial }: Atlas
         }
     }, [clearHighlights, padding, personBySlug, places]);
 
-    /** Loads the seat layers once (they are ~2 MB, so only when first needed). */
-    const ensureSeats = useCallback(() => {
+    /**
+     * Loads one kind of seat layer once, when first needed: Lok Sabha seats (~2 MB, the whole country) or
+     * the assembly seats of every state whose assembly we have (one file per state).
+     */
+    const ensureSeats = useCallback((prefix: SeatPrefix) => {
         const map = mapRef.current;
         if (!map) return Promise.reject(new Error('no map'));
-        seatLoad.current ??= loadSeats(map, countryCode, SEAT_PALETTE[darkRef.current ? 'dark' : 'light'], 'states-line')
-            .then(geo => { setSeatGeo(geo); return geo; });
-        return seatLoad.current;
-    }, [countryCode]);
+        const pal = SEAT_PALETTE[darkRef.current ? 'dark' : 'light'];
+        const merge = (geo: Map<string, SeatGeo>) => { setSeatGeo(prev => new Map([...(prev ?? []), ...geo])); return geo; };
+        seatLoad.current[prefix] ??= (prefix === 'pc'
+            ? loadSeats(map, 'pc', { polys: `/geo/${countryCode}/pc.geojson`, lines: `/geo/${countryCode}/pc-lines.geojson` }, pal, 'states-line')
+            : Promise.all(Object.keys(assemblies).map(st => loadSeats(map, 'ac', { polys: `/geo/${countryCode}/ac/${st}.geojson`, lines: `/geo/${countryCode}/ac/${st}-lines.geojson` }, pal, 'states-line', `ac-${st}`)))
+                .then(all => { setAcLoaded(true); return new Map(all.flatMap(g => [...g])); })
+        ).then(merge);
+        return seatLoad.current[prefix]!;
+    }, [countryCode, assemblies]);
 
     const openSeat = useCallback((id: string, fly = true) => {
         const map = mapRef.current;
         const seat = seatById.get(id);
         if (!map || !seat) return;
+        const prefix: SeatPrefix = isAc(id) ? 'ac' : 'pc';
         clearHighlights();
         setView({ kind: 'seat', id });
-        setMode('seats');
+        setMode(prefix);
         setSnap('half');
         setQuery('');
         setSearchOpen(false);
-        ensureSeats().then(geo => {
+        ensureSeats(prefix).then(geo => {
             const g = geo.get(id);
             if (g) {
-                selectedRef.current = { source: 'pc', id };
+                selectedRef.current = { source: prefix === 'pc' ? 'pc' : `ac-${seat.state}`, id };
                 map.setFeatureState(selectedRef.current, { selected: true });
-                if (fly) map.fitBounds(g.bounds, { padding: padding(), maxZoom: 10.5, duration: 900 });
+                if (fly) map.fitBounds(g.bounds, { padding: padding(), maxZoom: prefix === 'ac' ? 12 : 10.5, duration: 900 });
             } else if (fly) {
                 const st = places.find(p => p.kind === 'state' && p.stateSlug === seat.state);
                 if (st) map.fitBounds(st.bounds, { padding: padding(), maxZoom: 7, duration: 900 });
             }
         }).catch(() => {});
-    }, [clearHighlights, ensureSeats, padding, places, seatById]);
+    }, [clearHighlights, ensureSeats, isAc, padding, places, seatById]);
 
     const openRoads = useCallback(() => {
         clearHighlights();
@@ -471,7 +491,7 @@ export default function Atlas({ countryCode, countryName, data, initial }: Atlas
             // ---- hover and click: roads win over districts, districts over states ----
             const hit = (p: maplibregl.PointLike): MapGeoJSONFeature | undefined =>
                 map.queryRenderedFeatures(p, { layers: ['routes-hit'] })[0] ??
-                (modeRef.current === 'seats' && map.getLayer('pc-fill') ? map.queryRenderedFeatures(p, { layers: ['pc-fill'] })[0] : undefined) ??
+                (modeRef.current !== 'districts' && seatFillLayers(map, modeRef.current).length ? map.queryRenderedFeatures(p, { layers: seatFillLayers(map, modeRef.current) })[0] : undefined) ??
                 map.queryRenderedFeatures(p, { layers: map.getZoom() >= DISTRICT_ZOOM && modeRef.current === 'districts' ? ['districts-fill'] : ['hover-shade'] })[0];
             let hovered: { source: string; id: string | number } | null = null;
             const clearHover = () => {
@@ -484,7 +504,7 @@ export default function Atlas({ countryCode, countryName, data, initial }: Atlas
                 if (!f) return clearHover();
                 map.getCanvas().style.cursor = 'pointer';
                 if (f.layer.id === 'routes-hit' || f.id === undefined) { if (hovered) { map.setFeatureState(hovered, { hover: false }); hovered = null; } return; }
-                const source = f.layer.id === 'districts-fill' ? 'districts' : f.layer.id === 'pc-fill' ? 'pc' : 'states';
+                const source = f.source;
                 if (!hovered || hovered.id !== f.id || hovered.source !== source) {
                     clearHover();
                     hovered = { source, id: f.id };
@@ -498,7 +518,7 @@ export default function Atlas({ countryCode, countryName, data, initial }: Atlas
                 if (!f) return handlers.current.closeView();
                 const p = f.properties as Record<string, string>;
                 if (f.layer.id === 'routes-hit') return handlers.current.openRoad(p.slug, false);
-                if (f.layer.id === 'pc-fill') return handlers.current.openSeat(p.key, false);
+                if (/^(pc|ac)-fill/.test(f.layer.id)) return handlers.current.openSeat(p.key, false);
                 const geom = f.geometry as Geom;
                 handlers.current.openPlace(
                     f.layer.id === 'districts-fill'
@@ -528,14 +548,18 @@ export default function Atlas({ countryCode, countryName, data, initial }: Atlas
     useEffect(() => {
         const map = mapRef.current;
         if (!map || !ready) return;
-        if (mode === 'seats') ensureSeats().then(() => { showSeats(map, true); relayout.current(); }).catch(e => { console.error('Lok Sabha seats could not be loaded', e); setMode('districts'); });
-        else { showSeats(map, false); relayout.current(); }
+        if (mode !== 'districts') {
+            ensureSeats(mode).then(() => { showLines(map, mode); relayout.current(); })
+                .catch(e => { console.error('Seats could not be loaded', e); setMode('districts'); });
+        } else { showLines(map, 'districts'); relayout.current(); }
     }, [mode, ready, ensureSeats]);
 
-    // A district's panel lists the MPs whose seats cover it, so it needs the seat layers.
+    // Place and seat panels list the representatives whose seats cover them, so they need the seat files.
     useEffect(() => {
-        if (ready && view?.kind === 'place' && !seatGeo) ensureSeats().catch(() => {});
-    }, [view, ready, seatGeo, ensureSeats]);
+        if (!ready || !view || (view.kind !== 'place' && view.kind !== 'seat')) return;
+        ensureSeats('pc').catch(() => {});
+        if (Object.keys(assemblies).length) ensureSeats('ac').catch(() => {});
+    }, [view, ready, ensureSeats, assemblies]);
 
     // Theme: repaint, don't rebuild.
     useEffect(() => {
@@ -556,11 +580,13 @@ export default function Atlas({ countryCode, countryName, data, initial }: Atlas
     const routeOf = useCallback((v: View | null): AtlasRoute =>
         !v ? { kind: 'home' }
             : v.kind === 'roads' ? { kind: 'roads' }
-            : v.kind === 'seat' ? { kind: 'seat', state: v.id.slice(0, v.id.indexOf(':')), seat: v.id.slice(v.id.indexOf(':') + 1) }
+            : v.kind === 'seat' ? (isAc(v.id)
+                ? { kind: 'assembly', state: v.id.slice(0, v.id.indexOf(':')), number: v.id.slice(v.id.indexOf(':') + 1) }
+                : { kind: 'seat', state: v.id.slice(0, v.id.indexOf(':')), seat: v.id.slice(v.id.indexOf(':') + 1) })
             : v.kind === 'road' ? { kind: 'road', slug: v.slug }
             : v.kind === 'person' ? { kind: 'person', slug: v.slug }
             : v.place.kind === 'state' ? { kind: 'state', slug: v.place.stateSlug }
-            : { kind: 'district', state: v.place.stateSlug, code: v.place.code! }, []);
+            : { kind: 'district', state: v.place.stateSlug, code: v.place.code! }, [isAc]);
 
     const applyRoute = useCallback((r: AtlasRoute) => {
         fromUrl.current = true;
@@ -570,6 +596,7 @@ export default function Atlas({ countryCode, countryName, data, initial }: Atlas
             case 'home': return closeView();
             case 'roads': return openRoads();
             case 'seat': return openSeat(`${r.state}:${r.seat}`);
+            case 'assembly': return openSeat(`${r.state}:${r.number}`);
             case 'road': return openRoad(r.slug);
             case 'person': return openPerson(r.slug);
             case 'state':
@@ -626,14 +653,24 @@ export default function Atlas({ countryCode, countryName, data, initial }: Atlas
         }
         if (view.kind === 'seat') {
             const seat = seatById.get(view.id);
-            if (!seat || !lokSabha) return null;
+            const ac = isAc(view.id);
+            const house = ac ? assemblies[seat?.state ?? ''] : lokSabha;
+            if (!seat || !house) return null;
             const codes = seatGeo?.get(seat.id)?.districts ?? [];
             const districts = codes.map(c => places.find(p => p.kind === 'district' && p.code === c)).filter((p): p is Place => !!p);
+            const parent = ac && seat.lokSabhaSeat ? seatById.get(seat.lokSabhaSeat) : undefined;
+            const inside = ac ? undefined : (assemblies[seat.state]?.seats ?? []).filter(x => x.lokSabhaSeat === seat.id);
             return {
                 key: `seat:${seat.id}`,
-                body: <SeatView seat={seat} stateName={placeName(seat.state)} lokSabha={lokSabha} country={countryCode}
+                body: <SeatView seat={seat} house={house} stateName={placeName(seat.state)} country={countryCode}
                     districts={districts.map(d => ({ code: d.code!, name: d.name }))}
-                    onPlace={c => { const d = districts.find(x => x.code === c); if (d) openPlace(d); }} />,
+                    parent={parent} parentHouse={lokSabha ?? undefined} inside={inside} insideHouse={assemblies[seat.state]}
+                    mplads={!ac && mplads?.bySeat[seat.id] ? {
+                        term: mplads.term, asOf: mplads.asOf, source: mplads.source, seat: mplads.bySeat[seat.id],
+                        nationalPaidShare: Math.round((mplads.totals.paid / mplads.totals.allocated) * 100),
+                        worksUrl: mplads.worksStates.includes(seat.state) ? `/data/mplads/lok-sabha-${mplads.term}/${seat.state}/${seat.id.slice(seat.id.indexOf(':') + 1)}.json` : undefined,
+                    } : undefined}
+                    onPlace={c => { const d = districts.find(x => x.code === c); if (d) openPlace(d); }} onSeat={id => openSeat(id)} />,
             };
         }
         if (view.kind === 'road') {
@@ -653,10 +690,14 @@ export default function Atlas({ countryCode, countryName, data, initial }: Atlas
         const seatsHere = pl.kind === 'state'
             ? seats.filter(x => x.state === pl.stateSlug)
             : seats.filter(x => seatGeo?.get(x.id)?.districts.includes(pl.code!));
+        const assembly = assemblies[pl.stateSlug] ?? null;
+        const mlasHere = !assembly ? [] : pl.kind === 'state'
+            ? assembly.seats
+            : assembly.seats.filter(x => seatGeo?.get(x.id)?.districts.includes(pl.code!));
         return {
             key: `place:${pl.kind}:${pl.code ?? pl.stateSlug}`,
-            body: <PlaceView place={pl} region={regions[pl.stateSlug]} roads={inPlace} people={here} seats={seatsHere} seatsLoading={pl.kind === 'district' && !seatGeo}
-                lokSabha={lokSabha} country={countryCode} onRoad={s => openRoad(s)} onPerson={s => openPerson(s)} onSeat={id => openSeat(id)} />,
+            body: <PlaceView place={pl} region={regions[pl.stateSlug]} roads={inPlace} people={here} seats={seatsHere} seatsLoading={pl.kind === 'district' && (!seatGeo || (!!assembly && !acLoaded))}
+                lokSabha={lokSabha} mlas={mlasHere} assembly={assembly} country={countryCode} onRoad={s => openRoad(s)} onPerson={s => openPerson(s)} onSeat={id => openSeat(id)} />,
         };
     })();
 
@@ -683,10 +724,10 @@ export default function Atlas({ countryCode, countryName, data, initial }: Atlas
                 <div className="pointer-events-auto flex items-start gap-2">
                     {lokSabha && (
                         <div role="radiogroup" aria-label="Lines inside states" className="flex h-11 items-center rounded-full border border-ftw-line bg-ftw-surface/95 p-1 shadow-sm backdrop-blur">
-                            {([['districts', 'Districts'], ['seats', 'MPs']] as const).map(([v, label]) => (
+                            {([['districts', 'Districts'], ['pc', 'MPs'], ...(Object.keys(assemblies).length ? [['ac', 'MLAs']] : [])] as ['districts' | SeatPrefix, string][]).map(([v, label]) => (
                                 <button key={v} role="radio" aria-checked={mode === v} onClick={() => setMode(v)}
-                                    title={v === 'seats' ? 'Lok Sabha seats and their MPs' : '2011 districts'}
-                                    className={`h-full rounded-full px-3 text-xs font-semibold sm:px-3.5 ${mode === v ? 'bg-ftw-text text-ftw-surface' : 'text-ftw-muted hover:text-ftw-text'}`}>
+                                    title={v === 'pc' ? 'Lok Sabha seats and their MPs' : v === 'ac' ? `Assembly seats and their MLAs (${Object.keys(assemblies).map(placeName).join(', ')} so far)` : '2011 districts'}
+                                    className={`h-full rounded-full px-2.5 text-xs font-semibold sm:px-3.5 ${mode === v ? 'bg-ftw-text text-ftw-surface' : 'text-ftw-muted hover:text-ftw-text'}`}>
                                     {label}
                                 </button>
                             ))}
@@ -775,7 +816,7 @@ export default function Atlas({ countryCode, countryName, data, initial }: Atlas
                                         if (m.type === 'place') openPlace(m.place!); else if (m.type === 'road') openRoad(m.slug!); else if (m.type === 'seat') openSeat(m.slug!); else openPerson(m.slug!);
                                     }
                                 }}
-                                placeholder="Search a place, MP, road or person"
+                                placeholder="Search a place, MP, MLA, road or person"
                                 aria-label="Search the atlas"
                                 className="h-14 w-full rounded-full border border-ftw-line bg-ftw-surface pl-12 pr-12 text-base text-ftw-text shadow-[0_4px_24px_rgba(0,0,0,0.10)] placeholder:text-ftw-faint focus:border-ftw-accent focus:outline-none"
                             />

@@ -1,0 +1,21 @@
+{
+  "_comment": "eSAKSHI's constituency spelling (state|CONSTITUENCY) -> the Lok Sabha Secretariat's seat name, for fetch-mplads.mjs.",
+  "jammu-and-kashmir|BARAMULLAH": "Baramulla",
+  "jammu-and-kashmir|ANANTNAG": "Anantnag-Rajouri",
+  "uttarakhand|NAINITAL UDHAM SINGH NAG.": "Nainital-Udhamsingh Nagar",
+  "telangana|MAHABUBNAGAR": "Mahbubnagar",
+  "telangana|WARANGEL(SC)": "Warangal",
+  "telangana|CHELVELLA": "Chevella",
+  "andhra-pradesh|NARASAPURAM": "Narsapuram",
+  "chhattisgarh|SARGUJA(ST)": "Surguja",
+  "karnataka|CHIKBALLAPUR": "Chikkballapur",
+  "dadra-and-nagar-haveli-and-daman-and-diu|DADRA & NAGAR HAVELI (ST)": "Dadra and Nagar Haveli",
+  "tamil-nadu|DHARAMAPURI": "Dharmapuri",
+  "bihar|UJJARPUR": "Ujiarpur",
+  "bihar|PURNEA": "Purnia",
+  "assam|NOWGONG": "Nagaon",
+  "west-bengal|JOYNAGAR(SC)": "Jaynagar",
+  "delhi|CHANDINI CHOWK": "Chandni Chowk",
+  "haryana|SONEPAT": "Sonipat",
+  "punjab|BHATINDA": "Bathinda"
+}

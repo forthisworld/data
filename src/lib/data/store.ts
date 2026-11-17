@@ -21,6 +21,7 @@ import type {
     Region,
     TollRoad,
     Legislature,
+    MpladsRecord,
 } from '@/types';
 
 export interface InfoRequestData {
@@ -40,6 +41,7 @@ export interface CountryData {
     infrastructure: Infrastructure[];
     tollRoads: TollRoad[];
     legislatures: Legislature[];
+    mplads: MpladsRecord[];
     infoRequests: InfoRequestData | null;
 }
 
@@ -61,6 +63,7 @@ function build(code: string): CountryData | null {
         infrastructure: [],
         tollRoads: [],
         legislatures: [],
+        mplads: [],
         infoRequests: (dataFiles[`${prefix}info-requests.json`] as InfoRequestData | undefined) ?? null,
     };
 
@@ -68,6 +71,8 @@ function build(code: string): CountryData | null {
         const rel = path.slice(prefix.length);
         if (rel.startsWith('toll-roads/')) {
             data.tollRoads.push(json as TollRoad);
+        } else if (rel.startsWith('mplads/')) {
+            data.mplads.push(json as MpladsRecord);
         } else if (rel.startsWith('representatives/')) {
             data.legislatures.push(json as Legislature);
         } else if (rel.startsWith('regions/')) {

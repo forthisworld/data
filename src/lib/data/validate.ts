@@ -3,7 +3,7 @@
  * the site, the contribution endpoint and scripts/validate-data.ts share them.
  */
 
-import type { AnalysisPoint, Entity, Legislature, MoneyValue, Overview, SourceCitation, TollRoad } from '@/types';
+import type { AnalysisPoint, Entity, Legislature, MoneyValue, MpladsRecord, Overview, SourceCitation, TollRoad } from '@/types';
 
 const ESTABLISHED = new Set(['court_finding', 'audit_finding', 'official_record', 'company_filing']);
 const BASES = new Set([...ESTABLISHED, 'reported', 'claim']);
@@ -109,6 +109,25 @@ export function validateLegislature(l: Legislature, today = new Date()): string[
         checkRef(seat.sourceId, where, ids, errors);
         if (seat.status === 'sitting' && (!seat.member?.name || !seat.member.party)) errors.push(`${where}: a sitting seat needs the member's name and party`);
         if (seat.status === 'vacant' && seat.member) errors.push(`${where}: a vacant seat has no member`);
+    }
+    return errors;
+}
+
+/** MPLADS figures: every seat cites the portal, amounts are whole rupees, and parts never exceed wholes. */
+export function validateMplads(m: MpladsRecord): string[] {
+    const errors: string[] = [];
+    const ids = checkSources(m.sources, m.id, errors);
+    const seen = new Set<string>();
+    for (const s of m.seats) {
+        const where = `${m.id} / ${s.seat}`;
+        if (seen.has(s.seat)) errors.push(`${where}: duplicate seat`);
+        seen.add(s.seat);
+        checkRef(s.sourceId, where, ids, errors);
+        for (const [k, v] of [['allocated', s.allocated], ['paid', s.paid], ['recommended', s.recommended.amount], ['sanctioned', s.sanctioned.amount], ['completed', s.completed.amount]] as const) {
+            if (!Number.isFinite(v) || v < 0) errors.push(`${where}: ${k} is not a non-negative amount`);
+        }
+        if (s.sanctioned.count > s.recommended.count) errors.push(`${where}: more works sanctioned than recommended`);
+        if (s.completed.count > s.recommended.count) errors.push(`${where}: more works completed than recommended`);
     }
     return errors;
 }

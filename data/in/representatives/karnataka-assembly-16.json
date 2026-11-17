@@ -1,0 +1,3390 @@
+{
+ "id": "karnataka-assembly-16",
+ "house": "Karnataka Legislative Assembly",
+ "state": "karnataka",
+ "term": 16,
+ "asOf": "2026-11-17",
+ "sources": [
+  {
+   "id": "kla-members-16",
+   "title": "Sixteenth Karnataka Legislative Assembly: list of members",
+   "publisher": "Karnataka Legislative Assembly Secretariat (kla.kar.nic.in)",
+   "type": "government_portal",
+   "url": "https://kla.kar.nic.in/assembly/member/16assemblymemberslist.htm",
+   "retrievedAt": "2026-11-17",
+   "note": "Linked from https://kla.kar.nic.in/assembly/member/members.htm. By-election winners and members who left are marked in the list itself."
+  }
+ ],
+ "seats": [
+  {
+   "id": "karnataka:1",
+   "state": "karnataka",
+   "name": "Nippani",
+   "number": 1,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Jolle Shashikala Annasaheb",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP"
+   },
+   "lokSabhaSeat": "karnataka:29-1",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:2",
+   "state": "karnataka",
+   "name": "Chikkodi-Sadalga",
+   "number": 2,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Ganesh Prakash Hukkeri",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-1",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:3",
+   "state": "karnataka",
+   "name": "Athani",
+   "number": 3,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Laxman Sangappa Savadi",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-1",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:4",
+   "state": "karnataka",
+   "name": "Kagawad",
+   "number": 4,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Bharamagouda (Raju) Alagouda Kage",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-1",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:5",
+   "state": "karnataka",
+   "name": "Kudachi",
+   "number": 5,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Mahendra Kallappa Tammannavar",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-1",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:6",
+   "state": "karnataka",
+   "name": "Raibag",
+   "number": 6,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Aihole Duryodhan Mahalingappa",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP"
+   },
+   "lokSabhaSeat": "karnataka:29-1",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:7",
+   "state": "karnataka",
+   "name": "Hukkeri",
+   "number": 7,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Katti Nikhil Umesh",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP"
+   },
+   "lokSabhaSeat": "karnataka:29-1",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:8",
+   "state": "karnataka",
+   "name": "Arabhavi",
+   "number": 8,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Balachandra Lakshmanrao Jarakiholi",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP"
+   },
+   "lokSabhaSeat": "karnataka:29-2",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:9",
+   "state": "karnataka",
+   "name": "Gokak",
+   "number": 9,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Ramesh Lakshmanrao Jarakiholi",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP"
+   },
+   "lokSabhaSeat": "karnataka:29-2",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:10",
+   "state": "karnataka",
+   "name": "Yemkanmardi",
+   "number": 10,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Satish Lakshmanrao Jarakiholi",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-1",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:11",
+   "state": "karnataka",
+   "name": "Belgaum Uttar",
+   "number": 11,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Asif (Raju) Sait",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-2",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:12",
+   "state": "karnataka",
+   "name": "Belgaum Dakshin",
+   "number": 12,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Abhay Patil",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP"
+   },
+   "lokSabhaSeat": "karnataka:29-2",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:13",
+   "state": "karnataka",
+   "name": "Belgaum Rural",
+   "number": 13,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Laxmi R Hebbalkar",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-2",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:14",
+   "state": "karnataka",
+   "name": "Khanapur",
+   "number": 14,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Vithal Somanna Halagekar",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP"
+   },
+   "lokSabhaSeat": "karnataka:29-12",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:15",
+   "state": "karnataka",
+   "name": "Kittur",
+   "number": 15,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Babasaheb Patil",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-12",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:16",
+   "state": "karnataka",
+   "name": "Bailhongal",
+   "number": 16,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Koujalgi Mahanthesh Shivananda",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-2",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:17",
+   "state": "karnataka",
+   "name": "Saundatti Yellamma",
+   "number": 17,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Vishwas Vasant Vaidya",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-2",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:18",
+   "state": "karnataka",
+   "name": "Ramadurg",
+   "number": 18,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Ashok Mahadevappa Pattan",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-2",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:19",
+   "state": "karnataka",
+   "name": "Mudhol",
+   "number": 19,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Ramappa Balappa Thimmapur",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-3",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:20",
+   "state": "karnataka",
+   "name": "Terdal",
+   "number": 20,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Siddu Savadi",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP"
+   },
+   "lokSabhaSeat": "karnataka:29-3",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:21",
+   "state": "karnataka",
+   "name": "Jamakhandi",
+   "number": 21,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Jagadeesh Shivayya Gudagunti",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP"
+   },
+   "lokSabhaSeat": "karnataka:29-3",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:22",
+   "state": "karnataka",
+   "name": "Bilgi",
+   "number": 22,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Jagadish Thimmanagouda Patil",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-3",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:23",
+   "state": "karnataka",
+   "name": "Badami",
+   "number": 23,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "B B Chimmanakatti",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-3",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:24",
+   "state": "karnataka",
+   "name": "Bagalkot",
+   "number": 24,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Umesh Hullappa Meti",
+    "party": "Indian National Congress",
+    "partyShort": "INC",
+    "since": "2026-05-04"
+   },
+   "lokSabhaSeat": "karnataka:29-3",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:25",
+   "state": "karnataka",
+   "name": "Hungund",
+   "number": 25,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Kashappanavar Vijayanand Shivashankarappa",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-3",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:26",
+   "state": "karnataka",
+   "name": "Muddebihal",
+   "number": 26,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Appaji Channabasavaraj Shankarrao Nadagouda",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-4",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:27",
+   "state": "karnataka",
+   "name": "Devara Hippargi",
+   "number": 27,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Bhimanagouda (Rajugouda) Basanagouda Patil",
+    "party": "Janata Dal (Secular)",
+    "partyShort": "JD(S)"
+   },
+   "lokSabhaSeat": "karnataka:29-4",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:28",
+   "state": "karnataka",
+   "name": "Basavana Bagevadi",
+   "number": 28,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Patil Shivananda Siddaramappa",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-4",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:29",
+   "state": "karnataka",
+   "name": "Babaleshwar",
+   "number": 29,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Patil Mallanagouda Basavanagouda",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-4",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:30",
+   "state": "karnataka",
+   "name": "Bijapur City",
+   "number": 30,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Basanagouda Ramanagouda Patil (Yatnal)",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "note": "Un-attached member"
+   },
+   "lokSabhaSeat": "karnataka:29-4",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:31",
+   "state": "karnataka",
+   "name": "Nagthan",
+   "number": 31,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Katakdhond Vitthal Dhondiba",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-4",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:32",
+   "state": "karnataka",
+   "name": "Indi",
+   "number": 32,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Yashvantarayagouda Vittalagouda Patil",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-4",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:33",
+   "state": "karnataka",
+   "name": "Sindgi",
+   "number": 33,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Ashok Mallappa Managuli",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-4",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:34",
+   "state": "karnataka",
+   "name": "Afzalpur",
+   "number": 34,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "M Y Patil",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-5",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:35",
+   "state": "karnataka",
+   "name": "Jewargi",
+   "number": 35,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Dr Ajay Dharam Singh",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-5",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:36",
+   "state": "karnataka",
+   "name": "Shorapur",
+   "number": 36,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Raja Venugopal Naik",
+    "party": "Indian National Congress",
+    "partyShort": "INC",
+    "since": "2024-06-11"
+   },
+   "lokSabhaSeat": "karnataka:29-6",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:37",
+   "state": "karnataka",
+   "name": "Shahapur",
+   "number": 37,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Sharanabasappa Darshanapur",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-6",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:38",
+   "state": "karnataka",
+   "name": "Yadagir",
+   "number": 38,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Channareddy Patil Tunnur",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-6",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:39",
+   "state": "karnataka",
+   "name": "Gurmitkal",
+   "number": 39,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Sharana Gouda Kandakur",
+    "party": "Janata Dal (Secular)",
+    "partyShort": "JD(S)"
+   },
+   "lokSabhaSeat": "karnataka:29-5",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:40",
+   "state": "karnataka",
+   "name": "Chittapur",
+   "number": 40,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Priyanka M Kharge",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-5",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:41",
+   "state": "karnataka",
+   "name": "Sedam",
+   "number": 41,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Dr Sharan Prakash Rudrappa Patil",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-5",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:42",
+   "state": "karnataka",
+   "name": "Chincholi",
+   "number": 42,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Dr Avinash Umesh Jadhav",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP"
+   },
+   "lokSabhaSeat": "karnataka:29-7",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:43",
+   "state": "karnataka",
+   "name": "Gulbarga Rural",
+   "number": 43,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Basawaraj Mattimud",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP"
+   },
+   "lokSabhaSeat": "karnataka:29-5",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:44",
+   "state": "karnataka",
+   "name": "Gulbarga Dakshin",
+   "number": 44,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Allam Prabhu Patil",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-5",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:45",
+   "state": "karnataka",
+   "name": "Gulbarga Uttar",
+   "number": 45,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Kaneez Fatima",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-5",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:46",
+   "state": "karnataka",
+   "name": "Aland",
+   "number": 46,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Bhoj Raj",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-7",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:47",
+   "state": "karnataka",
+   "name": "Basavakalyan",
+   "number": 47,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Sharanu Salagar",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP"
+   },
+   "lokSabhaSeat": "karnataka:29-7",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:48",
+   "state": "karnataka",
+   "name": "Humnabad",
+   "number": 48,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Siddu Patil",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP"
+   },
+   "lokSabhaSeat": "karnataka:29-7",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:49",
+   "state": "karnataka",
+   "name": "Bidar South",
+   "number": 49,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Dr. Shailendra Beldale",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP"
+   },
+   "lokSabhaSeat": "karnataka:29-7",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:50",
+   "state": "karnataka",
+   "name": "Bidar",
+   "number": 50,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Raheem Khan",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-7",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:51",
+   "state": "karnataka",
+   "name": "Bhalki",
+   "number": 51,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Eshwara Bhimanna Khandre",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-7",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:52",
+   "state": "karnataka",
+   "name": "Aurad",
+   "number": 52,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Prabhu B Chavhan",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP"
+   },
+   "lokSabhaSeat": "karnataka:29-7",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:53",
+   "state": "karnataka",
+   "name": "Raichur Rural",
+   "number": 53,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Basanagouda Daddal",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-6",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:54",
+   "state": "karnataka",
+   "name": "Raichur",
+   "number": 54,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Dr S Shivaraj Patil",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP"
+   },
+   "lokSabhaSeat": "karnataka:29-6",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:55",
+   "state": "karnataka",
+   "name": "Manvi",
+   "number": 55,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "G Hampayya Nayak Ballatagi",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-6",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:56",
+   "state": "karnataka",
+   "name": "Devadurga",
+   "number": 56,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Karemma",
+    "party": "Janata Dal (Secular)",
+    "partyShort": "JD(S)"
+   },
+   "lokSabhaSeat": "karnataka:29-6",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:57",
+   "state": "karnataka",
+   "name": "Lingasagur",
+   "number": 57,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Manappa D Vajjal",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP"
+   },
+   "lokSabhaSeat": "karnataka:29-6",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:58",
+   "state": "karnataka",
+   "name": "Sindhanoor",
+   "number": 58,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Badarli Hampangouda",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-8",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:59",
+   "state": "karnataka",
+   "name": "Maski",
+   "number": 59,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Basanagouda Turuvihal",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-8",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:60",
+   "state": "karnataka",
+   "name": "Kushtagi",
+   "number": 60,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Doddanagouda Hanumanagouda Patil",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP"
+   },
+   "lokSabhaSeat": "karnataka:29-8",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:61",
+   "state": "karnataka",
+   "name": "Kanakagiri",
+   "number": 61,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Shivaraj Sangappa Tangadagi",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-8",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:62",
+   "state": "karnataka",
+   "name": "Gangavathi",
+   "number": 62,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "G Janardhan Reddy",
+    "party": "Kalyana Rajya Pragathi Paksha",
+    "partyShort": "KRPP"
+   },
+   "lokSabhaSeat": "karnataka:29-8",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:63",
+   "state": "karnataka",
+   "name": "Yelburga",
+   "number": 63,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Basavaraj Rayaraddi",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-8",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:64",
+   "state": "karnataka",
+   "name": "Koppal",
+   "number": 64,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "K Raghavendra Basavaraj Hitnal",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-8",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:65",
+   "state": "karnataka",
+   "name": "Shirahatti",
+   "number": 65,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Dr. Chandru Lamani",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP"
+   },
+   "lokSabhaSeat": "karnataka:29-10",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:66",
+   "state": "karnataka",
+   "name": "Gadag",
+   "number": 66,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "H K Patil",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-10",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:67",
+   "state": "karnataka",
+   "name": "Ron",
+   "number": 67,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Gurupadagouda Sanganagouda Patil",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-10",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:68",
+   "state": "karnataka",
+   "name": "Naragund",
+   "number": 68,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "C C Patil",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP"
+   },
+   "lokSabhaSeat": "karnataka:29-3",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:69",
+   "state": "karnataka",
+   "name": "Navalgund",
+   "number": 69,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "N H Konaraddi",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-11",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:70",
+   "state": "karnataka",
+   "name": "Kundagol",
+   "number": 70,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "M R Patil",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP"
+   },
+   "lokSabhaSeat": "karnataka:29-11",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:71",
+   "state": "karnataka",
+   "name": "Dharwad",
+   "number": 71,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Vinay Kulkarni",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-11",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:72",
+   "state": "karnataka",
+   "name": "Hubli-Dharwad-East",
+   "number": 72,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Abbayya Prasad",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-11",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:73",
+   "state": "karnataka",
+   "name": "Hubli-Dharwad-Central",
+   "number": 73,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Mahesh Tenginakai",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP"
+   },
+   "lokSabhaSeat": "karnataka:29-11",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:74",
+   "state": "karnataka",
+   "name": "Hubli-Dharwad-West",
+   "number": 74,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Aravind Chandrakant Bellad",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP"
+   },
+   "lokSabhaSeat": "karnataka:29-11",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:75",
+   "state": "karnataka",
+   "name": "Kalghatagi",
+   "number": 75,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Santosh S Lad",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-11",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:76",
+   "state": "karnataka",
+   "name": "Haliyal",
+   "number": 76,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Deshpande Raghunath Vishwanathrao",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-12",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:77",
+   "state": "karnataka",
+   "name": "Karwar",
+   "number": 77,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Sateesh Sail Krishna",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-12",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:78",
+   "state": "karnataka",
+   "name": "Kumta",
+   "number": 78,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Dinakar Keshav Shetty",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP"
+   },
+   "lokSabhaSeat": "karnataka:29-12",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:79",
+   "state": "karnataka",
+   "name": "Bhatkal",
+   "number": 79,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Mankala Subba Vaidya",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-12",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:80",
+   "state": "karnataka",
+   "name": "Sirsi",
+   "number": 80,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Bhimanna T Naik",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-12",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:81",
+   "state": "karnataka",
+   "name": "Yellapur",
+   "number": 81,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Arbail Shivaram Hebbar",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "note": "Un-attached member"
+   },
+   "lokSabhaSeat": "karnataka:29-12",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:82",
+   "state": "karnataka",
+   "name": "Hanagal",
+   "number": 82,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Mane Srinivas",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-10",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:83",
+   "state": "karnataka",
+   "name": "Shiggaon",
+   "number": 83,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Pathan Yasir Ahmed Khan",
+    "party": "Indian National Congress",
+    "partyShort": "INC",
+    "since": "2024-12-09"
+   },
+   "lokSabhaSeat": "karnataka:29-11",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:84",
+   "state": "karnataka",
+   "name": "Haveri",
+   "number": 84,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Lamani Rudrappa Manappa",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-10",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:85",
+   "state": "karnataka",
+   "name": "Byadagi",
+   "number": 85,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Shivannanavar Basavaraj Neelappa",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-10",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:86",
+   "state": "karnataka",
+   "name": "Hirekerur",
+   "number": 86,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Ujaneshwar Basavanneppa Banakar",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-10",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:87",
+   "state": "karnataka",
+   "name": "Ranebennur",
+   "number": 87,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Prakash Koliwad",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-10",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:88",
+   "state": "karnataka",
+   "name": "Hadagali",
+   "number": 88,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Krishna Nayaka",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP"
+   },
+   "lokSabhaSeat": "karnataka:29-9",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:89",
+   "state": "karnataka",
+   "name": "Hagaribommanahalli",
+   "number": 89,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "K Nemaraj Naik",
+    "party": "Janata Dal (Secular)",
+    "partyShort": "JD(S)"
+   },
+   "lokSabhaSeat": "karnataka:29-9",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:90",
+   "state": "karnataka",
+   "name": "Vijayanagara",
+   "number": 90,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "H R Gaviyappa",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-9",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:91",
+   "state": "karnataka",
+   "name": "Kampli",
+   "number": 91,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "J N Ganesh",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-9",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:92",
+   "state": "karnataka",
+   "name": "Siruguppa",
+   "number": 92,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "B M Nagaraja",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-8",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:93",
+   "state": "karnataka",
+   "name": "Bellary",
+   "number": 93,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "B Nagendra",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-9",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:94",
+   "state": "karnataka",
+   "name": "Bellary City",
+   "number": 94,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Nara Bharath Reddy",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-9",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:95",
+   "state": "karnataka",
+   "name": "Sandur",
+   "number": 95,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "E Annapoorna",
+    "party": "Indian National Congress",
+    "partyShort": "INC",
+    "since": "2024-12-09"
+   },
+   "lokSabhaSeat": "karnataka:29-9",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:96",
+   "state": "karnataka",
+   "name": "Kudligi",
+   "number": 96,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Srinivas N T",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-9",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:97",
+   "state": "karnataka",
+   "name": "Molakalmuru",
+   "number": 97,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "N Y Gopalakrishna",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-18",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:98",
+   "state": "karnataka",
+   "name": "Challakere",
+   "number": 98,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "T Raghumurthy",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-18",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:99",
+   "state": "karnataka",
+   "name": "Chitradurga",
+   "number": 99,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "K C Veerendra Puppy",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-18",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:100",
+   "state": "karnataka",
+   "name": "Hiriyur",
+   "number": 100,
+   "drawn": true,
+   "status": "vacant",
+   "vacatedBy": {
+    "name": "D Sudhakar",
+    "reason": "died",
+    "date": "2026-05-10"
+   },
+   "lokSabhaSeat": "karnataka:29-18",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:101",
+   "state": "karnataka",
+   "name": "Hosadurga",
+   "number": 101,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "B G Govindappa",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-18",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:102",
+   "state": "karnataka",
+   "name": "Holalkere",
+   "number": 102,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "M Chandrappa",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP"
+   },
+   "lokSabhaSeat": "karnataka:29-18",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:103",
+   "state": "karnataka",
+   "name": "Jagalur",
+   "number": 103,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "B Devendrappa",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-13",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:104",
+   "state": "karnataka",
+   "name": "Harapanahalli",
+   "number": 104,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Latha Mallikarjun",
+    "party": "Independent",
+    "partyShort": "IND"
+   },
+   "lokSabhaSeat": "karnataka:29-13",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:105",
+   "state": "karnataka",
+   "name": "Harihar",
+   "number": 105,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "B P Harish",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP"
+   },
+   "lokSabhaSeat": "karnataka:29-13",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:106",
+   "state": "karnataka",
+   "name": "Davanagere North",
+   "number": 106,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "S S Mallikarjuna",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-13",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:107",
+   "state": "karnataka",
+   "name": "Davanagere South",
+   "number": 107,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Samarth Shamanuru Mallikarjuna",
+    "party": "Indian National Congress",
+    "partyShort": "INC",
+    "since": "2026-05-04"
+   },
+   "lokSabhaSeat": "karnataka:29-13",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:108",
+   "state": "karnataka",
+   "name": "Mayakonda",
+   "number": 108,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "K S Basavanthappa",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-13",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:109",
+   "state": "karnataka",
+   "name": "Channagiri",
+   "number": 109,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Basavaraju V Shivaganga",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-13",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:110",
+   "state": "karnataka",
+   "name": "Honnali",
+   "number": 110,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "D G Shanthana Gowda",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-13",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:111",
+   "state": "karnataka",
+   "name": "Shimoga Rural",
+   "number": 111,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Sharada Poorya Naik",
+    "party": "Janata Dal (Secular)",
+    "partyShort": "JD(S)"
+   },
+   "lokSabhaSeat": "karnataka:29-14",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:112",
+   "state": "karnataka",
+   "name": "Bhadravathi",
+   "number": 112,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "B K Sangameshwara",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-14",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:113",
+   "state": "karnataka",
+   "name": "Shimoga",
+   "number": 113,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Channabasappa (Chenni)",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP"
+   },
+   "lokSabhaSeat": "karnataka:29-14",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:114",
+   "state": "karnataka",
+   "name": "Thirthahalli",
+   "number": 114,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Araga Jnanendra",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP"
+   },
+   "lokSabhaSeat": "karnataka:29-14",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:115",
+   "state": "karnataka",
+   "name": "Shikaripura",
+   "number": 115,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Vijayendra Yediyurappa",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP"
+   },
+   "lokSabhaSeat": "karnataka:29-14",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:116",
+   "state": "karnataka",
+   "name": "Soraba",
+   "number": 116,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "S Madhu Bangarappa",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-14",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:117",
+   "state": "karnataka",
+   "name": "Sagara",
+   "number": 117,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "B K Gopalakrishna Belur",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-14",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:118",
+   "state": "karnataka",
+   "name": "Baindur",
+   "number": 118,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Gururaj Shetty Gantihole",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP"
+   },
+   "lokSabhaSeat": "karnataka:29-14",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:119",
+   "state": "karnataka",
+   "name": "Coonadapur/Kundapura",
+   "number": 119,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "A Kiran Kumar Kodgi",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP"
+   },
+   "lokSabhaSeat": "karnataka:29-15",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:120",
+   "state": "karnataka",
+   "name": "Udupi",
+   "number": 120,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Yashpal A Suvarna",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP"
+   },
+   "lokSabhaSeat": "karnataka:29-15",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:121",
+   "state": "karnataka",
+   "name": "Kaup",
+   "number": 121,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Gurme Suresh Shetty",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP"
+   },
+   "lokSabhaSeat": "karnataka:29-15",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:122",
+   "state": "karnataka",
+   "name": "Karkala",
+   "number": 122,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "V Sunil Kumar",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP"
+   },
+   "lokSabhaSeat": "karnataka:29-15",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:123",
+   "state": "karnataka",
+   "name": "Sringeri",
+   "number": 123,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "T D Rajegowda",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-15",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:124",
+   "state": "karnataka",
+   "name": "Mudigere",
+   "number": 124,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Nayana Motamma",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-15",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:125",
+   "state": "karnataka",
+   "name": "Chikmagalur",
+   "number": 125,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "H D Thammaiah",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-15",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:126",
+   "state": "karnataka",
+   "name": "Tarikere",
+   "number": 126,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "G H Srinivasa",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-15",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:127",
+   "state": "karnataka",
+   "name": "Kadur",
+   "number": 127,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Anand K S",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-16",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:128",
+   "state": "karnataka",
+   "name": "Chikkanayakanahalli",
+   "number": 128,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "C B Suresh Babu",
+    "party": "Janata Dal (Secular)",
+    "partyShort": "JD(S)"
+   },
+   "lokSabhaSeat": "karnataka:29-19",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:129",
+   "state": "karnataka",
+   "name": "Tiptur",
+   "number": 129,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "K Shadakshari",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-19",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:130",
+   "state": "karnataka",
+   "name": "Turuvekere",
+   "number": 130,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "M T Krishnappa",
+    "party": "Janata Dal (Secular)",
+    "partyShort": "JD(S)"
+   },
+   "lokSabhaSeat": "karnataka:29-19",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:131",
+   "state": "karnataka",
+   "name": "Kunigal",
+   "number": 131,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Dr H D Ranganath",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-23",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:132",
+   "state": "karnataka",
+   "name": "Tumkur City",
+   "number": 132,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "G B Jyothi Ganesh",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP"
+   },
+   "lokSabhaSeat": "karnataka:29-19",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:133",
+   "state": "karnataka",
+   "name": "Tumkur Rural",
+   "number": 133,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "B Suresh Gowda",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP"
+   },
+   "lokSabhaSeat": "karnataka:29-19",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:134",
+   "state": "karnataka",
+   "name": "Koratagere",
+   "number": 134,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Dr G Parameshwara",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-19",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:135",
+   "state": "karnataka",
+   "name": "Gubbi",
+   "number": 135,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "S R Srinivas (Vasu)",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-19",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:136",
+   "state": "karnataka",
+   "name": "Sira",
+   "number": 136,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "T B Jayachandra",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-18",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:137",
+   "state": "karnataka",
+   "name": "Pavagada",
+   "number": 137,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "H V Venkatesh",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-18",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:138",
+   "state": "karnataka",
+   "name": "Madhugiri",
+   "number": 138,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Kyatsandra N Rajanna",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-19",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:139",
+   "state": "karnataka",
+   "name": "Gowribidanur",
+   "number": 139,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "K H Puttaswamy Gowda (Khp)",
+    "party": "Independent",
+    "partyShort": "IND"
+   },
+   "lokSabhaSeat": "karnataka:29-27",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:140",
+   "state": "karnataka",
+   "name": "Bagepalli",
+   "number": 140,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "S N Subbareddy",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-27",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:141",
+   "state": "karnataka",
+   "name": "Chikkaballapur",
+   "number": 141,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Pradeep Eshwar",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-27",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:142",
+   "state": "karnataka",
+   "name": "Sidlaghatta",
+   "number": 142,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "B N Ravikumar",
+    "party": "Janata Dal (Secular)",
+    "partyShort": "JD(S)"
+   },
+   "lokSabhaSeat": "karnataka:29-28",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:143",
+   "state": "karnataka",
+   "name": "Chintamani",
+   "number": 143,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Dr M C Sudhakar",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-28",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:144",
+   "state": "karnataka",
+   "name": "Srinivasapur",
+   "number": 144,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "G K Venkatasiva Reddy",
+    "party": "Janata Dal (Secular)",
+    "partyShort": "JD(S)"
+   },
+   "lokSabhaSeat": "karnataka:29-28",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:145",
+   "state": "karnataka",
+   "name": "Mulbagal",
+   "number": 145,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Samruddhi V Manjunath",
+    "party": "Janata Dal (Secular)",
+    "partyShort": "JD(S)"
+   },
+   "lokSabhaSeat": "karnataka:29-28",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:146",
+   "state": "karnataka",
+   "name": "Kolar Gold Field",
+   "number": 146,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Roopakala M",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-28",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:147",
+   "state": "karnataka",
+   "name": "Bangarpet",
+   "number": 147,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "M Narayanaswamy",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-28",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:148",
+   "state": "karnataka",
+   "name": "Kolar",
+   "number": 148,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Kothur G Manjunatha",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-28",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:149",
+   "state": "karnataka",
+   "name": "Malur",
+   "number": 149,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "K Y Nanjegowda",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-28",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:150",
+   "state": "karnataka",
+   "name": "Yelahanka",
+   "number": 150,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "S R Vishwanath",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP"
+   },
+   "lokSabhaSeat": "karnataka:29-27",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:151",
+   "state": "karnataka",
+   "name": "K.R. Pura",
+   "number": 151,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "B A Basavaraja",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP"
+   },
+   "lokSabhaSeat": "karnataka:29-24",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:152",
+   "state": "karnataka",
+   "name": "Byatarayanapura",
+   "number": 152,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "C B Krishna Byregowda",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-24",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:153",
+   "state": "karnataka",
+   "name": "Yeshvanthapura",
+   "number": 153,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "S T Somashekar",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "note": "Un-attached member"
+   },
+   "lokSabhaSeat": "karnataka:29-24",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:154",
+   "state": "karnataka",
+   "name": "Rajarajeshwarinagar",
+   "number": 154,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Munirathna",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP"
+   },
+   "lokSabhaSeat": "karnataka:29-23",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:155",
+   "state": "karnataka",
+   "name": "Dasarahalli",
+   "number": 155,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "S Muniraju",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP"
+   },
+   "lokSabhaSeat": "karnataka:29-24",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:156",
+   "state": "karnataka",
+   "name": "Mahalakshmi Layout",
+   "number": 156,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "K Gopalaiah",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP"
+   },
+   "lokSabhaSeat": "karnataka:29-24",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:157",
+   "state": "karnataka",
+   "name": "Malleshwaram",
+   "number": 157,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Dr C N Ashwath Narayana",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP"
+   },
+   "lokSabhaSeat": "karnataka:29-24",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:158",
+   "state": "karnataka",
+   "name": "Hebbal",
+   "number": 158,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Suresh B S",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-24",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:159",
+   "state": "karnataka",
+   "name": "Pulakeshinagar",
+   "number": 159,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "A C Srinivasa",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-24",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:160",
+   "state": "karnataka",
+   "name": "Sarvagnanagar",
+   "number": 160,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "K J George",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-25",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:161",
+   "state": "karnataka",
+   "name": "C.V Raman Nagar",
+   "number": 161,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "S Raghu",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP"
+   },
+   "lokSabhaSeat": "karnataka:29-25",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:162",
+   "state": "karnataka",
+   "name": "Shivajinagar",
+   "number": 162,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Rizwan Arshad",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-25",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:163",
+   "state": "karnataka",
+   "name": "Shantinagar",
+   "number": 163,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "N A Haris",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-25",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:164",
+   "state": "karnataka",
+   "name": "Gandhinagar",
+   "number": 164,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Dinesh Gundurao",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-25",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:165",
+   "state": "karnataka",
+   "name": "Rajajinagar",
+   "number": 165,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "S Suresh Kumar",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP"
+   },
+   "lokSabhaSeat": "karnataka:29-25",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:166",
+   "state": "karnataka",
+   "name": "Govindraj Nagar",
+   "number": 166,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Priyakrishna",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-26",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:167",
+   "state": "karnataka",
+   "name": "Vijayanagar",
+   "number": 167,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "M Krishnappa",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-26",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:168",
+   "state": "karnataka",
+   "name": "Chamarajpet",
+   "number": 168,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Jameer Ahmed Khan",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-25",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:169",
+   "state": "karnataka",
+   "name": "Chickpet",
+   "number": 169,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Uday B Garudachar",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP"
+   },
+   "lokSabhaSeat": "karnataka:29-26",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:170",
+   "state": "karnataka",
+   "name": "Basavanagudi",
+   "number": 170,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "L A Ravisubramanya",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP"
+   },
+   "lokSabhaSeat": "karnataka:29-26",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:171",
+   "state": "karnataka",
+   "name": "Padmanaba Nagar",
+   "number": 171,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "R Ashoka",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP"
+   },
+   "lokSabhaSeat": "karnataka:29-26",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:172",
+   "state": "karnataka",
+   "name": "B.T.M Layout",
+   "number": 172,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Ramalinga Reddy",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-26",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:173",
+   "state": "karnataka",
+   "name": "Jayanagar",
+   "number": 173,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "C K Ramamurthy",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP"
+   },
+   "lokSabhaSeat": "karnataka:29-26",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:174",
+   "state": "karnataka",
+   "name": "Mahadevapura",
+   "number": 174,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Manjula S",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP"
+   },
+   "lokSabhaSeat": "karnataka:29-25",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:175",
+   "state": "karnataka",
+   "name": "Bommanahalli",
+   "number": 175,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "M Satish Reddy",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP"
+   },
+   "lokSabhaSeat": "karnataka:29-26",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:176",
+   "state": "karnataka",
+   "name": "Bangalore South",
+   "number": 176,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "M Krishnappa",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP"
+   },
+   "lokSabhaSeat": "karnataka:29-23",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:177",
+   "state": "karnataka",
+   "name": "Anekal",
+   "number": 177,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "B Shivanna",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-23",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:178",
+   "state": "karnataka",
+   "name": "Hosakote",
+   "number": 178,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Sharath Kumar Bachegowda",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-27",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:179",
+   "state": "karnataka",
+   "name": "Devanahalli",
+   "number": 179,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "K H Muniyappa",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-27",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:180",
+   "state": "karnataka",
+   "name": "Doddaballapur",
+   "number": 180,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Dheeraj Muniraju",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP"
+   },
+   "lokSabhaSeat": "karnataka:29-27",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:181",
+   "state": "karnataka",
+   "name": "Nelamangala",
+   "number": 181,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Shreenivasaiah N",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-27",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:182",
+   "state": "karnataka",
+   "name": "Magadi",
+   "number": 182,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "H C Balakrishna",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-23",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:183",
+   "state": "karnataka",
+   "name": "Ramanagaram",
+   "number": 183,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "H A Iqbal Hussain",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-23",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:184",
+   "state": "karnataka",
+   "name": "Kanakapura",
+   "number": 184,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "D K Shivakumar",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-23",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:185",
+   "state": "karnataka",
+   "name": "Channapatna",
+   "number": 185,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "C P Yogeeshwara",
+    "party": "Indian National Congress",
+    "partyShort": "INC",
+    "since": "2024-12-09"
+   },
+   "lokSabhaSeat": "karnataka:29-23",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:186",
+   "state": "karnataka",
+   "name": "Malavalli",
+   "number": 186,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "P M Narendraswamy",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-20",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:187",
+   "state": "karnataka",
+   "name": "Maddur",
+   "number": 187,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Udaya K M",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-20",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:188",
+   "state": "karnataka",
+   "name": "Melukote",
+   "number": 188,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Dharshan Puttannaiah",
+    "party": "Sarvodaya Karnataka Paksha",
+    "partyShort": "SKP"
+   },
+   "lokSabhaSeat": "karnataka:29-20",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:189",
+   "state": "karnataka",
+   "name": "Mandya",
+   "number": 189,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Ravi Kumar Gowda (Ganiga)",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-20",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:190",
+   "state": "karnataka",
+   "name": "Shrirangapattana",
+   "number": 190,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "A B Ramesh Bandisiddegowda",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-20",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:191",
+   "state": "karnataka",
+   "name": "Nagamangala",
+   "number": 191,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "N Cheluvarayaswamy Alias Swamygowda",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-20",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:192",
+   "state": "karnataka",
+   "name": "Krishnarajapet",
+   "number": 192,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "H T Manju",
+    "party": "Janata Dal (Secular)",
+    "partyShort": "JD(S)"
+   },
+   "lokSabhaSeat": "karnataka:29-20",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:193",
+   "state": "karnataka",
+   "name": "Sravanabelagola",
+   "number": 193,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "C N Balakrishna",
+    "party": "Janata Dal (Secular)",
+    "partyShort": "JD(S)"
+   },
+   "lokSabhaSeat": "karnataka:29-16",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:194",
+   "state": "karnataka",
+   "name": "Arasikere",
+   "number": 194,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "K M Shivalinge Gowda",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-16",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:195",
+   "state": "karnataka",
+   "name": "Belur",
+   "number": 195,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "H K Suresh",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP"
+   },
+   "lokSabhaSeat": "karnataka:29-16",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:196",
+   "state": "karnataka",
+   "name": "Hassan",
+   "number": 196,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Swaroop Prakash",
+    "party": "Janata Dal (Secular)",
+    "partyShort": "JD(S)"
+   },
+   "lokSabhaSeat": "karnataka:29-16",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:197",
+   "state": "karnataka",
+   "name": "Holenarasipura",
+   "number": 197,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "H D Revanna",
+    "party": "Janata Dal (Secular)",
+    "partyShort": "JD(S)"
+   },
+   "lokSabhaSeat": "karnataka:29-16",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:198",
+   "state": "karnataka",
+   "name": "Arakalgud",
+   "number": 198,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "A Manju",
+    "party": "Janata Dal (Secular)",
+    "partyShort": "JD(S)"
+   },
+   "lokSabhaSeat": "karnataka:29-16",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:199",
+   "state": "karnataka",
+   "name": "Sakaleshpur",
+   "number": 199,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Cement Manju",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP"
+   },
+   "lokSabhaSeat": "karnataka:29-16",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:200",
+   "state": "karnataka",
+   "name": "Belthangady",
+   "number": 200,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Harish Poonja",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP"
+   },
+   "lokSabhaSeat": "karnataka:29-17",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:201",
+   "state": "karnataka",
+   "name": "Moodabidri",
+   "number": 201,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Umanatha A Kotian",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP"
+   },
+   "lokSabhaSeat": "karnataka:29-17",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:202",
+   "state": "karnataka",
+   "name": "Mangalore City North",
+   "number": 202,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Dr Bharath Shetty Y",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP"
+   },
+   "lokSabhaSeat": "karnataka:29-17",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:203",
+   "state": "karnataka",
+   "name": "Mangalore City South",
+   "number": 203,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "D Vedavyasa Kamath",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP"
+   },
+   "lokSabhaSeat": "karnataka:29-17",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:204",
+   "state": "karnataka",
+   "name": "Mangalore",
+   "number": 204,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "U T Khadar",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-17",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:205",
+   "state": "karnataka",
+   "name": "Bantwal",
+   "number": 205,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Rajesh Naik U",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP"
+   },
+   "lokSabhaSeat": "karnataka:29-17",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:206",
+   "state": "karnataka",
+   "name": "Puttur",
+   "number": 206,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Ashok Kumar Rai",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-17",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:207",
+   "state": "karnataka",
+   "name": "Sullia",
+   "number": 207,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Bhagirathi Murulya",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP"
+   },
+   "lokSabhaSeat": "karnataka:29-17",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:208",
+   "state": "karnataka",
+   "name": "Madikeri",
+   "number": 208,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Dr. Mantar Gowda",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-21",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:209",
+   "state": "karnataka",
+   "name": "Virajpet",
+   "number": 209,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "A S Ponnanna",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-21",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:210",
+   "state": "karnataka",
+   "name": "Periyapatna",
+   "number": 210,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "K Venkatesh",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-21",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:211",
+   "state": "karnataka",
+   "name": "Krishnarajanagara",
+   "number": 211,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Ravishankar D",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-20",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:212",
+   "state": "karnataka",
+   "name": "Hunsur",
+   "number": 212,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "G D Harish Gowda",
+    "party": "Janata Dal (Secular)",
+    "partyShort": "JD(S)"
+   },
+   "lokSabhaSeat": "karnataka:29-21",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:213",
+   "state": "karnataka",
+   "name": "Heggadadevankote",
+   "number": 213,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Anil Kumar C",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-22",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:214",
+   "state": "karnataka",
+   "name": "Nanjangud",
+   "number": 214,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Dharshan Dhruvanarayana",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-22",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:215",
+   "state": "karnataka",
+   "name": "Chamundeshwari",
+   "number": 215,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "G T Devegowda",
+    "party": "Janata Dal (Secular)",
+    "partyShort": "JD(S)"
+   },
+   "lokSabhaSeat": "karnataka:29-21",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:216",
+   "state": "karnataka",
+   "name": "Krishnaraja",
+   "number": 216,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "T S Srivathsa",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP"
+   },
+   "lokSabhaSeat": "karnataka:29-21",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:217",
+   "state": "karnataka",
+   "name": "Chamaraja",
+   "number": 217,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "K Harish Gowda",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-21",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:218",
+   "state": "karnataka",
+   "name": "Narasimharaja",
+   "number": 218,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Tanveer Sait",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-21",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:219",
+   "state": "karnataka",
+   "name": "Varuna",
+   "number": 219,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Siddaramaiah",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-22",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:220",
+   "state": "karnataka",
+   "name": "T. Narasipura",
+   "number": 220,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Dr H C Mahadevappa",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-22",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:221",
+   "state": "karnataka",
+   "name": "Hanur",
+   "number": 221,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "M R Manjunath",
+    "party": "Janata Dal (Secular)",
+    "partyShort": "JD(S)"
+   },
+   "lokSabhaSeat": "karnataka:29-22",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:222",
+   "state": "karnataka",
+   "name": "Kollegal",
+   "number": 222,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "A R Krishnamurthy",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-22",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:223",
+   "state": "karnataka",
+   "name": "Chamarajanagar",
+   "number": 223,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "C Puttarangashetty",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-22",
+   "sourceId": "kla-members-16"
+  },
+  {
+   "id": "karnataka:224",
+   "state": "karnataka",
+   "name": "Gundlupet",
+   "number": 224,
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "H M Ganesh Prasad",
+    "party": "Indian National Congress",
+    "partyShort": "INC"
+   },
+   "lokSabhaSeat": "karnataka:29-22",
+   "sourceId": "kla-members-16"
+  }
+ ],
+ "lastVerified": "2026-11-17"
+}

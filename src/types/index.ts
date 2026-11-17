@@ -580,6 +580,8 @@ export interface LegislatureSeat {
   id: string;
   state: string;
   name: string;
+  /** The seat's number in the delimitation order (assembly seats). */
+  number?: number;
   /** Whether the map has a current boundary for this seat. */
   drawn: boolean;
   status: 'sitting' | 'vacant';
@@ -589,18 +591,60 @@ export interface LegislatureSeat {
     partyShort?: string;
     /** Which Lok Sabhas (by number) this member has sat in. */
     lokSabhaTerms?: number[];
+    /** For a by-election winner: when they took the seat (YYYY-MM-DD). */
+    since?: string;
+    /** As the house lists it, e.g. "Un-attached member". */
+    note?: string;
   };
-  vacatedBy?: { name: string; reason: string };
+  vacatedBy?: { name: string; reason: string; date?: string };
+  /** Assembly seats: the Lok Sabha seat it lies in (a pc.geojson key). */
+  lokSabhaSeat?: string;
   sourceId: string;
 }
 
 export interface Legislature {
   id: string;
   house: string;
+  /** State legislatures: the state's slug. */
+  state?: string;
   term: number;
   /** The date the member list was read. */
   asOf: string;
   sources: SourceCitation[];
   seats: LegislatureSeat[];
+  lastVerified?: string;
+}
+
+// ============================================
+// MPLADS: MP Local Area Development Scheme
+// ============================================
+
+export interface CountAmount { count: number; amount: number }
+
+/** One Lok Sabha seat's MPLADS position for a term, as the eSAKSHI portal reports it (INR). */
+export interface MpladsSeat {
+  /** A LegislatureSeat id (Lok Sabha). */
+  seat: string;
+  /** MPs as the portal names them (a seat can have had more than one this term). */
+  mps: string[];
+  allocated: number;
+  recommended: CountAmount;
+  sanctioned: CountAmount;
+  completed: CountAmount;
+  /** Payments released to vendors for completed and ongoing works. */
+  paid: number;
+  sourceId: string;
+}
+
+export interface MpladsRecord {
+  id: string;
+  scheme: 'MPLADS';
+  house: string;
+  term: number;
+  asOf: string;
+  currency: string;
+  sources: SourceCitation[];
+  totals: Omit<MpladsSeat, 'seat' | 'mps' | 'sourceId'>;
+  seats: MpladsSeat[];
   lastVerified?: string;
 }

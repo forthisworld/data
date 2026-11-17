@@ -6,6 +6,7 @@
  *   /in/<state-slug>                     a state or union territory
  *   /in/<state-slug>/district/<code>     a district (Census 2011 code)
  *   /in/<state-slug>/lok-sabha/<seat>    a Lok Sabha seat (the part of its id after the colon)
+ *   /in/<state-slug>/assembly/<number>   an assembly (Vidhan Sabha) seat
  *   /in/person/<slug>                    a person
  *   /in/infrastructure/toll-roads        all toll roads
  *   /in/infrastructure/toll-roads/<slug> a toll road
@@ -18,6 +19,7 @@ export type AtlasRoute =
     | { kind: 'state'; slug: string }
     | { kind: 'district'; state: string; code: string }
     | { kind: 'seat'; state: string; seat: string }
+    | { kind: 'assembly'; state: string; number: string }
     | { kind: 'person'; slug: string }
     | { kind: 'roads' }
     | { kind: 'road'; slug: string };
@@ -39,6 +41,7 @@ export function parseAtlasPath(segments: string[]): AtlasRoute | null {
     if (s.length === 1) return { kind: 'state', slug: s[0] };
     if (s.length === 3 && s[1] === 'district' && /^\d+$/.test(s[2])) return { kind: 'district', state: s[0], code: s[2] };
     if (s.length === 3 && s[1] === 'lok-sabha' && /^[a-z0-9-]+$/.test(s[2])) return { kind: 'seat', state: s[0], seat: s[2] };
+    if (s.length === 3 && s[1] === 'assembly' && /^\d+$/.test(s[2])) return { kind: 'assembly', state: s[0], number: s[2] };
     return null;
 }
 
@@ -48,6 +51,7 @@ export function atlasPath(country: string, r: AtlasRoute): string {
         case 'state': return `/${country}/${r.slug}`;
         case 'district': return `/${country}/${r.state}/district/${r.code}`;
         case 'seat': return `/${country}/${r.state}/lok-sabha/${r.seat}`;
+        case 'assembly': return `/${country}/${r.state}/assembly/${r.number}`;
         case 'person': return `/${country}/person/${r.slug}`;
         case 'roads': return `/${country}/infrastructure/toll-roads`;
         case 'road': return `/${country}/infrastructure/toll-roads/${r.slug}`;

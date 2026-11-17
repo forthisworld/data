@@ -6,7 +6,7 @@
  */
 
 import { getCountryData, findEntity } from '@/lib/data/store';
-import { CountryConfig, LegislatureSeat, Overview, Person, SourceCitation, TollRoad } from '@/types';
+import { CountryConfig, LegislatureSeat, MpladsRecord, MpladsSeat, Overview, Person, SourceCitation, TollRoad } from '@/types';
 
 export async function getCountryConfig(countryCode: string): Promise<CountryConfig> {
     const d = getCountryData(countryCode);
@@ -99,18 +99,37 @@ export interface AtlasData {
     roads: TollRoad[];
     people: Person[];
     /** Who holds each Lok Sabha seat (data/in/representatives). */
-    lokSabha: { term: number; asOf: string; source: SourceCitation; seats: Omit<LegislatureSeat, 'sourceId'>[] } | null;
+    lokSabha: HouseData | null;
+    /** State assemblies we have, by state slug. */
+    assemblies: Record<string, HouseData>;
+    /** MPLADS for the current Lok Sabha, by seat id. */
+    mplads: { term: number; asOf: string; source: SourceCitation; totals: MpladsRecord['totals']; bySeat: Record<string, Omit<MpladsSeat, 'seat' | 'sourceId'>>; worksStates: string[] } | null;
+}
+
+/** A house's seats for the atlas; every seat cites the same list, so the source is sent once. */
+export interface HouseData { house: string; term: number; asOf: string; source: SourceCitation; seats: Omit<LegislatureSeat, 'sourceId'>[] }
+
+function houseData(l: { house: string; term: number; asOf: string; sources: SourceCitation[]; seats: LegislatureSeat[] }): HouseData {
+    return { house: l.house, term: l.term, asOf: l.asOf, source: l.sources[0], seats: l.seats.map(seat => { const { sourceId, ...rest } = seat; void sourceId; return rest; }) };
 }
 
 export async function getAtlasData(countryCode: string): Promise<AtlasData> {
     const d = getCountryData(countryCode);
     const ls = d?.legislatures.find(l => l.house === 'Lok Sabha');
+    const mp = d?.mplads.find(m => m.house === 'Lok Sabha' && m.term === ls?.term);
     return {
         regions: await getAtlasRegions(countryCode),
         roads: d?.tollRoads ?? [],
         people: d?.persons ?? [],
         // Every seat cites the same member list, so it is sent once.
-        lokSabha: ls ? { term: ls.term, asOf: ls.asOf, source: ls.sources[0], seats: ls.seats.map(seat => { const { sourceId, ...rest } = seat; void sourceId; return rest; }) } : null,
+        lokSabha: ls ? houseData(ls) : null,
+        mplads: mp ? {
+            term: mp.term, asOf: mp.asOf, source: mp.sources[0], totals: mp.totals,
+            bySeat: Object.fromEntries(mp.seats.map(({ seat, sourceId, ...rest }) => { void sourceId; return [seat, rest]; })),
+            // States with a per-work list in public/data/mplads (scripts/fetch-mplads.mjs WORK_STATES).
+            worksStates: ['karnataka'],
+        } : null,
+        assemblies: Object.fromEntries((d?.legislatures ?? []).filter(l => l.state).map(l => [l.state!, houseData(l)])),
     };
 }
 

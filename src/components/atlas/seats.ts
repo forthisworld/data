@@ -1,16 +1,21 @@
 /**
- * Lok Sabha seats on the map: public/geo/<country>/pc.geojson (one polygon per seat, clipped to our
- * state boundaries) and pc-lines.geojson (lines between seats of the same state only), built by
- * scripts/build-constituencies.mjs. Loaded the first time they are needed.
+ * Seats on the map: Lok Sabha seats (prefix "pc": public/geo/<country>/pc.geojson + pc-lines.geojson,
+ * from scripts/build-constituencies.mjs) and assembly seats (prefix "ac": ac/<state>.geojson +
+ * ac/<state>-lines.geojson, from scripts/build-assembly.mjs). Every seat is clipped to our state
+ * boundaries and lines are drawn only between seats, so seats never draw a border of their own.
+ * Loaded the first time they are needed.
  */
 import type maplibregl from 'maplibre-gl';
 
 type Bounds = [[number, number], [number, number]];
+export type SeatPrefix = 'pc' | 'ac';
 
 export interface SeatGeo {
     bounds: Bounds;
     /** Census 2011 district codes the seat overlaps meaningfully. */
     districts: string[];
+    /** Assembly seats: the Lok Sabha seat they lie in. */
+    pcKey?: string;
 }
 
 export interface SeatPalette { line: string; select: string; selectOpacity: number; hover: string; hoverOpacity: number; label: string; halo: string }
@@ -20,7 +25,7 @@ export const SEAT_PALETTE: Record<'light' | 'dark', SeatPalette> = {
     dark: { line: '#4b5768', select: '#60a5fa', selectOpacity: 0.14, hover: '#ffffff', hoverOpacity: 0.06, label: '#a5b0bf', halo: '#0b0f14' },
 };
 
-const LAYERS = ['pc-fill', 'pc-selected-fill', 'pc-lines', 'pc-labels'];
+const layers = (x: SeatPrefix) => [`${x}-fill`, `${x}-selected-fill`, `${x}-lines`, `${x}-labels`];
 
 function bboxOf(g: GeoJSON.Polygon | GeoJSON.MultiPolygon): Bounds {
     let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity;
@@ -30,45 +35,56 @@ function bboxOf(g: GeoJSON.Polygon | GeoJSON.MultiPolygon): Bounds {
     return [[x0, y0], [x1, y1]];
 }
 
-/** Adds the seat layers (hidden) under `before`, and returns each seat's bounds and districts. */
-export async function loadSeats(map: maplibregl.Map, country: string, p: SeatPalette, before: string): Promise<Map<string, SeatGeo>> {
-    const [polys, lines] = await Promise.all(['pc', 'pc-lines'].map(f =>
-        fetch(`/geo/${country}/${f}.geojson`).then(r => { if (!r.ok) throw new Error(`${f}: ${r.status}`); return r.json(); })));
+/**
+ * Adds (or extends) a seat layer set, hidden, under `before`, and returns each seat's bounds and
+ * districts. For assembly seats, call once per state: each state's file is added as its own source.
+ */
+export async function loadSeats(map: maplibregl.Map, prefix: SeatPrefix, files: { polys: string; lines: string }, p: SeatPalette, before: string, sourceId: string = prefix): Promise<Map<string, SeatGeo>> {
+    const [polys, lines] = await Promise.all([files.polys, files.lines].map(u =>
+        fetch(u).then(r => { if (!r.ok) throw new Error(`${u}: ${r.status}`); return r.json(); })));
     const geo = new Map<string, SeatGeo>();
     for (const f of (polys as GeoJSON.FeatureCollection<GeoJSON.Polygon | GeoJSON.MultiPolygon>).features) {
         if (!f.geometry) continue;
-        geo.set(f.properties!.key, { bounds: bboxOf(f.geometry), districts: f.properties!.districts ?? [] });
+        geo.set(f.properties!.key, { bounds: bboxOf(f.geometry), districts: f.properties!.districts ?? [], pcKey: f.properties!.pcKey });
     }
-    if (map.getSource('pc')) return geo;
-    map.addSource('pc', { type: 'geojson', data: polys, promoteId: 'key' });
-    map.addSource('pc-lines', { type: 'geojson', data: lines });
+    if (map.getSource(sourceId)) return geo;
+    map.addSource(sourceId, { type: 'geojson', data: polys, promoteId: 'key' });
+    map.addSource(`${sourceId}-lines`, { type: 'geojson', data: lines });
     const hidden = { visibility: 'none' as const };
-    map.addLayer({ id: 'pc-fill', type: 'fill', source: 'pc', layout: hidden, paint: {} }, before);
-    map.addLayer({ id: 'pc-selected-fill', type: 'fill', source: 'pc', layout: hidden, paint: {} }, before);
-    map.addLayer({ id: 'pc-lines', type: 'line', source: 'pc-lines', layout: hidden, paint: { 'line-width': ['interpolate', ['linear'], ['zoom'], 4, 0.4, 9, 1.3] } }, before);
+    const id = (kind: string) => (sourceId === prefix ? `${prefix}-${kind}` : `${prefix}-${kind}--${sourceId}`);
+    map.addLayer({ id: id('fill'), type: 'fill', source: sourceId, layout: hidden, paint: {} }, before);
+    map.addLayer({ id: id('selected-fill'), type: 'fill', source: sourceId, layout: hidden, paint: {} }, before);
+    map.addLayer({ id: id('lines'), type: 'line', source: `${sourceId}-lines`, layout: hidden, paint: { 'line-width': ['interpolate', ['linear'], ['zoom'], 4, 0.4, 9, 1.3] } }, before);
     map.addLayer({
-        id: 'pc-labels', type: 'symbol', source: 'pc', minzoom: 5.6,
-        layout: { ...hidden, 'text-field': ['get', 'name'], 'text-font': ['Noto Sans Regular'], 'text-size': ['interpolate', ['linear'], ['zoom'], 5.6, 10, 9, 13], 'text-max-width': 7, 'text-padding': 3 },
+        id: id('labels'), type: 'symbol', source: sourceId, minzoom: prefix === 'ac' ? 7.6 : 5.6,
+        layout: { ...hidden, 'text-field': ['get', 'name'], 'text-font': ['Noto Sans Regular'], 'text-size': ['interpolate', ['linear'], ['zoom'], 5.6, 10, 10, 13], 'text-max-width': 7, 'text-padding': 3 },
         paint: {},
     });
     paintSeats(map, p);
     return geo;
 }
 
-export function paintSeats(map: maplibregl.Map, p: SeatPalette) {
-    const set = (layer: string, prop: string, value: unknown) => { if (map.getLayer(layer)) map.setPaintProperty(layer, prop, value); };
-    set('pc-fill', 'fill-color', p.hover);
-    set('pc-fill', 'fill-opacity', ['case', ['boolean', ['feature-state', 'hover'], false], p.hoverOpacity, 0]);
-    set('pc-selected-fill', 'fill-color', p.select);
-    set('pc-selected-fill', 'fill-opacity', ['case', ['boolean', ['feature-state', 'selected'], false], p.selectOpacity, 0]);
-    set('pc-lines', 'line-color', p.line);
-    set('pc-labels', 'text-color', p.label);
-    set('pc-labels', 'text-halo-color', p.halo);
-    set('pc-labels', 'text-halo-width', 1.3);
+/** Every seat layer on the map, of one kind or all. */
+export function seatLayers(map: maplibregl.Map, prefix?: SeatPrefix): string[] {
+    const ids = (map.getStyle()?.layers ?? []).map(l => l.id);
+    return ids.filter(i => (prefix ? [prefix] : (['pc', 'ac'] as const)).some(x => layers(x).some(base => i === base || i.startsWith(`${base}--`))));
 }
 
-/** Seats mode shows seat lines and names instead of district lines. */
-export function showSeats(map: maplibregl.Map, on: boolean) {
-    for (const id of LAYERS) if (map.getLayer(id)) map.setLayoutProperty(id, 'visibility', on ? 'visible' : 'none');
-    for (const id of ['districts-line', 'districts-fill']) if (map.getLayer(id)) map.setLayoutProperty(id, 'visibility', on ? 'none' : 'visible');
+export function paintSeats(map: maplibregl.Map, p: SeatPalette) {
+    for (const id of seatLayers(map)) {
+        const set = (prop: string, value: unknown) => map.setPaintProperty(id, prop, value);
+        if (/-selected-fill/.test(id)) { set('fill-color', p.select); set('fill-opacity', ['case', ['boolean', ['feature-state', 'selected'], false], p.selectOpacity, 0]); }
+        else if (/-fill/.test(id)) { set('fill-color', p.hover); set('fill-opacity', ['case', ['boolean', ['feature-state', 'hover'], false], p.hoverOpacity, 0]); }
+        else if (/-lines/.test(id)) set('line-color', p.line);
+        else if (/-labels/.test(id)) { set('text-color', p.label); set('text-halo-color', p.halo); set('text-halo-width', 1.3); }
+    }
 }
+
+/** Which lines show inside states: 2011 districts, Lok Sabha seats or assembly seats. */
+export function showLines(map: maplibregl.Map, mode: 'districts' | SeatPrefix) {
+    for (const id of seatLayers(map)) map.setLayoutProperty(id, 'visibility', id.startsWith(`${mode}-`) ? 'visible' : 'none');
+    for (const id of ['districts-line', 'districts-fill']) if (map.getLayer(id)) map.setLayoutProperty(id, 'visibility', mode === 'districts' ? 'visible' : 'none');
+}
+
+/** Fill layers to hit-test for a kind of seat (one per loaded source). */
+export const seatFillLayers = (map: maplibregl.Map, prefix: SeatPrefix) => seatLayers(map, prefix).filter(i => /-fill(--|$)/.test(i) && !i.includes('selected'));

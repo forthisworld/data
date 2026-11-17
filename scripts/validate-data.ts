@@ -8,8 +8,8 @@
 
 import { existsSync, readdirSync, readFileSync, statSync } from 'fs';
 import { join, relative } from 'path';
-import type { Entity, Legislature, Overview, TollRoad } from '../src/types';
-import { validateRoad, validateEntity, validateOverview, validateLegislature } from '../src/lib/data/validate';
+import type { Entity, Legislature, MpladsRecord, Overview, TollRoad } from '../src/types';
+import { validateRoad, validateEntity, validateOverview, validateLegislature, validateMplads } from '../src/lib/data/validate';
 
 export { validateRoad, validateEntity, validateOverview };
 
@@ -31,6 +31,7 @@ function main(): void {
             let errors: string[] = [];
             if (rel.includes('/toll-roads/')) errors = validateRoad(json as TollRoad);
             else if (rel.includes('/representatives/')) errors = validateLegislature(json as Legislature);
+            else if (rel.includes('/mplads/')) errors = validateMplads(json as MpladsRecord);
             else if (rel.endsWith('overview.json')) errors = validateOverview(json as Overview);
             else if (Array.isArray(json)) {
                 json.forEach((e: Entity & Record<string, unknown>) =>

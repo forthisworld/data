@@ -16,7 +16,10 @@
     "geo:build": "node scripts/build-geo.mjs",
     "geo:routes": "node scripts/build-routes.mjs",
     "geo:pc": "node scripts/build-constituencies.mjs",
-    "data:lok-sabha": "node scripts/fetch-lok-sabha.mjs"
+    "data:lok-sabha": "node scripts/fetch-lok-sabha.mjs",
+    "geo:ac": "node scripts/build-assembly.mjs",
+    "data:karnataka-assembly": "node scripts/fetch-karnataka-assembly.mjs",
+    "data:mplads": "node --max-old-space-size=4096 scripts/fetch-mplads.mjs"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.30.0",
