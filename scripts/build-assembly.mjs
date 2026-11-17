@@ -9,8 +9,9 @@
  * As with Lok Sabha seats (build-constituencies.mjs), every seat is clipped to the state on OUR state
  * boundaries and lines are drawn only between seats, so nothing here can disagree with the official
  * outline. Strips of the state that no seat covers (the two files' line-work differs) go to the
- * neighbouring seat (scripts/lib/fill-gaps.mjs). An area the file draws without a seat number is left
- * empty, with its edge drawn: the file does not say whose seat it is. Each seat also records its Lok Sabha seat (from the file's PC number, which is fixed by the
+ * neighbouring seat, and an exclave that touches no seat to the nearest one (scripts/lib/fill-gaps.mjs).
+ * An area the file draws without a seat number takes the seat named for it in STATES below, with the
+ * reason; one with no entry is left empty, with its edge drawn. Each seat also records its Lok Sabha seat (from the file's PC number, which is fixed by the
  * 2008 delimitation order) and the 2011 districts it overlaps.
  *
  * Writes public/geo/<country>/ac/<state>.geojson and ac/<state>-lines.geojson.
@@ -28,7 +29,17 @@ const GEO = resolve(ROOT, 'public/geo/in');
 
 /** States we have checked: the file's state name, seat count, and Census 2011 state code (for Lok Sabha keys). */
 const STATES = {
-    karnataka: { file: 'KARNATAKA', seats: 224, stCode: 29 },
+    karnataka: {
+        file: 'KARNATAKA', seats: 224, stCode: 29,
+        // Areas the file draws with no seat number: a point inside each, and the seat it belongs to.
+        unnamed: [
+            // Almost all of this shape is BBMP ward 114, Agaram (8.7 of its 9.7 km2; the rest is slivers
+            // along its edge). Agaram is one of the wards of Shanti Nagar, seat 163: the BBMP 198-ward
+            // list of 2009 records each ward's assembly constituency (DataMeet, Municipal_Spatial_Data,
+            // Bangalore/BBMP_oldWards.geojson).
+            { at: [77.641, 12.941], acNo: 163 },
+        ],
+    },
 };
 
 const state = process.argv[2];
@@ -63,11 +74,28 @@ const clipped = await mapshaper.applyCommands(
     ].join(' '),
     { 'state.json': JSON.stringify(own) },
 );
-const filled = await fillGaps({ seats: JSON.parse(clipped['ac.json']), states: own, hold: key => key.startsWith(UNNAMED) });
+const source = JSON.parse(clipped['ac.json']);
+const inRing = ([px, py], ring) => {
+    let inside = false;
+    for (let i = 0, j = ring.length - 1; i < ring.length; j = i++) {
+        const [xi, yi] = ring[i], [xj, yj] = ring[j];
+        if ((yi > py) !== (yj > py) && px < ((xj - xi) * (py - yi)) / (yj - yi) + xi) inside = !inside;
+    }
+    return inside;
+};
+const contains = (g, pt) => (g.type === 'Polygon' ? [g.coordinates] : g.coordinates).some(poly => inRing(pt, poly[0]) && !poly.slice(1).some(hole => inRing(pt, hole)));
+for (const fix of cfg.unnamed ?? []) {
+    const shape = source.features.find(f => f.properties.key.startsWith(UNNAMED) && contains(f.geometry, fix.at));
+    const seat = source.features.find(f => f.properties.acNo === fix.acNo);
+    if (!shape || !seat) throw new Error(`${state}: no unnamed area at ${fix.at}, or no seat ${fix.acNo}`);
+    shape.properties = { ...seat.properties };
+    console.log(`unnamed area at ${fix.at}: joined to ${seat.properties.name}`);
+}
+const filled = await fillGaps({ seats: source, states: own, hold: key => key.startsWith(UNNAMED) });
+for (const a of filled.apart) console.log(`apart from every seat: ${a.km2.toFixed(1)} km2 at ${a.at.map(v => v.toFixed(3))} -> ${a.key} (${a.km.toFixed(1)} km away)`);
 const unnamed = filled.seats.features.filter(f => f.properties.key.startsWith(UNNAMED));
 const leftKm2 = filled.left.reduce((s, x) => s + x.km2, 0);
-// A piece that touches no seat (an exclave) stays empty: we do not guess its seat. Anything more is a fault.
-if (leftKm2 > 20) throw new Error(`${state}: ${leftKm2.toFixed(1)} km2 of the state is still in no seat`);
+if (leftKm2 > 1) throw new Error(`${state}: ${leftKm2.toFixed(1)} km2 of the state is still in no seat`);
 
 const out = await mapshaper.applyCommands(
     [
@@ -88,7 +116,7 @@ const out = await mapshaper.applyCommands(
         '-filter target=overlap "key != null && census2011Code != null"',
         '-o target=overlap overlap.json format=json',
     ].join(' '),
-    { 'filled.json': JSON.stringify(filled.seats), 'source.json': clipped['ac.json'], 'districts.json': readFileSync(resolve(GEO, 'districts.geojson'), 'utf8') },
+    { 'filled.json': JSON.stringify(filled.seats), 'source.json': JSON.stringify(source), 'districts.json': readFileSync(resolve(GEO, 'districts.geojson'), 'utf8') },
 );
 
 const seats = JSON.parse(out['ac.json']);
@@ -117,5 +145,5 @@ for (const f of seats.features) {
 mkdirSync(resolve(GEO, 'ac'), { recursive: true });
 writeFileSync(resolve(GEO, `ac/${state}.geojson`), JSON.stringify(seats));
 writeFileSync(resolve(GEO, `ac/${state}-lines.geojson`), JSON.stringify(lines));
-console.log(`ac/${state}.geojson: ${seats.features.length} seats; ${lines.features.length} lines; ${filled.filledKm2.toFixed(1)} km2 of gaps given to the neighbouring seat, ${leftKm2.toFixed(2)} km2 left empty (pieces that touch no seat)`);
+console.log(`ac/${state}.geojson: ${seats.features.length} seats; ${lines.features.length} lines; ${filled.filledKm2.toFixed(1)} km2 of gaps given to the neighbouring seat, ${leftKm2.toFixed(2)} km2 left empty`);
 if (unnamed.length) console.log(`left empty: ${unnamed.length} area(s) the source draws with no seat number`);

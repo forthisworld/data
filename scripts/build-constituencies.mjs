@@ -8,7 +8,7 @@
  * lines drawn between constituencies are only those inside a state. Nothing here can draw a border
  * that disagrees with the official outline. Parts of a state that no seat covers (the two files'
  * line-work differs, and the source leaves out some water and marsh) go to the neighbouring seat of
- * the same state (scripts/lib/fill-gaps.mjs).
+ * the same state, and islands and exclaves that touch no seat to the nearest one (scripts/lib/fill-gaps.mjs).
  *
  * Left out: Assam and Jammu & Kashmir (except Ladakh). Their seats were redrawn by the 2023 and 2022
  * delimitations, after this file was made.
@@ -80,8 +80,8 @@ const filled = await fillGaps({ seats: JSON.parse(clipped['clipped.json']), stat
 // What is left should be only the states whose seats are not drawn at all.
 const drawn = new Set(filled.seats.features.map(f => f.properties.stateSlug));
 const leftKm2 = filled.left.filter(x => drawn.has(x.slug)).reduce((s, x) => s + x.km2, 0);
-// Islands and exclaves that touch no seat stay empty (we do not guess their seat); anything more is a fault.
-if (leftKm2 > 200) throw new Error(`${leftKm2.toFixed(0)} km2 inside states with seats is still in no seat`);
+for (const a of filled.apart.filter(x => x.km2 > 1)) console.log(`apart from every seat: ${a.km2.toFixed(1)} km2 at ${a.at.map(v => v.toFixed(3))} -> ${a.key} (${a.km.toFixed(1)} km away)`);
+if (leftKm2 > 1) throw new Error(`${leftKm2.toFixed(0)} km2 inside states with seats is still in no seat`);
 
 const out = await mapshaper.applyCommands(
     [
@@ -124,6 +124,6 @@ const missing = kept.features.filter(f => !seats.features.some(s => s.properties
 if (missing.length > 3) throw new Error(`Seats lost in clipping: ${missing.map(f => f.properties.pc_name).join(', ')}`);
 writeFileSync(resolve(OUT, 'pc.geojson'), JSON.stringify(seats));
 writeFileSync(resolve(OUT, 'pc-lines.geojson'), JSON.stringify(lines));
-console.log(`gaps: ${filled.filledKm2.toFixed(0)} km2 given to the neighbouring seat, ${leftKm2.toFixed(1)} km2 left empty in states with seats (pieces that touch no seat)`);
+console.log(`gaps: ${filled.filledKm2.toFixed(0)} km2 given to the neighbouring seat, ${leftKm2.toFixed(1)} km2 left empty in states with seats`);
 console.log(`pc.geojson: ${seats.features.length} seats (${pc.features.length - kept.features.length} left out as redrawn); pc-lines.geojson: ${lines.features.length} lines`);
 if (missing.length) console.log('not placed:', missing.map(f => f.properties.pc_name).join(', '));
