@@ -13,19 +13,17 @@ Status and next steps: [PLAN.md](PLAN.md).
 | `src/` | The website (Next.js 15, shadcn/ui, Tailwind): country, state and region pages, toll roads, people, infrastructure, the RTI tracker |
 | `data/in/` | The published record: reviewed JSON, each fact with its citation. Schema in `src/types/index.ts` |
 | `scripts/scrapers/` | Source adapters (NHAI TIS, data.gov.in, Gazette, MCA); they write overlays for review, never the published files. See its README |
-| `mcp-server/` | MCP server so AI clients can search the record, list data gaps, draft RTIs and submit contributions for review |
+| `mcp-server/` | MCP server so AI clients can search the record, list data gaps, draft RTIs and submit contributions to a review queue (`data/_contributions/`, not published) |
 
 ## Running it
 
 ```bash
 npm install
 npm run dev        # http://localhost:3000
-npx tsx scripts/scrapers/run-toll-roads.ts --validate
+npm run data:validate   # every fact must cite a source it was read from (data/SOURCING.md)
 ```
 
-Some pages (entities, regions, search) still read from MongoDB through `src/lib/repositories`. That database has
-been retired, and these reads are moving to the JSON in `data/` (see PLAN.md). Toll roads, RTI and overviews already
-read the files directly.
+There is no database. The site reads the published record in `data/` through a module generated at build time (`npm run data:index`, run automatically by `dev`, `build` and `npm install`), so the same build runs on Node and on Cloudflare Workers.
 
 ## Contributing data
 

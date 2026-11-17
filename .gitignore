@@ -49,3 +49,9 @@ temp/
 # scraper output awaiting review (never the published record)
 data/*/toll-roads/_overlays/
 data/*/toll-roads/_merged/
+
+# generated from data/ by scripts/gen-data-index.ts (npm run data:index)
+src/lib/data/files.generated.ts
+
+# contributions awaiting review (moves to Postgres with the review service)
+data/_contributions/

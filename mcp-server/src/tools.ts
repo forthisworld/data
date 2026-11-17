@@ -2,32 +2,29 @@
  * FTW MCP tools.
  *
  * Design rules:
- * - Read tools hit published collections only (entities, regions, toll_roads, info_requests).
- * - submit_contribution is the ONLY write, and it lands in the `contributions`
- *   review queue with machine validation applied. Published data is untouchable.
+ * - Read tools read the published record (data/<country>/, see data/SOURCING.md).
+ * - submit_contribution is the ONLY write, and it lands in the review queue
+ *   (data/_contributions/) after machine validation. Published data is untouchable.
  */
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
-import { Db } from "mongodb";
 import { z } from "zod";
+import { loadCorpus, findBySlug, saveContribution, getContribution, Doc } from "./corpus.js";
 
-// Minimal TollRoad validation for contributions (subset of the platform schema -
-// the authoritative zod schema lives in the research tool / platform).
+// Every number says where it comes from and how firm it is (data/SOURCING.md).
+const Basis = z.enum(["court_finding", "audit_finding", "official_record", "company_filing", "reported", "claim"]);
 const MoneyValue = z.object({
   value: z.number(),
   currency: z.string().default("INR"),
   note: z.string().optional(),
+  sourceId: z.string(),
+  basis: Basis,
+  claimedBy: z.string().optional(),
 });
 
-const SourceCitation = z.object({
-  id: z.string(),
-  title: z.string(),
-  publisher: z.string(),
-  url: z.string().optional(),
-  date: z.string().optional(),
-  type: z.string().optional(),
-});
+const ESTABLISHED = new Set(["court_finding", "audit_finding", "official_record", "company_filing"]);
+const established = (basis?: string) => ESTABLISHED.has(basis ?? "");
 
-export function registerTools(server: McpServer, db: Db) {
+export function registerTools(server: McpServer) {
   // ---------------------------------------------------------
   server.tool(
     "search_entities",
@@ -39,29 +36,25 @@ export function registerTools(server: McpServer, db: Db) {
     },
     async ({ query, type, limit }) => {
       const rx = new RegExp(escapeRegex(query), "i");
+      const hit = (...fields: unknown[]) => fields.some((f) => typeof f === "string" && rx.test(f));
+      const corpus = loadCorpus("in");
       const results: unknown[] = [];
 
       if (type === "any" || type === "toll_road") {
-        const roads = await db
-          .collection("toll_roads")
-          .find({ $or: [{ name: rx }, { officialName: rx }, { operatorCompany: rx }] })
-          .limit(limit)
-          .project({ _id: 0, slug: 1, name: 1, officialName: 1, operatorCompany: 1 })
-          .toArray();
-        roads.forEach((r) => results.push({ kind: "toll_road", ...r }));
+        for (const r of corpus.tollRoads) {
+          if (hit(r.name, r.officialName, r.operatorCompany)) {
+            results.push({ kind: "toll_road", slug: r.slug, name: r.name, officialName: r.officialName, operatorCompany: r.operatorCompany, tolling: r.tolling?.status });
+          }
+        }
       }
-      if ((type === "any" || type !== "toll_road") && results.length < limit) {
-        const filter: Record<string, unknown> = { $or: [{ name: rx }, { description: rx }] };
-        if (type !== "any") filter.type = type;
-        const docs = await db
-          .collection("entities")
-          .find(filter)
-          .limit(limit - results.length)
-          .project({ _id: 0, id: 1, slug: 1, name: 1, type: 1, description: 1 })
-          .toArray();
-        docs.forEach((d) => results.push(d));
+      if (type !== "toll_road") {
+        for (const d of [...corpus.entities, ...corpus.regions]) {
+          if ((type === "any" || d.type === type) && hit(d.name, d.description)) {
+            results.push({ kind: d.type, id: d.id, slug: d.slug, name: d.name, description: d.description });
+          }
+        }
       }
-
+      results.splice(limit);
       return text(JSON.stringify({ count: results.length, results }, null, 2));
     }
   );
@@ -69,45 +62,43 @@ export function registerTools(server: McpServer, db: Db) {
   // ---------------------------------------------------------
   server.tool(
     "get_entity",
-    "Get full structured data for one entity by slug - e.g. a toll road with its concession terms, funding structure, revenue records, timeline, analysis and cited sources.",
+    "Get full structured data for one entity by slug - e.g. a toll road with its concession terms, collections, timeline, analysis, claims and cited sources. Each number carries a sourceId and a basis (court_finding, audit_finding, official_record, company_filing, reported, claim).",
     {
       country: z.enum(["in"]).default("in"),
       slug: z.string().describe("Entity slug, e.g. 'nice-bmic'"),
     },
     async ({ country, slug }) => {
-      const road = await db.collection("toll_roads").findOne({ countryCode: country, slug });
-      if (road) return text(JSON.stringify(road, null, 2));
-
-      const entity =
-        (await db.collection("entities").findOne({ countryCode: country, $or: [{ slug }, { id: slug }] })) ??
-        (await db.collection("regions").findOne({ countryCode: country, slug }));
-      if (!entity) return text(`Not found: ${slug}`);
-      return text(JSON.stringify(entity, null, 2));
+      const corpus = loadCorpus(country);
+      const found = findBySlug(corpus.tollRoads, slug) ?? findBySlug(corpus.entities, slug) ?? findBySlug(corpus.regions, slug);
+      if (!found) return text(`Not found: ${slug}`);
+      return text(JSON.stringify(found, null, 2));
     }
   );
 
   // ---------------------------------------------------------
   server.tool(
     "get_data_gaps",
-    "List what is NOT yet known about an entity - open questions that need research or RTI filings. This is where new contributions are most valuable.",
+    "List what is NOT yet known about a toll road - open questions that need research or RTI filings. This is where new contributions are most valuable.",
     {
       country: z.enum(["in"]).default("in"),
       slug: z.string(),
     },
     async ({ country, slug }) => {
-      const road = await db.collection("toll_roads").findOne({ countryCode: country, slug });
+      const road = findBySlug(loadCorpus(country).tollRoads, slug);
       if (!road) return text(`Unknown toll road: ${slug}`);
 
       const gaps: string[] = [...(road.analysis?.openQuestions ?? [])];
-      if (!road.projectCost?.value) gaps.push("Audited project cost not established");
-      const hasReportedRevenue = (road.annualRevenue ?? []).some((r: { revenue?: { value?: number } }) => r.revenue?.value);
-      if (!hasReportedRevenue) gaps.push("No official year-wise toll revenue figures");
-      if (!road.concession?.scheduledEndDate && !road.concession?.tollEndCondition)
-        gaps.push("Concession end condition not documented");
-      const unquantified = ((road.funding ?? []) as { amount?: { value?: number }; label: string }[]).filter((f) => !f.amount?.value);
-      if (unquantified.length) gaps.push(`Unquantified funding components: ${unquantified.map((f) => f.label).join("; ")}`);
+      if (!road.projectCost?.value || !established(road.projectCost.basis)) gaps.push("Audited project cost not established");
+      const hasRevenue =
+        (road.annualRevenue ?? []).some((r: Doc) => r.revenue?.value && established(r.revenue.basis)) ||
+        (road.collections ?? []).some((c: Doc) => /toll/i.test(c.label) && established(c.amount?.basis));
+      if (!hasRevenue) gaps.push("No established figure for toll collected (court, audit, official record or filing)");
+      if (!road.concession?.scheduledEndDate && !road.concession?.tollEndCondition) gaps.push("Concession end condition not documented");
+      const unquantified = (road.funding ?? []).filter((f: Doc) => !f.amount?.value);
+      if (unquantified.length) gaps.push(`Unquantified funding components: ${unquantified.map((f: Doc) => f.label).join("; ")}`);
+      const claims = (road.claims ?? []).map((c: Doc) => `Unconfirmed claim by ${c.claimedBy}: ${c.text}`);
 
-      return text(JSON.stringify({ slug, gapCount: gaps.length, gaps }, null, 2));
+      return text(JSON.stringify({ slug, gapCount: gaps.length, gaps, claimsToConfirm: claims }, null, 2));
     }
   );
 
@@ -121,7 +112,7 @@ export function registerTools(server: McpServer, db: Db) {
       question: z.string().describe("What you want to find out, e.g. 'cumulative toll revenue collected since 2005'"),
     },
     async ({ country, slug, question }) => {
-      const road = await db.collection("toll_roads").findOne({ countryCode: country, slug });
+      const road = findBySlug(loadCorpus(country).tollRoads, slug);
       const name = road?.name ?? slug;
       const authority = road?.concession?.grantingAuthority ?? "the relevant public authority";
 
@@ -156,13 +147,13 @@ export function registerTools(server: McpServer, db: Db) {
   // ---------------------------------------------------------
   server.tool(
     "submit_contribution",
-    "Submit a proposed change to the corpus. Lands in the public review queue with automated validation - it does NOT modify published data directly. Every substantive claim must cite a source.",
+    "Submit a proposed change to the corpus. Lands in the review queue with automated validation - it does NOT modify published data directly. Every number needs a sourceId and a basis, and every source needs a URL and the date you read it (retrievedAt).",
     {
       country: z.enum(["in"]).default("in"),
       entity_slug: z.string().describe("Slug of the entity this contribution applies to"),
       entity_type: z.enum(["toll_road", "person", "infrastructure", "region"]),
       patch_json: z.string().describe("JSON object of fields to add/update, e.g. {\"annualRevenue\":[...]}"),
-      sources_json: z.string().describe("JSON array of source citations supporting the change: [{id,title,publisher,url,date,type}]"),
+      sources_json: z.string().describe("JSON array of source citations supporting the change: [{id,title,publisher,url,date,type,retrievedAt}]"),
       submitter: z.string().describe("Your name or handle for attribution"),
       note: z.string().optional().describe("Why this change - context for reviewers"),
     },
@@ -178,32 +169,38 @@ export function registerTools(server: McpServer, db: Db) {
 
       const issues: string[] = [];
 
-      // Machine validation gate 1: shape
+      // Gate 1: shape
       if (entity_type === "toll_road") {
-        const parsed = z.object({ annualRevenue: z.array(z.object({ year: z.union([z.number(), z.string()]), revenue: MoneyValue.optional(), trafficVehiclesPerDay: z.number().optional() })).optional() }).passthrough().safeParse(patch);
+        const parsed = z
+          .object({
+            annualRevenue: z.array(z.object({ year: z.union([z.number(), z.string()]), revenue: MoneyValue.optional(), trafficVehiclesPerDay: z.number().optional(), trafficSourceId: z.string().optional() })).optional(),
+            collections: z.array(z.object({ label: z.string(), from: z.string().optional(), to: z.string().optional(), amount: MoneyValue })).optional(),
+            projectCost: MoneyValue.optional(),
+          })
+          .passthrough()
+          .safeParse(patch);
         if (!parsed.success) issues.push(...parsed.error.issues.map((i) => `patch.${i.path.join(".")}: ${i.message}`));
       }
 
-      // Gate 2: sources required and resolvable-looking
+      // Gate 2: sources present, retrievable, and actually read
       const srcArr = Array.isArray(sources) ? sources : [];
       if (srcArr.length === 0) issues.push("At least one source citation is required");
-      for (const s of srcArr as { title?: string; url?: string }[]) {
-        if (!s.title) issues.push("Each source needs a title");
+      for (const s of srcArr as { id?: string; title?: string; url?: string; retrievedAt?: string }[]) {
+        if (!s.id || !s.title) issues.push("Each source needs an id and a title");
         if (!s.url) issues.push(`Source '${s.title ?? "?"}' has no URL - claims without retrievable sources are rejected`);
+        if (!s.retrievedAt) issues.push(`Source '${s.title ?? "?"}' has no retrievedAt (YYYY-MM-DD): say when you read it`);
       }
 
       // Gate 3: target entity must exist
-      const target = await db.collection(entity_type === "toll_road" ? "toll_roads" : "entities").findOne({
-        countryCode: country,
-        $or: [{ slug: entity_slug }, { id: entity_slug }],
-      });
-      if (!target) issues.push(`Target entity '${entity_slug}' not found`);
+      const corpus = loadCorpus(country);
+      const list = entity_type === "toll_road" ? corpus.tollRoads : entity_type === "region" ? corpus.regions : corpus.entities;
+      if (!findBySlug(list, entity_slug)) issues.push(`Target entity '${entity_slug}' not found`);
 
       if (issues.length > 0) {
         return text(`REJECTED by automated validation:\n- ${issues.join("\n- ")}`);
       }
 
-      const doc = {
+      const saved = saveContribution({
         status: "pending",
         country,
         entityType: entity_type,
@@ -212,14 +209,12 @@ export function registerTools(server: McpServer, db: Db) {
         sources: srcArr,
         submitter,
         note: note ?? "",
-        submittedAt: new Date(),
+        submittedAt: new Date().toISOString(),
         checks: { schema: "pass", sourcesPresent: true, targetExists: true },
-      };
-
-      const res = await db.collection("contributions").insertOne(doc);
+      });
       return text(
-        `Accepted into review queue: contribution ${res.insertedId}\n` +
-          `Status: pending machine + community review.\n` +
+        `Accepted into review queue: contribution ${saved.id}\n` +
+          `Status: pending review. Nothing is published until a reviewer merges it.\n` +
           `Track it via get_contribution_status.`
       );
     }
@@ -233,15 +228,7 @@ export function registerTools(server: McpServer, db: Db) {
       contribution_id: z.string(),
     },
     async ({ contribution_id }) => {
-      const { ObjectId } = await import("mongodb");
-      let id: InstanceType<typeof ObjectId>;
-      try {
-        id = new ObjectId(contribution_id);
-      } catch {
-        return text("Invalid contribution id");
-      }
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const c = await db.collection("contributions").findOne({ _id: id } as any);
+      const c = getContribution(contribution_id);
       if (!c) return text("Not found");
       return text(JSON.stringify(c, null, 2));
     }

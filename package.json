@@ -4,11 +4,14 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
+    "predev": "npm run -s data:index",
     "build": "next build",
+    "prebuild": "npm run -s data:index",
     "start": "next start",
     "lint": "next lint",
-    "db:seed": "tsx --env-file=.env.local src/lib/db/seed.ts",
-    "db:test": "tsx --env-file=.env.local src/lib/db/test-connection.ts",
+    "typecheck": "npm run -s data:index && tsc --noEmit",
+    "postinstall": "npm run -s data:index",
+    "data:index": "tsx scripts/gen-data-index.ts",
     "data:validate": "tsx scripts/validate-data.ts"
   },
   "dependencies": {
@@ -23,7 +26,6 @@
     "fuse.js": "^7.1.0",
     "leaflet": "^1.9.4",
     "lucide-react": "^0.539.0",
-    "mongodb": "^7.0.0",
     "next": "15.4.6",
     "react": "19.1.0",
     "react-dom": "19.1.0",

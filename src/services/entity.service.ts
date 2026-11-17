@@ -1,101 +1,79 @@
 /**
  * Entity Service
- * 
- * Business logic for entity-related operations.
- * Handles persons, infrastructure, regions, and path resolution.
+ *
+ * Persons, infrastructure, regions and URL path resolution, read from the
+ * published record (src/lib/data/store.ts).
  */
 
-import { entityRepository, regionRepository, countryRepository } from '@/lib/repositories';
-import {
-    Entity,
-    Person,
-    Infrastructure,
-    Region,
-    Filters,
-    PaginatedResponse,
-} from '@/types';
+import { getCountryData, findEntity, inRegion } from '@/lib/data/store';
+import { Entity, Person, Infrastructure, Region, Filters, PaginatedResponse } from '@/types';
 
-/**
- * Get all persons for a country
- */
+function data(countryCode: string) {
+    const d = getCountryData(countryCode);
+    if (!d) throw new Error(`No published data for country: ${countryCode}`);
+    return d;
+}
+
 export async function getPersons(countryCode: string): Promise<Person[]> {
-    return entityRepository.getPersons(countryCode);
+    return data(countryCode).persons;
 }
 
-/**
- * Get a person by ID or slug
- */
 export async function getPersonById(countryCode: string, personId: string): Promise<Person | undefined> {
-    const person = await entityRepository.findById(countryCode, personId, 'person');
-    return person as Person | undefined;
+    return findEntity(data(countryCode).persons, personId);
 }
 
-/**
- * Get all infrastructure for a country
- */
 export async function getInfrastructure(countryCode: string): Promise<Infrastructure[]> {
-    return entityRepository.getInfrastructure(countryCode);
+    return data(countryCode).infrastructure;
 }
 
-/**
- * Get infrastructure by ID or slug
- */
 export async function getInfrastructureById(countryCode: string, infraId: string): Promise<Infrastructure | undefined> {
-    const infra = await entityRepository.findById(countryCode, infraId, 'infrastructure');
-    return infra as Infrastructure | undefined;
+    return findEntity(data(countryCode).infrastructure, infraId);
 }
 
-/**
- * Get all regions for a country
- */
 export async function getRegions(countryCode: string): Promise<Region[]> {
-    return regionRepository.findAll(countryCode);
+    return data(countryCode).regions;
 }
 
-/**
- * Get a region by ID or slug
- */
 export async function getRegionById(countryCode: string, regionId: string): Promise<Region | undefined> {
-    const region = await regionRepository.findBySlug(countryCode, regionId);
-    return region || undefined;
+    return findEntity(data(countryCode).regions, regionId);
 }
 
 /**
- * Get entities with filters and pagination
+ * Entities of one type, filtered and paginated.
  */
 export async function getEntities(
     countryCode: string,
     type: 'person' | 'infrastructure' | 'region',
     filters?: Filters
 ): Promise<PaginatedResponse<Entity>> {
-    if (type === 'region') {
-        // Regions handled separately
-        const allRegions = await regionRepository.findAll(countryCode);
-        let data: Entity[] = allRegions;
+    const d = data(countryCode);
+    let list: Entity[] = type === 'person' ? d.persons : type === 'infrastructure' ? d.infrastructure : d.regions;
 
-        // Apply filters
-        if (filters?.search) {
-            const searchLower = filters.search.toLowerCase();
-            data = data.filter(r =>
-                r.name.toLowerCase().includes(searchLower) ||
-                r.description?.toLowerCase().includes(searchLower)
-            );
-        }
-
-        const limit = filters?.limit || 20;
-        const offset = filters?.offset || 0;
-        const paginatedData = data.slice(offset, offset + limit);
-
-        return {
-            data: paginatedData,
-            total: data.length,
-            limit,
-            offset,
-            hasMore: offset + limit < data.length,
-        };
+    if (filters?.role) {
+        const role = filters.role;
+        list = (list as Person[]).filter(p => p.role === role || p.roles?.includes(role));
+    }
+    if (filters?.category) {
+        const category = filters.category;
+        list = (list as Infrastructure[]).filter(i => i.category === category);
+    }
+    if (filters?.regionId) {
+        list = inRegion(list as (Entity & { regionId?: string; regionIds?: string[] })[], filters.regionId);
+    }
+    if (filters?.search) {
+        const q = filters.search.toLowerCase();
+        list = list.filter(e => e.name.toLowerCase().includes(q) || e.description?.toLowerCase().includes(q));
     }
 
-    return entityRepository.findByType(countryCode, type, filters);
+    const limit = filters?.limit || 20;
+    const offset = filters?.offset || 0;
+    return {
+        data: list.slice(offset, offset + limit),
+        total: list.length,
+        limit,
+        offset,
+        hasMore: offset + limit < list.length,
+    };
 }
 
 /**
@@ -119,7 +97,6 @@ export async function resolvePath(countryCode: string, pathSegments: string[]): 
 
     const [first, ...rest] = pathSegments;
 
-    // Check if it's a known category
     if (first === 'region') {
         return { type: 'category', category: 'region' };
     }
@@ -127,25 +104,22 @@ export async function resolvePath(countryCode: string, pathSegments: string[]): 
     if (first === 'person') {
         if (rest.length > 0) {
             const person = await getPersonById(countryCode, rest[0]);
-            if (person) {
-                return { type: 'person', entity: person };
-            }
+            if (person) return { type: 'person', entity: person };
+            return { type: 'not_found' };
         }
         return { type: 'category', category: 'person' };
     }
 
     if (first === 'infrastructure') {
         if (rest.length > 0) {
-            // Toll roads section: /infrastructure/toll-roads and /infrastructure/toll-roads/[slug]
+            // /infrastructure/toll-roads and /infrastructure/toll-roads/[slug]
             if (rest[0] === 'toll-roads') {
-                if (rest.length > 1) {
-                    return { type: 'toll_road', tollRoadSlug: rest[1] };
-                }
+                if (rest.length > 1) return { type: 'toll_road', tollRoadSlug: rest[1] };
                 return { type: 'toll_roads_list' };
             }
-            // Check if second segment is a category or an entity
-            const config = await countryRepository.getConfig(countryCode);
-            if (config && config.infraCategories.includes(rest[0] as never)) {
+            // /infrastructure/[category] and /infrastructure/[category]/[region]
+            const config = data(countryCode).config;
+            if (config.infraCategories.includes(rest[0] as never)) {
                 return {
                     type: 'category',
                     category: rest[0],
@@ -153,18 +127,14 @@ export async function resolvePath(countryCode: string, pathSegments: string[]): 
                 };
             }
             const infra = await getInfrastructureById(countryCode, rest[0]);
-            if (infra) {
-                return { type: 'infrastructure', entity: infra };
-            }
+            if (infra) return { type: 'infrastructure', entity: infra };
+            return { type: 'not_found' };
         }
         return { type: 'category', category: 'infrastructure' };
     }
 
-    // Check if it's a region
     const region = await getRegionById(countryCode, first);
-    if (region) {
-        return { type: 'region', entity: region };
-    }
+    if (region) return { type: 'region', entity: region };
 
     return { type: 'not_found' };
 }

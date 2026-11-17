@@ -1,17 +1,39 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getDatabase } from '@/lib/db/mongodb';
+import { getCountryData } from '@/lib/data/store';
 
 /**
- * Read-only research API.
+ * Read-only research API over the published record.
  *
- * Lets the local FTW Research Tool query platform collections without ever
- * holding MongoDB credentials. Guarded by a shared secret set in .env.local:
+ * Lets the FTW Research Tool query the same data the site shows. Guarded by a
+ * shared secret in .env.local:
  *   RESEARCH_API_TOKEN=<random string>
  *
- * Only `find` is exposed, with a hard limit. No writes, no aggregations.
+ * Body: { country?: "in", collection, filter?: { field: value }, limit? }
+ * A filter matches when every field equals the value, or (for array fields)
+ * contains it. No writes.
  */
 
-const ALLOWED_COLLECTIONS = ['entities', 'regions', 'countries', 'info_requests', 'toll_roads'] as const;
+const COLLECTIONS = ['entities', 'regions', 'countries', 'info_requests', 'toll_roads'] as const;
+type Collection = (typeof COLLECTIONS)[number];
+
+function rows(country: string, collection: Collection): Record<string, unknown>[] {
+    const d = getCountryData(country);
+    if (!d) return [];
+    switch (collection) {
+        case 'entities': return [...d.persons, ...d.infrastructure] as unknown as Record<string, unknown>[];
+        case 'regions': return d.regions as unknown as Record<string, unknown>[];
+        case 'countries': return [d.config as unknown as Record<string, unknown>];
+        case 'info_requests': return (d.infoRequests?.requests ?? []) as unknown as Record<string, unknown>[];
+        case 'toll_roads': return d.tollRoads as unknown as Record<string, unknown>[];
+    }
+}
+
+function matches(doc: Record<string, unknown>, filter: Record<string, unknown>): boolean {
+    return Object.entries(filter).every(([k, v]) => {
+        const field = doc[k];
+        return Array.isArray(field) ? field.includes(v) : field === v;
+    });
+}
 
 export async function POST(req: NextRequest) {
     const token = req.headers.get('x-research-token');
@@ -23,31 +45,19 @@ export async function POST(req: NextRequest) {
         return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    let body: { collection?: string; filter?: Record<string, unknown>; limit?: number; projection?: Record<string, unknown> };
+    let body: { country?: string; collection?: string; filter?: Record<string, unknown>; limit?: number };
     try {
         body = await req.json();
     } catch {
         return NextResponse.json({ error: 'Invalid JSON body' }, { status: 400 });
     }
 
-    const collection = body.collection;
-    if (!collection || !ALLOWED_COLLECTIONS.includes(collection as (typeof ALLOWED_COLLECTIONS)[number])) {
-        return NextResponse.json({ error: `collection must be one of: ${ALLOWED_COLLECTIONS.join(', ')}` }, { status: 400 });
+    const collection = body.collection as Collection;
+    if (!COLLECTIONS.includes(collection)) {
+        return NextResponse.json({ error: `collection must be one of: ${COLLECTIONS.join(', ')}` }, { status: 400 });
     }
-
     const limit = Math.min(Math.max(body.limit ?? 20, 1), 200);
     const filter = body.filter && typeof body.filter === 'object' ? body.filter : {};
-
-    try {
-        const db = await getDatabase();
-        let cursor = db.collection(collection).find(filter, { limit });
-        if (body.projection && typeof body.projection === 'object') {
-            cursor = db.collection(collection).find(filter, { limit, projection: body.projection });
-        }
-        const docs = await cursor.toArray();
-        return NextResponse.json({ collection, count: docs.length, docs });
-    } catch (error) {
-        console.error('Research API query failed:', error);
-        return NextResponse.json({ error: 'Query failed' }, { status: 500 });
-    }
+    const docs = rows(body.country ?? 'in', collection).filter(d => matches(d, filter)).slice(0, limit);
+    return NextResponse.json({ collection, count: docs.length, docs });
 }

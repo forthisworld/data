@@ -142,6 +142,8 @@ export default async function CatchAllPage({ params }: CatchAllPageProps) {
                 notFound();
         }
     } catch (error) {
+        // notFound() works by throwing; let it through rather than logging it as a failure.
+        if ((error as { digest?: string })?.digest?.startsWith('NEXT_HTTP_ERROR_FALLBACK')) throw error;
         console.error('Error loading page data:', error);
         notFound();
     }

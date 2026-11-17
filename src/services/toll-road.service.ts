@@ -1,31 +1,15 @@
 /**
  * Toll Road Service
  *
- * Reads curated toll-road datasets from data/<country>/toll-roads/*.json.
- * File-based (like the info-request service) so it works without MongoDB;
- * the seed script mirrors this data into the toll_roads collection.
+ * Curated toll roads from data/<country>/toll-roads/*.json, read through the
+ * published-record store (src/lib/data/store.ts).
  */
 
-import { promises as fs } from 'fs';
-import path from 'path';
+import { getCountryData } from '@/lib/data/store';
 import { TollRoad, FundingComponent } from '@/types';
 
 export async function getAllTollRoads(countryCode: string): Promise<TollRoad[]> {
-    const dir = path.join(process.cwd(), 'data', countryCode, 'toll-roads');
-    try {
-        const files = (await fs.readdir(dir))
-            .filter(f => f.endsWith('.json') && !f.startsWith('_'))
-            .sort();
-        const roads = await Promise.all(
-            files.map(async f => {
-                const content = await fs.readFile(path.join(dir, f), 'utf-8');
-                return JSON.parse(content) as TollRoad;
-            })
-        );
-        return roads;
-    } catch {
-        return [];
-    }
+    return getCountryData(countryCode)?.tollRoads ?? [];
 }
 
 export async function getTollRoadBySlug(countryCode: string, slug: string): Promise<TollRoad | undefined> {
