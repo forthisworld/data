@@ -54,3 +54,6 @@ data/*/toll-roads/_merged/
 src/lib/data/files.generated.ts
 src/lib/data/places.generated.ts
 
+
+# The project plan is personal: kept locally, never committed
+PLAN.md

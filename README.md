@@ -9,8 +9,6 @@ Search at the bottom finds any state, district (including renamed ones, e.g. Ben
 one opens a side panel (a drawer on phones) with every figure's grade and source, and what is still unknown. Every view
 has its own link (`/in/infrastructure/toll-roads/nice-bmic`, `/in/karnataka/district/572`), and the browser's Back button closes the panel. It installs as an app (PWA) and works offline once visited.
 
-Status and next steps: [PLAN.md](PLAN.md).
-
 ## Ways to contribute
 
 Add or correct sourced data, file an RTI and share the reply, improve the code, or (later) fund the work.
@@ -31,7 +29,8 @@ entry in Cursor's `mcp.json`. The site's `/connect` page has the details and sta
 | `src/app/api/` | `search`, `mcp` (MCP over HTTP), `contributions` (sourced change → pull request), `research` (read-only, token) |
 | `data/in/` | The published record: reviewed JSON, each fact with its citation. Rules in [data/SOURCING.md](data/SOURCING.md) |
 | `public/geo/in/` | Map boundaries built from DataMeet by `npm run geo:build`, Lok Sabha seats by `npm run geo:pc`, toll roads from OpenStreetMap by `npm run geo:routes`; licences in its ATTRIBUTION.md |
-| `data/in/representatives/` | Who holds each Lok Sabha seat, from the Lok Sabha Secretariat (`npm run data:lok-sabha`; must be refreshed at least every six months) |
+| `data/in/mplads/`, `public/data/mplads/` | MPLADS for the current Lok Sabha: per-seat totals (the record) and per-work lists for Karnataka, from MoSPI's eSAKSHI dashboard (`npm run data:mplads`) |
+| `data/in/representatives/` | Who holds each Lok Sabha seat (`npm run data:lok-sabha`) and each Karnataka assembly seat (`npm run data:karnataka-assembly`), from the houses' own member lists; must be refreshed at least every six months |
 | `scripts/scrapers/` | Source adapters (NHAI TIS, data.gov.in, Gazette, MCA); they write overlays for review, never the published files |
 | `mcp-server/` | A local (stdio) MCP server over a clone's `data/`; contributions go to the site's `/api/contributions` |
 
