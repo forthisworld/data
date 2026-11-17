@@ -10,6 +10,7 @@ const ROWS: { what: string; licence: string; href: string; note: string }[] = [
     { what: 'The code', licence: 'MIT', href: 'https://github.com/forthisworld/data/blob/main/LICENSE', note: 'Use, copy and change it for any purpose, keeping the copyright notice.' },
     { what: 'State, district and national boundaries', licence: 'CC BY 2.5 India, CC BY 4.0', href: 'https://github.com/datameet/maps', note: 'From the DataMeet India community’s maps: 2011 Census districts grouped by today’s states. How they were built: /geo/in/ATTRIBUTION.md.' },
     { what: 'Roads drawn on the map', licence: 'ODbL 1.0, © OpenStreetMap contributors', href: 'https://www.openstreetmap.org/copyright', note: 'Each toll road is drawn from the OpenStreetMap ways listed in scripts/routes.json.' },
+    { what: 'Streets, water and place names at city zoom', licence: 'ODbL 1.0, © OpenStreetMap contributors; tiles by OpenFreeMap (OpenMapTiles schema)', href: 'https://openfreemap.org', note: 'Loaded from OpenFreeMap’s servers. Their borders and country names are not drawn; only our boundary files draw borders.' },
     { what: 'Source documents', licence: 'Their publishers’ own terms', href: 'https://github.com/forthisworld/data/blob/main/data/SOURCING.md', note: 'We link to judgments, audits, gazettes, filings and reports; we do not relicense them.' },
     { what: 'Map software and fonts', licence: 'BSD-3-Clause (MapLibre GL JS), SIL OFL (Geist)', href: 'https://github.com/maplibre/maplibre-gl-js/blob/main/LICENSE.txt', note: '' },
 ];

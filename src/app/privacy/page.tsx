@@ -82,6 +82,11 @@ export default function PrivacyPage() {
                                 Neither is a cookie and neither identifies you, which is why there is no consent banner. Clearing
                                 this site&apos;s data in your browser removes both.
                             </p>
+                            <p className="text-sm text-muted-foreground">
+                                When you zoom in to street level, the map loads street tiles and fonts from{' '}
+                                <a href="https://openfreemap.org" className="underline" target="_blank" rel="noopener noreferrer">OpenFreeMap</a>,
+                                whose servers see your IP address as any website does. We send them nothing else.
+                            </p>
                         </CardContent>
                     </Card>
 

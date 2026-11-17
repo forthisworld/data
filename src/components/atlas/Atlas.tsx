@@ -8,9 +8,9 @@
  *     screens, a drawer from the bottom on phones. The selection is kept in the URL (?v=...).
  *   - Search at the bottom covers places, roads and people, client-side, so it works offline.
  *
- * Boundaries come from one official-outline topology (public/geo/in/ATTRIBUTION.md). There is
- * no basemap yet: a basemap's own borders could contradict that outline. A street basemap with
- * its borders removed is the next step.
+ * Boundaries come from one official-outline topology (public/geo/in/ATTRIBUTION.md). From city
+ * zoom, streets, water and local names come from OpenStreetMap tiles with every border and
+ * country/state name left out (./basemap.ts), so that outline stays the only border.
  */
 
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
@@ -24,6 +24,7 @@ import CompassMark from '@/components/CompassMark';
 import { useTheme } from '@/lib/theme';
 import Sheet, { PEEK_PX, useWide, type Snap } from './Sheet';
 import QuickSettings from './QuickSettings';
+import { addBasemap, paintBasemap, BASEMAP_GLYPHS, BASEMAP_PALETTE } from './basemap';
 import { PlaceView, RoadView, PersonView, RoadsView, ROLE, shortName } from './PanelViews';
 import { PLACE_ALIASES } from '@/lib/place-aliases';
 import { atlasPath, parseAtlasPath, type AtlasRoute } from '@/lib/atlas-route';
@@ -252,11 +253,11 @@ export default function Atlas({ countryCode, countryName, data, initial }: Atlas
         const pal = PALETTE[darkRef.current ? 'dark' : 'light'];
         const map = new maplibregl.Map({
             container: container.current,
-            style: { version: 8, sources: {}, layers: [{ id: 'sea', type: 'background', paint: { 'background-color': pal.sea } }] },
+            style: { version: 8, glyphs: BASEMAP_GLYPHS, sources: {}, layers: [{ id: 'sea', type: 'background', paint: { 'background-color': pal.sea } }] },
             bounds: INDIA_BOUNDS,
             maxBounds: [[40, -10], [125, 50]],
             minZoom: 2.5,
-            maxZoom: 13,
+            maxZoom: 15,
             maxPitch: 0,
             attributionControl: false,
         });
@@ -334,6 +335,8 @@ export default function Atlas({ countryCode, countryName, data, initial }: Atlas
             // A wide invisible line so roads are easy to tap.
             map.addLayer({ id: 'routes-hit', type: 'line', source: 'routes', paint: { 'line-width': 22, 'line-opacity': 0 } });
             applyPalette(map, pal);
+            // Streets, water and local names from city zoom (src/components/atlas/basemap.ts).
+            addBasemap(map, BASEMAP_PALETTE[darkRef.current ? 'dark' : 'light'], { fills: 'hover-shade', roads: 'states-line' });
 
             setPlaces([
                 ...(states.features as GeoJSON.Feature<Geom, Record<string, string>>[]).map(f => ({
@@ -390,7 +393,7 @@ export default function Atlas({ countryCode, countryName, data, initial }: Atlas
                 }
                 markersRef.current.districts.forEach(m => m.remove());
                 markersRef.current.districts = [];
-                if (zoomed) {
+                if (zoomed && z < 10.5) {
                     const b = map.getBounds();
                     const min = districtAreaThreshold(z);
                     const sel = selectedRef.current?.source === 'districts' ? selectedRef.current.id : null;
@@ -473,7 +476,10 @@ export default function Atlas({ countryCode, countryName, data, initial }: Atlas
     // Theme: repaint, don't rebuild.
     useEffect(() => {
         const map = mapRef.current;
-        if (map && ready) applyPalette(map, PALETTE[dark ? 'dark' : 'light']);
+        if (map && ready) {
+            applyPalette(map, PALETTE[dark ? 'dark' : 'light']);
+            paintBasemap(map, BASEMAP_PALETTE[dark ? 'dark' : 'light']);
+        }
     }, [dark, ready]);
 
     // ---------- URLs and the Back button ----------
@@ -520,7 +526,8 @@ export default function Atlas({ countryCode, countryName, data, initial }: Atlas
                 : kind === 'district' ? { kind: 'district', state: places.find(p => p.code === id)?.stateSlug ?? '', code: id } : null;
             if (legacy) return applyRoute(legacy);
         }
-        applyRoute(initial ?? { kind: 'home' });
+        const here = parseAtlasPath(window.location.pathname.split('/').filter(Boolean).slice(1));
+        applyRoute(here ?? initial ?? { kind: 'home' });
         // Only on first load.
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [ready, places.length]);
@@ -609,7 +616,7 @@ export default function Atlas({ countryCode, countryName, data, initial }: Atlas
                 <Sheet wide={wide} snap={snap} onSnap={setSnap} onClose={closeView} viewKey={panel.key}>
                     {panel.body}
                     <p className="border-t border-ftw-line px-5 py-3 text-[11px] text-ftw-faint">
-                        Map: roads © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer" className="underline">OpenStreetMap contributors</a>,
+                        Map data © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer" className="underline">OpenStreetMap contributors</a>, street tiles <a href="https://openfreemap.org" target="_blank" rel="noopener noreferrer" className="underline">OpenFreeMap</a>,
                         boundaries <a href="https://github.com/datameet/maps" target="_blank" rel="noopener noreferrer" className="underline">DataMeet</a>.
                     </p>
                 </Sheet>
@@ -686,7 +693,7 @@ export default function Atlas({ countryCode, countryName, data, initial }: Atlas
                             )}
                         </div>
                         <p className="mt-1.5 text-center text-[10px] text-ftw-faint">
-                            Roads © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer" className="underline">OpenStreetMap contributors</a> ·
+                            Map data © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer" className="underline">OpenStreetMap contributors</a>, tiles <a href="https://openfreemap.org" target="_blank" rel="noopener noreferrer" className="underline">OpenFreeMap</a> ·
                             boundaries <a href="https://github.com/datameet/maps" target="_blank" rel="noopener noreferrer" className="underline">DataMeet</a> ·{' '}
                             <Link href="/licences" className="underline">licences</Link>
                         </p>

@@ -57,4 +57,5 @@ pull request by hand.
 - **Data:** [Open Database License (ODbL) 1.0](LICENSE-DATA). You can use it for anything, including commercial use,
   with attribution. If you publish a changed copy of the database, it must also be ODbL. See
   [data/LICENSE.md](data/LICENSE.md). Cited source documents keep their own terms. Map boundaries keep DataMeet's
-  licences, and roads drawn on the map are © OpenStreetMap contributors (ODbL) (`public/geo/in/ATTRIBUTION.md`).
+  licences, and roads, streets and place names drawn on the map are © OpenStreetMap contributors (ODbL), with street tiles
+  from OpenFreeMap (`public/geo/in/ATTRIBUTION.md`).

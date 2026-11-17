@@ -22,6 +22,11 @@ beyond the junction toward Mysore is left out, since this record does not cover 
 
 Attribution: *India boundaries by the [DataMeet India community](http://datameet.org/). Roads © [OpenStreetMap contributors](https://www.openstreetmap.org/copyright).*
 
+At city zoom the atlas also draws streets, water, parks and local place names from [OpenFreeMap](https://openfreemap.org)'s
+OpenStreetMap tiles (ODbL; OpenMapTiles schema), loaded from their servers. Their `boundary` layer and country/state
+names are not drawn, so the borders on the map are only the ones in this folder. At street zoom the simplified
+outline can sit a little off the OSM coastline (e.g. Mumbai); less-simplified boundaries will fix that.
+
 Notes:
 
 - **Districts are 2011 boundaries.** Districts created since 2011 are not shown separately.
@@ -56,9 +61,10 @@ Notes:
 - **Simplified for the web** (6.5% of the original points kept, coordinates to 0.001°). Small islands
   and enclaves are kept but coarsened. The simplified outline differs from the unsimplified one by
   about 0.1% of the area each way, and its easternmost point is about 1.6 km short.
-- **No basemap is used.** Third-party basemaps draw their own international borders, which could
-  contradict this outline. The legal requirements for publishing maps of India are on the list for
-  legal review (PLAN.md).
+- **No basemap borders are used.** Third-party basemaps draw their own international borders, which
+  could contradict this outline, so the street layer at city zoom (OpenFreeMap) is drawn without its
+  boundary layer or country/state names. The legal requirements for publishing maps of India are on
+  the list for legal review (PLAN.md).
 - These files are not part of the ODbL-licensed data.ftw database; they keep the licences above.
 - To replace them with current boundaries, use the Survey of India's administrative boundary
   release (district and sub-district, keyed by LGD code) once downloaded, and update `build-geo.mjs`.
