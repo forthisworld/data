@@ -569,3 +569,38 @@ export interface TollRoad {
   sources: SourceCitation[];
   lastVerified?: string;
 }
+
+// ============================================
+// Legislatures: who holds each seat
+// ============================================
+
+/** One seat in a legislature and who holds it, as published by the house's secretariat. */
+export interface LegislatureSeat {
+  /** "<stateSlug>:<boundary key>" for seats drawn on the map (public/geo/in/pc.geojson), else "<stateSlug>:<name>" */
+  id: string;
+  state: string;
+  name: string;
+  /** Whether the map has a current boundary for this seat. */
+  drawn: boolean;
+  status: 'sitting' | 'vacant';
+  member?: {
+    name: string;
+    party: string;
+    partyShort?: string;
+    /** Which Lok Sabhas (by number) this member has sat in. */
+    lokSabhaTerms?: number[];
+  };
+  vacatedBy?: { name: string; reason: string };
+  sourceId: string;
+}
+
+export interface Legislature {
+  id: string;
+  house: string;
+  term: number;
+  /** The date the member list was read. */
+  asOf: string;
+  sources: SourceCitation[];
+  seats: LegislatureSeat[];
+  lastVerified?: string;
+}

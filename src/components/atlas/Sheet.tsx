@@ -90,7 +90,7 @@ export default function Sheet({ wide, snap, onSnap, onClose, viewKey, children }
         <aside style={{ height: h }}
             className={`absolute inset-x-0 bottom-0 z-30 flex flex-col overflow-hidden rounded-t-2xl border-t border-ftw-line bg-ftw-surface text-ftw-text shadow-[0_-8px_30px_rgba(0,0,0,0.15)] ${drag === null ? 'transition-[height] duration-200 ease-out' : ''}`}>
             <div onPointerDown={onDown} onPointerMove={onMove} onPointerUp={onUp} onPointerCancel={onUp}
-                className="flex h-7 shrink-0 cursor-grab touch-none items-center justify-center" role="slider" aria-label="Drag to resize" aria-valuetext={snap}>
+                className="flex h-7 shrink-0 cursor-grab touch-none items-center justify-center" role="slider" aria-label="Drag to resize" aria-valuemin={0} aria-valuemax={2} aria-valuenow={snap === "peek" ? 0 : snap === "half" ? 1 : 2} aria-valuetext={snap}>
                 <span className="h-1 w-10 rounded-full bg-ftw-line" />
             </div>
             {close}

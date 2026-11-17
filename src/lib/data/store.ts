@@ -20,6 +20,7 @@ import type {
     Person,
     Region,
     TollRoad,
+    Legislature,
 } from '@/types';
 
 export interface InfoRequestData {
@@ -38,6 +39,7 @@ export interface CountryData {
     persons: Person[];
     infrastructure: Infrastructure[];
     tollRoads: TollRoad[];
+    legislatures: Legislature[];
     infoRequests: InfoRequestData | null;
 }
 
@@ -58,6 +60,7 @@ function build(code: string): CountryData | null {
         persons: [],
         infrastructure: [],
         tollRoads: [],
+        legislatures: [],
         infoRequests: (dataFiles[`${prefix}info-requests.json`] as InfoRequestData | undefined) ?? null,
     };
 
@@ -65,6 +68,8 @@ function build(code: string): CountryData | null {
         const rel = path.slice(prefix.length);
         if (rel.startsWith('toll-roads/')) {
             data.tollRoads.push(json as TollRoad);
+        } else if (rel.startsWith('representatives/')) {
+            data.legislatures.push(json as Legislature);
         } else if (rel.startsWith('regions/')) {
             const m = rel.match(/^regions\/([^/]+)\/overview\.json$/);
             if (m) data.regionOverviews[m[1]] = json as Overview;

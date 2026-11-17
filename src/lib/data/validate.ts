@@ -3,7 +3,7 @@
  * the site, the contribution endpoint and scripts/validate-data.ts share them.
  */
 
-import type { AnalysisPoint, Entity, MoneyValue, Overview, SourceCitation, TollRoad } from '@/types';
+import type { AnalysisPoint, Entity, Legislature, MoneyValue, Overview, SourceCitation, TollRoad } from '@/types';
 
 const ESTABLISHED = new Set(['court_finding', 'audit_finding', 'official_record', 'company_filing']);
 const BASES = new Set([...ESTABLISHED, 'reported', 'claim']);
@@ -88,4 +88,27 @@ export function validateEntity(e: Entity & Record<string, unknown>): string[] {
 
 export function validateOverview(o: Overview): string[] {
     return o.metrics.filter(m => !m.source).map(m => `metric ${m.key}: no source`);
+}
+
+/**
+ * Who holds each seat. These are "current" facts, so the member list must have been read in the
+ * last six months (rule 7), and every seat cites it.
+ */
+export function validateLegislature(l: Legislature, today = new Date()): string[] {
+    const errors: string[] = [];
+    const ids = checkSources(l.sources, l.id, errors);
+    const read = l.sources.map(s => s.retrievedAt).filter(Boolean).sort().pop();
+    if (read && (today.getTime() - new Date(read).getTime()) / 86_400_000 > 183) {
+        errors.push(`${l.id}: member list last read ${read}; refresh it (npm run data:lok-sabha), current office-holders need a source from the last six months`);
+    }
+    const seen = new Set<string>();
+    for (const seat of l.seats) {
+        const where = `${l.id} / ${seat.name}`;
+        if (seen.has(seat.id)) errors.push(`${where}: duplicate seat id ${seat.id}`);
+        seen.add(seat.id);
+        checkRef(seat.sourceId, where, ids, errors);
+        if (seat.status === 'sitting' && (!seat.member?.name || !seat.member.party)) errors.push(`${where}: a sitting seat needs the member's name and party`);
+        if (seat.status === 'vacant' && seat.member) errors.push(`${where}: a vacant seat has no member`);
+    }
+    return errors;
 }

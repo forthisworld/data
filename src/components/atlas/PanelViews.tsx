@@ -8,8 +8,8 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { ArrowUpRight, ChevronRight, CircleHelp, FileText, Plus, User, Route as RouteIcon, PenLine } from 'lucide-react';
-import type { FactBasis, MoneyValue, Person, SourceCitation, TollRoad } from '@/types';
+import { ArrowUpRight, ChevronRight, CircleHelp, FileText, Plus, User, Route as RouteIcon, PenLine, Landmark } from 'lucide-react';
+import type { FactBasis, LegislatureSeat, MoneyValue, Person, SourceCitation, TollRoad } from '@/types';
 import type { AtlasRegion } from '@/services/country.service';
 import { estimateRecoveryProgress, getDataGaps, isEstablished, REVENUE_ASSUMPTIONS } from '@/services/toll-road-analytics';
 
@@ -402,23 +402,30 @@ export interface PlaceInfo {
     code?: string;
 }
 
-export function PlaceView({ place, region, roads, people, country, onRoad, onPerson }: {
+export function PlaceView({ place, region, roads, people, seats, seatsLoading, lokSabha, country, onRoad, onPerson, onSeat }: {
     place: PlaceInfo;
     region?: AtlasRegion;
     roads: TollRoad[];
     people: Person[];
+    /** Lok Sabha seats in (or overlapping) this place. */
+    seats: Seat[];
+    seatsLoading?: boolean;
+    lokSabha: LokSabhaInfo | null;
     country: string;
     onRoad: (slug: string) => void;
     onPerson: (slug: string) => void;
+    onSeat: (id: string) => void;
 }) {
     const eyebrow = place.kind === 'district' ? `District · ${place.state}` : region?.level === 'union_territory' ? 'Union territory' : 'State';
     const questions = roads.flatMap(r => (r.analysis?.openQuestions ?? []).map(q => ({ q, road: shortName(r.name) }))).slice(0, 4);
-    const known = roads.length + people.length;
+    const known = roads.length + people.length + seats.filter(x => x.member).length;
+    const [allSeats, setAllSeats] = useState(false);
+    const shown = allSeats ? seats : seats.slice(0, 8);
 
     return (
         <article>
             <Header eyebrow={eyebrow} title={place.name}
-                sub={known ? [roads.length && `${roads.length} road${roads.length === 1 ? '' : 's'}`, people.length && `${people.length} office-holder${people.length === 1 ? '' : 's'}`].filter(Boolean).join(' and ') + ' on record' : 'Nothing on record here yet'} />
+                sub={known ? [seats.length && `${seats.length} Lok Sabha seat${seats.length === 1 ? '' : 's'}`, roads.length && `${roads.length} road${roads.length === 1 ? '' : 's'}`, people.length && `${people.length} other office-holder${people.length === 1 ? '' : 's'}`].filter(Boolean).join(', ') + ' on record' : 'Nothing on record here yet'} />
 
             {roads.length > 0 && (
                 <Section title="Roads on record">
@@ -444,7 +451,19 @@ export function PlaceView({ place, region, roads, people, country, onRoad, onPer
                 </Section>
             )}
 
-            <Section title="Who answers for it">
+            <Section title="Who answers for it" aside={seats.length > 8 && (
+                <button onClick={() => setAllSeats(v => !v)} className="text-xs font-medium text-ftw-accent hover:underline">{allSeats ? 'Fewer' : `All ${seats.length} MPs`}</button>
+            )}>
+                {seatsLoading && <p className="mb-2 text-xs text-ftw-faint">Loading Lok Sabha seats…</p>}
+                {seats.length > 0 && (
+                    <>
+                        {place.kind === 'state' && seats.length > 3 && <PartySplit seats={seats} />}
+                        <ul className="mb-3 space-y-1">
+                            {shown.map(x => <SeatRow key={x.id} seat={x} onSeat={onSeat} showSeat />)}
+                        </ul>
+                        {lokSabha && <p className="mb-3 text-[11px] text-ftw-faint">Members of the {lokSabha.term}th Lok Sabha, as listed by the {lokSabha.source.publisher}, read {fmtDate(lokSabha.asOf)}.{place.kind === 'district' ? ' Seats that cover part of this district.' : ''}</p>}
+                    </>
+                )}
                 {people.length > 0 && (
                     <ul className="mb-3 space-y-2">
                         {people.map(p => (
@@ -462,16 +481,10 @@ export function PlaceView({ place, region, roads, people, country, onRoad, onPer
                     </ul>
                 )}
                 <ul className="space-y-2">
-                    {place.kind === 'district' ? (
-                        <>
-                            <Gap>The MPs and MLAs elected from {place.name}, with their declared assets and cases, are not on record yet.</Gap>
-                            <Gap>Who runs the district administration and the local bodies here is not on record yet.</Gap>
-                        </>
-                    ) : (
-                        <Gap>{place.name}&apos;s MPs, MLAs and ministers are not on record yet{people.length ? ', beyond the people above' : ''}.</Gap>
-                    )}
+                    {!seats.length && !seatsLoading && <Gap>The MPs for {place.name} are not on record yet (seat boundaries here were redrawn after the map we use).</Gap>}
+                    <Gap>The MLAs elected from {place.name}, and every representative&apos;s declared assets and criminal cases, are not on record yet.</Gap>
+                    {place.kind === 'district' && <Gap>Who runs the district administration and the local bodies here is not on record yet.</Gap>}
                 </ul>
-                {people.length === 0 && place.kind === 'state' && <p className="mt-2 text-xs text-ftw-faint">Representatives are the next layer we are adding, constituency by constituency.</p>}
             </Section>
 
             {questions.length > 0 ? (
@@ -557,6 +570,116 @@ export function RoadsView({ roads, placeName, onRoad }: { roads: TollRoad[]; pla
                 </ul>
                 <div className="mt-3"><Link href="/contribute" className="inline-flex items-center gap-1.5 text-[13px] font-medium text-ftw-accent hover:underline"><Plus className="h-3.5 w-3.5" /> Add a toll road</Link></div>
             </Section>
+        </article>
+    );
+}
+
+// ---------- Lok Sabha seats ----------
+
+export type Seat = Omit<LegislatureSeat, 'sourceId'>;
+export interface LokSabhaInfo { term: number; asOf: string; source: SourceCitation }
+
+const ordinal = (n: number) => `${n}${n % 100 >= 11 && n % 100 <= 13 ? 'th' : ['th', 'st', 'nd', 'rd'][n % 10] ?? 'th'}`;
+
+function SeatRow({ seat, onSeat, showSeat }: { seat: Seat; onSeat: (id: string) => void; showSeat?: boolean }) {
+    return (
+        <li>
+            <button onClick={() => onSeat(seat.id)} className="group flex w-full items-center gap-3 rounded-lg p-1.5 text-left hover:bg-ftw-raised">
+                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-ftw-raised"><User className="h-4 w-4 text-ftw-muted" /></span>
+                <span className="min-w-0 flex-1">
+                    <span className="block truncate text-sm font-semibold">{seat.member?.name ?? 'Vacant'}</span>
+                    <span className="block truncate text-xs text-ftw-muted">
+                        {[showSeat && `MP for ${seat.name}`, seat.member?.partyShort ?? seat.member?.party].filter(Boolean).join(' · ')}
+                    </span>
+                </span>
+                <ChevronRight className="h-4 w-4 text-ftw-faint group-hover:text-ftw-text" />
+            </button>
+        </li>
+    );
+}
+
+function PartySplit({ seats }: { seats: Seat[] }) {
+    const counts = new Map<string, number>();
+    for (const x of seats) {
+        const k = x.member ? (x.member.partyShort ?? x.member.party) : 'Vacant';
+        counts.set(k, (counts.get(k) ?? 0) + 1);
+    }
+    const rows = [...counts].sort((a, b) => b[1] - a[1]);
+    return (
+        <div className="mb-3">
+            <div className="flex h-2 overflow-hidden rounded-full bg-ftw-raised">
+                {rows.map(([k, n], i) => (
+                    <span key={k} title={`${k}: ${n}`} style={{ width: `${(n / seats.length) * 100}%`, opacity: 1 - Math.min(i, 6) * 0.13 }} className="h-full border-r border-ftw-surface bg-ftw-accent last:border-0" />
+                ))}
+            </div>
+            <p className="mt-1.5 text-xs text-ftw-muted">{rows.map(([k, n]) => `${k} ${n}`).join(' · ')}</p>
+        </div>
+    );
+}
+
+export function SeatView({ seat, stateName, lokSabha, districts, country, onPlace }: {
+    seat: Seat;
+    stateName: string;
+    lokSabha: LokSabhaInfo;
+    /** The 2011 districts the seat covers, by name. */
+    districts: { code: string; name: string }[];
+    country: string;
+    onPlace: (code: string) => void;
+}) {
+    const m = seat.member;
+    const terms = m?.lokSabhaTerms ?? [];
+    return (
+        <article>
+            <Header eyebrow={`Lok Sabha seat · ${stateName}`} title={seat.name}
+                sub={m ? undefined : 'No sitting member'} />
+            <Section title="Member of Parliament">
+                {m ? (
+                    <div className="flex items-start gap-3">
+                        <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-ftw-raised"><Landmark className="h-5 w-5 text-ftw-muted" /></span>
+                        <div className="min-w-0">
+                            <p className="text-lg font-semibold leading-tight">{m.name}<Cite ids={[lokSabha.source.id]} sources={[lokSabha.source]} /></p>
+                            <p className="text-[13px] text-ftw-muted">{m.party}</p>
+                            {terms.length > 0 && (
+                                <p className="mt-1 text-xs text-ftw-muted">
+                                    {terms.length === 1 ? `First term (${ordinal(terms[0])} Lok Sabha)` : `${terms.length} terms: ${terms.map(ordinal).join(', ')} Lok Sabha`}
+                                </p>
+                            )}
+                        </div>
+                    </div>
+                ) : (
+                    <p className="text-[13px]">
+                        Vacant{seat.vacatedBy ? `: ${seat.vacatedBy.name} ${seat.vacatedBy.reason === 'died' ? 'died' : seat.vacatedBy.reason === 'resigned' ? 'resigned' : `(${seat.vacatedBy.reason})`}` : ''}, according to the member list.
+                        <Cite ids={[lokSabha.source.id]} sources={[lokSabha.source]} />
+                    </p>
+                )}
+                <p className="mt-3 text-[11px] text-ftw-faint">As listed by the {lokSabha.source.publisher}, read {fmtDate(lokSabha.asOf)}. A by-election held since may not be reflected yet.</p>
+            </Section>
+
+            {districts.length > 0 && (
+                <Section title="Covers (2011 districts)">
+                    <div className="flex flex-wrap gap-1.5">
+                        {districts.map(d => (
+                            <button key={d.code} onClick={() => onPlace(d.code)} className="rounded-full border border-ftw-line px-2.5 py-1 text-xs font-medium hover:bg-ftw-raised">{d.name}</button>
+                        ))}
+                    </div>
+                </Section>
+            )}
+            {!seat.drawn && (
+                <Section title="Boundary">
+                    <p className="text-[13px] text-ftw-muted">Not drawn: this seat was redrawn by the delimitation after 2019, and the map does not have the new boundaries yet.</p>
+                </Section>
+            )}
+
+            <Section title="Not on record yet">
+                <ul className="space-y-2">
+                    <Gap>Declared assets, liabilities, education and criminal cases, from the election affidavit.</Gap>
+                    <Gap>MPLADS: the works this MP recommended in {seat.name}, what they cost and whether they were finished.</Gap>
+                    <Gap>Attendance, questions asked and debates taken part in.</Gap>
+                    <Gap>The assembly seats (and MLAs) inside {seat.name}.</Gap>
+                </ul>
+                <Actions country={country} />
+            </Section>
+            <Sources sources={[lokSabha.source]} lastVerified={lokSabha.asOf} />
         </article>
     );
 }

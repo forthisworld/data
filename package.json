@@ -14,7 +14,9 @@
     "data:index": "tsx scripts/gen-data-index.ts",
     "data:validate": "tsx scripts/validate-data.ts",
     "geo:build": "node scripts/build-geo.mjs",
-    "geo:routes": "node scripts/build-routes.mjs"
+    "geo:routes": "node scripts/build-routes.mjs",
+    "geo:pc": "node scripts/build-constituencies.mjs",
+    "data:lok-sabha": "node scripts/fetch-lok-sabha.mjs"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.30.0",

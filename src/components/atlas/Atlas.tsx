@@ -25,7 +25,8 @@ import { useTheme } from '@/lib/theme';
 import Sheet, { PEEK_PX, useWide, type Snap } from './Sheet';
 import QuickSettings from './QuickSettings';
 import { addBasemap, paintBasemap, BASEMAP_GLYPHS, BASEMAP_PALETTE } from './basemap';
-import { PlaceView, RoadView, PersonView, RoadsView, ROLE, shortName } from './PanelViews';
+import { PlaceView, RoadView, PersonView, RoadsView, SeatView, ROLE, shortName } from './PanelViews';
+import { loadSeats, paintSeats, showSeats, SEAT_PALETTE, type SeatGeo } from './seats';
 import { PLACE_ALIASES } from '@/lib/place-aliases';
 import { atlasPath, parseAtlasPath, type AtlasRoute } from '@/lib/atlas-route';
 
@@ -43,6 +44,7 @@ interface Place {
 
 type View =
     | { kind: 'roads' }
+    | { kind: 'seat'; id: string }
     | { kind: 'place'; place: Place }
     | { kind: 'road'; slug: string }
     | { kind: 'person'; slug: string };
@@ -127,7 +129,7 @@ interface AtlasProps {
 }
 
 export default function Atlas({ countryCode, countryName, data, initial }: AtlasProps) {
-    const { regions, roads, people } = data;
+    const { regions, roads, people, lokSabha } = data;
     const { choice, dark, setTheme } = useTheme();
     const wide = useWide();
 
@@ -149,14 +151,28 @@ export default function Atlas({ countryCode, countryName, data, initial }: Atlas
     const [query, setQuery] = useState('');
     const [searchOpen, setSearchOpen] = useState(false);
     const [bearing, setBearing] = useState(0);
+    // What the lines inside states show: 2011 districts, or Lok Sabha seats.
+    const [mode, setMode] = useState<'districts' | 'seats'>('districts');
+    const modeRef = useRef(mode);
+    modeRef.current = mode;
+    const [seatGeo, setSeatGeo] = useState<Map<string, SeatGeo> | null>(null);
+    const seatLoad = useRef<Promise<Map<string, SeatGeo>> | null>(null);
+    const relayout = useRef<() => void>(() => {});
 
     const roadBySlug = useMemo(() => new Map(roads.map(r => [r.slug, r])), [roads]);
     const personBySlug = useMemo(() => new Map(people.map(p => [p.slug, p])), [people]);
+    const seats = useMemo(() => lokSabha?.seats ?? [], [lokSabha]);
+    const seatById = useMemo(() => new Map(seats.map(x => [x.id, x])), [seats]);
     const placeName = useCallback((slug: string) => regions[slug]?.name ?? places.find(p => p.kind === 'state' && p.stateSlug === slug)?.name ?? slug, [regions, places]);
 
     // ---------- search (all client-side) ----------
-    type Item = { type: 'place' | 'road' | 'person'; label: string; sub: string; extra: string[]; place?: Place; slug?: string };
+    type Item = { type: 'place' | 'road' | 'person' | 'seat'; label: string; sub: string; extra: string[]; place?: Place; slug?: string };
     const items = useMemo<Item[]>(() => [
+        ...seats.map(x => ({
+            type: 'seat' as const, label: x.member?.name ?? `${x.name} (vacant)`, slug: x.id,
+            sub: `MP for ${x.name}, ${placeName(x.state)}${x.member ? ` · ${x.member.partyShort ?? x.member.party}` : ''}`,
+            extra: [x.name, x.member?.party ?? '', x.member?.partyShort ?? ''],
+        })),
         ...roads.map(r => ({ type: 'road' as const, label: shortName(r.name), sub: `Toll road · ${r.regionIds.map(placeName).join(', ')}`, extra: [r.name, r.officialName ?? '', r.operatorCompany ?? ''], slug: r.slug })),
         ...people.map(p => ({ type: 'person' as const, label: p.name, sub: [ROLE[p.role] || p.role, p.party].filter(Boolean).join(' · '), extra: [p.party ?? '', p.role], slug: p.slug })),
         ...places.map(p => {
@@ -168,7 +184,7 @@ export default function Atlas({ countryCode, countryName, data, initial }: Atlas
                     : regions[p.stateSlug]?.level === 'union_territory' ? 'Union territory' : 'State',
             };
         }),
-    ], [roads, people, places, regions, placeName]);
+    ], [roads, people, places, regions, placeName, seats]);
     const fuse = useMemo(() => new Fuse(items, { keys: [{ name: 'label', weight: 3 }, { name: 'extra', weight: 1 }], threshold: 0.25, ignoreLocation: true }), [items]);
     const matches = query.trim().length >= 2 ? fuse.search(query.trim(), { limit: 8 }).map(r => r.item) : [];
 
@@ -231,6 +247,38 @@ export default function Atlas({ countryCode, countryName, data, initial }: Atlas
         }
     }, [clearHighlights, padding, personBySlug, places]);
 
+    /** Loads the seat layers once (they are ~2 MB, so only when first needed). */
+    const ensureSeats = useCallback(() => {
+        const map = mapRef.current;
+        if (!map) return Promise.reject(new Error('no map'));
+        seatLoad.current ??= loadSeats(map, countryCode, SEAT_PALETTE[darkRef.current ? 'dark' : 'light'], 'states-line')
+            .then(geo => { setSeatGeo(geo); return geo; });
+        return seatLoad.current;
+    }, [countryCode]);
+
+    const openSeat = useCallback((id: string, fly = true) => {
+        const map = mapRef.current;
+        const seat = seatById.get(id);
+        if (!map || !seat) return;
+        clearHighlights();
+        setView({ kind: 'seat', id });
+        setMode('seats');
+        setSnap('half');
+        setQuery('');
+        setSearchOpen(false);
+        ensureSeats().then(geo => {
+            const g = geo.get(id);
+            if (g) {
+                selectedRef.current = { source: 'pc', id };
+                map.setFeatureState(selectedRef.current, { selected: true });
+                if (fly) map.fitBounds(g.bounds, { padding: padding(), maxZoom: 10.5, duration: 900 });
+            } else if (fly) {
+                const st = places.find(p => p.kind === 'state' && p.stateSlug === seat.state);
+                if (st) map.fitBounds(st.bounds, { padding: padding(), maxZoom: 7, duration: 900 });
+            }
+        }).catch(() => {});
+    }, [clearHighlights, ensureSeats, padding, places, seatById]);
+
     const openRoads = useCallback(() => {
         clearHighlights();
         setView({ kind: 'roads' });
@@ -244,8 +292,8 @@ export default function Atlas({ countryCode, countryName, data, initial }: Atlas
     }, [clearHighlights]);
 
     // Map callbacks are bound once; route them to the latest handlers.
-    const handlers = useRef({ openPlace, openRoad, closeView });
-    handlers.current = { openPlace, openRoad, closeView };
+    const handlers = useRef({ openPlace, openRoad, openSeat, closeView });
+    handlers.current = { openPlace, openRoad, openSeat, closeView };
 
     // ---------- the map ----------
     useEffect(() => {
@@ -393,7 +441,7 @@ export default function Atlas({ countryCode, countryName, data, initial }: Atlas
                 }
                 markersRef.current.districts.forEach(m => m.remove());
                 markersRef.current.districts = [];
-                if (zoomed && z < 10.5) {
+                if (zoomed && z < 10.5 && modeRef.current === 'districts') {
                     const b = map.getBounds();
                     const min = districtAreaThreshold(z);
                     const sel = selectedRef.current?.source === 'districts' ? selectedRef.current.id : null;
@@ -417,12 +465,14 @@ export default function Atlas({ countryCode, countryName, data, initial }: Atlas
                 }
             };
             map.on('moveend', layoutLabels);
+            relayout.current = layoutLabels;
             layoutLabels();
 
             // ---- hover and click: roads win over districts, districts over states ----
             const hit = (p: maplibregl.PointLike): MapGeoJSONFeature | undefined =>
                 map.queryRenderedFeatures(p, { layers: ['routes-hit'] })[0] ??
-                map.queryRenderedFeatures(p, { layers: map.getZoom() >= DISTRICT_ZOOM ? ['districts-fill'] : ['hover-shade'] })[0];
+                (modeRef.current === 'seats' && map.getLayer('pc-fill') ? map.queryRenderedFeatures(p, { layers: ['pc-fill'] })[0] : undefined) ??
+                map.queryRenderedFeatures(p, { layers: map.getZoom() >= DISTRICT_ZOOM && modeRef.current === 'districts' ? ['districts-fill'] : ['hover-shade'] })[0];
             let hovered: { source: string; id: string | number } | null = null;
             const clearHover = () => {
                 if (hovered) map.setFeatureState(hovered, { hover: false });
@@ -434,7 +484,7 @@ export default function Atlas({ countryCode, countryName, data, initial }: Atlas
                 if (!f) return clearHover();
                 map.getCanvas().style.cursor = 'pointer';
                 if (f.layer.id === 'routes-hit' || f.id === undefined) { if (hovered) { map.setFeatureState(hovered, { hover: false }); hovered = null; } return; }
-                const source = f.layer.id === 'districts-fill' ? 'districts' : 'states';
+                const source = f.layer.id === 'districts-fill' ? 'districts' : f.layer.id === 'pc-fill' ? 'pc' : 'states';
                 if (!hovered || hovered.id !== f.id || hovered.source !== source) {
                     clearHover();
                     hovered = { source, id: f.id };
@@ -448,6 +498,7 @@ export default function Atlas({ countryCode, countryName, data, initial }: Atlas
                 if (!f) return handlers.current.closeView();
                 const p = f.properties as Record<string, string>;
                 if (f.layer.id === 'routes-hit') return handlers.current.openRoad(p.slug, false);
+                if (f.layer.id === 'pc-fill') return handlers.current.openSeat(p.key, false);
                 const geom = f.geometry as Geom;
                 handlers.current.openPlace(
                     f.layer.id === 'districts-fill'
@@ -473,12 +524,26 @@ export default function Atlas({ countryCode, countryName, data, initial }: Atlas
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
+    // Districts or seats: load the seat layers the first time, then swap which lines show.
+    useEffect(() => {
+        const map = mapRef.current;
+        if (!map || !ready) return;
+        if (mode === 'seats') ensureSeats().then(() => { showSeats(map, true); relayout.current(); }).catch(e => { console.error('Lok Sabha seats could not be loaded', e); setMode('districts'); });
+        else { showSeats(map, false); relayout.current(); }
+    }, [mode, ready, ensureSeats]);
+
+    // A district's panel lists the MPs whose seats cover it, so it needs the seat layers.
+    useEffect(() => {
+        if (ready && view?.kind === 'place' && !seatGeo) ensureSeats().catch(() => {});
+    }, [view, ready, seatGeo, ensureSeats]);
+
     // Theme: repaint, don't rebuild.
     useEffect(() => {
         const map = mapRef.current;
         if (map && ready) {
             applyPalette(map, PALETTE[dark ? 'dark' : 'light']);
             paintBasemap(map, BASEMAP_PALETTE[dark ? 'dark' : 'light']);
+            paintSeats(map, SEAT_PALETTE[dark ? 'dark' : 'light']);
         }
     }, [dark, ready]);
 
@@ -491,6 +556,7 @@ export default function Atlas({ countryCode, countryName, data, initial }: Atlas
     const routeOf = useCallback((v: View | null): AtlasRoute =>
         !v ? { kind: 'home' }
             : v.kind === 'roads' ? { kind: 'roads' }
+            : v.kind === 'seat' ? { kind: 'seat', state: v.id.slice(0, v.id.indexOf(':')), seat: v.id.slice(v.id.indexOf(':') + 1) }
             : v.kind === 'road' ? { kind: 'road', slug: v.slug }
             : v.kind === 'person' ? { kind: 'person', slug: v.slug }
             : v.place.kind === 'state' ? { kind: 'state', slug: v.place.stateSlug }
@@ -503,6 +569,7 @@ export default function Atlas({ countryCode, countryName, data, initial }: Atlas
         switch (r.kind) {
             case 'home': return closeView();
             case 'roads': return openRoads();
+            case 'seat': return openSeat(`${r.state}:${r.seat}`);
             case 'road': return openRoad(r.slug);
             case 'person': return openPerson(r.slug);
             case 'state':
@@ -513,7 +580,7 @@ export default function Atlas({ countryCode, countryName, data, initial }: Atlas
                 return p ? openPlace(p) : closeView();
             }
         }
-    }, [closeView, openPlace, openPerson, openRoad, openRoads, places]);
+    }, [closeView, openPlace, openPerson, openRoad, openRoads, openSeat, places]);
 
     // First load: the route the server was asked for (or an old ?v= link).
     useEffect(() => {
@@ -557,6 +624,18 @@ export default function Atlas({ countryCode, countryName, data, initial }: Atlas
         if (view.kind === 'roads') {
             return { key: 'roads', body: <RoadsView roads={roads} placeName={placeName} onRoad={s => openRoad(s)} /> };
         }
+        if (view.kind === 'seat') {
+            const seat = seatById.get(view.id);
+            if (!seat || !lokSabha) return null;
+            const codes = seatGeo?.get(seat.id)?.districts ?? [];
+            const districts = codes.map(c => places.find(p => p.kind === 'district' && p.code === c)).filter((p): p is Place => !!p);
+            return {
+                key: `seat:${seat.id}`,
+                body: <SeatView seat={seat} stateName={placeName(seat.state)} lokSabha={lokSabha} country={countryCode}
+                    districts={districts.map(d => ({ code: d.code!, name: d.name }))}
+                    onPlace={c => { const d = districts.find(x => x.code === c); if (d) openPlace(d); }} />,
+            };
+        }
         if (view.kind === 'road') {
             const road = roadBySlug.get(view.slug);
             return road ? { key: `road:${road.slug}`, body: <RoadView road={road} country={countryCode} stateNames={road.regionIds.map(placeName)} /> } : null;
@@ -571,9 +650,13 @@ export default function Atlas({ countryCode, countryName, data, initial }: Atlas
             return pl.kind === 'district' ? !!route?.districts.has(pl.code!) : r.regionIds.includes(pl.stateSlug) || !!route?.states.has(pl.stateSlug);
         });
         const here = people.filter(p => p.regionId === pl.stateSlug || (p.regionIds ?? []).includes(pl.stateSlug));
+        const seatsHere = pl.kind === 'state'
+            ? seats.filter(x => x.state === pl.stateSlug)
+            : seats.filter(x => seatGeo?.get(x.id)?.districts.includes(pl.code!));
         return {
             key: `place:${pl.kind}:${pl.code ?? pl.stateSlug}`,
-            body: <PlaceView place={pl} region={regions[pl.stateSlug]} roads={inPlace} people={here} country={countryCode} onRoad={s => openRoad(s)} onPerson={s => openPerson(s)} />,
+            body: <PlaceView place={pl} region={regions[pl.stateSlug]} roads={inPlace} people={here} seats={seatsHere} seatsLoading={pl.kind === 'district' && !seatGeo}
+                lokSabha={lokSabha} country={countryCode} onRoad={s => openRoad(s)} onPerson={s => openPerson(s)} onSeat={id => openSeat(id)} />,
         };
     })();
 
@@ -594,10 +677,21 @@ export default function Atlas({ countryCode, countryName, data, initial }: Atlas
                 <a href={`/${countryCode}`} className="pointer-events-auto flex h-11 items-center gap-2.5 rounded-full border border-ftw-line bg-ftw-surface/95 pl-2 pr-4 shadow-sm backdrop-blur">
                     <CompassMark className="h-7 w-7 text-ftw-text" />
                     <span className="text-[15px] font-semibold tracking-tight">data.ftw</span>
-                    <span className="h-4 w-px bg-ftw-line" />
-                    <span className="text-sm text-ftw-muted">{countryName}</span>
+                    <span className="hidden h-4 w-px bg-ftw-line sm:block" />
+                    <span className="hidden text-sm text-ftw-muted sm:block">{countryName}</span>
                 </a>
-                <div className="pointer-events-auto">
+                <div className="pointer-events-auto flex items-start gap-2">
+                    {lokSabha && (
+                        <div role="radiogroup" aria-label="Lines inside states" className="flex h-11 items-center rounded-full border border-ftw-line bg-ftw-surface/95 p-1 shadow-sm backdrop-blur">
+                            {([['districts', 'Districts'], ['seats', 'MPs']] as const).map(([v, label]) => (
+                                <button key={v} role="radio" aria-checked={mode === v} onClick={() => setMode(v)}
+                                    title={v === 'seats' ? 'Lok Sabha seats and their MPs' : '2011 districts'}
+                                    className={`h-full rounded-full px-3 text-xs font-semibold sm:px-3.5 ${mode === v ? 'bg-ftw-text text-ftw-surface' : 'text-ftw-muted hover:text-ftw-text'}`}>
+                                    {label}
+                                </button>
+                            ))}
+                        </div>
+                    )}
                     <QuickSettings country={countryCode} theme={choice} onTheme={setTheme} onRoads={openRoads} />
                 </div>
             </div>
@@ -658,10 +752,10 @@ export default function Atlas({ countryCode, countryName, data, initial }: Atlas
                             <div className="mb-2 max-h-[50dvh] overflow-y-auto rounded-2xl border border-ftw-line bg-ftw-surface p-1.5 text-sm shadow-[0_8px_40px_rgba(0,0,0,0.15)]">
                                 {matches.length ? matches.map(m => (
                                     <button key={`${m.type}-${m.slug ?? m.place?.code ?? m.place?.stateSlug}`}
-                                        onClick={() => m.type === 'place' ? openPlace(m.place!) : m.type === 'road' ? openRoad(m.slug!) : openPerson(m.slug!)}
+                                        onClick={() => m.type === 'place' ? openPlace(m.place!) : m.type === 'road' ? openRoad(m.slug!) : m.type === 'seat' ? openSeat(m.slug!) : openPerson(m.slug!)}
                                         className="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left hover:bg-ftw-raised">
                                         <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-ftw-raised">
-                                            {m.type === 'road' ? <RouteIcon className="h-4 w-4 text-ftw-tolled" /> : m.type === 'person' ? <User className="h-4 w-4 text-ftw-muted" /> : <MapPin className="h-4 w-4 text-ftw-muted" />}
+                                            {m.type === 'road' ? <RouteIcon className="h-4 w-4 text-ftw-tolled" /> : m.type === 'person' || m.type === 'seat' ? <User className="h-4 w-4 text-ftw-muted" /> : <MapPin className="h-4 w-4 text-ftw-muted" />}
                                         </span>
                                         <span className="min-w-0">
                                             <span className="block truncate font-medium">{m.label}</span>
@@ -681,10 +775,10 @@ export default function Atlas({ countryCode, countryName, data, initial }: Atlas
                                     if (e.key === 'Escape') { setQuery(''); setSearchOpen(false); }
                                     if (e.key === 'Enter' && matches[0]) {
                                         const m = matches[0];
-                                        if (m.type === 'place') openPlace(m.place!); else if (m.type === 'road') openRoad(m.slug!); else openPerson(m.slug!);
+                                        if (m.type === 'place') openPlace(m.place!); else if (m.type === 'road') openRoad(m.slug!); else if (m.type === 'seat') openSeat(m.slug!); else openPerson(m.slug!);
                                     }
                                 }}
-                                placeholder="Search a place, road or person"
+                                placeholder="Search a place, MP, road or person"
                                 aria-label="Search the atlas"
                                 className="h-14 w-full rounded-full border border-ftw-line bg-ftw-surface pl-12 pr-12 text-base text-ftw-text shadow-[0_4px_24px_rgba(0,0,0,0.10)] placeholder:text-ftw-faint focus:border-ftw-accent focus:outline-none"
                             />

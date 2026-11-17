@@ -6,7 +6,7 @@
  */
 
 import { getCountryData, findEntity } from '@/lib/data/store';
-import { CountryConfig, Overview, Person, TollRoad } from '@/types';
+import { CountryConfig, LegislatureSeat, Overview, Person, SourceCitation, TollRoad } from '@/types';
 
 export async function getCountryConfig(countryCode: string): Promise<CountryConfig> {
     const d = getCountryData(countryCode);
@@ -98,11 +98,20 @@ export interface AtlasData {
     regions: Record<string, AtlasRegion>;
     roads: TollRoad[];
     people: Person[];
+    /** Who holds each Lok Sabha seat (data/in/representatives). */
+    lokSabha: { term: number; asOf: string; source: SourceCitation; seats: Omit<LegislatureSeat, 'sourceId'>[] } | null;
 }
 
 export async function getAtlasData(countryCode: string): Promise<AtlasData> {
     const d = getCountryData(countryCode);
-    return { regions: await getAtlasRegions(countryCode), roads: d?.tollRoads ?? [], people: d?.persons ?? [] };
+    const ls = d?.legislatures.find(l => l.house === 'Lok Sabha');
+    return {
+        regions: await getAtlasRegions(countryCode),
+        roads: d?.tollRoads ?? [],
+        people: d?.persons ?? [],
+        // Every seat cites the same member list, so it is sent once.
+        lokSabha: ls ? { term: ls.term, asOf: ls.asOf, source: ls.sources[0], seats: ls.seats.map(seat => { const { sourceId, ...rest } = seat; void sourceId; return rest; }) } : null,
+    };
 }
 
 export async function isCountrySupported(countryCode: string): Promise<boolean> {

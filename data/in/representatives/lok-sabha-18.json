@@ -1,0 +1,9244 @@
+{
+ "id": "lok-sabha-18",
+ "house": "Lok Sabha",
+ "term": 18,
+ "asOf": "2026-11-17",
+ "sources": [
+  {
+   "id": "sansad-ls18-members",
+   "title": "Members of the 18th Lok Sabha",
+   "publisher": "Lok Sabha Secretariat (sansad.in)",
+   "type": "government_portal",
+   "url": "https://sansad.in/ls/members",
+   "retrievedAt": "2026-11-17",
+   "note": "Read from the member list's JSON API (https://sansad.in/api_ls/member?loksabha=18&locale=en&page=1&size=600). Only each seat's member, party, terms and status are kept."
+  }
+ ],
+ "seats": [
+  {
+   "id": "andaman-and-nicobar:35-1",
+   "state": "andaman-and-nicobar",
+   "name": "Andaman and Nicobar Islands",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Bishnu Pada Ray",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     13,
+     15,
+     16,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "andhra-pradesh:37-7",
+   "state": "andhra-pradesh",
+   "name": "Amalapuram",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "G M Harish Balayogi",
+    "party": "Telugu Desam Party",
+    "partyShort": "TDP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "andhra-pradesh:37-5",
+   "state": "andhra-pradesh",
+   "name": "Anakapalle",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "C M Ramesh",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "andhra-pradesh:37-19",
+   "state": "andhra-pradesh",
+   "name": "Anantapur",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "G Lakshminarayana",
+    "party": "Telugu Desam Party",
+    "partyShort": "TDP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "andhra-pradesh:37-1",
+   "state": "andhra-pradesh",
+   "name": "Araku",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Gumma Thanuja Rani",
+    "party": "Yuvajana Sramika Rythu Congress Party",
+    "partyShort": "YSR Congress Party",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "andhra-pradesh:37-15",
+   "state": "andhra-pradesh",
+   "name": "Bapatla",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Krishna Prasad Tenneti",
+    "party": "Telugu Desam Party",
+    "partyShort": "TDP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "andhra-pradesh:37-25",
+   "state": "andhra-pradesh",
+   "name": "Chittoor",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Daggumalla Prasada Rao",
+    "party": "Telugu Desam Party",
+    "partyShort": "TDP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "andhra-pradesh:37-10",
+   "state": "andhra-pradesh",
+   "name": "Eluru",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Putta Mahesh Kumar",
+    "party": "Telugu Desam Party",
+    "partyShort": "TDP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "andhra-pradesh:37-13",
+   "state": "andhra-pradesh",
+   "name": "Guntur",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Chandra Sekhar Pemmasani",
+    "party": "Telugu Desam Party",
+    "partyShort": "TDP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "andhra-pradesh:37-20",
+   "state": "andhra-pradesh",
+   "name": "Hindupur",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "B K Parthasarathi",
+    "party": "Telugu Desam Party",
+    "partyShort": "TDP",
+    "lokSabhaTerms": [
+     13,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "andhra-pradesh:37-21",
+   "state": "andhra-pradesh",
+   "name": "Kadapa",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Y S Avinash Reddy",
+    "party": "Yuvajana Sramika Rythu Congress Party",
+    "partyShort": "YSR Congress Party",
+    "lokSabhaTerms": [
+     16,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "andhra-pradesh:37-6",
+   "state": "andhra-pradesh",
+   "name": "Kakinada",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Tangella Uday Srinivas",
+    "party": "Janasena Party",
+    "partyShort": "JSP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "andhra-pradesh:37-18",
+   "state": "andhra-pradesh",
+   "name": "Kurnool",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Bastipati Nagaraju",
+    "party": "Telugu Desam Party",
+    "partyShort": "TDP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "andhra-pradesh:37-11",
+   "state": "andhra-pradesh",
+   "name": "Machilipatnam",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Balashowry Vallabhaneni",
+    "party": "Janasena Party",
+    "partyShort": "JSP",
+    "lokSabhaTerms": [
+     14,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "andhra-pradesh:37-17",
+   "state": "andhra-pradesh",
+   "name": "Nandyal",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Byreddy Shabari",
+    "party": "Telugu Desam Party",
+    "partyShort": "TDP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "andhra-pradesh:37-14",
+   "state": "andhra-pradesh",
+   "name": "Narasaraopet",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Lavu Sri Krishna Devarayalu",
+    "party": "Telugu Desam Party",
+    "partyShort": "TDP",
+    "lokSabhaTerms": [
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "andhra-pradesh:37-9",
+   "state": "andhra-pradesh",
+   "name": "Narsapuram",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Srinivasa Varma B J P Varma Bhupathiraju",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "andhra-pradesh:37-22",
+   "state": "andhra-pradesh",
+   "name": "Nellore",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Prabhakar Reddy Vemireddy",
+    "party": "Telugu Desam Party",
+    "partyShort": "TDP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "andhra-pradesh:37-16",
+   "state": "andhra-pradesh",
+   "name": "Ongole",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Magunta Sreenivasulu Reddy",
+    "party": "Telugu Desam Party",
+    "partyShort": "TDP",
+    "lokSabhaTerms": [
+     12,
+     14,
+     15,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "andhra-pradesh:37-8",
+   "state": "andhra-pradesh",
+   "name": "Rajahmundry",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "D. Purandeswari",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     14,
+     15,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "andhra-pradesh:37-24",
+   "state": "andhra-pradesh",
+   "name": "Rajampet",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "P V Midhun Reddy",
+    "party": "Yuvajana Sramika Rythu Congress Party",
+    "partyShort": "YSR Congress Party",
+    "lokSabhaTerms": [
+     16,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "andhra-pradesh:37-2",
+   "state": "andhra-pradesh",
+   "name": "Srikakulam",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Kinjarapu Rammohan Naidu",
+    "party": "Telugu Desam Party",
+    "partyShort": "TDP",
+    "lokSabhaTerms": [
+     16,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "andhra-pradesh:37-23",
+   "state": "andhra-pradesh",
+   "name": "Tirupati",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Maddila Gurumoorthy",
+    "party": "Yuvajana Sramika Rythu Congress Party",
+    "partyShort": "YSR Congress Party",
+    "lokSabhaTerms": [
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "andhra-pradesh:37-12",
+   "state": "andhra-pradesh",
+   "name": "Vijayawada",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Kesineni Sivanath",
+    "party": "Telugu Desam Party",
+    "partyShort": "TDP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "andhra-pradesh:37-4",
+   "state": "andhra-pradesh",
+   "name": "Visakhapatnam",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Sribharat Mathukumilli",
+    "party": "Telugu Desam Party",
+    "partyShort": "TDP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "andhra-pradesh:37-3",
+   "state": "andhra-pradesh",
+   "name": "Vizianagaram",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Appalanaidu Kalisetti",
+    "party": "Telugu Desam Party",
+    "partyShort": "TDP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "arunachal-pradesh:12-2",
+   "state": "arunachal-pradesh",
+   "name": "Arunachal East",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Tapir Gao",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     14,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "arunachal-pradesh:12-1",
+   "state": "arunachal-pradesh",
+   "name": "Arunachal West",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Kiren Rijiju",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     14,
+     16,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "assam:barpeta",
+   "state": "assam",
+   "name": "Barpeta",
+   "drawn": false,
+   "status": "sitting",
+   "member": {
+    "name": "Phani Bhusan Choudhury",
+    "party": "Asom Gana Parishad",
+    "partyShort": "AGP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "assam:darrangudalguri",
+   "state": "assam",
+   "name": "Darrang Udalguri",
+   "drawn": false,
+   "status": "sitting",
+   "member": {
+    "name": "Dilip Saikia",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "assam:dhubri",
+   "state": "assam",
+   "name": "Dhubri",
+   "drawn": false,
+   "status": "sitting",
+   "member": {
+    "name": "Rakibul Hussain",
+    "party": "Indian National Congress",
+    "partyShort": "INC",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "assam:dibrugarh",
+   "state": "assam",
+   "name": "Dibrugarh",
+   "drawn": false,
+   "status": "sitting",
+   "member": {
+    "name": "Sarbananda Sonowal",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     14,
+     16,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "assam:diphu",
+   "state": "assam",
+   "name": "Diphu",
+   "drawn": false,
+   "status": "sitting",
+   "member": {
+    "name": "Amarsing Tisso",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "assam:guwahati",
+   "state": "assam",
+   "name": "Guwahati",
+   "drawn": false,
+   "status": "sitting",
+   "member": {
+    "name": "Bijuli Kalita Medhi",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "assam:jorhat",
+   "state": "assam",
+   "name": "Jorhat",
+   "drawn": false,
+   "status": "sitting",
+   "member": {
+    "name": "Gaurav Gogoi",
+    "party": "Indian National Congress",
+    "partyShort": "INC",
+    "lokSabhaTerms": [
+     16,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "assam:karimganj",
+   "state": "assam",
+   "name": "Karimganj",
+   "drawn": false,
+   "status": "sitting",
+   "member": {
+    "name": "Kripanath Mallah",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "assam:kaziranga",
+   "state": "assam",
+   "name": "Kaziranga",
+   "drawn": false,
+   "status": "sitting",
+   "member": {
+    "name": "Kamakhya Prasad Tasa",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     16,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "assam:kokrajhar",
+   "state": "assam",
+   "name": "Kokrajhar",
+   "drawn": false,
+   "status": "sitting",
+   "member": {
+    "name": "Joyanta Basumatary",
+    "party": "United Peoples Party, Liberal",
+    "partyShort": "UPPL",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "assam:lakhimpur",
+   "state": "assam",
+   "name": "Lakhimpur",
+   "drawn": false,
+   "status": "sitting",
+   "member": {
+    "name": "Pradan Baruah",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     16,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "assam:nagaon",
+   "state": "assam",
+   "name": "Nagaon",
+   "drawn": false,
+   "status": "sitting",
+   "member": {
+    "name": "Devasish Sharma",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "assam:silchar",
+   "state": "assam",
+   "name": "Silchar",
+   "drawn": false,
+   "status": "sitting",
+   "member": {
+    "name": "Parimal Suklabaidya",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "assam:sonitpur",
+   "state": "assam",
+   "name": "Sonitpur",
+   "drawn": false,
+   "status": "sitting",
+   "member": {
+    "name": "Ranjit Dutta",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "bihar:10-9",
+   "state": "bihar",
+   "name": "Araria",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Pradeep Kumar Singh",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     15,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "bihar:10-32",
+   "state": "bihar",
+   "name": "Arrah",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Sudama Prasad",
+    "party": "Communist Party of India (Marxist-Leninist) Liberation",
+    "partyShort": "CPI(ML)(L)",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "bihar:10-37",
+   "state": "bihar",
+   "name": "Aurangabad",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Abhay Kumar Sinha",
+    "party": "Rashtriya Janata Dal",
+    "partyShort": "RJD",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "bihar:10-27",
+   "state": "bihar",
+   "name": "Banka",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Giridhari Yadav",
+    "party": "Janata Dal (United)",
+    "partyShort": "JD(U)",
+    "lokSabhaTerms": [
+     11,
+     14,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "bihar:10-24",
+   "state": "bihar",
+   "name": "Begusarai",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Giriraj Singh",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     16,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "bihar:10-26",
+   "state": "bihar",
+   "name": "Bhagalpur",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Ajay Kumar Mandal",
+    "party": "Janata Dal (United)",
+    "partyShort": "JD(U)",
+    "lokSabhaTerms": [
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "bihar:10-33",
+   "state": "bihar",
+   "name": "Buxar",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Sudhakar Singh",
+    "party": "Rashtriya Janata Dal",
+    "partyShort": "RJD",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "bihar:10-14",
+   "state": "bihar",
+   "name": "Darbhanga",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Gopal Jee Thakur",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "bihar:10-38",
+   "state": "bihar",
+   "name": "Gaya",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Jitan Ram Manjhi",
+    "party": "Hindustani Awam Morcha (Secular)",
+    "partyShort": "HAM (S)",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "bihar:10-17",
+   "state": "bihar",
+   "name": "Gopalganj",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Alok Kumar Suman",
+    "party": "Janata Dal (United)",
+    "partyShort": "JD(U)",
+    "lokSabhaTerms": [
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "bihar:10-21",
+   "state": "bihar",
+   "name": "Hajipur",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Chirag Paswan",
+    "party": "Lok Jan Shakti Party (Ram Vilas)",
+    "partyShort": "LJSP(RV)",
+    "lokSabhaTerms": [
+     16,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "bihar:10-36",
+   "state": "bihar",
+   "name": "Jahanabad",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Surendra Prasad Yadav",
+    "party": "Rashtriya Janata Dal",
+    "partyShort": "RJD",
+    "lokSabhaTerms": [
+     12,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "bihar:10-40",
+   "state": "bihar",
+   "name": "Jamui",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Arun Bharti",
+    "party": "Lok Jan Shakti Party (Ram Vilas)",
+    "partyShort": "LJSP(RV)",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "bihar:10-7",
+   "state": "bihar",
+   "name": "Jhanjharpur",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Ramprit Mandal",
+    "party": "Janata Dal (United)",
+    "partyShort": "JD(U)",
+    "lokSabhaTerms": [
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "bihar:10-35",
+   "state": "bihar",
+   "name": "Karakat",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Raja Ram Singh",
+    "party": "Communist Party of India (Marxist-Leninist) Liberation",
+    "partyShort": "CPI(ML)(L)",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "bihar:10-11",
+   "state": "bihar",
+   "name": "Katihar",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Tariq Anwar",
+    "party": "Indian National Congress",
+    "partyShort": "INC",
+    "lokSabhaTerms": [
+     7,
+     8,
+     11,
+     12,
+     16,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "bihar:10-25",
+   "state": "bihar",
+   "name": "Khagaria",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Rajesh Verma",
+    "party": "Lok Jan Shakti Party (Ram Vilas)",
+    "partyShort": "LJSP(RV)",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "bihar:10-10",
+   "state": "bihar",
+   "name": "Kishanganj",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Mohammad Jawed",
+    "party": "Indian National Congress",
+    "partyShort": "INC",
+    "lokSabhaTerms": [
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "bihar:10-13",
+   "state": "bihar",
+   "name": "Madhepura",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Dinesh Chandra Yadav",
+    "party": "Janata Dal (United)",
+    "partyShort": "JD(U)",
+    "lokSabhaTerms": [
+     11,
+     13,
+     15,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "bihar:10-6",
+   "state": "bihar",
+   "name": "Madhubani",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Ashok Kumar Yadav",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "bihar:10-19",
+   "state": "bihar",
+   "name": "Maharajganj",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Janardan Singh Sigriwal",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     16,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "bihar:10-28",
+   "state": "bihar",
+   "name": "Munger",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Rajiv Ranjan Singh",
+    "party": "Janata Dal (United)",
+    "partyShort": "JD(U)",
+    "lokSabhaTerms": [
+     14,
+     15,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "bihar:10-15",
+   "state": "bihar",
+   "name": "Muzaffarpur",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Raj Bhushan Choudhary",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "bihar:10-29",
+   "state": "bihar",
+   "name": "Nalanda",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Kaushalendra Kumar",
+    "party": "Janata Dal (United)",
+    "partyShort": "JD(U)",
+    "lokSabhaTerms": [
+     15,
+     16,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "bihar:10-39",
+   "state": "bihar",
+   "name": "Nawada",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Vivek Thakur",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "bihar:10-2",
+   "state": "bihar",
+   "name": "Paschim Champaran",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Sanjay Jaiswal",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     15,
+     16,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "bihar:10-31",
+   "state": "bihar",
+   "name": "Pataliputra",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Misha Bharti",
+    "party": "Rashtriya Janata Dal",
+    "partyShort": "RJD",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "bihar:10-30",
+   "state": "bihar",
+   "name": "Patna Sahib",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Ravi Shankar Prasad",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "bihar:10-12",
+   "state": "bihar",
+   "name": "Purnia",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Rajesh Ranjan",
+    "party": "Independent",
+    "partyShort": "Ind.",
+    "lokSabhaTerms": [
+     10,
+     11,
+     13,
+     14,
+     16,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "bihar:10-3",
+   "state": "bihar",
+   "name": "Purvi Champaran",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Radha Mohan Singh",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     9,
+     11,
+     13,
+     15,
+     16,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "bihar:10-23",
+   "state": "bihar",
+   "name": "Samastipur",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Shambhavi",
+    "party": "Lok Jan Shakti Party (Ram Vilas)",
+    "partyShort": "LJSP(RV)",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "bihar:10-20",
+   "state": "bihar",
+   "name": "Saran",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Rajiv Pratap Rudy",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     11,
+     13,
+     16,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "bihar:10-34",
+   "state": "bihar",
+   "name": "Sasaram",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Manoj Kumar",
+    "party": "Indian National Congress",
+    "partyShort": "INC",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "bihar:10-4",
+   "state": "bihar",
+   "name": "Sheohar",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Lovely Anand",
+    "party": "Janata Dal (United)",
+    "partyShort": "JD(U)",
+    "lokSabhaTerms": [
+     10,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "bihar:10-5",
+   "state": "bihar",
+   "name": "Sitamarhi",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Devesh Chandra Thakur",
+    "party": "Janata Dal (United)",
+    "partyShort": "JD(U)",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "bihar:10-18",
+   "state": "bihar",
+   "name": "Siwan",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Vijaylakshmi Devi",
+    "party": "Janata Dal (United)",
+    "partyShort": "JD(U)",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "bihar:10-8",
+   "state": "bihar",
+   "name": "Supaul",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Dileshwar Kamait",
+    "party": "Janata Dal (United)",
+    "partyShort": "JD(U)",
+    "lokSabhaTerms": [
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "bihar:10-22",
+   "state": "bihar",
+   "name": "Ujiarpur",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Nityanand Rai",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     16,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "bihar:10-16",
+   "state": "bihar",
+   "name": "Vaishali",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Veena Devi",
+    "party": "Lok Jan Shakti Party (Ram Vilas)",
+    "partyShort": "LJSP(RV)",
+    "lokSabhaTerms": [
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "bihar:10-1",
+   "state": "bihar",
+   "name": "Valmiki Nagar",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Sunil Kumar",
+    "party": "Janata Dal (United)",
+    "partyShort": "JD(U)",
+    "lokSabhaTerms": [
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "chandigarh:4-1",
+   "state": "chandigarh",
+   "name": "Chandigarh",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Manish Tewari",
+    "party": "Indian National Congress",
+    "partyShort": "INC",
+    "lokSabhaTerms": [
+     15,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "chhattisgarh:22-10",
+   "state": "chhattisgarh",
+   "name": "Bastar",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Mahesh Kashyap",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "chhattisgarh:22-5",
+   "state": "chhattisgarh",
+   "name": "Bilaspur",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Tokhan Sahu",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "chhattisgarh:22-7",
+   "state": "chhattisgarh",
+   "name": "Durg",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Vijay Baghel",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "chhattisgarh:22-3",
+   "state": "chhattisgarh",
+   "name": "Janjgir-Champa",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Kamlesh Jangde",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "chhattisgarh:22-11",
+   "state": "chhattisgarh",
+   "name": "Kanker",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Bhojraj Nag",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "chhattisgarh:22-4",
+   "state": "chhattisgarh",
+   "name": "Korba",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Jyotsna Charandas Mahant",
+    "party": "Indian National Congress",
+    "partyShort": "INC",
+    "lokSabhaTerms": [
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "chhattisgarh:22-9",
+   "state": "chhattisgarh",
+   "name": "Mahasamund",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Roopkumari Choudhary",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "chhattisgarh:22-2",
+   "state": "chhattisgarh",
+   "name": "Raigarh",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Radheshyam Rathiya",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "chhattisgarh:22-8",
+   "state": "chhattisgarh",
+   "name": "Raipur",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Brijmohan Agrawal",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "chhattisgarh:22-6",
+   "state": "chhattisgarh",
+   "name": "Rajnandgaon",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Santosh Pandey",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "chhattisgarh:22-1",
+   "state": "chhattisgarh",
+   "name": "Surguja",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Chintamani Maharaj",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "dadra-and-nagar-haveli-and-daman-and-diu:26-1",
+   "state": "dadra-and-nagar-haveli-and-daman-and-diu",
+   "name": "Dadra and Nagar Haveli",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Delkar Kalaben Mohanbhai",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "dadra-and-nagar-haveli-and-daman-and-diu:25-1",
+   "state": "dadra-and-nagar-haveli-and-daman-and-diu",
+   "name": "Daman and Diu",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Patel Umeshbhai Babubhai",
+    "party": "Independent",
+    "partyShort": "Ind.",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "delhi:7-1",
+   "state": "delhi",
+   "name": "Chandni Chowk",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Praveen Khandelwal",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "delhi:7-3",
+   "state": "delhi",
+   "name": "East Delhi",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Harsh Malhotra",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "delhi:7-4",
+   "state": "delhi",
+   "name": "New Delhi",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Bansuri Swaraj",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "delhi:7-2",
+   "state": "delhi",
+   "name": "North East Delhi",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Manoj Tiwari",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     16,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "delhi:7-5",
+   "state": "delhi",
+   "name": "North West Delhi",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Yogender Chandolia",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "delhi:7-7",
+   "state": "delhi",
+   "name": "South Delhi",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Ramvir Singh Bidhuri",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "delhi:7-6",
+   "state": "delhi",
+   "name": "West Delhi",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Kamaljeet Sehrawat",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "goa:30-1",
+   "state": "goa",
+   "name": "North Goa",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Shripad Yesso Naik",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     13,
+     14,
+     15,
+     16,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "goa:30-2",
+   "state": "goa",
+   "name": "South Goa",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Captain Viriato Fernandes",
+    "party": "Indian National Congress",
+    "partyShort": "INC",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "gujarat:24-7",
+   "state": "gujarat",
+   "name": "Ahmedabad East",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Hasmukhbhai Somabhai Patel",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "gujarat:24-8",
+   "state": "gujarat",
+   "name": "Ahmedabad West",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Dineshbhai Makwana",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "gujarat:24-14",
+   "state": "gujarat",
+   "name": "Amreli",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Bharatbhai Manubhai Sutariya",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "gujarat:24-16",
+   "state": "gujarat",
+   "name": "Anand",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Miteshbhai Rameshbhai Patel",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "gujarat:24-2",
+   "state": "gujarat",
+   "name": "Banaskantha",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Geniben Nagaji Thakor",
+    "party": "Indian National Congress",
+    "partyShort": "INC",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "gujarat:24-23",
+   "state": "gujarat",
+   "name": "Bardoli",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Parbhubhai Nagarbhai Vasava",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     16,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "gujarat:24-22",
+   "state": "gujarat",
+   "name": "Bharuch",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Mansukhbhai Dhanjibhai Vasava",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     12,
+     13,
+     14,
+     15,
+     16,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "gujarat:24-15",
+   "state": "gujarat",
+   "name": "Bhavnagar",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Nimuben Jayantibhai Bambhaniya",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "gujarat:24-21",
+   "state": "gujarat",
+   "name": "Chhota Udaipur",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Jashubhai Bhilubhai Rathva",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "gujarat:24-19",
+   "state": "gujarat",
+   "name": "Dahod",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Jaswantsinh Sumanbhai Bhabhor",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     16,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "gujarat:24-6",
+   "state": "gujarat",
+   "name": "Gandhinagar",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Amit Shah",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "gujarat:24-12",
+   "state": "gujarat",
+   "name": "Jamnagar",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Poonamben Hematbhai Maadam",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     16,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "gujarat:24-13",
+   "state": "gujarat",
+   "name": "Junagadh",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Rajesh Naranbhai Chudasama",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     16,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "gujarat:24-1",
+   "state": "gujarat",
+   "name": "Kachchh",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Chavda Vinod Lakhamshi",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     16,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "gujarat:24-17",
+   "state": "gujarat",
+   "name": "Kheda",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Devusinh Chauhan",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     16,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "gujarat:24-4",
+   "state": "gujarat",
+   "name": "Mahesana",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Haribhai Patel",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "gujarat:24-25",
+   "state": "gujarat",
+   "name": "Navsari",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Chandrakant Raghunath Patil",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     15,
+     16,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "gujarat:24-18",
+   "state": "gujarat",
+   "name": "Panchmahal",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Rajpalsinh Mahendrasinh Jadav",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "gujarat:24-3",
+   "state": "gujarat",
+   "name": "Patan",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Bharatsinhji Shankarji Dabhi",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "gujarat:24-11",
+   "state": "gujarat",
+   "name": "Porbandar",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Mansukh Mandaviya",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "gujarat:24-10",
+   "state": "gujarat",
+   "name": "Rajkot",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Parshottambhai Rupala",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "gujarat:24-5",
+   "state": "gujarat",
+   "name": "Sabarkantha",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Shobhanaben Mahendrasinh Baraiya",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "gujarat:24-24",
+   "state": "gujarat",
+   "name": "Surat",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Mukeshkumar Chandrakaant Dalal",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "gujarat:24-9",
+   "state": "gujarat",
+   "name": "Surendranagar",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Chandubhai Chhaganbhai Shihora",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "gujarat:24-20",
+   "state": "gujarat",
+   "name": "Vadodara",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Hemang Joshi",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "gujarat:24-26",
+   "state": "gujarat",
+   "name": "Valsad",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Dhaval Laxmanbhai Patel",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "haryana:6-1",
+   "state": "haryana",
+   "name": "Ambala",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Varun Chaudhry",
+    "party": "Indian National Congress",
+    "partyShort": "INC",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "haryana:6-8",
+   "state": "haryana",
+   "name": "Bhiwani-Mahendragarh",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Dharambir Singh",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     16,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "haryana:6-10",
+   "state": "haryana",
+   "name": "Faridabad",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Krishan Pal Gurjar",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     16,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "haryana:6-9",
+   "state": "haryana",
+   "name": "Gurgaon",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Rao Inderjit Singh",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     12,
+     14,
+     15,
+     16,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "haryana:6-4",
+   "state": "haryana",
+   "name": "Hisar",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Jai Parkash",
+    "party": "Indian National Congress",
+    "partyShort": "INC",
+    "lokSabhaTerms": [
+     9,
+     11,
+     14,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "haryana:6-5",
+   "state": "haryana",
+   "name": "Karnal",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Manohar Lal",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "haryana:6-2",
+   "state": "haryana",
+   "name": "Kurukshetra",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Naveen Jindal",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     14,
+     15,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "haryana:6-7",
+   "state": "haryana",
+   "name": "Rohtak",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Deepender Singh Hooda",
+    "party": "Indian National Congress",
+    "partyShort": "INC",
+    "lokSabhaTerms": [
+     14,
+     15,
+     16,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "haryana:6-3",
+   "state": "haryana",
+   "name": "Sirsa",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Kumari Selja",
+    "party": "Indian National Congress",
+    "partyShort": "INC",
+    "lokSabhaTerms": [
+     10,
+     11,
+     14,
+     15,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "haryana:6-6",
+   "state": "haryana",
+   "name": "Sonipat",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Satpal Brahamchari",
+    "party": "Indian National Congress",
+    "partyShort": "INC",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "himachal-pradesh:2-3",
+   "state": "himachal-pradesh",
+   "name": "Hamirpur",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Anurag Singh Thakur",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     14,
+     15,
+     16,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "himachal-pradesh:2-1",
+   "state": "himachal-pradesh",
+   "name": "Kangra",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Rajeev Bharadwaj",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "himachal-pradesh:2-2",
+   "state": "himachal-pradesh",
+   "name": "Mandi",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Kangna Ranaut",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "himachal-pradesh:2-4",
+   "state": "himachal-pradesh",
+   "name": "Shimla",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Suresh Kumar Kashyap",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "jammu-and-kashmir:anantnagrajouri",
+   "state": "jammu-and-kashmir",
+   "name": "Anantnag-Rajouri",
+   "drawn": false,
+   "status": "sitting",
+   "member": {
+    "name": "Mian Altaf Ahmad",
+    "party": "Jammu and Kashmir National Conference",
+    "partyShort": "J&KNC",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "jammu-and-kashmir:baramulla",
+   "state": "jammu-and-kashmir",
+   "name": "Baramulla",
+   "drawn": false,
+   "status": "sitting",
+   "member": {
+    "name": "Abdul Rashid Sheikh",
+    "party": "Independent",
+    "partyShort": "Ind.",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "jammu-and-kashmir:jammu",
+   "state": "jammu-and-kashmir",
+   "name": "Jammu",
+   "drawn": false,
+   "status": "sitting",
+   "member": {
+    "name": "Jugal Kishore",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     16,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "jammu-and-kashmir:srinagar",
+   "state": "jammu-and-kashmir",
+   "name": "Srinagar",
+   "drawn": false,
+   "status": "vacant",
+   "vacatedBy": {
+    "name": "Aga Syed Ruhullah Mehdi",
+    "reason": "resigned"
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "jammu-and-kashmir:udhampur",
+   "state": "jammu-and-kashmir",
+   "name": "Udhampur",
+   "drawn": false,
+   "status": "sitting",
+   "member": {
+    "name": "Jitendra Singh",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     16,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "jharkhand:20-4",
+   "state": "jharkhand",
+   "name": "Chatra",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Kali Charan Singh",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "jharkhand:20-7",
+   "state": "jharkhand",
+   "name": "Dhanbad",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Dulu Mahato",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "jharkhand:20-2",
+   "state": "jharkhand",
+   "name": "Dumka",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Nalin Soren",
+    "party": "Jharkhand Mukti Morcha",
+    "partyShort": "JMM",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "jharkhand:20-6",
+   "state": "jharkhand",
+   "name": "Giridih",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Chandra Prakash Choudhary",
+    "party": "AJSU Party",
+    "partyShort": "AJSU",
+    "lokSabhaTerms": [
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "jharkhand:20-3",
+   "state": "jharkhand",
+   "name": "Godda",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Nishikant Dubey",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     15,
+     16,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "jharkhand:20-14",
+   "state": "jharkhand",
+   "name": "Hazaribagh",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Manish Jaiswal",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "jharkhand:20-9",
+   "state": "jharkhand",
+   "name": "Jamshedpur",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Bidyut Baran Mahato",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     16,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "jharkhand:20-11",
+   "state": "jharkhand",
+   "name": "Khunti",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Kali Charan Munda",
+    "party": "Indian National Congress",
+    "partyShort": "INC",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "jharkhand:20-5",
+   "state": "jharkhand",
+   "name": "Kodarma",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Annpurna Devi",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "jharkhand:20-12",
+   "state": "jharkhand",
+   "name": "Lohardaga",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Sukhdeo Bhagat",
+    "party": "Indian National Congress",
+    "partyShort": "INC",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "jharkhand:20-13",
+   "state": "jharkhand",
+   "name": "Palamu",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Vishnu Dayal Ram",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     16,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "jharkhand:20-1",
+   "state": "jharkhand",
+   "name": "Rajmahal",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Vijay Kumar Hansdak",
+    "party": "Jharkhand Mukti Morcha",
+    "partyShort": "JMM",
+    "lokSabhaTerms": [
+     16,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "jharkhand:20-8",
+   "state": "jharkhand",
+   "name": "Ranchi",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Sanjay Seth",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "jharkhand:20-10",
+   "state": "jharkhand",
+   "name": "Singhbhum",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Joba Majhi",
+    "party": "Jharkhand Mukti Morcha",
+    "partyShort": "JMM",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "karnataka:29-3",
+   "state": "karnataka",
+   "name": "Bagalkot",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Gaddigoudar Parvatagouda Chandanagouda",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     14,
+     15,
+     16,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "karnataka:29-25",
+   "state": "karnataka",
+   "name": "Bangalore Central",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "P C Mohan",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     15,
+     16,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "karnataka:29-24",
+   "state": "karnataka",
+   "name": "Bangalore North",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Shobha Karandlaje",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     16,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "karnataka:29-23",
+   "state": "karnataka",
+   "name": "Bangalore Rural",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "C N Manjunath",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "karnataka:29-26",
+   "state": "karnataka",
+   "name": "Bangalore South",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Tejasvi Surya",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "karnataka:29-2",
+   "state": "karnataka",
+   "name": "Belgaum",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Jagadish Shettar",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "karnataka:29-9",
+   "state": "karnataka",
+   "name": "Bellary",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "E Tukaram",
+    "party": "Indian National Congress",
+    "partyShort": "INC",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "karnataka:29-7",
+   "state": "karnataka",
+   "name": "Bidar",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Sagar Eshwar Khandre",
+    "party": "Indian National Congress",
+    "partyShort": "INC",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "karnataka:29-4",
+   "state": "karnataka",
+   "name": "Bijapur",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Ramesh Chandappa Jigajinagi",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     12,
+     13,
+     14,
+     15,
+     16,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "karnataka:29-22",
+   "state": "karnataka",
+   "name": "Chamarajanagar",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Sunil Bose",
+    "party": "Indian National Congress",
+    "partyShort": "INC",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "karnataka:29-27",
+   "state": "karnataka",
+   "name": "Chikkballapur",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "K Sudhakar",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "karnataka:29-1",
+   "state": "karnataka",
+   "name": "Chikkodi",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Priyanka Satish Jarkiholi",
+    "party": "Indian National Congress",
+    "partyShort": "INC",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "karnataka:29-18",
+   "state": "karnataka",
+   "name": "Chitradurga",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Govind Makthappa Karjol",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "karnataka:29-17",
+   "state": "karnataka",
+   "name": "Dakshina Kannada",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Captain Brijesh Chowta",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "karnataka:29-13",
+   "state": "karnataka",
+   "name": "Davanagere",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Prabha Mallikarjun",
+    "party": "Indian National Congress",
+    "partyShort": "INC",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "karnataka:29-11",
+   "state": "karnataka",
+   "name": "Dharwad",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Pralhad Joshi",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     14,
+     15,
+     16,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "karnataka:29-5",
+   "state": "karnataka",
+   "name": "Gulbarga",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Radhakrishna",
+    "party": "Indian National Congress",
+    "partyShort": "INC",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "karnataka:29-16",
+   "state": "karnataka",
+   "name": "Hassan",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Shreyas M Patel",
+    "party": "Indian National Congress",
+    "partyShort": "INC",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "karnataka:29-10",
+   "state": "karnataka",
+   "name": "Haveri",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Basavaraj Bommai",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "karnataka:29-28",
+   "state": "karnataka",
+   "name": "Kolar",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "M Mallesh Babu",
+    "party": "Janata Dal (Secular)",
+    "partyShort": "JD(S)",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "karnataka:29-8",
+   "state": "karnataka",
+   "name": "Koppal",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "K Rajashekar Basavaraj Hitnal",
+    "party": "Indian National Congress",
+    "partyShort": "INC",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "karnataka:29-20",
+   "state": "karnataka",
+   "name": "Mandya",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "H D Kumaraswamy",
+    "party": "Janata Dal (Secular)",
+    "partyShort": "JD(S)",
+    "lokSabhaTerms": [
+     11,
+     15,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "karnataka:29-21",
+   "state": "karnataka",
+   "name": "Mysore",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Yaduveer Wadiyar",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "karnataka:29-6",
+   "state": "karnataka",
+   "name": "Raichur",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "G Kumar Naik",
+    "party": "Indian National Congress",
+    "partyShort": "INC",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "karnataka:29-14",
+   "state": "karnataka",
+   "name": "Shimoga",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "B Y Raghavendra",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     15,
+     16,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "karnataka:29-19",
+   "state": "karnataka",
+   "name": "Tumkur",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "V Somanna",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "karnataka:29-15",
+   "state": "karnataka",
+   "name": "Udupi Chikmagalur",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Kota Srinivasa Poojary",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "karnataka:29-12",
+   "state": "karnataka",
+   "name": "Uttara Kannada",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Vishweshwar Hegde Kageri",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "kerala:32-15",
+   "state": "kerala",
+   "name": "Alappuzha",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "K C Venugopal",
+    "party": "Indian National Congress",
+    "partyShort": "INC",
+    "lokSabhaTerms": [
+     15,
+     16,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "kerala:32-9",
+   "state": "kerala",
+   "name": "Alathur",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "K Radhakrishnan",
+    "party": "Communist Party of India (Marxist)",
+    "partyShort": "CPI(M)",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "kerala:32-19",
+   "state": "kerala",
+   "name": "Attingal",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Adoor Prakash",
+    "party": "Indian National Congress",
+    "partyShort": "INC",
+    "lokSabhaTerms": [
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "kerala:32-11",
+   "state": "kerala",
+   "name": "Chalakudy",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Benny Behanan",
+    "party": "Indian National Congress",
+    "partyShort": "INC",
+    "lokSabhaTerms": [
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "kerala:32-12",
+   "state": "kerala",
+   "name": "Ernakulam",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Hibi Eden",
+    "party": "Indian National Congress",
+    "partyShort": "INC",
+    "lokSabhaTerms": [
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "kerala:32-13",
+   "state": "kerala",
+   "name": "Idukki",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Dean Kuriakose",
+    "party": "Indian National Congress",
+    "partyShort": "INC",
+    "lokSabhaTerms": [
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "kerala:32-2",
+   "state": "kerala",
+   "name": "Kannur",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "K Sudhakaran",
+    "party": "Indian National Congress",
+    "partyShort": "INC",
+    "lokSabhaTerms": [
+     15,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "kerala:32-1",
+   "state": "kerala",
+   "name": "Kasaragod",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Rajmohan Unnithan",
+    "party": "Indian National Congress",
+    "partyShort": "INC",
+    "lokSabhaTerms": [
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "kerala:32-18",
+   "state": "kerala",
+   "name": "Kollam",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "N K Premachandran",
+    "party": "Revolutionary Socialist Party",
+    "partyShort": "RSP",
+    "lokSabhaTerms": [
+     11,
+     12,
+     16,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "kerala:32-14",
+   "state": "kerala",
+   "name": "Kottayam",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "K. Francis George",
+    "party": "Kerala Congress",
+    "partyShort": "KEC",
+    "lokSabhaTerms": [
+     13,
+     14,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "kerala:32-5",
+   "state": "kerala",
+   "name": "Kozhikode",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "M K Raghavan",
+    "party": "Indian National Congress",
+    "partyShort": "INC",
+    "lokSabhaTerms": [
+     15,
+     16,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "kerala:32-6",
+   "state": "kerala",
+   "name": "Malappuram",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "E T Mohammed Basheer",
+    "party": "Indian Union Muslim League",
+    "partyShort": "IUML",
+    "lokSabhaTerms": [
+     15,
+     16,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "kerala:32-16",
+   "state": "kerala",
+   "name": "Mavelikkara",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Kodikunnil Suresh",
+    "party": "Indian National Congress",
+    "partyShort": "INC",
+    "lokSabhaTerms": [
+     9,
+     10,
+     11,
+     13,
+     15,
+     16,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "kerala:32-8",
+   "state": "kerala",
+   "name": "Palakkad",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "V K Sreekandan",
+    "party": "Indian National Congress",
+    "partyShort": "INC",
+    "lokSabhaTerms": [
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "kerala:32-17",
+   "state": "kerala",
+   "name": "Pathanamthitta",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Anto Antony",
+    "party": "Indian National Congress",
+    "partyShort": "INC",
+    "lokSabhaTerms": [
+     15,
+     16,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "kerala:32-7",
+   "state": "kerala",
+   "name": "Ponnani",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "M P Abdussamad Samadani",
+    "party": "Indian Union Muslim League",
+    "partyShort": "IUML",
+    "lokSabhaTerms": [
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "kerala:32-20",
+   "state": "kerala",
+   "name": "Thiruvananthapuram",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Shashi Tharoor",
+    "party": "Indian National Congress",
+    "partyShort": "INC",
+    "lokSabhaTerms": [
+     15,
+     16,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "kerala:32-10",
+   "state": "kerala",
+   "name": "Thrissur",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Suresh Gopi",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "kerala:32-3",
+   "state": "kerala",
+   "name": "Vadakara",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Shafi Parambil",
+    "party": "Indian National Congress",
+    "partyShort": "INC",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "kerala:32-4",
+   "state": "kerala",
+   "name": "Wayanad",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Priyanka Gandhi Vadra",
+    "party": "Indian National Congress",
+    "partyShort": "INC",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "ladakh:1-4",
+   "state": "ladakh",
+   "name": "Ladakh",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Mohmad Haneefa",
+    "party": "Independent",
+    "partyShort": "Ind.",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "lakshadweep:31-1",
+   "state": "lakshadweep",
+   "name": "Lakshadweep",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Muhammed Hamdullah Sayeed",
+    "party": "Indian National Congress",
+    "partyShort": "INC",
+    "lokSabhaTerms": [
+     15,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "madhya-pradesh:23-15",
+   "state": "madhya-pradesh",
+   "name": "Balaghat",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Bharti Pardhi",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "madhya-pradesh:23-29",
+   "state": "madhya-pradesh",
+   "name": "Betul",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Durgadas D D Uikey",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "madhya-pradesh:23-2",
+   "state": "madhya-pradesh",
+   "name": "Bhind",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Sandhya Ray",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "madhya-pradesh:23-19",
+   "state": "madhya-pradesh",
+   "name": "Bhopal",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Alok Sharma",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "madhya-pradesh:23-16",
+   "state": "madhya-pradesh",
+   "name": "Chhindwara",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Bunty Vivek Sahu",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "madhya-pradesh:23-7",
+   "state": "madhya-pradesh",
+   "name": "Damoh",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Rahul Singh Lodhi",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "madhya-pradesh:23-21",
+   "state": "madhya-pradesh",
+   "name": "Dewas",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Mahendra Singh Solanky",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "madhya-pradesh:23-25",
+   "state": "madhya-pradesh",
+   "name": "Dhar",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Savitri Thakur",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     16,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "madhya-pradesh:23-4",
+   "state": "madhya-pradesh",
+   "name": "Guna",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Jyotiraditya M Scindia",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     13,
+     14,
+     15,
+     16,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "madhya-pradesh:23-3",
+   "state": "madhya-pradesh",
+   "name": "Gwalior",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Bharat Singh Kushwah",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "madhya-pradesh:23-17",
+   "state": "madhya-pradesh",
+   "name": "Hoshangabad",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Darshan Singh Choudhary",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "madhya-pradesh:23-26",
+   "state": "madhya-pradesh",
+   "name": "Indore",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Shankar Lalwani",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "madhya-pradesh:23-13",
+   "state": "madhya-pradesh",
+   "name": "Jabalpur",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Ashish Dubey",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "madhya-pradesh:23-8",
+   "state": "madhya-pradesh",
+   "name": "Khajuraho",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Vishnu Datt Sharma",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "madhya-pradesh:23-28",
+   "state": "madhya-pradesh",
+   "name": "Khandwa",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Gyaneshwar Patil",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "madhya-pradesh:23-27",
+   "state": "madhya-pradesh",
+   "name": "Khargone",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Gajendra Singh Patel",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "madhya-pradesh:23-14",
+   "state": "madhya-pradesh",
+   "name": "Mandla",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Faggan Singh Kulaste",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     11,
+     12,
+     13,
+     14,
+     16,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "madhya-pradesh:23-23",
+   "state": "madhya-pradesh",
+   "name": "Mandsour",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Sudheer Gupta",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     16,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "madhya-pradesh:23-1",
+   "state": "madhya-pradesh",
+   "name": "Morena",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Shivmangal Singh Tomar",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "madhya-pradesh:23-20",
+   "state": "madhya-pradesh",
+   "name": "Rajgarh",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Rodmal Nagar",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     16,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "madhya-pradesh:23-24",
+   "state": "madhya-pradesh",
+   "name": "Ratlam",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Anita Nagarsingh Chouhan",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "madhya-pradesh:23-10",
+   "state": "madhya-pradesh",
+   "name": "Rewa",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Janardan Mishra",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     16,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "madhya-pradesh:23-5",
+   "state": "madhya-pradesh",
+   "name": "Sagar",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Lata Wankhede",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "madhya-pradesh:23-9",
+   "state": "madhya-pradesh",
+   "name": "Satna",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Ganesh Singh",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     14,
+     15,
+     16,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "madhya-pradesh:23-12",
+   "state": "madhya-pradesh",
+   "name": "Shahdol",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Himadri Singh",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "madhya-pradesh:23-11",
+   "state": "madhya-pradesh",
+   "name": "Sidhi",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Rajesh Mishra",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "madhya-pradesh:23-6",
+   "state": "madhya-pradesh",
+   "name": "Tikamgarh",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Virendra Kumar",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     11,
+     12,
+     13,
+     14,
+     15,
+     16,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "madhya-pradesh:23-22",
+   "state": "madhya-pradesh",
+   "name": "Ujjain",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Anil Firojiya",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "madhya-pradesh:23-18",
+   "state": "madhya-pradesh",
+   "name": "Vidisha",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Shivraj Singh Chouhan",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     10,
+     11,
+     12,
+     13,
+     14,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "maharashtra:27-37",
+   "state": "maharashtra",
+   "name": "Ahmednagar",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Nilesh Dnyandev Lanke",
+    "party": "Nationalist Congress Party - Sharadchandra Pawar",
+    "partyShort": "NCPSP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "maharashtra:27-6",
+   "state": "maharashtra",
+   "name": "Akola",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Anup Sanjay Dhotre",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "maharashtra:27-7",
+   "state": "maharashtra",
+   "name": "Amravati",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Balwant Baswant Wankhade",
+    "party": "Indian National Congress",
+    "partyShort": "INC",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "maharashtra:27-19",
+   "state": "maharashtra",
+   "name": "Aurangabad",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Bhumare Sandipanrao Asaram",
+    "party": "Shiv Sena",
+    "partyShort": "SS",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "maharashtra:27-35",
+   "state": "maharashtra",
+   "name": "Baramati",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Supriya Sule",
+    "party": "Nationalist Congress Party - Sharadchandra Pawar",
+    "partyShort": "NCPSP",
+    "lokSabhaTerms": [
+     15,
+     16,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "maharashtra:27-39",
+   "state": "maharashtra",
+   "name": "Beed",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Bajrang Manohar Sonwane",
+    "party": "Nationalist Congress Party - Sharadchandra Pawar",
+    "partyShort": "NCPSP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "maharashtra:27-11",
+   "state": "maharashtra",
+   "name": "Bhandara-Gondiya",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Prashant Yadaorao Padole",
+    "party": "Indian National Congress",
+    "partyShort": "INC",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "maharashtra:27-23",
+   "state": "maharashtra",
+   "name": "Bhiwandi",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Balya Mama Suresh Gopinath Mhatre",
+    "party": "Nationalist Congress Party - Sharadchandra Pawar",
+    "partyShort": "NCPSP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "maharashtra:27-5",
+   "state": "maharashtra",
+   "name": "Buldhana",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Prataprao Ganpatrao Jadhav",
+    "party": "Shiv Sena",
+    "partyShort": "SS",
+    "lokSabhaTerms": [
+     15,
+     16,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "maharashtra:27-13",
+   "state": "maharashtra",
+   "name": "Chandrapur",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Dhanorkar Pratibha Suresh",
+    "party": "Indian National Congress",
+    "partyShort": "INC",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "maharashtra:27-2",
+   "state": "maharashtra",
+   "name": "Dhule",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Bachhav Shobha Dinesh",
+    "party": "Indian National Congress",
+    "partyShort": "INC",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "maharashtra:27-20",
+   "state": "maharashtra",
+   "name": "Dindori",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Bhaskar Murlidhar Bhagare",
+    "party": "Nationalist Congress Party - Sharadchandra Pawar",
+    "partyShort": "NCPSP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "maharashtra:27-12",
+   "state": "maharashtra",
+   "name": "Gadchiroli-Chimur",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Kirsan Namdeo",
+    "party": "Indian National Congress",
+    "partyShort": "INC",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "maharashtra:27-48",
+   "state": "maharashtra",
+   "name": "Hatkanangle",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Dhairyasheel Sambhajirao Mane",
+    "party": "Shiv Sena",
+    "partyShort": "SS",
+    "lokSabhaTerms": [
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "maharashtra:27-15",
+   "state": "maharashtra",
+   "name": "Hingoli",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Aashtikar Patil Nagesh Bapurao",
+    "party": "Shiv Sena",
+    "partyShort": "SS",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "maharashtra:27-3",
+   "state": "maharashtra",
+   "name": "Jalgaon",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Smita Uday Wagh",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "maharashtra:27-18",
+   "state": "maharashtra",
+   "name": "Jalna",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Kalyan Vaijinathrao Kale",
+    "party": "Indian National Congress",
+    "partyShort": "INC",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "maharashtra:27-24",
+   "state": "maharashtra",
+   "name": "Kalyan",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Shrikant Eknath Shinde",
+    "party": "Shiv Sena",
+    "partyShort": "SS",
+    "lokSabhaTerms": [
+     16,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "maharashtra:27-47",
+   "state": "maharashtra",
+   "name": "Kolhapur",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Shahu Shahaji Chhatrapati",
+    "party": "Indian National Congress",
+    "partyShort": "INC",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "maharashtra:27-41",
+   "state": "maharashtra",
+   "name": "Latur",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Shivaji Bandappa Kalge",
+    "party": "Indian National Congress",
+    "partyShort": "INC",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "maharashtra:27-43",
+   "state": "maharashtra",
+   "name": "Madha",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Mohite Patil Dhairyasheel Rajsinh",
+    "party": "Nationalist Congress Party - Sharadchandra Pawar",
+    "partyShort": "NCPSP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "maharashtra:27-33",
+   "state": "maharashtra",
+   "name": "Maval",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Shrirang Appa Chandu Barne",
+    "party": "Shiv Sena",
+    "partyShort": "SS",
+    "lokSabhaTerms": [
+     16,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "maharashtra:27-26",
+   "state": "maharashtra",
+   "name": "Mumbai North",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Piyush Vedprakash Goyal",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "maharashtra:27-29",
+   "state": "maharashtra",
+   "name": "Mumbai North Central",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Varsha Eknath Gaikwad",
+    "party": "Indian National Congress",
+    "partyShort": "INC",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "maharashtra:27-28",
+   "state": "maharashtra",
+   "name": "Mumbai North East",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Sanjay Dina Patil",
+    "party": "Shiv Sena",
+    "partyShort": "SS",
+    "lokSabhaTerms": [
+     15,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "maharashtra:27-27",
+   "state": "maharashtra",
+   "name": "Mumbai North West",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Ravindra Dattaram Waikar",
+    "party": "Shiv Sena",
+    "partyShort": "SS",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "maharashtra:27-31",
+   "state": "maharashtra",
+   "name": "Mumbai South",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Arvind Ganpat Sawant",
+    "party": "Shiv Sena (Uddhav Balasaheb Thackrey)",
+    "partyShort": "SHSUBT",
+    "lokSabhaTerms": [
+     16,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "maharashtra:27-30",
+   "state": "maharashtra",
+   "name": "Mumbai South Central",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Anil Yeshwant Desai",
+    "party": "Shiv Sena (Uddhav Balasaheb Thackrey)",
+    "partyShort": "SHSUBT",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "maharashtra:27-10",
+   "state": "maharashtra",
+   "name": "Nagpur",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Nitin Jairam Gadkari",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     16,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "maharashtra:27-16",
+   "state": "maharashtra",
+   "name": "Nanded",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Chavan Ravindra Vasantrao",
+    "party": "Indian National Congress",
+    "partyShort": "INC",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "maharashtra:27-1",
+   "state": "maharashtra",
+   "name": "Nandurbar",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Gowaal Kagada Padavi",
+    "party": "Indian National Congress",
+    "partyShort": "INC",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "maharashtra:27-21",
+   "state": "maharashtra",
+   "name": "Nashik",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Rajabhau Parag Prakash Waje",
+    "party": "Shiv Sena (Uddhav Balasaheb Thackrey)",
+    "partyShort": "SHSUBT",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "maharashtra:27-40",
+   "state": "maharashtra",
+   "name": "Osmanabad",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Omprakash Bhupalsinh Alias Pavan Rajenimbalkar",
+    "party": "Shiv Sena",
+    "partyShort": "SS",
+    "lokSabhaTerms": [
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "maharashtra:27-22",
+   "state": "maharashtra",
+   "name": "Palghar",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Hemant Vishnu Savara",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "maharashtra:27-17",
+   "state": "maharashtra",
+   "name": "Parbhani",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Sanjay Haribhau Jadhav",
+    "party": "Shiv Sena",
+    "partyShort": "SS",
+    "lokSabhaTerms": [
+     16,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "maharashtra:27-34",
+   "state": "maharashtra",
+   "name": "Pune",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Murlidhar Mohol",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "maharashtra:27-32",
+   "state": "maharashtra",
+   "name": "Raigad",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Tatkare Sunil Dattatrey",
+    "party": "Nationalist Congress Party",
+    "partyShort": "NCP",
+    "lokSabhaTerms": [
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "maharashtra:27-9",
+   "state": "maharashtra",
+   "name": "Ramtek",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Shyamkumar Daulat Barve",
+    "party": "Indian National Congress",
+    "partyShort": "INC",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "maharashtra:27-46",
+   "state": "maharashtra",
+   "name": "Ratnagiri-Sindhudurg",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Narayan Tatu Rane",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "maharashtra:27-4",
+   "state": "maharashtra",
+   "name": "Raver",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Raksha Nikhil Khadse",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     16,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "maharashtra:27-44",
+   "state": "maharashtra",
+   "name": "Sangli",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Vishaldada Prakashbapu Patil",
+    "party": "Independent",
+    "partyShort": "Ind.",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "maharashtra:27-45",
+   "state": "maharashtra",
+   "name": "Satara",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Udayanraje Pratapsinha Maharaj Bhonsle",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     15,
+     16,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "maharashtra:27-38",
+   "state": "maharashtra",
+   "name": "Shirdi",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Bhausaheb Rajaram Wakchaure",
+    "party": "Shiv Sena",
+    "partyShort": "SS",
+    "lokSabhaTerms": [
+     15,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "maharashtra:27-36",
+   "state": "maharashtra",
+   "name": "Shirur",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Amol Ramsing Kolhe",
+    "party": "Nationalist Congress Party - Sharadchandra Pawar",
+    "partyShort": "NCPSP",
+    "lokSabhaTerms": [
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "maharashtra:27-42",
+   "state": "maharashtra",
+   "name": "Solapur",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Praniti Sushilkumar Shinde",
+    "party": "Indian National Congress",
+    "partyShort": "INC",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "maharashtra:27-25",
+   "state": "maharashtra",
+   "name": "Thane",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Naresh Ganpat Mhaske",
+    "party": "Shiv Sena",
+    "partyShort": "SS",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "maharashtra:27-8",
+   "state": "maharashtra",
+   "name": "Wardha",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Amar Sharadrao Kale",
+    "party": "Nationalist Congress Party - Sharadchandra Pawar",
+    "partyShort": "NCPSP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "maharashtra:27-14",
+   "state": "maharashtra",
+   "name": "Yavatmal-Washim",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Sanjay Uttamrao Deshmukh",
+    "party": "Shiv Sena",
+    "partyShort": "SS",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "manipur:14-1",
+   "state": "manipur",
+   "name": "Inner Manipur",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Angomcha Bimol Akoijam",
+    "party": "Indian National Congress",
+    "partyShort": "INC",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "manipur:14-2",
+   "state": "manipur",
+   "name": "Outer Manipur",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Alfred Kanngam S Arthur",
+    "party": "Indian National Congress",
+    "partyShort": "INC",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "meghalaya:17-1",
+   "state": "meghalaya",
+   "name": "Shillong",
+   "drawn": true,
+   "status": "vacant",
+   "vacatedBy": {
+    "name": "Ricky Andrew J Syngkon",
+    "reason": "died"
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "meghalaya:17-2",
+   "state": "meghalaya",
+   "name": "Tura",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Saleng A Sangma",
+    "party": "Indian National Congress",
+    "partyShort": "INC",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "mizoram:15-1",
+   "state": "mizoram",
+   "name": "Mizoram",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Richard Vanlalhmangaiha",
+    "party": "Zoram Peoples Movement",
+    "partyShort": "ZPM",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "nagaland:13-1",
+   "state": "nagaland",
+   "name": "Nagaland",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "S Supongmeren Jamir",
+    "party": "Indian National Congress",
+    "partyShort": "INC",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "odisha:21-19",
+   "state": "odisha",
+   "name": "Aska",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Anita Subhadarshini",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "odisha:21-6",
+   "state": "odisha",
+   "name": "Balasore",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Pratap Chandra Sarangi",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "odisha:21-1",
+   "state": "odisha",
+   "name": "Bargarh",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Pradeep Purohit",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "odisha:21-20",
+   "state": "odisha",
+   "name": "Berhampur",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Pradeep Kumar Panigrahy",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "odisha:21-7",
+   "state": "odisha",
+   "name": "Bhadrak",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Avimanyu Sethi",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "odisha:21-18",
+   "state": "odisha",
+   "name": "Bhubaneswar",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Aparajita Sarangi",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "odisha:21-10",
+   "state": "odisha",
+   "name": "Bolangir",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Sangeeta Kumari Singh Deo",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     12,
+     13,
+     14,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "odisha:21-14",
+   "state": "odisha",
+   "name": "Cuttack",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Bhartruhari Mahtab",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     12,
+     13,
+     14,
+     15,
+     16,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "odisha:21-9",
+   "state": "odisha",
+   "name": "Dhenkanal",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Rudra Narayan Pany",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "odisha:21-16",
+   "state": "odisha",
+   "name": "Jagatsinghpur",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Bibhu Prasad Tarai",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     15,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "odisha:21-8",
+   "state": "odisha",
+   "name": "Jajpur",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Rabindra Narayan Behera",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "odisha:21-11",
+   "state": "odisha",
+   "name": "Kalahandi",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Malvika Devi",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "odisha:21-13",
+   "state": "odisha",
+   "name": "Kandhamal",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Sukanta Kumar Panigrahi",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "odisha:21-15",
+   "state": "odisha",
+   "name": "Kendrapara",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Baijayant Panda",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     15,
+     16,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "odisha:21-4",
+   "state": "odisha",
+   "name": "Keonjhar",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Ananta Nayak",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     13,
+     14,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "odisha:21-21",
+   "state": "odisha",
+   "name": "Koraput",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Saptagiri Sankar Ulaka",
+    "party": "Indian National Congress",
+    "partyShort": "INC",
+    "lokSabhaTerms": [
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "odisha:21-5",
+   "state": "odisha",
+   "name": "Mayurbhanj",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Naba Charan Majhi",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "odisha:21-12",
+   "state": "odisha",
+   "name": "Nabarangpur",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Balabhadra Majhi",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     16,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "odisha:21-17",
+   "state": "odisha",
+   "name": "Puri",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Sambit Patra",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "odisha:21-3",
+   "state": "odisha",
+   "name": "Sambalpur",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Dharmendra Pradhan",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     14,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "odisha:21-2",
+   "state": "odisha",
+   "name": "Sundargarh",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Jual Oram",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     12,
+     13,
+     14,
+     16,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "puducherry:34-1",
+   "state": "puducherry",
+   "name": "Puducherry",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Ve Vaithilingam",
+    "party": "Indian National Congress",
+    "partyShort": "INC",
+    "lokSabhaTerms": [
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "punjab:3-2",
+   "state": "punjab",
+   "name": "Amritsar",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Gurjeet Singh Aujla",
+    "party": "Indian National Congress",
+    "partyShort": "INC",
+    "lokSabhaTerms": [
+     16,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "punjab:3-6",
+   "state": "punjab",
+   "name": "Anandpur Sahib",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Malvinder Singh Kang",
+    "party": "Aam Aadmi Party",
+    "partyShort": "AAP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "punjab:3-11",
+   "state": "punjab",
+   "name": "Bathinda",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Harsimrat Kaur Badal",
+    "party": "Shiromani Akali Dal",
+    "partyShort": "SAD",
+    "lokSabhaTerms": [
+     15,
+     16,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "punjab:3-9",
+   "state": "punjab",
+   "name": "Faridkot",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Sarabjeet Singh Khalsa",
+    "party": "Independent",
+    "partyShort": "Ind.",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "punjab:3-8",
+   "state": "punjab",
+   "name": "Fatehgarh Sahib",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Amar Singh",
+    "party": "Indian National Congress",
+    "partyShort": "INC",
+    "lokSabhaTerms": [
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "punjab:3-10",
+   "state": "punjab",
+   "name": "Firozpur",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Sher Singh Ghubaya",
+    "party": "Indian National Congress",
+    "partyShort": "INC",
+    "lokSabhaTerms": [
+     15,
+     16,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "punjab:3-1",
+   "state": "punjab",
+   "name": "Gurdaspur",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Sukhjinder Singh Randhawa",
+    "party": "Indian National Congress",
+    "partyShort": "INC",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "punjab:3-5",
+   "state": "punjab",
+   "name": "Hoshiarpur",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Raj Kumar Chabbewal",
+    "party": "Aam Aadmi Party",
+    "partyShort": "AAP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "punjab:3-4",
+   "state": "punjab",
+   "name": "Jalandhar",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Charanjit Singh Channi",
+    "party": "Indian National Congress",
+    "partyShort": "INC",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "punjab:3-3",
+   "state": "punjab",
+   "name": "Khadoor Sahib",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Amritpal Singh",
+    "party": "Independent",
+    "partyShort": "Ind.",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "punjab:3-7",
+   "state": "punjab",
+   "name": "Ludhiana",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Amrinder Singh Raja Warring",
+    "party": "Indian National Congress",
+    "partyShort": "INC",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "punjab:3-13",
+   "state": "punjab",
+   "name": "Patiala",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Dharamvira Gandhi",
+    "party": "Indian National Congress",
+    "partyShort": "INC",
+    "lokSabhaTerms": [
+     16,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "punjab:3-12",
+   "state": "punjab",
+   "name": "Sangrur",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Gurmeet Singh Meet Hayer",
+    "party": "Aam Aadmi Party",
+    "partyShort": "AAP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "rajasthan:8-13",
+   "state": "rajasthan",
+   "name": "Ajmer",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Bhagirath Choudhary",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "rajasthan:8-8",
+   "state": "rajasthan",
+   "name": "Alwar",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Bhupender Yadav",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "rajasthan:8-20",
+   "state": "rajasthan",
+   "name": "Banswara",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Rajkumar Roat",
+    "party": "Bharat Adivasi Party",
+    "partyShort": "BAP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "rajasthan:8-17",
+   "state": "rajasthan",
+   "name": "Barmer",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Ummeda Ram Beniwal",
+    "party": "Indian National Congress",
+    "partyShort": "INC",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "rajasthan:8-9",
+   "state": "rajasthan",
+   "name": "Bharatpur",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Sanjna Jatav",
+    "party": "Indian National Congress",
+    "partyShort": "INC",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "rajasthan:8-23",
+   "state": "rajasthan",
+   "name": "Bhilwara",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Damodar Agrawal",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "rajasthan:8-2",
+   "state": "rajasthan",
+   "name": "Bikaner",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Arjun Ram Meghwal",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     15,
+     16,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "rajasthan:8-21",
+   "state": "rajasthan",
+   "name": "Chittorgarh",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Chandra Prakash Joshi",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     16,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "rajasthan:8-3",
+   "state": "rajasthan",
+   "name": "Churu",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Rahul Kaswan",
+    "party": "Indian National Congress",
+    "partyShort": "INC",
+    "lokSabhaTerms": [
+     16,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "rajasthan:8-11",
+   "state": "rajasthan",
+   "name": "Dausa",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Murari Lal Meena",
+    "party": "Indian National Congress",
+    "partyShort": "INC",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "rajasthan:8-1",
+   "state": "rajasthan",
+   "name": "Ganganagar",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Kuldeep Indora",
+    "party": "Indian National Congress",
+    "partyShort": "INC",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "rajasthan:8-7",
+   "state": "rajasthan",
+   "name": "Jaipur",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Manju Sharma",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "rajasthan:8-6",
+   "state": "rajasthan",
+   "name": "Jaipur Rural",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Rao Rajendra Singh",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "rajasthan:8-18",
+   "state": "rajasthan",
+   "name": "Jalore",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Lumbaram Choudhary",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "rajasthan:8-25",
+   "state": "rajasthan",
+   "name": "Jhalawar-Baran",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Dushyant Singh",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     14,
+     15,
+     16,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "rajasthan:8-4",
+   "state": "rajasthan",
+   "name": "Jhunjhunu",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Brijendra Singh Ola",
+    "party": "Indian National Congress",
+    "partyShort": "INC",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "rajasthan:8-16",
+   "state": "rajasthan",
+   "name": "Jodhpur",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Gajendra Singh Shekhawat",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     16,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "rajasthan:8-10",
+   "state": "rajasthan",
+   "name": "Karauli-Dholpur",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Bhajan Lal Jatav",
+    "party": "Indian National Congress",
+    "partyShort": "INC",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "rajasthan:8-24",
+   "state": "rajasthan",
+   "name": "Kota",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Om Birla",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     16,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "rajasthan:8-14",
+   "state": "rajasthan",
+   "name": "Nagaur",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Hanuman Beniwal",
+    "party": "Rashtriya Loktantrik Party",
+    "partyShort": "RLP",
+    "lokSabhaTerms": [
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "rajasthan:8-15",
+   "state": "rajasthan",
+   "name": "Pali",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "P P Chaudhary",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     16,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "rajasthan:8-22",
+   "state": "rajasthan",
+   "name": "Rajsamand",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Mahima Kumari Mewar",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "rajasthan:8-5",
+   "state": "rajasthan",
+   "name": "Sikar",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Amra Ram",
+    "party": "Communist Party of India (Marxist)",
+    "partyShort": "CPI(M)",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "rajasthan:8-12",
+   "state": "rajasthan",
+   "name": "Tonk-Sawai Madhopur",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Harish Chandra Meena",
+    "party": "Indian National Congress",
+    "partyShort": "INC",
+    "lokSabhaTerms": [
+     16,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "rajasthan:8-19",
+   "state": "rajasthan",
+   "name": "Udaipur",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Manna Lal Rawat",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "sikkim:11-1",
+   "state": "sikkim",
+   "name": "Sikkim",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Indra Hang Subba",
+    "party": "Sikkim Krantikari Morcha",
+    "partyShort": "SKM",
+    "lokSabhaTerms": [
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "tamil-nadu:33-7",
+   "state": "tamil-nadu",
+   "name": "Arakkonam",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Dr. S Jagathratchakan",
+    "party": "Dravida Munnetra Kazhagam",
+    "partyShort": "DMK",
+    "lokSabhaTerms": [
+     8,
+     13,
+     15,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "tamil-nadu:33-12",
+   "state": "tamil-nadu",
+   "name": "Arani",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Tharaniventhan M S",
+    "party": "Dravida Munnetra Kazhagam",
+    "partyShort": "DMK",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "tamil-nadu:33-4",
+   "state": "tamil-nadu",
+   "name": "Chennai Central",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Dayanidhi Maran",
+    "party": "Dravida Munnetra Kazhagam",
+    "partyShort": "DMK",
+    "lokSabhaTerms": [
+     14,
+     15,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "tamil-nadu:33-2",
+   "state": "tamil-nadu",
+   "name": "Chennai North",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Kalanidhi Veeraswamy",
+    "party": "Dravida Munnetra Kazhagam",
+    "partyShort": "DMK",
+    "lokSabhaTerms": [
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "tamil-nadu:33-3",
+   "state": "tamil-nadu",
+   "name": "Chennai South",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "T Sumathy Alias Thamizhachi Thangapandian",
+    "party": "Dravida Munnetra Kazhagam",
+    "partyShort": "DMK",
+    "lokSabhaTerms": [
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "tamil-nadu:33-27",
+   "state": "tamil-nadu",
+   "name": "Chidambaram",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Thirumaavalavan Tholkappiyan",
+    "party": "Viduthalai Chiruthaigal Katchi",
+    "partyShort": "VCK",
+    "lokSabhaTerms": [
+     15,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "tamil-nadu:33-20",
+   "state": "tamil-nadu",
+   "name": "Coimbatore",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Ganapathy Rajkumar P",
+    "party": "Dravida Munnetra Kazhagam",
+    "partyShort": "DMK",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "tamil-nadu:33-26",
+   "state": "tamil-nadu",
+   "name": "Cuddalore",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "M K Vishnu Prasad",
+    "party": "Indian National Congress",
+    "partyShort": "INC",
+    "lokSabhaTerms": [
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "tamil-nadu:33-10",
+   "state": "tamil-nadu",
+   "name": "Dharmapuri",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Mani A",
+    "party": "Dravida Munnetra Kazhagam",
+    "partyShort": "DMK",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "tamil-nadu:33-22",
+   "state": "tamil-nadu",
+   "name": "Dindigul",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Sachithanantham R",
+    "party": "Communist Party of India (Marxist)",
+    "partyShort": "CPI(M)",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "tamil-nadu:33-17",
+   "state": "tamil-nadu",
+   "name": "Erode",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "K E Prakash",
+    "party": "Dravida Munnetra Kazhagam",
+    "partyShort": "DMK",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "tamil-nadu:33-14",
+   "state": "tamil-nadu",
+   "name": "Kallakurichi",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Malaiyarasan D",
+    "party": "Dravida Munnetra Kazhagam",
+    "partyShort": "DMK",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "tamil-nadu:33-6",
+   "state": "tamil-nadu",
+   "name": "Kancheepuram",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Selvam G",
+    "party": "Dravida Munnetra Kazhagam",
+    "partyShort": "DMK",
+    "lokSabhaTerms": [
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "tamil-nadu:33-39",
+   "state": "tamil-nadu",
+   "name": "Kanniyakumari",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Vijayakumar Alias Vijay Vasanth",
+    "party": "Indian National Congress",
+    "partyShort": "INC",
+    "lokSabhaTerms": [
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "tamil-nadu:33-23",
+   "state": "tamil-nadu",
+   "name": "Karur",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "S Jothimani",
+    "party": "Indian National Congress",
+    "partyShort": "INC",
+    "lokSabhaTerms": [
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "tamil-nadu:33-9",
+   "state": "tamil-nadu",
+   "name": "Krishnagiri",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "K Gopinath",
+    "party": "Indian National Congress",
+    "partyShort": "INC",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "tamil-nadu:33-32",
+   "state": "tamil-nadu",
+   "name": "Madurai",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "S Venkatesan",
+    "party": "Communist Party of India (Marxist)",
+    "partyShort": "CPI(M)",
+    "lokSabhaTerms": [
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "tamil-nadu:33-28",
+   "state": "tamil-nadu",
+   "name": "Mayiladuthurai",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Sudha R",
+    "party": "Indian National Congress",
+    "partyShort": "INC",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "tamil-nadu:33-29",
+   "state": "tamil-nadu",
+   "name": "Nagapattinam",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Selvaraj V",
+    "party": "Communist Party of India",
+    "partyShort": "CPI",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "tamil-nadu:33-16",
+   "state": "tamil-nadu",
+   "name": "Namakkal",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Matheswaran V S",
+    "party": "Dravida Munnetra Kazhagam",
+    "partyShort": "DMK",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "tamil-nadu:33-19",
+   "state": "tamil-nadu",
+   "name": "Nilgiris",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Raja A",
+    "party": "Dravida Munnetra Kazhagam",
+    "partyShort": "DMK",
+    "lokSabhaTerms": [
+     11,
+     13,
+     14,
+     15,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "tamil-nadu:33-25",
+   "state": "tamil-nadu",
+   "name": "Perambalur",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Arun Nehru",
+    "party": "Dravida Munnetra Kazhagam",
+    "partyShort": "DMK",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "tamil-nadu:33-21",
+   "state": "tamil-nadu",
+   "name": "Pollachi",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Eswarasamy K",
+    "party": "Dravida Munnetra Kazhagam",
+    "partyShort": "DMK",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "tamil-nadu:33-35",
+   "state": "tamil-nadu",
+   "name": "Ramanathapuram",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Navaskani K",
+    "party": "Indian Union Muslim League",
+    "partyShort": "IUML",
+    "lokSabhaTerms": [
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "tamil-nadu:33-15",
+   "state": "tamil-nadu",
+   "name": "Salem",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Selvaganapathi T.M.",
+    "party": "Dravida Munnetra Kazhagam",
+    "partyShort": "DMK",
+    "lokSabhaTerms": [
+     13,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "tamil-nadu:33-31",
+   "state": "tamil-nadu",
+   "name": "Sivaganga",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Karti P Chidambaram",
+    "party": "Indian National Congress",
+    "partyShort": "INC",
+    "lokSabhaTerms": [
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "tamil-nadu:33-5",
+   "state": "tamil-nadu",
+   "name": "Sriperumbudur",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "T R Baalu",
+    "party": "Dravida Munnetra Kazhagam",
+    "partyShort": "DMK",
+    "lokSabhaTerms": [
+     11,
+     12,
+     13,
+     14,
+     15,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "tamil-nadu:33-37",
+   "state": "tamil-nadu",
+   "name": "Tenkasi",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Rani Srikumar",
+    "party": "Dravida Munnetra Kazhagam",
+    "partyShort": "DMK",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "tamil-nadu:33-30",
+   "state": "tamil-nadu",
+   "name": "Thanjavur",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Murasoli S",
+    "party": "Dravida Munnetra Kazhagam",
+    "partyShort": "DMK",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "tamil-nadu:33-33",
+   "state": "tamil-nadu",
+   "name": "Theni",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Thanga Tamilselvan",
+    "party": "Dravida Munnetra Kazhagam",
+    "partyShort": "DMK",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "tamil-nadu:33-36",
+   "state": "tamil-nadu",
+   "name": "Thoothukkudi",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Kanimozhi Rajathi Karunanidhi",
+    "party": "Dravida Munnetra Kazhagam",
+    "partyShort": "DMK",
+    "lokSabhaTerms": [
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "tamil-nadu:33-24",
+   "state": "tamil-nadu",
+   "name": "Tiruchirappalli",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Durai Vaiko",
+    "party": "Marumalarchi Dravida Munnetra Kazhagam",
+    "partyShort": "MDMK",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "tamil-nadu:33-38",
+   "state": "tamil-nadu",
+   "name": "Tirunelveli",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Robert Bruce C",
+    "party": "Indian National Congress",
+    "partyShort": "INC",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "tamil-nadu:33-18",
+   "state": "tamil-nadu",
+   "name": "Tiruppur",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Subbarayan K",
+    "party": "Communist Party of India",
+    "partyShort": "CPI",
+    "lokSabhaTerms": [
+     14,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "tamil-nadu:33-1",
+   "state": "tamil-nadu",
+   "name": "Tiruvallur",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Sasikanth Senthil",
+    "party": "Indian National Congress",
+    "partyShort": "INC",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "tamil-nadu:33-11",
+   "state": "tamil-nadu",
+   "name": "Tiruvannamalai",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "C N Annadurai",
+    "party": "Dravida Munnetra Kazhagam",
+    "partyShort": "DMK",
+    "lokSabhaTerms": [
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "tamil-nadu:33-8",
+   "state": "tamil-nadu",
+   "name": "Vellore",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "D M Kathir Anand",
+    "party": "Dravida Munnetra Kazhagam",
+    "partyShort": "DMK",
+    "lokSabhaTerms": [
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "tamil-nadu:33-13",
+   "state": "tamil-nadu",
+   "name": "Viluppuram",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "D Ravi Kumar",
+    "party": "Viduthalai Chiruthaigal Katchi",
+    "partyShort": "VCK",
+    "lokSabhaTerms": [
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "tamil-nadu:33-34",
+   "state": "tamil-nadu",
+   "name": "Virudhunagar",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Manickam Tagore B",
+    "party": "Indian National Congress",
+    "partyShort": "INC",
+    "lokSabhaTerms": [
+     15,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "telangana:36-1",
+   "state": "telangana",
+   "name": "Adilabad",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Godam Nagesh",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     16,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "telangana:36-14",
+   "state": "telangana",
+   "name": "Bhongir",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Chamala Kiran Kumar Reddy",
+    "party": "Indian National Congress",
+    "partyShort": "INC",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "telangana:36-10",
+   "state": "telangana",
+   "name": "Chevella",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Konda Vishweshwar Reddy",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     16,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "telangana:36-9",
+   "state": "telangana",
+   "name": "Hyderabad",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Asaduddin Owaisi",
+    "party": "All India Majlis-E-Ittehadul Muslimeen",
+    "partyShort": "AIMIM",
+    "lokSabhaTerms": [
+     14,
+     15,
+     16,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "telangana:36-3",
+   "state": "telangana",
+   "name": "Karimnagar",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Bandi Sanjay Kumar",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "telangana:36-17",
+   "state": "telangana",
+   "name": "Khammam",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Ramasahayam Raghuram Reddy",
+    "party": "Indian National Congress",
+    "partyShort": "INC",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "telangana:36-16",
+   "state": "telangana",
+   "name": "Mahabubabad",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Balram Naik Porika",
+    "party": "Indian National Congress",
+    "partyShort": "INC",
+    "lokSabhaTerms": [
+     15,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "telangana:36-11",
+   "state": "telangana",
+   "name": "Mahbubnagar",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "D K Aruna",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "telangana:36-7",
+   "state": "telangana",
+   "name": "Malkajgiri",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Eatala Rajender",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "telangana:36-6",
+   "state": "telangana",
+   "name": "Medak",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Madhavaneni Raghunandan Rao",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "telangana:36-12",
+   "state": "telangana",
+   "name": "Nagarkurnool",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Mallu Ravi",
+    "party": "Indian National Congress",
+    "partyShort": "INC",
+    "lokSabhaTerms": [
+     10,
+     12,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "telangana:36-13",
+   "state": "telangana",
+   "name": "Nalgonda",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Kunduru Raghuveer",
+    "party": "Indian National Congress",
+    "partyShort": "INC",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "telangana:36-4",
+   "state": "telangana",
+   "name": "Nizamabad",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Arvind Dharmapuri",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "telangana:36-2",
+   "state": "telangana",
+   "name": "Peddapalle",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Vamsi Krishna Gaddam",
+    "party": "Indian National Congress",
+    "partyShort": "INC",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "telangana:36-8",
+   "state": "telangana",
+   "name": "Secunderabad",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "G Kishan Reddy",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "telangana:36-15",
+   "state": "telangana",
+   "name": "Warangal",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Kadiyam Kavya",
+    "party": "Indian National Congress",
+    "partyShort": "INC",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "telangana:36-5",
+   "state": "telangana",
+   "name": "Zahirabad",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Suresh Kumar Shetkar",
+    "party": "Indian National Congress",
+    "partyShort": "INC",
+    "lokSabhaTerms": [
+     15,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "tripura:16-2",
+   "state": "tripura",
+   "name": "Tripura East",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Kriti Devi Debbarman",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "tripura:16-1",
+   "state": "tripura",
+   "name": "Tripura West",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Biplab Kumar Deb",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "uttar-pradesh:9-18",
+   "state": "uttar-pradesh",
+   "name": "Agra",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "S P Singh Baghel",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     12,
+     13,
+     14,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "uttar-pradesh:9-44",
+   "state": "uttar-pradesh",
+   "name": "Akbarpur",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Devendra Singh Alias Bhole Singh",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     16,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "uttar-pradesh:9-15",
+   "state": "uttar-pradesh",
+   "name": "Aligarh",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Satish Kumar Gautam",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     16,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "uttar-pradesh:9-52",
+   "state": "uttar-pradesh",
+   "name": "Allahabad",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Ujjwal Raman Singh",
+    "party": "Indian National Congress",
+    "partyShort": "INC",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "uttar-pradesh:9-55",
+   "state": "uttar-pradesh",
+   "name": "Ambedkar Nagar",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Lalji Verma",
+    "party": "Samajwadi Party",
+    "partyShort": "SP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "uttar-pradesh:9-37",
+   "state": "uttar-pradesh",
+   "name": "Amethi",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Kishori Lal",
+    "party": "Indian National Congress",
+    "partyShort": "INC",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "uttar-pradesh:9-9",
+   "state": "uttar-pradesh",
+   "name": "Amroha",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Kanwar Singh Tanwar",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     16,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "uttar-pradesh:9-24",
+   "state": "uttar-pradesh",
+   "name": "Aonla",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Neeraj Maurya",
+    "party": "Samajwadi Party",
+    "partyShort": "SP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "uttar-pradesh:9-69",
+   "state": "uttar-pradesh",
+   "name": "Azamgarh",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Dharmendra Yadav",
+    "party": "Samajwadi Party",
+    "partyShort": "SP",
+    "lokSabhaTerms": [
+     14,
+     15,
+     16,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "uttar-pradesh:9-23",
+   "state": "uttar-pradesh",
+   "name": "Badaun",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Aditya Yadav",
+    "party": "Samajwadi Party",
+    "partyShort": "SP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "uttar-pradesh:9-11",
+   "state": "uttar-pradesh",
+   "name": "Baghpat",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Rajkumar Sangwan",
+    "party": "Rashtriya Lok Dal",
+    "partyShort": "RLD",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "uttar-pradesh:9-56",
+   "state": "uttar-pradesh",
+   "name": "Bahraich",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Anand Kumar",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "uttar-pradesh:9-72",
+   "state": "uttar-pradesh",
+   "name": "Ballia",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Sanatan Pandey",
+    "party": "Samajwadi Party",
+    "partyShort": "SP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "uttar-pradesh:9-48",
+   "state": "uttar-pradesh",
+   "name": "Banda",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Krishna Devi Shivshankar Patel",
+    "party": "Samajwadi Party",
+    "partyShort": "SP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "uttar-pradesh:9-67",
+   "state": "uttar-pradesh",
+   "name": "Bansgaon",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Kamlesh Paswan",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     15,
+     16,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "uttar-pradesh:9-53",
+   "state": "uttar-pradesh",
+   "name": "Barabanki",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Tanuj Punia",
+    "party": "Indian National Congress",
+    "partyShort": "INC",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "uttar-pradesh:9-25",
+   "state": "uttar-pradesh",
+   "name": "Bareilly",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Chhatrapal Singh Gangwar",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "uttar-pradesh:9-61",
+   "state": "uttar-pradesh",
+   "name": "Basti",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Ram Prasad Chaudhary",
+    "party": "Samajwadi Party",
+    "partyShort": "SP",
+    "lokSabhaTerms": [
+     9,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "uttar-pradesh:9-78",
+   "state": "uttar-pradesh",
+   "name": "Bhadohi",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Vinod Kumar Bind",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "uttar-pradesh:9-4",
+   "state": "uttar-pradesh",
+   "name": "Bijnor",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Chandan Chauhan",
+    "party": "Rashtriya Lok Dal",
+    "partyShort": "RLD",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "uttar-pradesh:9-14",
+   "state": "uttar-pradesh",
+   "name": "Bulandshahr",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Bhola Singh",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     16,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "uttar-pradesh:9-76",
+   "state": "uttar-pradesh",
+   "name": "Chandauli",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Virendra Singh",
+    "party": "Samajwadi Party",
+    "partyShort": "SP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "uttar-pradesh:9-66",
+   "state": "uttar-pradesh",
+   "name": "Deoria",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Shashank Mani",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "uttar-pradesh:9-29",
+   "state": "uttar-pradesh",
+   "name": "Dhaurahra",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Anand Bhadauria",
+    "party": "Samajwadi Party",
+    "partyShort": "SP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "uttar-pradesh:9-60",
+   "state": "uttar-pradesh",
+   "name": "Domariyaganj",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Jagdambika Pal",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     15,
+     16,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "uttar-pradesh:9-22",
+   "state": "uttar-pradesh",
+   "name": "Etah",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Devesh Shakya",
+    "party": "Samajwadi Party",
+    "partyShort": "SP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "uttar-pradesh:9-41",
+   "state": "uttar-pradesh",
+   "name": "Etawah",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Jitendra Kumar Dohare",
+    "party": "Samajwadi Party",
+    "partyShort": "SP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "uttar-pradesh:9-54",
+   "state": "uttar-pradesh",
+   "name": "Faizabad",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Awadhesh Prasad",
+    "party": "Samajwadi Party",
+    "partyShort": "SP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "uttar-pradesh:9-40",
+   "state": "uttar-pradesh",
+   "name": "Farrukhabad",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Mukesh Rajput",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     16,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "uttar-pradesh:9-49",
+   "state": "uttar-pradesh",
+   "name": "Fatehpur",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Naresh Chandra Uttam Patel",
+    "party": "Samajwadi Party",
+    "partyShort": "SP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "uttar-pradesh:9-19",
+   "state": "uttar-pradesh",
+   "name": "Fatehpur Sikri",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Rajkumar Chahar",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "uttar-pradesh:9-20",
+   "state": "uttar-pradesh",
+   "name": "Firozabad",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Akshay Yadav",
+    "party": "Samajwadi Party",
+    "partyShort": "SP",
+    "lokSabhaTerms": [
+     16,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "uttar-pradesh:9-13",
+   "state": "uttar-pradesh",
+   "name": "Gautam Buddha Nagar",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Mahesh Sharma",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     16,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "uttar-pradesh:9-12",
+   "state": "uttar-pradesh",
+   "name": "Ghaziabad",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Atul Garg",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "uttar-pradesh:9-75",
+   "state": "uttar-pradesh",
+   "name": "Ghazipur",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Afzal Ansari",
+    "party": "Samajwadi Party",
+    "partyShort": "SP",
+    "lokSabhaTerms": [
+     14,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "uttar-pradesh:9-70",
+   "state": "uttar-pradesh",
+   "name": "Ghosi",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Rajeev Rai",
+    "party": "Samajwadi Party",
+    "partyShort": "SP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "uttar-pradesh:9-59",
+   "state": "uttar-pradesh",
+   "name": "Gonda",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Kirti Vardhan Singh",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     12,
+     14,
+     16,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "uttar-pradesh:9-64",
+   "state": "uttar-pradesh",
+   "name": "Gorakhpur",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Ravindra Shukla Alias Ravi Kishan",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "uttar-pradesh:9-47",
+   "state": "uttar-pradesh",
+   "name": "Hamirpur",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Ajendra Singh Lodhi",
+    "party": "Samajwadi Party",
+    "partyShort": "SP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "uttar-pradesh:9-31",
+   "state": "uttar-pradesh",
+   "name": "Hardoi",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Jai Prakash",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     10,
+     11,
+     13,
+     14,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "uttar-pradesh:9-16",
+   "state": "uttar-pradesh",
+   "name": "Hathras",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Anoop Pradhan Valmiki",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "uttar-pradesh:9-45",
+   "state": "uttar-pradesh",
+   "name": "Jalaun",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Narayandas Ahirwar",
+    "party": "Samajwadi Party",
+    "partyShort": "SP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "uttar-pradesh:9-73",
+   "state": "uttar-pradesh",
+   "name": "Jaunpur",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Babu Singh Kushwaha",
+    "party": "Samajwadi Party",
+    "partyShort": "SP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "uttar-pradesh:9-46",
+   "state": "uttar-pradesh",
+   "name": "Jhansi",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Anurag Sharma",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "uttar-pradesh:9-2",
+   "state": "uttar-pradesh",
+   "name": "Kairana",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Iqra Choudhary",
+    "party": "Samajwadi Party",
+    "partyShort": "SP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "uttar-pradesh:9-57",
+   "state": "uttar-pradesh",
+   "name": "Kaiserganj",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Karan Bhushan Singh",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "uttar-pradesh:9-42",
+   "state": "uttar-pradesh",
+   "name": "Kannauj",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Akhilesh Yadav",
+    "party": "Samajwadi Party",
+    "partyShort": "SP",
+    "lokSabhaTerms": [
+     13,
+     14,
+     15,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "uttar-pradesh:9-43",
+   "state": "uttar-pradesh",
+   "name": "Kanpur",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Ramesh Awasthi",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "uttar-pradesh:9-50",
+   "state": "uttar-pradesh",
+   "name": "Kaushambi",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Pushpendra Saroj",
+    "party": "Samajwadi Party",
+    "partyShort": "SP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "uttar-pradesh:9-28",
+   "state": "uttar-pradesh",
+   "name": "Kheri",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Utkarsh Verma Madhur",
+    "party": "Samajwadi Party",
+    "partyShort": "SP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "uttar-pradesh:9-65",
+   "state": "uttar-pradesh",
+   "name": "Kushi Nagar",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Vijay Kumar Dubey",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "uttar-pradesh:9-68",
+   "state": "uttar-pradesh",
+   "name": "Lalganj",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Daroga Prasad Saroj",
+    "party": "Samajwadi Party",
+    "partyShort": "SP",
+    "lokSabhaTerms": [
+     12,
+     14,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "uttar-pradesh:9-35",
+   "state": "uttar-pradesh",
+   "name": "Lucknow",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Rajnath Singh",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     15,
+     16,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "uttar-pradesh:9-74",
+   "state": "uttar-pradesh",
+   "name": "Machhlishahr",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Priya Saroj",
+    "party": "Samajwadi Party",
+    "partyShort": "SP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "uttar-pradesh:9-63",
+   "state": "uttar-pradesh",
+   "name": "Maharajganj",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Pankaj Choudhary",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     10,
+     11,
+     12,
+     14,
+     16,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "uttar-pradesh:9-21",
+   "state": "uttar-pradesh",
+   "name": "Mainpuri",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Dimple Yadav",
+    "party": "Samajwadi Party",
+    "partyShort": "SP",
+    "lokSabhaTerms": [
+     15,
+     16,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "uttar-pradesh:9-17",
+   "state": "uttar-pradesh",
+   "name": "Mathura",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Hema Malini",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     16,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "uttar-pradesh:9-10",
+   "state": "uttar-pradesh",
+   "name": "Meerut",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Arun Govil",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "uttar-pradesh:9-79",
+   "state": "uttar-pradesh",
+   "name": "Mirzapur",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Anupriya Patel",
+    "party": "Apna Dal (Soneylal)",
+    "partyShort": "Apna Dal (S)",
+    "lokSabhaTerms": [
+     16,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "uttar-pradesh:9-32",
+   "state": "uttar-pradesh",
+   "name": "Misrikh",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Ashok Kumar Rawat",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     14,
+     15,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "uttar-pradesh:9-34",
+   "state": "uttar-pradesh",
+   "name": "Mohanlalganj",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "R K Chaudhary",
+    "party": "Samajwadi Party",
+    "partyShort": "SP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "uttar-pradesh:9-6",
+   "state": "uttar-pradesh",
+   "name": "Moradabad",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Ruchi Vira",
+    "party": "Samajwadi Party",
+    "partyShort": "SP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "uttar-pradesh:9-3",
+   "state": "uttar-pradesh",
+   "name": "Muzaffarnagar",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Harendra Singh Malik",
+    "party": "Samajwadi Party",
+    "partyShort": "SP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "uttar-pradesh:9-5",
+   "state": "uttar-pradesh",
+   "name": "Nagina",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Chandra Shekhar",
+    "party": "Azad Samaj Party (Kanshi Ram)",
+    "partyShort": "ASP (KR)",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "uttar-pradesh:9-51",
+   "state": "uttar-pradesh",
+   "name": "Phulpur",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Praveen Patel",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "uttar-pradesh:9-26",
+   "state": "uttar-pradesh",
+   "name": "Pilibhit",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Jitin Prasada",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     14,
+     15,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "uttar-pradesh:9-39",
+   "state": "uttar-pradesh",
+   "name": "Pratapgarh",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Shiv Pal Singh Patel",
+    "party": "Samajwadi Party",
+    "partyShort": "SP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "uttar-pradesh:9-36",
+   "state": "uttar-pradesh",
+   "name": "Rae Bareli",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Rahul Gandhi",
+    "party": "Indian National Congress",
+    "partyShort": "INC",
+    "lokSabhaTerms": [
+     14,
+     15,
+     16,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "uttar-pradesh:9-7",
+   "state": "uttar-pradesh",
+   "name": "Rampur",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Mohibbullah",
+    "party": "Samajwadi Party",
+    "partyShort": "SP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "uttar-pradesh:9-80",
+   "state": "uttar-pradesh",
+   "name": "Robertsganj",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Chhotelal",
+    "party": "Samajwadi Party",
+    "partyShort": "SP",
+    "lokSabhaTerms": [
+     16,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "uttar-pradesh:9-1",
+   "state": "uttar-pradesh",
+   "name": "Saharanpur",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Imran Masood",
+    "party": "Indian National Congress",
+    "partyShort": "INC",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "uttar-pradesh:9-71",
+   "state": "uttar-pradesh",
+   "name": "Salempur",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Ramashankar Vidharthi Rajbhar",
+    "party": "Samajwadi Party",
+    "partyShort": "SP",
+    "lokSabhaTerms": [
+     15,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "uttar-pradesh:9-8",
+   "state": "uttar-pradesh",
+   "name": "Sambhal",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Zia Ur Rehman",
+    "party": "Samajwadi Party",
+    "partyShort": "SP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "uttar-pradesh:9-62",
+   "state": "uttar-pradesh",
+   "name": "Sant Kabir Nagar",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Laxmikant Pappu Nishad",
+    "party": "Samajwadi Party",
+    "partyShort": "SP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "uttar-pradesh:9-27",
+   "state": "uttar-pradesh",
+   "name": "Shahjahanpur",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Arun Kumar Sagar",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "uttar-pradesh:9-58",
+   "state": "uttar-pradesh",
+   "name": "Shrawasti",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Ram Shiromani Verma",
+    "party": "Samajwadi Party",
+    "partyShort": "SP",
+    "lokSabhaTerms": [
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "uttar-pradesh:9-30",
+   "state": "uttar-pradesh",
+   "name": "Sitapur",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Rakesh Rathor",
+    "party": "Indian National Congress",
+    "partyShort": "INC",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "uttar-pradesh:9-38",
+   "state": "uttar-pradesh",
+   "name": "Sultanpur",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Rambhual Nishad",
+    "party": "Samajwadi Party",
+    "partyShort": "SP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "uttar-pradesh:9-33",
+   "state": "uttar-pradesh",
+   "name": "Unnao",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Swami Sachidanand Hari Sakshi",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     10,
+     11,
+     12,
+     16,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "uttar-pradesh:9-77",
+   "state": "uttar-pradesh",
+   "name": "Varanasi",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Narendra Modi",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     16,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "uttarakhand:5-3",
+   "state": "uttarakhand",
+   "name": "Almora",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Ajay Tamta",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     16,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "uttarakhand:5-2",
+   "state": "uttarakhand",
+   "name": "Garhwal",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Anil Baluni",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "uttarakhand:5-5",
+   "state": "uttarakhand",
+   "name": "Hardwar",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Trivendra Singh Rawat",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "uttarakhand:5-4",
+   "state": "uttarakhand",
+   "name": "Nainital-Udhamsingh Nagar",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Ajay Bhatt",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "uttarakhand:5-1",
+   "state": "uttarakhand",
+   "name": "Tehri Garhwal",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Mala Rajya Laxmi Shah",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     15,
+     16,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "west-bengal:19-2",
+   "state": "west-bengal",
+   "name": "Alipurduars",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Manoj Tigga",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "west-bengal:19-29",
+   "state": "west-bengal",
+   "name": "Arambag",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Bag Mitali",
+    "party": "All India Trinamool Congress",
+    "partyShort": "AITC",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "west-bengal:19-40",
+   "state": "west-bengal",
+   "name": "Asansol",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Shatrughan Prasad Sinha",
+    "party": "All India Trinamool Congress",
+    "partyShort": "AITC",
+    "lokSabhaTerms": [
+     15,
+     16,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "west-bengal:19-10",
+   "state": "west-bengal",
+   "name": "Baharampur",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Pathan Yusuf",
+    "party": "All India Trinamool Congress",
+    "partyShort": "AITC",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "west-bengal:19-6",
+   "state": "west-bengal",
+   "name": "Balurghat",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Sukanta Majumdar",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "west-bengal:19-14",
+   "state": "west-bengal",
+   "name": "Bangaon",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Shantanu Thakur",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "west-bengal:19-36",
+   "state": "west-bengal",
+   "name": "Bankura",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Arup Chakraborty",
+    "party": "All India Trinamool Congress",
+    "partyShort": "AITC",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "west-bengal:19-17",
+   "state": "west-bengal",
+   "name": "Barasat",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Kakoli Ghosh Dastidar",
+    "party": "All India Trinamool Congress",
+    "partyShort": "AITC",
+    "lokSabhaTerms": [
+     15,
+     16,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "west-bengal:19-38",
+   "state": "west-bengal",
+   "name": "Bardhaman Purba",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Sharmila Sarkar",
+    "party": "All India Trinamool Congress",
+    "partyShort": "AITC",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "west-bengal:19-39",
+   "state": "west-bengal",
+   "name": "Bardhaman-Durgapur",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Azad Kirti Jha",
+    "party": "All India Trinamool Congress",
+    "partyShort": "AITC",
+    "lokSabhaTerms": [
+     13,
+     15,
+     16,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "west-bengal:19-15",
+   "state": "west-bengal",
+   "name": "Barrackpur",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Partha Bhowmick",
+    "party": "All India Trinamool Congress",
+    "partyShort": "AITC",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "west-bengal:19-18",
+   "state": "west-bengal",
+   "name": "Basirhat",
+   "drawn": true,
+   "status": "vacant",
+   "vacatedBy": {
+    "name": "Nurul Islam",
+    "reason": "died"
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "west-bengal:19-42",
+   "state": "west-bengal",
+   "name": "Birbhum",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Satabdi Roy",
+    "party": "All India Trinamool Congress",
+    "partyShort": "AITC",
+    "lokSabhaTerms": [
+     15,
+     16,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "west-bengal:19-37",
+   "state": "west-bengal",
+   "name": "Bishnupur",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Saumitra Khan",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     16,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "west-bengal:19-41",
+   "state": "west-bengal",
+   "name": "Bolpur",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Asit Kumar Mal",
+    "party": "All India Trinamool Congress",
+    "partyShort": "AITC",
+    "lokSabhaTerms": [
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "west-bengal:19-1",
+   "state": "west-bengal",
+   "name": "Coochbehar",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Jagadish Chandra Barma Basunia",
+    "party": "All India Trinamool Congress",
+    "partyShort": "AITC",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "west-bengal:19-4",
+   "state": "west-bengal",
+   "name": "Darjeeling",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Raju Bista",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "west-bengal:19-21",
+   "state": "west-bengal",
+   "name": "Diamond Harbour",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Abhishek Banerjee",
+    "party": "All India Trinamool Congress",
+    "partyShort": "AITC",
+    "lokSabhaTerms": [
+     16,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "west-bengal:19-16",
+   "state": "west-bengal",
+   "name": "Dum Dum",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Sougata Ray",
+    "party": "All India Trinamool Congress",
+    "partyShort": "AITC",
+    "lokSabhaTerms": [
+     6,
+     15,
+     16,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "west-bengal:19-32",
+   "state": "west-bengal",
+   "name": "Ghatal",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Adhikari Deepak Dev",
+    "party": "All India Trinamool Congress",
+    "partyShort": "AITC",
+    "lokSabhaTerms": [
+     16,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "west-bengal:19-28",
+   "state": "west-bengal",
+   "name": "Hooghly",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Rachna Banerjee",
+    "party": "All India Trinamool Congress",
+    "partyShort": "AITC",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "west-bengal:19-25",
+   "state": "west-bengal",
+   "name": "Howrah",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Prasun Banerjee",
+    "party": "All India Trinamool Congress",
+    "partyShort": "AITC",
+    "lokSabhaTerms": [
+     15,
+     16,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "west-bengal:19-22",
+   "state": "west-bengal",
+   "name": "Jadavpur",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Sayani Ghosh",
+    "party": "All India Trinamool Congress",
+    "partyShort": "AITC",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "west-bengal:19-3",
+   "state": "west-bengal",
+   "name": "Jalpaiguri",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Jayanta Kumar Roy",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "west-bengal:19-9",
+   "state": "west-bengal",
+   "name": "Jangipur",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Khalilur Rahaman",
+    "party": "All India Trinamool Congress",
+    "partyShort": "AITC",
+    "lokSabhaTerms": [
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "west-bengal:19-19",
+   "state": "west-bengal",
+   "name": "Jaynagar",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Pratima Mondal",
+    "party": "All India Trinamool Congress",
+    "partyShort": "AITC",
+    "lokSabhaTerms": [
+     16,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "west-bengal:19-33",
+   "state": "west-bengal",
+   "name": "Jhargram",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Kalipada Saren Kherwal",
+    "party": "All India Trinamool Congress",
+    "partyShort": "AITC",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "west-bengal:19-31",
+   "state": "west-bengal",
+   "name": "Kanthi",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Adhikari Soumendu",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "west-bengal:19-23",
+   "state": "west-bengal",
+   "name": "Kolkata Dakshin",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Mala Roy",
+    "party": "All India Trinamool Congress",
+    "partyShort": "AITC",
+    "lokSabhaTerms": [
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "west-bengal:19-24",
+   "state": "west-bengal",
+   "name": "Kolkata Uttar",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Sudip Bandyopadhyay",
+    "party": "All India Trinamool Congress",
+    "partyShort": "AITC",
+    "lokSabhaTerms": [
+     12,
+     13,
+     15,
+     16,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "west-bengal:19-12",
+   "state": "west-bengal",
+   "name": "Krishnanagar",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Mahua Moitra",
+    "party": "All India Trinamool Congress",
+    "partyShort": "AITC",
+    "lokSabhaTerms": [
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "west-bengal:19-8",
+   "state": "west-bengal",
+   "name": "Maldaha Dakshin",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Isha Khan Choudhury",
+    "party": "Indian National Congress",
+    "partyShort": "INC",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "west-bengal:19-7",
+   "state": "west-bengal",
+   "name": "Maldaha Uttar",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Khagen Murmu",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "west-bengal:19-20",
+   "state": "west-bengal",
+   "name": "Mathurapur",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Bapi Haldar",
+    "party": "All India Trinamool Congress",
+    "partyShort": "AITC",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "west-bengal:19-34",
+   "state": "west-bengal",
+   "name": "Medinipur",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "June Maliah",
+    "party": "All India Trinamool Congress",
+    "partyShort": "AITC",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "west-bengal:19-11",
+   "state": "west-bengal",
+   "name": "Murshidabad",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Abu Taher Khan",
+    "party": "All India Trinamool Congress",
+    "partyShort": "AITC",
+    "lokSabhaTerms": [
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "west-bengal:19-35",
+   "state": "west-bengal",
+   "name": "Purulia",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Jyotirmay Singh Mahato",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "west-bengal:19-5",
+   "state": "west-bengal",
+   "name": "Raiganj",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Kartick Chandra Paul",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "west-bengal:19-13",
+   "state": "west-bengal",
+   "name": "Ranaghat",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Jagannath Sarkar",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "west-bengal:19-27",
+   "state": "west-bengal",
+   "name": "Sreerampur",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Kalyan Banerjee",
+    "party": "All India Trinamool Congress",
+    "partyShort": "AITC",
+    "lokSabhaTerms": [
+     15,
+     16,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "west-bengal:19-30",
+   "state": "west-bengal",
+   "name": "Tamluk",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Abhijit Gangopadhyay",
+    "party": "Bharatiya Janata Party",
+    "partyShort": "BJP",
+    "lokSabhaTerms": [
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  },
+  {
+   "id": "west-bengal:19-26",
+   "state": "west-bengal",
+   "name": "Uluberia",
+   "drawn": true,
+   "status": "sitting",
+   "member": {
+    "name": "Sajda Ahmed",
+    "party": "All India Trinamool Congress",
+    "partyShort": "AITC",
+    "lokSabhaTerms": [
+     16,
+     17,
+     18
+    ]
+   },
+   "sourceId": "sansad-ls18-members"
+  }
+ ],
+ "lastVerified": "2026-11-17"
+}

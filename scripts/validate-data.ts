@@ -8,8 +8,8 @@
 
 import { existsSync, readdirSync, readFileSync, statSync } from 'fs';
 import { join, relative } from 'path';
-import type { Entity, Overview, TollRoad } from '../src/types';
-import { validateRoad, validateEntity, validateOverview } from '../src/lib/data/validate';
+import type { Entity, Legislature, Overview, TollRoad } from '../src/types';
+import { validateRoad, validateEntity, validateOverview, validateLegislature } from '../src/lib/data/validate';
 
 export { validateRoad, validateEntity, validateOverview };
 
@@ -30,6 +30,7 @@ function main(): void {
             const json = JSON.parse(readFileSync(file, 'utf-8'));
             let errors: string[] = [];
             if (rel.includes('/toll-roads/')) errors = validateRoad(json as TollRoad);
+            else if (rel.includes('/representatives/')) errors = validateLegislature(json as Legislature);
             else if (rel.endsWith('overview.json')) errors = validateOverview(json as Overview);
             else if (Array.isArray(json)) {
                 json.forEach((e: Entity & Record<string, unknown>) =>
