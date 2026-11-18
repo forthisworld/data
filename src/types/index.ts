@@ -602,6 +602,58 @@ export interface LegislatureSeat {
   sourceId: string;
 }
 
+/** One election a person stood in, as the election results give it. */
+export interface ElectionContest {
+  year: number;
+  house: 'assembly' | 'lok_sabha';
+  byElection?: boolean;
+  /** The seat's name at that election. */
+  seat: string;
+  party: string;
+  /** 1 is the winner. */
+  position: number;
+  candidates?: number;
+  votes?: number;
+  /** Per cent of valid votes. */
+  voteShare?: number;
+  /** Winners only: the lead over the runner-up, in votes and in per cent of valid votes. */
+  margin?: number;
+  marginPct?: number;
+  /** Per cent of electors who voted in the seat. */
+  turnout?: number;
+  runnerUp?: { name: string; party: string };
+}
+
+/** A sitting member's election record in brief (data/<country>/elections). */
+export interface ElectionSummary {
+  /** A LegislatureSeat id. */
+  seat: string;
+  /** The person's id in the source. */
+  pid: string;
+  /** Why this person is taken to be the seat's member. */
+  basis: string;
+  contests: number;
+  wins: number;
+  /** The year of the first contest on record. */
+  first: number;
+  /** The most recent win on record, where it is the one that made them the sitting member. */
+  last?: ElectionContest;
+  sourceId: string;
+}
+
+export interface ElectionHistoryRecord {
+  id: string;
+  house: string;
+  state?: string;
+  /** The date the source's data ends. */
+  asOf: string;
+  lastGeneralElection: number;
+  sources: SourceCitation[];
+  seats: ElectionSummary[];
+  /** Members not tied to a person in the source, and why. */
+  unmatched: { seat: string; name?: string; why: string }[];
+}
+
 /** A sentence of the record and the sources it rests on. */
 export interface CitedText {
   text: string;

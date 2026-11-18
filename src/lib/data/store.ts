@@ -20,6 +20,7 @@ import type {
     Person,
     Region,
     TollRoad,
+    ElectionHistoryRecord,
     Legislature,
     LocalBody,
     MpladsRecord,
@@ -44,6 +45,7 @@ export interface CountryData {
     legislatures: Legislature[];
     mplads: MpladsRecord[];
     localBodies: LocalBody[];
+    elections: ElectionHistoryRecord[];
     infoRequests: InfoRequestData | null;
 }
 
@@ -67,6 +69,7 @@ function build(code: string): CountryData | null {
         legislatures: [],
         mplads: [],
         localBodies: [],
+        elections: [],
         infoRequests: (dataFiles[`${prefix}info-requests.json`] as InfoRequestData | undefined) ?? null,
     };
 
@@ -76,6 +79,8 @@ function build(code: string): CountryData | null {
             data.tollRoads.push(json as TollRoad);
         } else if (rel.startsWith('mplads/')) {
             data.mplads.push(json as MpladsRecord);
+        } else if (rel.startsWith('elections/')) {
+            data.elections.push(json as ElectionHistoryRecord);
         } else if (rel.startsWith('local-bodies/')) {
             data.localBodies.push(json as LocalBody);
         } else if (rel.startsWith('representatives/')) {

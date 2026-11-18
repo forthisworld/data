@@ -13,7 +13,7 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { ArrowUpRight, Building2, ChevronDown, ChevronRight, CircleHelp, FileText, Plus, User, Route as RouteIcon, PenLine } from 'lucide-react';
-import type { FactBasis, LegislatureSeat, LocalBody, MoneyValue, MpladsSeat, Person, SourceCitation, TollRoad } from '@/types';
+import type { ElectionContest, ElectionSummary, FactBasis, LegislatureSeat, LocalBody, MoneyValue, MpladsSeat, Person, SourceCitation, TollRoad } from '@/types';
 import { partyColour } from '@/lib/parties';
 import type { AtlasRegion } from '@/services/country.service';
 import { estimateRecoveryProgress, getDataGaps, isEstablished, REVENUE_ASSUMPTIONS } from '@/services/toll-road-analytics';
@@ -780,7 +780,7 @@ const vacancy = (v?: Seat['vacatedBy']) => {
     return `: ${v.name} ${how}${v.date ? ` on ${fmtDate(v.date)}` : ''}`;
 };
 
-export function SeatView({ seat, house, stateName, districts, parent, parentHouse, inside, insideHouse, cities, mplads, country, onPlace, onSeat }: {
+export function SeatView({ seat, house, stateName, districts, parent, parentHouse, inside, insideHouse, cities, mplads, election, country, onPlace, onSeat }: {
     seat: Seat;
     house: HouseInfo;
     stateName: string;
@@ -796,6 +796,8 @@ export function SeatView({ seat, house, stateName, districts, parent, parentHous
     cities: LocalBody[];
     /** Lok Sabha seats: the seat's MPLADS figures, if the portal has them. */
     mplads?: MpladsInfo;
+    /** The member's election record, if they are matched to a person in the results archive. */
+    election?: ElectionInfo;
     country: string;
     onPlace: (code: string) => void;
     onSeat: (id: string) => void;
@@ -803,7 +805,7 @@ export function SeatView({ seat, house, stateName, districts, parent, parentHous
     const m = seat.member;
     const assembly = isAssembly(house);
     const terms = m?.lokSabhaTerms ?? [];
-    const sources = [house.source, ...(parent && parentHouse ? [parentHouse.source] : []), ...(inside?.length && insideHouse ? [insideHouse.source] : []), ...(mplads ? [mplads.source] : []), ...cities.flatMap(c => c.sources)];
+    const sources = [house.source, ...(parent && parentHouse ? [parentHouse.source] : []), ...(inside?.length && insideHouse ? [insideHouse.source] : []), ...(mplads ? [mplads.source] : []), ...(election ? [election.source] : []), ...cities.flatMap(c => c.sources)];
     const cite = <Cite ids={[house.source.id]} sources={sources} />;
     // The holder of this seat, on its own rung of the ladder.
     const holder = m ? (
@@ -829,6 +831,7 @@ export function SeatView({ seat, house, stateName, districts, parent, parentHous
                 sub={m ? `${assembly ? 'MLA' : 'MP'}: ${m.name} · ${m.partyShort ?? m.party}` : 'No sitting member'} />
 
             {mplads && <MpladsSection info={mplads} sources={sources} country={country} seatName={seat.name} stateName={stateName} />}
+            {election && <ElectionSection info={election} sources={sources} />}
 
             <Section title="Who governs here">
                 <ol>
@@ -868,6 +871,7 @@ export function SeatView({ seat, house, stateName, districts, parent, parentHous
 
             <Unknowns country={country} items={[
                 'Declared assets, liabilities, education and criminal cases, from the election affidavit.',
+                !election && m && 'This member\'s election history: they are not matched to a person in the results archive yet.',
                 ...(assembly ? [
                     `Local area development funds: the works this MLA recommended in ${seat.name}, what they cost and whether they were finished.`,
                     'Attendance and questions asked in the Assembly.',
@@ -909,7 +913,7 @@ function FundLine({ info }: { info: MpladsInfo }) {
     return <><b className="font-semibold text-ftw-text">{pct(m.recommended.amount, m.allocated)}%</b> of this seat&apos;s local fund proposed as works so far. All seats together: {info.nationalProposedShare}%.</>;
 }
 
-export function SpotView({ stateName, districtName, mp, mpHouse, fund, mla, mlaHouse, loading, cities, country, onSeat, onDistrict, onState }: {
+export function SpotView({ stateName, districtName, mp, mpHouse, fund, mla, mlaHouse, mlaElection, loading, cities, country, onSeat, onDistrict, onState }: {
     stateName: string;
     districtName?: string;
     /** The Lok Sabha seat the spot lies in, if its boundary is drawn. */
@@ -919,6 +923,7 @@ export function SpotView({ stateName, districtName, mp, mpHouse, fund, mla, mlaH
     /** The assembly seat the spot lies in, if we have this state's assembly. */
     mla?: Seat;
     mlaHouse?: HouseInfo;
+    mlaElection?: ElectionInfo;
     /** Seat shapes are still loading. */
     loading?: boolean;
     /** Cities with part of this spot's assembly seat in them. */
@@ -928,7 +933,7 @@ export function SpotView({ stateName, districtName, mp, mpHouse, fund, mla, mlaH
     onDistrict?: () => void;
     onState: () => void;
 }) {
-    const sources = [...(mp && mpHouse ? [mpHouse.source] : []), ...(fund ? [fund.source] : []), ...(mla && mlaHouse ? [mlaHouse.source] : []), ...cities.flatMap(c => c.sources)];
+    const sources = [...(mp && mpHouse ? [mpHouse.source] : []), ...(fund ? [fund.source] : []), ...(mla && mlaHouse ? [mlaHouse.source] : []), ...(mlaElection ? [mlaElection.source] : []), ...cities.flatMap(c => c.sources)];
     const blank = <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-ftw-raised"><CircleHelp className="h-4 w-4 text-ftw-faint" /></span>;
     return (
         <article>
@@ -948,7 +953,7 @@ export function SpotView({ stateName, districtName, mp, mpHouse, fund, mla, mlaH
                 {mla ? (
                     <SpotCard tier={`MLA · ${mlaHouse?.house ?? 'State assembly'}`} avatar={<Avatar name={mla.member?.name} party={partyOf(mla)} />} name={mla.member?.name ?? 'Vacant'}
                         chip={<PartyChip short={partyOf(mla)} title={mla.member?.party} />} onClick={() => onSeat(mla.id)}>
-                        For {mla.name}. Nothing measurable on record yet.
+                        {mlaElection?.summary.last ? <WinLine e={mlaElection.summary} /> : <>For {mla.name}. Nothing measurable on record yet.</>}
                     </SpotCard>
                 ) : (
                     <SpotCard tier="MLA · State assembly" avatar={blank} name={loading ? 'Finding the seat…' : 'Not on record yet'}>
@@ -982,6 +987,91 @@ export function SpotView({ stateName, districtName, mp, mpHouse, fund, mla, mlaH
             ]} />
             {sources.length > 0 && <Sources fold sources={sources} lastVerified={[mpHouse?.asOf, mlaHouse?.asOf].filter(Boolean).sort().pop()} />}
         </article>
+    );
+}
+
+// ---------- elections ----------
+
+export interface ElectionInfo {
+    summary: Omit<ElectionSummary, 'seat' | 'sourceId'>;
+    source: SourceCitation;
+    /** Every contest of the member (public/data/elections/...). */
+    url: string;
+}
+
+const votes = (n?: number) => (n == null ? '' : n.toLocaleString('en-IN'));
+
+/** One line: the win that made them the sitting member, and how long they have been standing. */
+function WinLine({ e }: { e: ElectionInfo['summary'] }) {
+    const w = e.last!;
+    return (
+        <>
+            Won in {w.year} by <b className="font-semibold text-ftw-text">{votes(w.margin)} votes</b>{w.marginPct != null ? ` (${w.marginPct}% of votes cast)` : ''}.
+            {' '}On record: {e.wins} {e.wins === 1 ? 'win' : 'wins'} in {e.contests} {e.contests === 1 ? 'contest' : 'contests'}{e.contests > 1 ? `, since ${e.first}` : ''}.
+        </>
+    );
+}
+
+function ElectionSection({ info, sources }: { info: ElectionInfo; sources: SourceCitation[] }) {
+    const e = info.summary;
+    const w = e.last;
+    const cite = <Cite ids={[info.source.id]} sources={sources} />;
+    const [contests, setContests] = useState<ElectionContest[] | null>(null);
+    useEffect(() => {
+        setContests(null);
+        let live = true;
+        fetch(info.url).then(r => (r.ok ? r.json() : null)).then(j => { if (live && j) setContests(j.contests); }).catch(() => {});
+        return () => { live = false; };
+    }, [info.url]);
+
+    return (
+        <Section title={w ? `How they won, ${w.year}` : 'Elections before 2024'}>
+            {w ? (
+                <>
+                    <div className="flex items-end gap-3">
+                        <span className="text-4xl font-semibold tabular-nums leading-none tracking-tight">{w.marginPct ?? '–'}%</span>
+                        <span className="pb-0.5 text-[13px] leading-snug text-ftw-muted">
+                            lead over the runner-up{w.runnerUp ? <>,<br />{w.runnerUp.name} ({w.runnerUp.party})</> : null}{cite}
+                        </span>
+                    </div>
+                    <dl className="mt-4 grid grid-cols-3 gap-2 text-center">
+                        {([[votes(w.margin), 'votes ahead'], [w.voteShare != null ? `${w.voteShare}%` : '–', 'of votes cast'], [w.turnout != null ? `${w.turnout}%` : '–', 'turnout']] as const).map(([v, label]) => (
+                            <div key={label} className="rounded-lg bg-ftw-raised p-2">
+                                <dd className="text-lg font-semibold tabular-nums leading-tight">{v}</dd>
+                                <dt className="text-[11px] text-ftw-muted">{label}</dt>
+                            </div>
+                        ))}
+                    </dl>
+                </>
+            ) : (
+                <p className="text-[13px] leading-snug text-ftw-muted">The results archive ends in June 2023, so the 2024 election that made them MP is not in it.{cite}</p>
+            )}
+            <p className="mt-3 text-[13px] leading-snug">
+                On record: {e.wins} {e.wins === 1 ? 'win' : 'wins'} in {e.contests} {e.contests === 1 ? 'contest' : 'contests'}{e.contests > 1 ? `, the earliest in ${e.first}` : ''}. Earlier contests under another name or in another seat may be missing.
+            </p>
+            <More label="Every election they stood in">
+                {!contests && <p className="text-xs text-ftw-faint">Loading…</p>}
+                <ol className="space-y-1.5">
+                    {(contests ?? []).map((c, i) => (
+                        <li key={i} className="flex items-baseline gap-3 text-[13px] leading-snug">
+                            <span className="w-10 shrink-0 tabular-nums text-ftw-muted">{c.year}</span>
+                            <span className="min-w-0 flex-1">
+                                <span className="font-medium">{c.seat}</span>
+                                <span className="text-ftw-muted"> · {c.house === 'lok_sabha' ? 'Lok Sabha' : 'Assembly'}{c.byElection ? ' by-election' : ''} · {c.party}</span>
+                                <span className="block text-xs text-ftw-muted">
+                                    {votes(c.votes)} votes{c.voteShare != null ? ` (${c.voteShare}%)` : ''}{c.position === 1 && c.margin != null ? `, ahead by ${votes(c.margin)}` : ''}
+                                </span>
+                            </span>
+                            <span className={`shrink-0 text-xs font-semibold ${c.position === 1 ? 'text-ftw-free' : 'text-ftw-muted'}`}>{c.position === 1 ? 'Won' : `Lost (${ordinal(c.position)})`}</span>
+                        </li>
+                    ))}
+                </ol>
+            </More>
+            <p className="mt-3 text-[11px] leading-snug text-ftw-faint">
+                From the Trivedi Centre&apos;s Lok Dhaba archive of Election Commission results, which ends in June 2023. This member is taken to be the {e.basis}.
+                Which contests belong to one person is the Centre&apos;s linking, extended here to the same seat and a matching name. It can be wrong or incomplete.
+            </p>
+        </Section>
     );
 }
 

@@ -1,0 +1,186 @@
+{
+ "id": "elections-lok-sabha-18",
+ "house": "Lok Sabha",
+ "asOf": "2023-06-30",
+ "lastGeneralElection": 2019,
+ "sources": [
+  {
+   "id": "tcpd-lok-dhaba-2023-06",
+   "title": "Lok Dhaba: Indian election results, data archive as on June 2023",
+   "publisher": "Trivedi Centre for Political Data, Ashoka University",
+   "type": "statistics",
+   "url": "https://github.com/tcpd/tcpd-ld-data-archive",
+   "date": "2023-06-30",
+   "retrievedAt": "2026-11-18",
+   "note": "Commit a194c06816. Compiled by the Centre from the Election Commission of India's statistical reports. Ends in June 2023, so the 2024 Lok Sabha election and later by-elections are not in it. Which contests belong to one person is the Centre's own linking, and can be wrong."
+  }
+ ],
+ "seats": [
+  {
+   "seat": "karnataka:29-3",
+   "pid": "AEKA127774",
+   "basis": "same name as the seat's 2019 winner",
+   "contests": 5,
+   "wins": 4,
+   "first": 1994,
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:29-25",
+   "pid": "GEKA2757",
+   "basis": "same name as the seat's 2019 winner",
+   "contests": 8,
+   "wins": 5,
+   "first": 1996,
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:29-26",
+   "pid": "GEKA108297",
+   "basis": "same name as the seat's 2019 winner",
+   "contests": 1,
+   "wins": 1,
+   "first": 2019,
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:29-4",
+   "pid": "AEKA3535",
+   "basis": "same name as the seat's 2019 winner",
+   "contests": 11,
+   "wins": 9,
+   "first": 1983,
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:29-11",
+   "pid": "GEKA16556",
+   "basis": "same name as the seat's 2019 winner",
+   "contests": 4,
+   "wins": 4,
+   "first": 2004,
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:29-14",
+   "pid": "AEKA51+GEKA108357",
+   "basis": "same name as the seat's 2019 winner",
+   "contests": 4,
+   "wins": 4,
+   "first": 2009,
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  }
+ ],
+ "unmatched": [
+  {
+   "seat": "karnataka:29-24",
+   "name": "Shobha Karandlaje",
+   "why": "not the seat's 2019 winner; the archive ends before the 2024 election"
+  },
+  {
+   "seat": "karnataka:29-23",
+   "name": "C N Manjunath",
+   "why": "not the seat's 2019 winner; the archive ends before the 2024 election"
+  },
+  {
+   "seat": "karnataka:29-2",
+   "name": "Jagadish Shettar",
+   "why": "not the seat's 2019 winner; the archive ends before the 2024 election"
+  },
+  {
+   "seat": "karnataka:29-9",
+   "name": "E Tukaram",
+   "why": "not the seat's 2019 winner; the archive ends before the 2024 election"
+  },
+  {
+   "seat": "karnataka:29-7",
+   "name": "Sagar Eshwar Khandre",
+   "why": "not the seat's 2019 winner; the archive ends before the 2024 election"
+  },
+  {
+   "seat": "karnataka:29-22",
+   "name": "Sunil Bose",
+   "why": "not the seat's 2019 winner; the archive ends before the 2024 election"
+  },
+  {
+   "seat": "karnataka:29-27",
+   "name": "K Sudhakar",
+   "why": "not the seat's 2019 winner; the archive ends before the 2024 election"
+  },
+  {
+   "seat": "karnataka:29-1",
+   "name": "Priyanka Satish Jarkiholi",
+   "why": "not the seat's 2019 winner; the archive ends before the 2024 election"
+  },
+  {
+   "seat": "karnataka:29-18",
+   "name": "Govind Makthappa Karjol",
+   "why": "not the seat's 2019 winner; the archive ends before the 2024 election"
+  },
+  {
+   "seat": "karnataka:29-17",
+   "name": "Captain Brijesh Chowta",
+   "why": "not the seat's 2019 winner; the archive ends before the 2024 election"
+  },
+  {
+   "seat": "karnataka:29-13",
+   "name": "Prabha Mallikarjun",
+   "why": "not the seat's 2019 winner; the archive ends before the 2024 election"
+  },
+  {
+   "seat": "karnataka:29-5",
+   "name": "Radhakrishna",
+   "why": "not the seat's 2019 winner; the archive ends before the 2024 election"
+  },
+  {
+   "seat": "karnataka:29-16",
+   "name": "Shreyas M Patel",
+   "why": "not the seat's 2019 winner; the archive ends before the 2024 election"
+  },
+  {
+   "seat": "karnataka:29-10",
+   "name": "Basavaraj Bommai",
+   "why": "not the seat's 2019 winner; the archive ends before the 2024 election"
+  },
+  {
+   "seat": "karnataka:29-28",
+   "name": "M Mallesh Babu",
+   "why": "not the seat's 2019 winner; the archive ends before the 2024 election"
+  },
+  {
+   "seat": "karnataka:29-8",
+   "name": "K Rajashekar Basavaraj Hitnal",
+   "why": "not the seat's 2019 winner; the archive ends before the 2024 election"
+  },
+  {
+   "seat": "karnataka:29-20",
+   "name": "H D Kumaraswamy",
+   "why": "not the seat's 2019 winner; the archive ends before the 2024 election"
+  },
+  {
+   "seat": "karnataka:29-21",
+   "name": "Yaduveer Wadiyar",
+   "why": "not the seat's 2019 winner; the archive ends before the 2024 election"
+  },
+  {
+   "seat": "karnataka:29-6",
+   "name": "G Kumar Naik",
+   "why": "not the seat's 2019 winner; the archive ends before the 2024 election"
+  },
+  {
+   "seat": "karnataka:29-19",
+   "name": "V Somanna",
+   "why": "not the seat's 2019 winner; the archive ends before the 2024 election"
+  },
+  {
+   "seat": "karnataka:29-15",
+   "name": "Kota Srinivasa Poojary",
+   "why": "not the seat's 2019 winner; the archive ends before the 2024 election"
+  },
+  {
+   "seat": "karnataka:29-12",
+   "name": "Vishweshwar Hegde Kageri",
+   "why": "not the seat's 2019 winner; the archive ends before the 2024 election"
+  }
+ ]
+}

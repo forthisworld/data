@@ -1,0 +1,5636 @@
+{
+ "id": "elections-karnataka-assembly-16",
+ "house": "Karnataka Legislative Assembly",
+ "state": "karnataka",
+ "asOf": "2023-06-30",
+ "lastGeneralElection": 2023,
+ "sources": [
+  {
+   "id": "tcpd-lok-dhaba-2023-06",
+   "title": "Lok Dhaba: Indian election results, data archive as on June 2023",
+   "publisher": "Trivedi Centre for Political Data, Ashoka University",
+   "type": "statistics",
+   "url": "https://github.com/tcpd/tcpd-ld-data-archive",
+   "date": "2023-06-30",
+   "retrievedAt": "2026-11-18",
+   "note": "Commit a194c06816. Compiled by the Centre from the Election Commission of India's statistical reports. Ends in June 2023, so the 2024 Lok Sabha election and later by-elections are not in it. Which contests belong to one person is the Centre's own linking, and can be wrong."
+  }
+ ],
+ "seats": [
+  {
+   "seat": "karnataka:1",
+   "pid": "AEKA127924+AEKA617",
+   "basis": "winner of seat 1 in 2023, with earlier contests in the same seat joined by name",
+   "contests": 4,
+   "wins": 3,
+   "first": 2008,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Nippani",
+    "party": "BJP",
+    "position": 1,
+    "candidates": 10,
+    "votes": 73348,
+    "voteShare": 39.14,
+    "margin": 7292,
+    "marginPct": 3.89,
+    "turnout": 83,
+    "runnerUp": {
+     "name": "Uttam Raosaheb Patil",
+     "party": "NCP"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:2",
+   "pid": "AEKA1",
+   "basis": "winner of seat 2 in 2023",
+   "contests": 3,
+   "wins": 3,
+   "first": 2014,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Chikkodi-Sadalga",
+    "party": "INC",
+    "position": 1,
+    "candidates": 11,
+    "votes": 128349,
+    "voteShare": 69.82,
+    "margin": 78509,
+    "marginPct": 42.71,
+    "turnout": 81.47,
+    "runnerUp": {
+     "name": "Katti Ramesh Vishwanath",
+     "party": "BJP"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:3",
+   "pid": "AEKA641",
+   "basis": "winner of seat 3 in 2023",
+   "contests": 6,
+   "wins": 4,
+   "first": 1999,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Athani",
+    "party": "INC",
+    "position": 1,
+    "candidates": 13,
+    "votes": 131404,
+    "voteShare": 68.34,
+    "margin": 76122,
+    "marginPct": 39.59,
+    "turnout": 80.23,
+    "runnerUp": {
+     "name": "Mahesh. Irangouda. Kumathalli.",
+     "party": "BJP"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:4",
+   "pid": "AEKA127581+AEKA312",
+   "basis": "winner of seat 4 in 2023, with earlier contests in the same seat joined by name",
+   "contests": 9,
+   "wins": 5,
+   "first": 1983,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Kagwad",
+    "party": "INC",
+    "position": 1,
+    "candidates": 11,
+    "votes": 83387,
+    "voteShare": 51.45,
+    "margin": 8827,
+    "marginPct": 5.45,
+    "turnout": 82.3,
+    "runnerUp": {
+     "name": "Shrimant Balasaheb Patil",
+     "party": "BJP"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:5",
+   "pid": "AEKA665",
+   "basis": "winner of seat 5 in 2023",
+   "contests": 3,
+   "wins": 1,
+   "first": 2008,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Kudachi",
+    "party": "INC",
+    "position": 1,
+    "candidates": 7,
+    "votes": 85321,
+    "voteShare": 56.87,
+    "margin": 25243,
+    "marginPct": 16.82,
+    "turnout": 77.08,
+    "runnerUp": {
+     "name": "P. Rajeev",
+     "party": "BJP"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:6",
+   "pid": "AEKA673",
+   "basis": "winner of seat 6 in 2023",
+   "contests": 4,
+   "wins": 4,
+   "first": 2008,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Raybag",
+    "party": "BJP",
+    "position": 1,
+    "candidates": 10,
+    "votes": 57500,
+    "voteShare": 34.79,
+    "margin": 2570,
+    "marginPct": 1.55,
+    "turnout": 77.1,
+    "runnerUp": {
+     "name": "Shambhu Kallolikar",
+     "party": "IND"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:7",
+   "pid": "AEKA127969",
+   "basis": "winner of seat 7 in 2023",
+   "contests": 1,
+   "wins": 1,
+   "first": 2023,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Hukkeri",
+    "party": "BJP",
+    "position": 1,
+    "candidates": 7,
+    "votes": 103574,
+    "voteShare": 61.69,
+    "margin": 42551,
+    "marginPct": 25.34,
+    "turnout": 80.3,
+    "runnerUp": {
+     "name": "A.B.Patil",
+     "party": "INC"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:8",
+   "pid": "AEKA694",
+   "basis": "winner of seat 8 in 2023",
+   "contests": 5,
+   "wins": 5,
+   "first": 2004,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Arabhavi",
+    "party": "BJP",
+    "position": 1,
+    "candidates": 13,
+    "votes": 115402,
+    "voteShare": 60.7,
+    "margin": 71540,
+    "marginPct": 37.63,
+    "turnout": 76.62,
+    "runnerUp": {
+     "name": "Bhimappa Gundappa Gadad",
+     "party": "IND"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:9",
+   "pid": "AEKA704",
+   "basis": "winner of seat 9 in 2023",
+   "contests": 7,
+   "wins": 7,
+   "first": 1999,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Gokak",
+    "party": "BJP",
+    "position": 1,
+    "candidates": 10,
+    "votes": 105313,
+    "voteShare": 55.31,
+    "margin": 25412,
+    "marginPct": 13.35,
+    "turnout": 74.08,
+    "runnerUp": {
+     "name": "Kadadi Mahantesh Kallappa",
+     "party": "INC"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:10",
+   "pid": "AEKA713",
+   "basis": "winner of seat 10 in 2023",
+   "contests": 5,
+   "wins": 4,
+   "first": 2008,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Yemkanmardi",
+    "party": "INC",
+    "position": 1,
+    "candidates": 5,
+    "votes": 100290,
+    "voteShare": 60.25,
+    "margin": 57211,
+    "marginPct": 34.37,
+    "turnout": 82.53,
+    "runnerUp": {
+     "name": "Basavaraj Hundri",
+     "party": "BJP"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:11",
+   "pid": "AEKA127990",
+   "basis": "winner of seat 11 in 2023",
+   "contests": 1,
+   "wins": 1,
+   "first": 2023,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Belgaum Uttar",
+    "party": "INC",
+    "position": 1,
+    "candidates": 15,
+    "votes": 69184,
+    "voteShare": 46.28,
+    "margin": 4231,
+    "marginPct": 2.83,
+    "turnout": 59.53,
+    "runnerUp": {
+     "name": "Dr. Ravi B. Patil",
+     "party": "BJP"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:12",
+   "pid": "AEKA734",
+   "basis": "winner of seat 12 in 2023",
+   "contests": 5,
+   "wins": 4,
+   "first": 2004,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Belgaum Dakshin",
+    "party": "BJP",
+    "position": 1,
+    "candidates": 8,
+    "votes": 77094,
+    "voteShare": 48.45,
+    "margin": 12308,
+    "marginPct": 7.74,
+    "turnout": 63.46,
+    "runnerUp": {
+     "name": "Ramakant Konduskar",
+     "party": "IND"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:13",
+   "pid": "GEKA745",
+   "basis": "winner of seat 13 in 2023",
+   "contests": 4,
+   "wins": 2,
+   "first": 2013,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Belgaum Rural",
+    "party": "INC",
+    "position": 1,
+    "candidates": 12,
+    "votes": 107619,
+    "voteShare": 52.61,
+    "margin": 56016,
+    "marginPct": 27.38,
+    "turnout": 79.01,
+    "runnerUp": {
+     "name": "Nagesh Annappa Manolkar",
+     "party": "BJP"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:14",
+   "pid": "AEKA761",
+   "basis": "winner of seat 14 in 2023",
+   "contests": 3,
+   "wins": 1,
+   "first": 2013,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Khanapur",
+    "party": "BJP",
+    "position": 1,
+    "candidates": 13,
+    "votes": 91834,
+    "voteShare": 57.04,
+    "margin": 54629,
+    "marginPct": 33.93,
+    "turnout": 75.69,
+    "runnerUp": {
+     "name": "Dr. Anjali Hemant Nimbalkar",
+     "party": "INC"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:15",
+   "pid": "AEKA128031+AEKA17864",
+   "basis": "winner of seat 15 in 2023, with earlier contests in the same seat joined by name",
+   "contests": 2,
+   "wins": 1,
+   "first": 2018,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Kittur",
+    "party": "INC",
+    "position": 1,
+    "candidates": 10,
+    "votes": 77536,
+    "voteShare": 49.49,
+    "margin": 2993,
+    "marginPct": 1.91,
+    "turnout": 79.73,
+    "runnerUp": {
+     "name": "Doddagoudar Mahantesh Basavantaray",
+     "party": "BJP"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:16",
+   "pid": "AEKA451",
+   "basis": "winner of seat 16 in 2023",
+   "contests": 6,
+   "wins": 4,
+   "first": 1996,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Bailhongal",
+    "party": "INC",
+    "position": 1,
+    "candidates": 9,
+    "votes": 58408,
+    "voteShare": 38.28,
+    "margin": 2778,
+    "marginPct": 1.82,
+    "turnout": 76.16,
+    "runnerUp": {
+     "name": "Jagdish Channappa Metgud",
+     "party": "BJP"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:17",
+   "pid": "AEKA127811",
+   "basis": "winner of seat 17 in 2023",
+   "contests": 2,
+   "wins": 1,
+   "first": 2018,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Saundatti Yellamma",
+    "party": "INC",
+    "position": 1,
+    "candidates": 10,
+    "votes": 71224,
+    "voteShare": 43.61,
+    "margin": 14695,
+    "marginPct": 9,
+    "turnout": 81.2,
+    "runnerUp": {
+     "name": "Mamani Ratna Anand @ Vishwanath",
+     "party": "BJP"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:18",
+   "pid": "AEKA799",
+   "basis": "winner of seat 18 in 2023",
+   "contests": 5,
+   "wins": 3,
+   "first": 2004,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Ramdurg",
+    "party": "INC",
+    "position": 1,
+    "candidates": 13,
+    "votes": 80294,
+    "voteShare": 52.13,
+    "margin": 11730,
+    "marginPct": 7.62,
+    "turnout": 75.31,
+    "runnerUp": {
+     "name": "Chikkarevanna",
+     "party": "BJP"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:19",
+   "pid": "AEKA811",
+   "basis": "winner of seat 19 in 2023",
+   "contests": 7,
+   "wins": 3,
+   "first": 1989,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Mudhol",
+    "party": "INC",
+    "position": 1,
+    "candidates": 8,
+    "votes": 77298,
+    "voteShare": 48.69,
+    "margin": 17335,
+    "marginPct": 10.92,
+    "turnout": 77,
+    "runnerUp": {
+     "name": "Govind Makthappa Karjol",
+     "party": "BJP"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:20",
+   "pid": "AEKA816",
+   "basis": "winner of seat 20 in 2023",
+   "contests": 5,
+   "wins": 4,
+   "first": 2004,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Terdal",
+    "party": "BJP",
+    "position": 1,
+    "candidates": 12,
+    "votes": 77265,
+    "voteShare": 43.01,
+    "margin": 10745,
+    "marginPct": 5.98,
+    "turnout": 78.25,
+    "runnerUp": {
+     "name": "Siddu.Ramappa.Konnur.",
+     "party": "INC"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:21",
+   "pid": "AEKA128079+AEKA823",
+   "basis": "winner of seat 21 in 2023, with earlier contests in the same seat joined by name",
+   "contests": 2,
+   "wins": 1,
+   "first": 2013,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Jamkhandi",
+    "party": "BJP",
+    "position": 1,
+    "candidates": 11,
+    "votes": 81937,
+    "voteShare": 48.86,
+    "margin": 4716,
+    "marginPct": 2.81,
+    "turnout": 74.51,
+    "runnerUp": {
+     "name": "Anand Siddu Nyamagouda",
+     "party": "INC"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:22",
+   "pid": "AEKA9461",
+   "basis": "winner of seat 22 in 2023",
+   "contests": 7,
+   "wins": 4,
+   "first": 1994,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Bilgi",
+    "party": "INC",
+    "position": 1,
+    "candidates": 10,
+    "votes": 95652,
+    "voteShare": 51.75,
+    "margin": 11129,
+    "marginPct": 6.02,
+    "turnout": 78.01,
+    "runnerUp": {
+     "name": "Nirani Muragesh Rudrappa",
+     "party": "BJP"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:23",
+   "pid": "AEKA128096+AEKA846",
+   "basis": "winner of seat 23 in 2023, with earlier contests in the same seat joined by name",
+   "contests": 9,
+   "wins": 6,
+   "first": 1978,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Badami",
+    "party": "INC",
+    "position": 1,
+    "candidates": 7,
+    "votes": 65845,
+    "voteShare": 38.95,
+    "margin": 9725,
+    "marginPct": 5.75,
+    "turnout": 73,
+    "runnerUp": {
+     "name": "Shanthagouda Thirthgouda Patil.",
+     "party": "BJP"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:25",
+   "pid": "AEKA128112+AEKA127770",
+   "basis": "winner of seat 25 in 2023, with earlier contests in the same seat joined by name",
+   "contests": 4,
+   "wins": 2,
+   "first": 2008,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Hungund",
+    "party": "INC",
+    "position": 1,
+    "candidates": 11,
+    "votes": 78434,
+    "voteShare": 47.43,
+    "margin": 30007,
+    "marginPct": 18.15,
+    "turnout": 73,
+    "runnerUp": {
+     "name": "Doddanagouda G Patil",
+     "party": "BJP"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:26",
+   "pid": "AEKA128120+AEKA870",
+   "basis": "winner of seat 26 in 2023, with earlier contests in the same seat joined by name",
+   "contests": 8,
+   "wins": 6,
+   "first": 1989,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Muddebihal",
+    "party": "INC",
+    "position": 1,
+    "candidates": 8,
+    "votes": 79483,
+    "voteShare": 51.27,
+    "margin": 7637,
+    "marginPct": 4.93,
+    "turnout": 71.67,
+    "runnerUp": {
+     "name": "A. S. Patil (Nadahalli)",
+     "party": "BJP"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:27",
+   "pid": "AEKA128128+AEKA884",
+   "basis": "winner of seat 27 in 2023, with earlier contests in the same seat joined by name",
+   "contests": 3,
+   "wins": 1,
+   "first": 2013,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Devar Hippargi",
+    "party": "JD(S)",
+    "position": 1,
+    "candidates": 13,
+    "votes": 65952,
+    "voteShare": 43.39,
+    "margin": 20175,
+    "marginPct": 13.27,
+    "turnout": 68.94,
+    "runnerUp": {
+     "name": "Somanagouda B. Patil (Sasanur)",
+     "party": "BJP"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:28",
+   "pid": "AEKA895",
+   "basis": "winner of seat 28 in 2023",
+   "contests": 5,
+   "wins": 4,
+   "first": 2004,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Basavana Bagevadi",
+    "party": "INC",
+    "position": 1,
+    "candidates": 13,
+    "votes": 68126,
+    "voteShare": 43,
+    "margin": 24863,
+    "marginPct": 15.69,
+    "turnout": 74.59,
+    "runnerUp": {
+     "name": "Bellubbi Sangappa Kallappa",
+     "party": "BJP"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:29",
+   "pid": "AEKA128151+AEKA107327",
+   "basis": "winner of seat 29 in 2023, with earlier contests in the same seat joined by name",
+   "contests": 11,
+   "wins": 9,
+   "first": 1983,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Babaleshwar",
+    "party": "INC",
+    "position": 1,
+    "candidates": 14,
+    "votes": 93923,
+    "voteShare": 52.42,
+    "margin": 15216,
+    "marginPct": 8.49,
+    "turnout": 78.28,
+    "runnerUp": {
+     "name": "Vijayakumar (Vijayagouda) Patil",
+     "party": "BJP"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:30",
+   "pid": "AEKA925",
+   "basis": "winner of seat 30 in 2023",
+   "contests": 8,
+   "wins": 5,
+   "first": 1994,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Bijapur City",
+    "party": "BJP",
+    "position": 1,
+    "candidates": 14,
+    "votes": 94211,
+    "voteShare": 51.47,
+    "margin": 8233,
+    "marginPct": 4.5,
+    "turnout": 64.68,
+    "runnerUp": {
+     "name": "Abdul Hameed Khajasab Musharif",
+     "party": "INC"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:31",
+   "pid": "AEKA127914",
+   "basis": "winner of seat 31 in 2023",
+   "contests": 6,
+   "wins": 2,
+   "first": 1994,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Nagthan",
+    "party": "INC",
+    "position": 1,
+    "candidates": 15,
+    "votes": 78990,
+    "voteShare": 43.75,
+    "margin": 30815,
+    "marginPct": 17.07,
+    "turnout": 66.66,
+    "runnerUp": {
+     "name": "Sanjeev Malasiddappa Aihole",
+     "party": "BJP"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:32",
+   "pid": "AEKA128186+AEKA956",
+   "basis": "winner of seat 32 in 2023, with earlier contests in the same seat joined by name",
+   "contests": 4,
+   "wins": 3,
+   "first": 2008,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Indi",
+    "party": "INC",
+    "position": 1,
+    "candidates": 9,
+    "votes": 71785,
+    "voteShare": 39.69,
+    "margin": 10329,
+    "marginPct": 5.71,
+    "turnout": 74.52,
+    "runnerUp": {
+     "name": "B. D. Patil (Hanjagi)",
+     "party": "JD(S)"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:33",
+   "pid": "AEKA127920",
+   "basis": "winner of seat 33 in 2023",
+   "contests": 2,
+   "wins": 1,
+   "first": 2021,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Sindgi",
+    "party": "INC",
+    "position": 1,
+    "candidates": 9,
+    "votes": 87621,
+    "voteShare": 50.53,
+    "margin": 7808,
+    "marginPct": 4.5,
+    "turnout": 69.5,
+    "runnerUp": {
+     "name": "Bhusanur Ramesh Balappa",
+     "party": "BJP"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:34",
+   "pid": "AEKA987",
+   "basis": "winner of seat 34 in 2023",
+   "contests": 9,
+   "wins": 4,
+   "first": 1978,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Afzalpur",
+    "party": "INC",
+    "position": 1,
+    "candidates": 10,
+    "votes": 56313,
+    "voteShare": 35.12,
+    "margin": 4594,
+    "marginPct": 2.87,
+    "turnout": 69.94,
+    "runnerUp": {
+     "name": "Nitin Venkayya Guttedar",
+     "party": "IND"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:35",
+   "pid": "AEKA128204+AEKA127738",
+   "basis": "winner of seat 35 in 2023, with earlier contests in the same seat joined by name",
+   "contests": 4,
+   "wins": 3,
+   "first": 2010,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Jevargi",
+    "party": "INC",
+    "position": 1,
+    "candidates": 15,
+    "votes": 70810,
+    "voteShare": 42.3,
+    "margin": 10278,
+    "marginPct": 6.14,
+    "turnout": 69.4,
+    "runnerUp": {
+     "name": "Doddappagouda",
+     "party": "JD(S)"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:37",
+   "pid": "AEKA1026",
+   "basis": "winner of seat 37 in 2023",
+   "contests": 7,
+   "wins": 5,
+   "first": 1994,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Shahapur",
+    "party": "INC",
+    "position": 1,
+    "candidates": 9,
+    "votes": 78353,
+    "voteShare": 47,
+    "margin": 26027,
+    "marginPct": 15.61,
+    "turnout": 69.26,
+    "runnerUp": {
+     "name": "Ameenraddi Yalagi",
+     "party": "BJP"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:38",
+   "pid": "AEKA128222",
+   "basis": "winner of seat 38 in 2023",
+   "contests": 1,
+   "wins": 1,
+   "first": 2023,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Yadgir",
+    "party": "INC",
+    "position": 1,
+    "candidates": 15,
+    "votes": 53802,
+    "voteShare": 34.71,
+    "margin": 3673,
+    "marginPct": 2.37,
+    "turnout": 64.53,
+    "runnerUp": {
+     "name": "Venkatreddy Mudnal",
+     "party": "BJP"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:39",
+   "pid": "AEKA128237",
+   "basis": "winner of seat 39 in 2023",
+   "contests": 1,
+   "wins": 1,
+   "first": 2023,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Gurmitkal",
+    "party": "JD(S)",
+    "position": 1,
+    "candidates": 6,
+    "votes": 72297,
+    "voteShare": 44.54,
+    "margin": 2579,
+    "marginPct": 1.59,
+    "turnout": 64.7,
+    "runnerUp": {
+     "name": "Baburao Chinchansoor",
+     "party": "INC"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:40",
+   "pid": "AEKA98",
+   "basis": "winner of seat 40 in 2023",
+   "contests": 4,
+   "wins": 3,
+   "first": 2009,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Chittapur",
+    "party": "INC",
+    "position": 1,
+    "candidates": 7,
+    "votes": 81323,
+    "voteShare": 53.08,
+    "margin": 13640,
+    "marginPct": 8.9,
+    "turnout": 64.32,
+    "runnerUp": {
+     "name": "Manikanta Rathod",
+     "party": "BJP"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:41",
+   "pid": "AEKA1069",
+   "basis": "winner of seat 41 in 2023",
+   "contests": 5,
+   "wins": 4,
+   "first": 2004,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Sedam",
+    "party": "INC",
+    "position": 1,
+    "candidates": 12,
+    "votes": 93377,
+    "voteShare": 53.06,
+    "margin": 43561,
+    "marginPct": 24.75,
+    "turnout": 77.03,
+    "runnerUp": {
+     "name": "Rajkumar Patil Telkur",
+     "party": "BJP"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:42",
+   "pid": "AEKA127915",
+   "basis": "winner of seat 42 in 2023",
+   "contests": 2,
+   "wins": 2,
+   "first": 2019,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Chincholi",
+    "party": "BJP",
+    "position": 1,
+    "candidates": 10,
+    "votes": 69963,
+    "voteShare": 46.66,
+    "margin": 858,
+    "marginPct": 0.57,
+    "turnout": 72.94,
+    "runnerUp": {
+     "name": "Subhash V Rathod",
+     "party": "INC"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:43",
+   "pid": "AEKA128262+AEKA345",
+   "basis": "winner of seat 43 in 2023, with earlier contests in the same seat joined by name",
+   "contests": 6,
+   "wins": 3,
+   "first": 1994,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Gulbarga Rural",
+    "party": "BJP",
+    "position": 1,
+    "candidates": 12,
+    "votes": 84466,
+    "voteShare": 52.1,
+    "margin": 12627,
+    "marginPct": 7.79,
+    "turnout": 60.8,
+    "runnerUp": {
+     "name": "Revu Naik Belamagi",
+     "party": "INC"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:44",
+   "pid": "AEKA18647+AEKA106",
+   "basis": "winner of seat 44 in 2023, with earlier contests in the same seat joined by name",
+   "contests": 3,
+   "wins": 2,
+   "first": 2010,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Gulbarga Dakshin",
+    "party": "INC",
+    "position": 1,
+    "candidates": 14,
+    "votes": 87345,
+    "voteShare": 54.74,
+    "margin": 21048,
+    "marginPct": 13.19,
+    "turnout": 55.79,
+    "runnerUp": {
+     "name": "Dattatreya.C. Patil Revoor Appugouda",
+     "party": "BJP"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:45",
+   "pid": "AEKA127786",
+   "basis": "winner of seat 45 in 2023",
+   "contests": 2,
+   "wins": 2,
+   "first": 2018,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Gulbarga Uttar",
+    "party": "INC",
+    "position": 1,
+    "candidates": 12,
+    "votes": 80973,
+    "voteShare": 45.28,
+    "margin": 2712,
+    "marginPct": 1.52,
+    "turnout": 57.79,
+    "runnerUp": {
+     "name": "Chandrakant B. Patil (Chandu Patil)",
+     "party": "BJP"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:46",
+   "pid": "AEKA128291+AEKA13482",
+   "basis": "winner of seat 46 in 2023, with earlier contests in the same seat joined by name",
+   "contests": 11,
+   "wins": 5,
+   "first": 1978,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Aland",
+    "party": "INC",
+    "position": 1,
+    "candidates": 13,
+    "votes": 89508,
+    "voteShare": 51.27,
+    "margin": 10348,
+    "marginPct": 5.93,
+    "turnout": 65.02,
+    "runnerUp": {
+     "name": "Subhash Guttedar",
+     "party": "BJP"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:47",
+   "pid": "AEKA127699",
+   "basis": "winner of seat 47 in 2023",
+   "contests": 2,
+   "wins": 2,
+   "first": 2021,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Basavakalyan",
+    "party": "BJP",
+    "position": 1,
+    "candidates": 10,
+    "votes": 92920,
+    "voteShare": 52.8,
+    "margin": 14415,
+    "marginPct": 8.19,
+    "turnout": 70.69,
+    "runnerUp": {
+     "name": "Vijay Singh",
+     "party": "INC"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:48",
+   "pid": "AEKA128313",
+   "basis": "winner of seat 48 in 2023",
+   "contests": 1,
+   "wins": 1,
+   "first": 2023,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Homnabad",
+    "party": "BJP",
+    "position": 1,
+    "candidates": 7,
+    "votes": 75515,
+    "voteShare": 42.23,
+    "margin": 1594,
+    "marginPct": 0.89,
+    "turnout": 72.38,
+    "runnerUp": {
+     "name": "Rajashekhar Basavaraj Patil",
+     "party": "INC"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:49",
+   "pid": "AEKA128319+AEKA1193",
+   "basis": "winner of seat 49 in 2023, with earlier contests in the same seat joined by name",
+   "contests": 3,
+   "wins": 1,
+   "first": 2013,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Bidar South",
+    "party": "BJP",
+    "position": 1,
+    "candidates": 10,
+    "votes": 49872,
+    "voteShare": 32.51,
+    "margin": 1263,
+    "marginPct": 0.82,
+    "turnout": 73.97,
+    "runnerUp": {
+     "name": "Ashok Kheny",
+     "party": "INC"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:50",
+   "pid": "AEKA32",
+   "basis": "winner of seat 50 in 2023",
+   "contests": 6,
+   "wins": 4,
+   "first": 2008,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Bidar",
+    "party": "INC",
+    "position": 1,
+    "candidates": 11,
+    "votes": 69165,
+    "voteShare": 46.03,
+    "margin": 10780,
+    "marginPct": 7.17,
+    "turnout": 65.67,
+    "runnerUp": {
+     "name": "Suryakanth Nagamarpalli",
+     "party": "JD(S)"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:51",
+   "pid": "AEKA1228",
+   "basis": "winner of seat 51 in 2023",
+   "contests": 5,
+   "wins": 4,
+   "first": 2004,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Bhalki",
+    "party": "INC",
+    "position": 1,
+    "candidates": 13,
+    "votes": 99451,
+    "voteShare": 56.9,
+    "margin": 27706,
+    "marginPct": 15.85,
+    "turnout": 74.84,
+    "runnerUp": {
+     "name": "Prakash Khandre",
+     "party": "BJP"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:52",
+   "pid": "AEKA127789",
+   "basis": "winner of seat 52 in 2023",
+   "contests": 4,
+   "wins": 4,
+   "first": 2008,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Aurad",
+    "party": "BJP",
+    "position": 1,
+    "candidates": 12,
+    "votes": 81382,
+    "voteShare": 51.31,
+    "margin": 9569,
+    "marginPct": 6.03,
+    "turnout": 71.69,
+    "runnerUp": {
+     "name": "Bhimsain Rao Shinde",
+     "party": "INC"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:53",
+   "pid": "AEKA3929",
+   "basis": "winner of seat 53 in 2023",
+   "contests": 3,
+   "wins": 2,
+   "first": 2008,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Raichur Rural",
+    "party": "INC",
+    "position": 1,
+    "candidates": 8,
+    "votes": 89140,
+    "voteShare": 51.42,
+    "margin": 13857,
+    "marginPct": 7.99,
+    "turnout": 75.44,
+    "runnerUp": {
+     "name": "Tipparaju Hawaldar",
+     "party": "BJP"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:54",
+   "pid": "AEKA1265",
+   "basis": "winner of seat 54 in 2023",
+   "contests": 3,
+   "wins": 3,
+   "first": 2013,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Raichur",
+    "party": "BJP",
+    "position": 1,
+    "candidates": 18,
+    "votes": 69655,
+    "voteShare": 47.96,
+    "margin": 3732,
+    "marginPct": 2.57,
+    "turnout": 61.87,
+    "runnerUp": {
+     "name": "Mohammed Shalam",
+     "party": "INC"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:55",
+   "pid": "AEKA1286",
+   "basis": "winner of seat 55 in 2023",
+   "contests": 4,
+   "wins": 3,
+   "first": 2008,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Manvi",
+    "party": "INC",
+    "position": 1,
+    "candidates": 6,
+    "votes": 66922,
+    "voteShare": 42.43,
+    "margin": 7719,
+    "marginPct": 4.89,
+    "turnout": 67.23,
+    "runnerUp": {
+     "name": "A Bhagavantaray",
+     "party": "BJP"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:56",
+   "pid": "AEKA18718",
+   "basis": "winner of seat 56 in 2023",
+   "contests": 2,
+   "wins": 1,
+   "first": 2018,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Devadurga",
+    "party": "JD(S)",
+    "position": 1,
+    "candidates": 5,
+    "votes": 99544,
+    "voteShare": 56.75,
+    "margin": 34256,
+    "marginPct": 19.53,
+    "turnout": 74.07,
+    "runnerUp": {
+     "name": "Shivanagouda",
+     "party": "BJP"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:57",
+   "pid": "AEKA1301",
+   "basis": "winner of seat 57 in 2023",
+   "contests": 4,
+   "wins": 3,
+   "first": 2008,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Lingsugur",
+    "party": "BJP",
+    "position": 1,
+    "candidates": 7,
+    "votes": 58769,
+    "voteShare": 33.73,
+    "margin": 2809,
+    "marginPct": 1.61,
+    "turnout": 67.41,
+    "runnerUp": {
+     "name": "D.S.Hulageri",
+     "party": "INC"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:58",
+   "pid": "AEKA1315",
+   "basis": "winner of seat 58 in 2023",
+   "contests": 8,
+   "wins": 5,
+   "first": 1989,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Sindhanur",
+    "party": "INC",
+    "position": 1,
+    "candidates": 10,
+    "votes": 73645,
+    "voteShare": 41.98,
+    "margin": 21942,
+    "marginPct": 12.51,
+    "turnout": 71.8,
+    "runnerUp": {
+     "name": "K. Kariyappa",
+     "party": "BJP"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:59",
+   "pid": "AEKA127827",
+   "basis": "winner of seat 59 in 2023",
+   "contests": 3,
+   "wins": 2,
+   "first": 2018,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Maski",
+    "party": "INC",
+    "position": 1,
+    "candidates": 7,
+    "votes": 79566,
+    "voteShare": 52.76,
+    "margin": 13053,
+    "marginPct": 8.66,
+    "turnout": 71.12,
+    "runnerUp": {
+     "name": "Pratapgouda Patil",
+     "party": "BJP"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:60",
+   "pid": "AEKA1339",
+   "basis": "winner of seat 60 in 2023",
+   "contests": 5,
+   "wins": 3,
+   "first": 2004,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Kushtagi",
+    "party": "BJP",
+    "position": 1,
+    "candidates": 15,
+    "votes": 92915,
+    "voteShare": 50.75,
+    "margin": 9646,
+    "marginPct": 5.27,
+    "turnout": 78.22,
+    "runnerUp": {
+     "name": "Amaregouda Linganagouda Patil Bayyapur",
+     "party": "INC"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:61",
+   "pid": "AEKA1353",
+   "basis": "winner of seat 61 in 2023",
+   "contests": 4,
+   "wins": 3,
+   "first": 2008,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Kanakagiri",
+    "party": "INC",
+    "position": 1,
+    "candidates": 12,
+    "votes": 106164,
+    "voteShare": 60.13,
+    "margin": 42632,
+    "marginPct": 24.15,
+    "turnout": 78.31,
+    "runnerUp": {
+     "name": "Basavaraj Dadesugur",
+     "party": "BJP"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:62",
+   "pid": "AEKA128425",
+   "basis": "winner of seat 62 in 2023",
+   "contests": 1,
+   "wins": 1,
+   "first": 2023,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Gangawati",
+    "party": "Kalyana Rajya Pragathi Paksha",
+    "position": 1,
+    "candidates": 19,
+    "votes": 66213,
+    "voteShare": 41.42,
+    "margin": 8266,
+    "marginPct": 5.17,
+    "turnout": 77.61,
+    "runnerUp": {
+     "name": "Iqbal Ansari",
+     "party": "INC"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:63",
+   "pid": "AEKA30009",
+   "basis": "winner of seat 63 in 2023",
+   "contests": 12,
+   "wins": 7,
+   "first": 1985,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Yelburga",
+    "party": "INC",
+    "position": 1,
+    "candidates": 11,
+    "votes": 94330,
+    "voteShare": 53.29,
+    "margin": 17181,
+    "marginPct": 9.71,
+    "turnout": 78.57,
+    "runnerUp": {
+     "name": "Achar Halappa Basappa",
+     "party": "BJP"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:64",
+   "pid": "AEKA128448+AEKA9849",
+   "basis": "winner of seat 64 in 2023, with earlier contests in the same seat joined by name",
+   "contests": 11,
+   "wins": 6,
+   "first": 1989,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Koppal",
+    "party": "INC",
+    "position": 1,
+    "candidates": 12,
+    "votes": 90430,
+    "voteShare": 46.43,
+    "margin": 36260,
+    "marginPct": 18.62,
+    "turnout": 75.13,
+    "runnerUp": {
+     "name": "Karadi Manjula",
+     "party": "BJP"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:65",
+   "pid": "AEKA128456",
+   "basis": "winner of seat 65 in 2023",
+   "contests": 1,
+   "wins": 1,
+   "first": 2023,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Shirahatti",
+    "party": "BJP",
+    "position": 1,
+    "candidates": 14,
+    "votes": 74489,
+    "voteShare": 45.43,
+    "margin": 28520,
+    "marginPct": 17.39,
+    "turnout": 70.79,
+    "runnerUp": {
+     "name": "Ramakrishna. Shidlingappa. Doddamani",
+     "party": "IND"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:66",
+   "pid": "AEKA107474",
+   "basis": "winner of seat 66 in 2023",
+   "contests": 7,
+   "wins": 5,
+   "first": 1978,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Gadag",
+    "party": "INC",
+    "position": 1,
+    "candidates": 14,
+    "votes": 89958,
+    "voteShare": 52.84,
+    "margin": 15130,
+    "marginPct": 8.89,
+    "turnout": 75.56,
+    "runnerUp": {
+     "name": "Anil. P. Menasinakai",
+     "party": "BJP"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:67",
+   "pid": "AEKA12167",
+   "basis": "winner of seat 67 in 2023",
+   "contests": 9,
+   "wins": 4,
+   "first": 1985,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Ron",
+    "party": "INC",
+    "position": 1,
+    "candidates": 9,
+    "votes": 94865,
+    "voteShare": 53.24,
+    "margin": 24688,
+    "marginPct": 13.85,
+    "turnout": 75.81,
+    "runnerUp": {
+     "name": "Kalakappa Gurushantappa Bandi",
+     "party": "BJP"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:68",
+   "pid": "AEKA7381",
+   "basis": "winner of seat 68 in 2023",
+   "contests": 6,
+   "wins": 4,
+   "first": 1999,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Nargund",
+    "party": "BJP",
+    "position": 1,
+    "candidates": 14,
+    "votes": 72835,
+    "voteShare": 48.48,
+    "margin": 1791,
+    "marginPct": 1.19,
+    "turnout": 79.44,
+    "runnerUp": {
+     "name": "B. R. Yavagal",
+     "party": "INC"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:69",
+   "pid": "AEKA128498+AEKA1444",
+   "basis": "winner of seat 69 in 2023, with earlier contests in the same seat joined by name",
+   "contests": 5,
+   "wins": 2,
+   "first": 2004,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Navalgund",
+    "party": "INC",
+    "position": 1,
+    "candidates": 13,
+    "votes": 86081,
+    "voteShare": 53.16,
+    "margin": 22199,
+    "marginPct": 13.71,
+    "turnout": 76.99,
+    "runnerUp": {
+     "name": "Shankar Basanagouda Patil Munenakoppa",
+     "party": "BJP"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:70",
+   "pid": "AEKA128509+AEKA1462",
+   "basis": "winner of seat 70 in 2023, with earlier contests in the same seat joined by name",
+   "contests": 2,
+   "wins": 1,
+   "first": 2013,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Kundgol",
+    "party": "BJP",
+    "position": 1,
+    "candidates": 14,
+    "votes": 76105,
+    "voteShare": 49.07,
+    "margin": 35341,
+    "marginPct": 22.79,
+    "turnout": 82.82,
+    "runnerUp": {
+     "name": "Kusumavathi Channabasappa Shivalli",
+     "party": "INC"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:71",
+   "pid": "AEKA1471",
+   "basis": "winner of seat 71 in 2023",
+   "contests": 7,
+   "wins": 3,
+   "first": 2004,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Dharwad",
+    "party": "INC",
+    "position": 1,
+    "candidates": 11,
+    "votes": 89333,
+    "voteShare": 53.92,
+    "margin": 18037,
+    "marginPct": 10.89,
+    "turnout": 76.69,
+    "runnerUp": {
+     "name": "Amrut Ayyappa Desai",
+     "party": "BJP"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:72",
+   "pid": "AEKA1484",
+   "basis": "winner of seat 72 in 2023",
+   "contests": 3,
+   "wins": 3,
+   "first": 2013,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Hubli-Dharwad-East",
+    "party": "INC",
+    "position": 1,
+    "candidates": 11,
+    "votes": 85426,
+    "voteShare": 57.47,
+    "margin": 32370,
+    "marginPct": 21.78,
+    "turnout": 70.69,
+    "runnerUp": {
+     "name": "Dr. Kranthi Kiran",
+     "party": "BJP"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:73",
+   "pid": "AEKA128535",
+   "basis": "winner of seat 73 in 2023",
+   "contests": 1,
+   "wins": 1,
+   "first": 2023,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Hubli-Dharwad-Central",
+    "party": "BJP",
+    "position": 1,
+    "candidates": 16,
+    "votes": 95064,
+    "voteShare": 59.27,
+    "margin": 34289,
+    "marginPct": 21.38,
+    "turnout": 64.14,
+    "runnerUp": {
+     "name": "Jagadish Shettar",
+     "party": "INC"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:74",
+   "pid": "AEKA1512",
+   "basis": "winner of seat 74 in 2023",
+   "contests": 3,
+   "wins": 3,
+   "first": 2013,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Hubli-Dharwad- West",
+    "party": "BJP",
+    "position": 1,
+    "candidates": 15,
+    "votes": 101410,
+    "voteShare": 59.45,
+    "margin": 38693,
+    "marginPct": 22.68,
+    "turnout": 64.49,
+    "runnerUp": {
+     "name": "Deepak Chinchore",
+     "party": "INC"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:75",
+   "pid": "AEKA1530",
+   "basis": "winner of seat 75 in 2023",
+   "contests": 5,
+   "wins": 4,
+   "first": 2004,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Kalghatgi",
+    "party": "INC",
+    "position": 1,
+    "candidates": 12,
+    "votes": 85761,
+    "voteShare": 52.86,
+    "margin": 14357,
+    "marginPct": 8.85,
+    "turnout": 81.78,
+    "runnerUp": {
+     "name": "Chabbi Nagaraj",
+     "party": "BJP"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:76",
+   "pid": "AEKA128571+AEKA1538",
+   "basis": "winner of seat 76 in 2023, with earlier contests in the same seat joined by name",
+   "contests": 12,
+   "wins": 9,
+   "first": 1980,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Haliyal",
+    "party": "INC",
+    "position": 1,
+    "candidates": 9,
+    "votes": 57240,
+    "voteShare": 40.08,
+    "margin": 3623,
+    "marginPct": 2.54,
+    "turnout": 78,
+    "runnerUp": {
+     "name": "Sunil Hegade",
+     "party": "BJP"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:77",
+   "pid": "AEKA1552",
+   "basis": "winner of seat 77 in 2023",
+   "contests": 3,
+   "wins": 2,
+   "first": 2013,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Karwar",
+    "party": "INC",
+    "position": 1,
+    "candidates": 11,
+    "votes": 77445,
+    "voteShare": 47.15,
+    "margin": 2138,
+    "marginPct": 1.3,
+    "turnout": 70.81,
+    "runnerUp": {
+     "name": "Roopali Santosh Naik",
+     "party": "BJP"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:78",
+   "pid": "AEKA1566",
+   "basis": "winner of seat 78 in 2023",
+   "contests": 6,
+   "wins": 3,
+   "first": 1994,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Kumta",
+    "party": "BJP",
+    "position": 1,
+    "candidates": 9,
+    "votes": 59965,
+    "voteShare": 40.37,
+    "margin": 676,
+    "marginPct": 0.46,
+    "turnout": 77.09,
+    "runnerUp": {
+     "name": "Suraj Naik Soni",
+     "party": "JD(S)"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:79",
+   "pid": "AEKA1576",
+   "basis": "winner of seat 79 in 2023",
+   "contests": 3,
+   "wins": 2,
+   "first": 2013,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Bhatkal",
+    "party": "INC",
+    "position": 1,
+    "candidates": 9,
+    "votes": 100442,
+    "voteShare": 57.45,
+    "margin": 32671,
+    "marginPct": 18.69,
+    "turnout": 78,
+    "runnerUp": {
+     "name": "Sunil B. Naik",
+     "party": "BJP"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:80",
+   "pid": "AEKA128600+AEKA4144",
+   "basis": "winner of seat 80 in 2023, with earlier contests in the same seat joined by name",
+   "contests": 4,
+   "wins": 1,
+   "first": 2008,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Sirsi",
+    "party": "INC",
+    "position": 1,
+    "candidates": 10,
+    "votes": 76887,
+    "voteShare": 47.89,
+    "margin": 8712,
+    "marginPct": 5.43,
+    "turnout": 77.15,
+    "runnerUp": {
+     "name": "Kageri Vishweshwar Hegde",
+     "party": "BJP"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:81",
+   "pid": "AEKA1593",
+   "basis": "winner of seat 81 in 2023",
+   "contests": 5,
+   "wins": 4,
+   "first": 2008,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Yellapur",
+    "party": "BJP",
+    "position": 1,
+    "candidates": 9,
+    "votes": 74699,
+    "voteShare": 49.69,
+    "margin": 4004,
+    "marginPct": 2.66,
+    "turnout": 80.12,
+    "runnerUp": {
+     "name": "Andalagi Veerabhadragouda Shivanagoud Patil",
+     "party": "INC"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:82",
+   "pid": "AEKA18126",
+   "basis": "winner of seat 82 in 2023",
+   "contests": 3,
+   "wins": 2,
+   "first": 2018,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Hangal",
+    "party": "INC",
+    "position": 1,
+    "candidates": 12,
+    "votes": 94590,
+    "voteShare": 52.76,
+    "margin": 21945,
+    "marginPct": 12.24,
+    "turnout": 83.17,
+    "runnerUp": {
+     "name": "Shivaraj Sajjanar",
+     "party": "BJP"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:84",
+   "pid": "AEKA1624",
+   "basis": "winner of seat 84 in 2023",
+   "contests": 7,
+   "wins": 3,
+   "first": 1994,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Haveri",
+    "party": "INC",
+    "position": 1,
+    "candidates": 10,
+    "votes": 93827,
+    "voteShare": 51.73,
+    "margin": 11915,
+    "marginPct": 6.57,
+    "turnout": 76.61,
+    "runnerUp": {
+     "name": "Gavisiddappa Dyamannavar",
+     "party": "BJP"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:85",
+   "pid": "AEKA1634",
+   "basis": "winner of seat 85 in 2023",
+   "contests": 8,
+   "wins": 4,
+   "first": 1989,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Byadgi",
+    "party": "INC",
+    "position": 1,
+    "candidates": 7,
+    "votes": 97740,
+    "voteShare": 55.58,
+    "margin": 23841,
+    "marginPct": 13.56,
+    "turnout": 83.47,
+    "runnerUp": {
+     "name": "Ballari Virupakshappa Rudrappa",
+     "party": "BJP"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:86",
+   "pid": "AEKA1647",
+   "basis": "winner of seat 86 in 2023",
+   "contests": 7,
+   "wins": 3,
+   "first": 1994,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Hirekerur",
+    "party": "INC",
+    "position": 1,
+    "candidates": 7,
+    "votes": 85378,
+    "voteShare": 53.53,
+    "margin": 15020,
+    "marginPct": 9.42,
+    "turnout": 84.89,
+    "runnerUp": {
+     "name": "Basavanagouda Patil",
+     "party": "BJP"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:87",
+   "pid": "AEKA128652",
+   "basis": "winner of seat 87 in 2023",
+   "contests": 1,
+   "wins": 1,
+   "first": 2023,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Ranibennur",
+    "party": "INC",
+    "position": 1,
+    "candidates": 14,
+    "votes": 71830,
+    "voteShare": 37.21,
+    "margin": 9800,
+    "marginPct": 5.08,
+    "turnout": 80.4,
+    "runnerUp": {
+     "name": "Arunkumar Guttur",
+     "party": "BJP"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:88",
+   "pid": "AEKA128666",
+   "basis": "winner of seat 88 in 2023",
+   "contests": 1,
+   "wins": 1,
+   "first": 2023,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Hadagalli",
+    "party": "BJP",
+    "position": 1,
+    "candidates": 8,
+    "votes": 73200,
+    "voteShare": 48.81,
+    "margin": 1444,
+    "marginPct": 0.96,
+    "turnout": 77.31,
+    "runnerUp": {
+     "name": "P.T.Parameshwara Naik",
+     "party": "INC"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:89",
+   "pid": "AEKA1688",
+   "basis": "winner of seat 89 in 2023",
+   "contests": 4,
+   "wins": 2,
+   "first": 2008,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Hagaribommanahalli",
+    "party": "JD(S)",
+    "position": 1,
+    "candidates": 12,
+    "votes": 84023,
+    "voteShare": 44.44,
+    "margin": 11344,
+    "marginPct": 6,
+    "turnout": 81.14,
+    "runnerUp": {
+     "name": "L B P Bheema Naik",
+     "party": "INC"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:90",
+   "pid": "AEKA5500",
+   "basis": "winner of seat 90 in 2023",
+   "contests": 4,
+   "wins": 2,
+   "first": 2004,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Vijayanagara",
+    "party": "INC",
+    "position": 1,
+    "candidates": 12,
+    "votes": 104863,
+    "voteShare": 57.99,
+    "margin": 33723,
+    "marginPct": 18.65,
+    "turnout": 71.65,
+    "runnerUp": {
+     "name": "Siddharth Singh A Thakur",
+     "party": "BJP"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:91",
+   "pid": "AEKA1722",
+   "basis": "winner of seat 91 in 2023",
+   "contests": 3,
+   "wins": 2,
+   "first": 2013,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Kampli",
+    "party": "INC",
+    "position": 1,
+    "candidates": 7,
+    "votes": 100424,
+    "voteShare": 55.21,
+    "margin": 24091,
+    "marginPct": 13.25,
+    "turnout": 84.43,
+    "runnerUp": {
+     "name": "T H Suresh Babu",
+     "party": "BJP"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:92",
+   "pid": "AEKA127799",
+   "basis": "winner of seat 92 in 2023",
+   "contests": 3,
+   "wins": 2,
+   "first": 2008,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Siruguppa",
+    "party": "INC",
+    "position": 1,
+    "candidates": 9,
+    "votes": 90862,
+    "voteShare": 54.05,
+    "margin": 37032,
+    "marginPct": 22.03,
+    "turnout": 77.02,
+    "runnerUp": {
+     "name": "M. S. Somalingappa",
+     "party": "BJP"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:93",
+   "pid": "AEKA18823",
+   "basis": "winner of seat 93 in 2023",
+   "contests": 4,
+   "wins": 4,
+   "first": 2008,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Bellary",
+    "party": "INC",
+    "position": 1,
+    "candidates": 8,
+    "votes": 103836,
+    "voteShare": 56.84,
+    "margin": 29300,
+    "marginPct": 16.04,
+    "turnout": 76.1,
+    "runnerUp": {
+     "name": "B Sreeramulu",
+     "party": "BJP"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:94",
+   "pid": "AEKA128710",
+   "basis": "winner of seat 94 in 2023",
+   "contests": 1,
+   "wins": 1,
+   "first": 2023,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Bellary City",
+    "party": "INC",
+    "position": 1,
+    "candidates": 24,
+    "votes": 86440,
+    "voteShare": 48.47,
+    "margin": 37863,
+    "marginPct": 21.23,
+    "turnout": 68.2,
+    "runnerUp": {
+     "name": "Gali Lakshmi Aruna",
+     "party": "Kalyana Rajya Pragathi Paksha"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:96",
+   "pid": "AEKA128741",
+   "basis": "winner of seat 96 in 2023",
+   "contests": 1,
+   "wins": 1,
+   "first": 2023,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Kudligi",
+    "party": "INC",
+    "position": 1,
+    "candidates": 8,
+    "votes": 104753,
+    "voteShare": 63.95,
+    "margin": 54350,
+    "marginPct": 33.18,
+    "turnout": 79.48,
+    "runnerUp": {
+     "name": "Lokesh. V. Nayaka",
+     "party": "BJP"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:97",
+   "pid": "AEKA46",
+   "basis": "winner of seat 97 in 2023",
+   "contests": 9,
+   "wins": 7,
+   "first": 1994,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Molakalmuru",
+    "party": "INC",
+    "position": 1,
+    "candidates": 10,
+    "votes": 109459,
+    "voteShare": 53.81,
+    "margin": 22149,
+    "marginPct": 10.89,
+    "turnout": 82.9,
+    "runnerUp": {
+     "name": "S.Thippeswamy",
+     "party": "BJP"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:98",
+   "pid": "AEKA1817",
+   "basis": "winner of seat 98 in 2023",
+   "contests": 3,
+   "wins": 3,
+   "first": 2013,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Challakere",
+    "party": "INC",
+    "position": 1,
+    "candidates": 7,
+    "votes": 67952,
+    "voteShare": 38.16,
+    "margin": 16450,
+    "marginPct": 9.24,
+    "turnout": 80.04,
+    "runnerUp": {
+     "name": "Ravish Kumar.M",
+     "party": "JD(S)"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:99",
+   "pid": "AEKA128760+AEKA18190",
+   "basis": "winner of seat 99 in 2023, with earlier contests in the same seat joined by name",
+   "contests": 2,
+   "wins": 1,
+   "first": 2018,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Chitradurga",
+    "party": "INC",
+    "position": 1,
+    "candidates": 21,
+    "votes": 122021,
+    "voteShare": 59.84,
+    "margin": 53300,
+    "marginPct": 26.14,
+    "turnout": 76.85,
+    "runnerUp": {
+     "name": "G.H.Thippa Reddy",
+     "party": "BJP"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:101",
+   "pid": "AEKA1860",
+   "basis": "winner of seat 101 in 2023",
+   "contests": 6,
+   "wins": 4,
+   "first": 1999,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Hosadurga",
+    "party": "INC",
+    "position": 1,
+    "candidates": 13,
+    "votes": 81050,
+    "voteShare": 48.36,
+    "margin": 32816,
+    "marginPct": 19.58,
+    "turnout": 83.72,
+    "runnerUp": {
+     "name": "S. Lingamurthy",
+     "party": "BJP"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:102",
+   "pid": "AEKA128790+AEKA1872",
+   "basis": "winner of seat 102 in 2023, with earlier contests in the same seat joined by name",
+   "contests": 8,
+   "wins": 5,
+   "first": 1989,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Holalkere",
+    "party": "BJP",
+    "position": 1,
+    "candidates": 13,
+    "votes": 88732,
+    "voteShare": 45.02,
+    "margin": 5682,
+    "marginPct": 2.88,
+    "turnout": 83.11,
+    "runnerUp": {
+     "name": "H.Anjaneya",
+     "party": "INC"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:103",
+   "pid": "AEKA127818",
+   "basis": "winner of seat 103 in 2023",
+   "contests": 2,
+   "wins": 1,
+   "first": 2018,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Jagalur",
+    "party": "INC",
+    "position": 1,
+    "candidates": 11,
+    "votes": 50765,
+    "voteShare": 32.44,
+    "margin": 874,
+    "marginPct": 0.56,
+    "turnout": 80.17,
+    "runnerUp": {
+     "name": "S.V.Ramachandra",
+     "party": "BJP"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:104",
+   "pid": "AEKA128814",
+   "basis": "winner of seat 104 in 2023",
+   "contests": 1,
+   "wins": 1,
+   "first": 2023,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Harapanahalli",
+    "party": "IND",
+    "position": 1,
+    "candidates": 15,
+    "votes": 70194,
+    "voteShare": 39.56,
+    "margin": 13845,
+    "marginPct": 7.8,
+    "turnout": 79.3,
+    "runnerUp": {
+     "name": "G Karunakara Reddy",
+     "party": "BJP"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:105",
+   "pid": "AEKA127840",
+   "basis": "winner of seat 105 in 2023",
+   "contests": 4,
+   "wins": 2,
+   "first": 2008,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Harihar",
+    "party": "BJP",
+    "position": 1,
+    "candidates": 11,
+    "votes": 63924,
+    "voteShare": 37.94,
+    "margin": 4304,
+    "marginPct": 2.55,
+    "turnout": 80.38,
+    "runnerUp": {
+     "name": "Srinivasa N H (Nandigavi)",
+     "party": "INC"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:106",
+   "pid": "GEKA1928",
+   "basis": "winner of seat 106 in 2023",
+   "contests": 8,
+   "wins": 4,
+   "first": 1998,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Davanagere North",
+    "party": "INC",
+    "position": 1,
+    "candidates": 13,
+    "votes": 94019,
+    "voteShare": 56,
+    "margin": 24472,
+    "marginPct": 14.58,
+    "turnout": 68.6,
+    "runnerUp": {
+     "name": "Lokikere Nagaraj",
+     "party": "BJP"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:108",
+   "pid": "AEKA128851+AEKA18295+AEKA1961",
+   "basis": "winner of seat 108 in 2023, with earlier contests in the same seat joined by name",
+   "contests": 7,
+   "wins": 4,
+   "first": 1983,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Mayakonda",
+    "party": "INC",
+    "position": 1,
+    "candidates": 14,
+    "votes": 70916,
+    "voteShare": 43.83,
+    "margin": 33302,
+    "marginPct": 20.58,
+    "turnout": 84.18,
+    "runnerUp": {
+     "name": "B.M. Pushpa Vageeshaswamy",
+     "party": "IND"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:109",
+   "pid": "AEKA128865",
+   "basis": "winner of seat 109 in 2023",
+   "contests": 1,
+   "wins": 1,
+   "first": 2023,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Channagiri",
+    "party": "INC",
+    "position": 1,
+    "candidates": 11,
+    "votes": 78263,
+    "voteShare": 47.03,
+    "margin": 16435,
+    "marginPct": 9.88,
+    "turnout": 82.56,
+    "runnerUp": {
+     "name": "Madal Mallikarjuna",
+     "party": "IND"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:110",
+   "pid": "AEKA1994",
+   "basis": "winner of seat 110 in 2023",
+   "contests": 6,
+   "wins": 3,
+   "first": 1999,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Honnali",
+    "party": "INC",
+    "position": 1,
+    "candidates": 9,
+    "votes": 92392,
+    "voteShare": 54.31,
+    "margin": 17560,
+    "marginPct": 10.32,
+    "turnout": 84.21,
+    "runnerUp": {
+     "name": "M.P. Renukacharya",
+     "party": "BJP"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:111",
+   "pid": "AEKA2007",
+   "basis": "winner of seat 111 in 2023",
+   "contests": 4,
+   "wins": 2,
+   "first": 2008,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Shimoga Rural",
+    "party": "JD(S)",
+    "position": 1,
+    "candidates": 11,
+    "votes": 86340,
+    "voteShare": 47.74,
+    "margin": 15142,
+    "marginPct": 8.37,
+    "turnout": 83.05,
+    "runnerUp": {
+     "name": "K.B.Ashok Naik",
+     "party": "BJP"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:112",
+   "pid": "AEKA128889+AEKA2020",
+   "basis": "winner of seat 112 in 2023, with earlier contests in the same seat joined by name",
+   "contests": 6,
+   "wins": 4,
+   "first": 1999,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Bhadravati",
+    "party": "INC",
+    "position": 1,
+    "candidates": 14,
+    "votes": 66208,
+    "voteShare": 42.63,
+    "margin": 2705,
+    "marginPct": 1.74,
+    "turnout": 71.03,
+    "runnerUp": {
+     "name": "Sharada Appaji",
+     "party": "JD(S)"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:113",
+   "pid": "AEKA128899",
+   "basis": "winner of seat 113 in 2023",
+   "contests": 1,
+   "wins": 1,
+   "first": 2023,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Shimoga",
+    "party": "BJP",
+    "position": 1,
+    "candidates": 15,
+    "votes": 96490,
+    "voteShare": 53.66,
+    "margin": 27674,
+    "marginPct": 15.39,
+    "turnout": 66,
+    "runnerUp": {
+     "name": "H C Yogesh",
+     "party": "INC"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:114",
+   "pid": "AEKA2052",
+   "basis": "winner of seat 114 in 2023",
+   "contests": 10,
+   "wins": 5,
+   "first": 1983,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Tirthahalli",
+    "party": "BJP",
+    "position": 1,
+    "candidates": 5,
+    "votes": 84563,
+    "voteShare": 52.28,
+    "margin": 12241,
+    "marginPct": 7.57,
+    "turnout": 79,
+    "runnerUp": {
+     "name": "Kimmane Ratnakar",
+     "party": "INC"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:115",
+   "pid": "AEKA128917",
+   "basis": "winner of seat 115 in 2023",
+   "contests": 1,
+   "wins": 1,
+   "first": 2023,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Shikaripura",
+    "party": "BJP",
+    "position": 1,
+    "candidates": 10,
+    "votes": 81810,
+    "voteShare": 49.07,
+    "margin": 11008,
+    "marginPct": 6.6,
+    "turnout": 82.57,
+    "runnerUp": {
+     "name": "S. P. Nagarajagowda",
+     "party": "IND"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:116",
+   "pid": "AEKA128926+AEKA2072",
+   "basis": "winner of seat 116 in 2023, with earlier contests in the same seat joined by name",
+   "contests": 7,
+   "wins": 2,
+   "first": 2004,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Sorab",
+    "party": "INC",
+    "position": 1,
+    "candidates": 10,
+    "votes": 98912,
+    "voteShare": 60.3,
+    "margin": 44262,
+    "marginPct": 26.98,
+    "turnout": 82.66,
+    "runnerUp": {
+     "name": "S. Kumara Bangarappa",
+     "party": "BJP"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:117",
+   "pid": "AEKA127853",
+   "basis": "winner of seat 117 in 2023",
+   "contests": 4,
+   "wins": 3,
+   "first": 2004,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Sagar",
+    "party": "INC",
+    "position": 1,
+    "candidates": 9,
+    "votes": 88988,
+    "voteShare": 53.46,
+    "margin": 16022,
+    "marginPct": 9.62,
+    "turnout": 79.85,
+    "runnerUp": {
+     "name": "H.Halappa Harathalu",
+     "party": "BJP"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:118",
+   "pid": "AEKA128938",
+   "basis": "winner of seat 118 in 2023",
+   "contests": 1,
+   "wins": 1,
+   "first": 2023,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Byndoor",
+    "party": "BJP",
+    "position": 1,
+    "candidates": 9,
+    "votes": 98628,
+    "voteShare": 53.12,
+    "margin": 16153,
+    "marginPct": 8.7,
+    "turnout": 77.84,
+    "runnerUp": {
+     "name": "K. Gopal Poojary",
+     "party": "INC"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:119",
+   "pid": "AEKA128944",
+   "basis": "winner of seat 119 in 2023",
+   "contests": 1,
+   "wins": 1,
+   "first": 2023,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Kundapura",
+    "party": "BJP",
+    "position": 1,
+    "candidates": 5,
+    "votes": 102424,
+    "voteShare": 61.16,
+    "margin": 41556,
+    "marginPct": 24.81,
+    "turnout": 78.94,
+    "runnerUp": {
+     "name": "Dinesh Hegde Molahalli",
+     "party": "INC"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:120",
+   "pid": "AEKA128952",
+   "basis": "winner of seat 120 in 2023",
+   "contests": 1,
+   "wins": 1,
+   "first": 2023,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Udupi",
+    "party": "BJP",
+    "position": 1,
+    "candidates": 7,
+    "votes": 97079,
+    "voteShare": 58.46,
+    "margin": 32776,
+    "marginPct": 19.74,
+    "turnout": 75.87,
+    "runnerUp": {
+     "name": "Prasadraj Kanchan",
+     "party": "INC"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:121",
+   "pid": "AEKA128955",
+   "basis": "winner of seat 121 in 2023",
+   "contests": 1,
+   "wins": 1,
+   "first": 2023,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Kapu",
+    "party": "BJP",
+    "position": 1,
+    "candidates": 5,
+    "votes": 80559,
+    "voteShare": 53.23,
+    "margin": 13004,
+    "marginPct": 8.59,
+    "turnout": 78.79,
+    "runnerUp": {
+     "name": "Vinay Kumar Sorake",
+     "party": "INC"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:122",
+   "pid": "AEKA2129",
+   "basis": "winner of seat 122 in 2023",
+   "contests": 5,
+   "wins": 4,
+   "first": 2004,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Karkal",
+    "party": "BJP",
+    "position": 1,
+    "candidates": 9,
+    "votes": 77028,
+    "voteShare": 49.11,
+    "margin": 4602,
+    "marginPct": 2.93,
+    "turnout": 81.3,
+    "runnerUp": {
+     "name": "Udaya Shetty Muniyal",
+     "party": "INC"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:123",
+   "pid": "AEKA2139",
+   "basis": "winner of seat 123 in 2023",
+   "contests": 3,
+   "wins": 2,
+   "first": 2013,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Sringeri",
+    "party": "INC",
+    "position": 1,
+    "candidates": 12,
+    "votes": 59171,
+    "voteShare": 41.79,
+    "margin": 201,
+    "marginPct": 0.14,
+    "turnout": 81,
+    "runnerUp": {
+     "name": "D.N.Jeevaraja.",
+     "party": "BJP"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:124",
+   "pid": "AEKA128976",
+   "basis": "winner of seat 124 in 2023",
+   "contests": 1,
+   "wins": 1,
+   "first": 2023,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Mudigere",
+    "party": "INC",
+    "position": 1,
+    "candidates": 9,
+    "votes": 50843,
+    "voteShare": 38,
+    "margin": 722,
+    "marginPct": 0.54,
+    "turnout": 77.13,
+    "runnerUp": {
+     "name": "Deepak Doddaiah",
+     "party": "BJP"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:125",
+   "pid": "AEKA128984",
+   "basis": "winner of seat 125 in 2023",
+   "contests": 1,
+   "wins": 1,
+   "first": 2023,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Chikmagalur",
+    "party": "INC",
+    "position": 1,
+    "candidates": 16,
+    "votes": 85054,
+    "voteShare": 50.01,
+    "margin": 5926,
+    "marginPct": 3.48,
+    "turnout": 72.21,
+    "runnerUp": {
+     "name": "C. T. Ravi",
+     "party": "BJP"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:126",
+   "pid": "AEKA2169",
+   "basis": "winner of seat 126 in 2023",
+   "contests": 3,
+   "wins": 2,
+   "first": 2013,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Tarikere",
+    "party": "INC",
+    "position": 1,
+    "candidates": 14,
+    "votes": 63086,
+    "voteShare": 40.93,
+    "margin": 12131,
+    "marginPct": 7.87,
+    "turnout": 79.31,
+    "runnerUp": {
+     "name": "D.S. Suresh",
+     "party": "BJP"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:127",
+   "pid": "AEKA127820",
+   "basis": "winner of seat 127 in 2023",
+   "contests": 3,
+   "wins": 1,
+   "first": 2018,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Kadur",
+    "party": "INC",
+    "position": 1,
+    "candidates": 10,
+    "votes": 75476,
+    "voteShare": 44.6,
+    "margin": 12007,
+    "marginPct": 7.1,
+    "turnout": 80.98,
+    "runnerUp": {
+     "name": "Belli Prakash",
+     "party": "BJP"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:128",
+   "pid": "AEKA127885",
+   "basis": "winner of seat 128 in 2023",
+   "contests": 7,
+   "wins": 4,
+   "first": 1997,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Chiknayakanhalli",
+    "party": "JD(S)",
+    "position": 1,
+    "candidates": 13,
+    "votes": 71036,
+    "voteShare": 37.65,
+    "margin": 10042,
+    "marginPct": 5.32,
+    "turnout": 85.24,
+    "runnerUp": {
+     "name": "J C Madhu Swamy",
+     "party": "BJP"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:129",
+   "pid": "AEKA127855",
+   "basis": "winner of seat 129 in 2023",
+   "contests": 6,
+   "wins": 3,
+   "first": 1999,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Tiptur",
+    "party": "INC",
+    "position": 1,
+    "candidates": 12,
+    "votes": 71999,
+    "voteShare": 46.13,
+    "margin": 17652,
+    "marginPct": 11.31,
+    "turnout": 83.56,
+    "runnerUp": {
+     "name": "B.C. Nagesh",
+     "party": "BJP"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:130",
+   "pid": "AEKA2212",
+   "basis": "winner of seat 130 in 2023",
+   "contests": 7,
+   "wins": 3,
+   "first": 1994,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Turuvekere",
+    "party": "JD(S)",
+    "position": 1,
+    "candidates": 11,
+    "votes": 68163,
+    "voteShare": 42.51,
+    "margin": 9923,
+    "marginPct": 6.19,
+    "turnout": 84.79,
+    "runnerUp": {
+     "name": "Masala Jayaram",
+     "party": "BJP"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:131",
+   "pid": "AEKA129041+AEKA18898",
+   "basis": "winner of seat 131 in 2023, with earlier contests in the same seat joined by name",
+   "contests": 2,
+   "wins": 2,
+   "first": 2018,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Kunigal",
+    "party": "INC",
+    "position": 1,
+    "candidates": 8,
+    "votes": 74724,
+    "voteShare": 42.88,
+    "margin": 26573,
+    "marginPct": 15.25,
+    "turnout": 87.23,
+    "runnerUp": {
+     "name": "D Krishnakumar",
+     "party": "BJP"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:132",
+   "pid": "AEKA127858",
+   "basis": "winner of seat 132 in 2023",
+   "contests": 3,
+   "wins": 2,
+   "first": 2013,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Tumkur City",
+    "party": "BJP",
+    "position": 1,
+    "candidates": 14,
+    "votes": 59165,
+    "voteShare": 33.79,
+    "margin": 3198,
+    "marginPct": 1.83,
+    "turnout": 66.83,
+    "runnerUp": {
+     "name": "N Govindaraju",
+     "party": "JD(S)"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:133",
+   "pid": "AEKA2247",
+   "basis": "winner of seat 133 in 2023",
+   "contests": 4,
+   "wins": 3,
+   "first": 2008,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Tumkur Rural",
+    "party": "BJP",
+    "position": 1,
+    "candidates": 13,
+    "votes": 89191,
+    "voteShare": 48.9,
+    "margin": 4594,
+    "marginPct": 2.52,
+    "turnout": 86.5,
+    "runnerUp": {
+     "name": "D.C.Gowrishankar Swamy",
+     "party": "JD(S)"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:134",
+   "pid": "AEKA2263",
+   "basis": "winner of seat 134 in 2023",
+   "contests": 8,
+   "wins": 6,
+   "first": 1989,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Koratagere",
+    "party": "INC",
+    "position": 1,
+    "candidates": 12,
+    "votes": 79099,
+    "voteShare": 45.31,
+    "margin": 14347,
+    "marginPct": 8.22,
+    "turnout": 83.78,
+    "runnerUp": {
+     "name": "P. R. Sudhakar Lal",
+     "party": "JD(S)"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:135",
+   "pid": "AEKA5685",
+   "basis": "winner of seat 135 in 2023",
+   "contests": 5,
+   "wins": 5,
+   "first": 2004,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Gubbi",
+    "party": "INC",
+    "position": 1,
+    "candidates": 10,
+    "votes": 60520,
+    "voteShare": 37.79,
+    "margin": 8541,
+    "marginPct": 5.33,
+    "turnout": 88.92,
+    "runnerUp": {
+     "name": "S D Dilipkumar",
+     "party": "BJP"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:136",
+   "pid": "AEKA2289",
+   "basis": "winner of seat 136 in 2023",
+   "contests": 11,
+   "wins": 7,
+   "first": 1978,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Sira",
+    "party": "INC",
+    "position": 1,
+    "candidates": 15,
+    "votes": 86084,
+    "voteShare": 45.14,
+    "margin": 29250,
+    "marginPct": 15.34,
+    "turnout": 83.8,
+    "runnerUp": {
+     "name": "R Ugresh",
+     "party": "JD(S)"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:137",
+   "pid": "AEKA127862",
+   "basis": "winner of seat 137 in 2023",
+   "contests": 2,
+   "wins": 1,
+   "first": 2013,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Pavagada",
+    "party": "INC",
+    "position": 1,
+    "candidates": 11,
+    "votes": 83062,
+    "voteShare": 49.62,
+    "margin": 10881,
+    "marginPct": 6.5,
+    "turnout": 87.41,
+    "runnerUp": {
+     "name": "K.M.Thimmarayappa",
+     "party": "JD(S)"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:138",
+   "pid": "AEKA2315",
+   "basis": "winner of seat 138 in 2023",
+   "contests": 5,
+   "wins": 3,
+   "first": 2004,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Madhugiri",
+    "party": "INC",
+    "position": 1,
+    "candidates": 12,
+    "votes": 91166,
+    "voteShare": 54.72,
+    "margin": 35523,
+    "marginPct": 21.32,
+    "turnout": 85.76,
+    "runnerUp": {
+     "name": "M.V.Veerabhadraiah",
+     "party": "JD(S)"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:139",
+   "pid": "AEKA129115",
+   "basis": "winner of seat 139 in 2023",
+   "contests": 1,
+   "wins": 1,
+   "first": 2023,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Gauribidanur",
+    "party": "IND",
+    "position": 1,
+    "candidates": 18,
+    "votes": 83837,
+    "voteShare": 46.37,
+    "margin": 37286,
+    "marginPct": 20.62,
+    "turnout": 86.12,
+    "runnerUp": {
+     "name": "N.H.Shivashankara Reddy",
+     "party": "INC"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:140",
+   "pid": "AEKA129123",
+   "basis": "winner of seat 140 in 2023",
+   "contests": 1,
+   "wins": 1,
+   "first": 2023,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Bagepalli",
+    "party": "INC",
+    "position": 1,
+    "candidates": 15,
+    "votes": 82128,
+    "voteShare": 47.37,
+    "margin": 19179,
+    "marginPct": 11.06,
+    "turnout": 85.38,
+    "runnerUp": {
+     "name": "C. Muniraju",
+     "party": "BJP"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:141",
+   "pid": "AEKA129134",
+   "basis": "winner of seat 141 in 2023",
+   "contests": 1,
+   "wins": 1,
+   "first": 2023,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Chikkaballapur",
+    "party": "INC",
+    "position": 1,
+    "candidates": 12,
+    "votes": 86224,
+    "voteShare": 46.65,
+    "margin": 10642,
+    "marginPct": 5.76,
+    "turnout": 86.9,
+    "runnerUp": {
+     "name": "Dr. K. Sudhakar",
+     "party": "BJP"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:142",
+   "pid": "AEKA129143+AEKA127754",
+   "basis": "winner of seat 142 in 2023, with earlier contests in the same seat joined by name",
+   "contests": 2,
+   "wins": 1,
+   "first": 2018,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Sidlaghatta",
+    "party": "JD(S)",
+    "position": 1,
+    "candidates": 14,
+    "votes": 68932,
+    "voteShare": 38.89,
+    "margin": 16772,
+    "marginPct": 9.46,
+    "turnout": 86.34,
+    "runnerUp": {
+     "name": "Puttu Anjinappa",
+     "party": "IND"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:143",
+   "pid": "AEKA2406",
+   "basis": "winner of seat 143 in 2023",
+   "contests": 5,
+   "wins": 3,
+   "first": 2004,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Chintamani",
+    "party": "INC",
+    "position": 1,
+    "candidates": 11,
+    "votes": 97324,
+    "voteShare": 51.05,
+    "margin": 29052,
+    "marginPct": 15.24,
+    "turnout": 84.52,
+    "runnerUp": {
+     "name": "J.K. Krishna Reddy",
+     "party": "JD(S)"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:145",
+   "pid": "AEKA129169+AEKA19435",
+   "basis": "winner of seat 145 in 2023, with earlier contests in the same seat joined by name",
+   "contests": 2,
+   "wins": 1,
+   "first": 2018,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Mulbagal",
+    "party": "JD(S)",
+    "position": 1,
+    "candidates": 12,
+    "votes": 94254,
+    "voteShare": 53.4,
+    "margin": 26268,
+    "marginPct": 14.88,
+    "turnout": 80.7,
+    "runnerUp": {
+     "name": "V.Adinarayana",
+     "party": "INC"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:146",
+   "pid": "AEKA129181+AEKA19474",
+   "basis": "winner of seat 146 in 2023, with earlier contests in the same seat joined by name",
+   "contests": 2,
+   "wins": 2,
+   "first": 2018,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Kolar Gold Field",
+    "party": "INC",
+    "position": 1,
+    "candidates": 10,
+    "votes": 81569,
+    "voteShare": 55.1,
+    "margin": 50467,
+    "marginPct": 34.09,
+    "turnout": 74.2,
+    "runnerUp": {
+     "name": "Ashwini Sampangi",
+     "party": "BJP"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:147",
+   "pid": "AEKA127865+AEKA167",
+   "basis": "winner of seat 147 in 2023, with earlier contests in the same seat joined by name",
+   "contests": 4,
+   "wins": 3,
+   "first": 2011,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Bangarapet",
+    "party": "INC",
+    "position": 1,
+    "candidates": 8,
+    "votes": 77292,
+    "voteShare": 47.04,
+    "margin": 4711,
+    "marginPct": 2.87,
+    "turnout": 78,
+    "runnerUp": {
+     "name": "M. Mallesh Babu",
+     "party": "JD(S)"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:148",
+   "pid": "AEKA129190",
+   "basis": "winner of seat 148 in 2023",
+   "contests": 1,
+   "wins": 1,
+   "first": 2023,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Kolar",
+    "party": "INC",
+    "position": 1,
+    "candidates": 18,
+    "votes": 83990,
+    "voteShare": 43.56,
+    "margin": 30761,
+    "marginPct": 15.95,
+    "turnout": 79.4,
+    "runnerUp": {
+     "name": "C.M.R. Srinath",
+     "party": "JD(S)"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:149",
+   "pid": "AEKA19513",
+   "basis": "winner of seat 149 in 2023",
+   "contests": 2,
+   "wins": 2,
+   "first": 2018,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Malur",
+    "party": "INC",
+    "position": 1,
+    "candidates": 15,
+    "votes": 50955,
+    "voteShare": 29.4,
+    "margin": 248,
+    "marginPct": 0.14,
+    "turnout": 89,
+    "runnerUp": {
+     "name": "K.S.Manjunathagowda",
+     "party": "BJP"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:150",
+   "pid": "AEKA127866",
+   "basis": "winner of seat 150 in 2023",
+   "contests": 4,
+   "wins": 4,
+   "first": 2008,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Yelahanka",
+    "party": "BJP",
+    "position": 1,
+    "candidates": 20,
+    "votes": 141538,
+    "voteShare": 51.5,
+    "margin": 64110,
+    "marginPct": 23.33,
+    "turnout": 62.68,
+    "runnerUp": {
+     "name": "Keshava Rajanna B",
+     "party": "INC"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:151",
+   "pid": "AEKA127867",
+   "basis": "winner of seat 151 in 2023",
+   "contests": 4,
+   "wins": 4,
+   "first": 2013,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "K.R.Pura",
+    "party": "BJP",
+    "position": 1,
+    "candidates": 12,
+    "votes": 139925,
+    "voteShare": 51.93,
+    "margin": 24301,
+    "marginPct": 9.02,
+    "turnout": 52.68,
+    "runnerUp": {
+     "name": "D K Mohan",
+     "party": "INC"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:152",
+   "pid": "GEKA298",
+   "basis": "winner of seat 152 in 2023",
+   "contests": 8,
+   "wins": 6,
+   "first": 2003,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Byatarayanapura",
+    "party": "INC",
+    "position": 1,
+    "candidates": 17,
+    "votes": 160182,
+    "voteShare": 54.43,
+    "margin": 38204,
+    "marginPct": 12.98,
+    "turnout": 56.6,
+    "runnerUp": {
+     "name": "Thammesh Gowda H C",
+     "party": "BJP"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:153",
+   "pid": "AEKA129256+AEKA2577",
+   "basis": "winner of seat 153 in 2023, with earlier contests in the same seat joined by name",
+   "contests": 6,
+   "wins": 4,
+   "first": 2004,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Yeshvanthapura",
+    "party": "BJP",
+    "position": 1,
+    "candidates": 14,
+    "votes": 169149,
+    "voteShare": 47.26,
+    "margin": 15118,
+    "marginPct": 4.22,
+    "turnout": 63.69,
+    "runnerUp": {
+     "name": "T.N.Javarayi Gowda",
+     "party": "JD(S)"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:154",
+   "pid": "AEKA2591+AEKA129948",
+   "basis": "winner of seat 154 in 2023, with earlier contests in the same seat joined by name",
+   "contests": 4,
+   "wins": 3,
+   "first": 2013,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Rajarajeshwarinagar",
+    "party": "BJP",
+    "position": 1,
+    "candidates": 14,
+    "votes": 127980,
+    "voteShare": 48.72,
+    "margin": 11842,
+    "marginPct": 4.51,
+    "turnout": 53.81,
+    "runnerUp": {
+     "name": "Kusuma .H",
+     "party": "INC"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:155",
+   "pid": "AEKA2610",
+   "basis": "winner of seat 155 in 2023",
+   "contests": 5,
+   "wins": 3,
+   "first": 1983,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Dasarahalli",
+    "party": "BJP",
+    "position": 1,
+    "candidates": 15,
+    "votes": 91289,
+    "voteShare": 39.75,
+    "margin": 9194,
+    "marginPct": 4,
+    "turnout": 50.16,
+    "runnerUp": {
+     "name": "R. Manjunatha",
+     "party": "JD(S)"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:156",
+   "pid": "AEKA2631",
+   "basis": "winner of seat 156 in 2023",
+   "contests": 5,
+   "wins": 4,
+   "first": 2008,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Mahalakshmi Layout",
+    "party": "BJP",
+    "position": 1,
+    "candidates": 12,
+    "votes": 96424,
+    "voteShare": 60.6,
+    "margin": 51165,
+    "marginPct": 32.16,
+    "turnout": 54.25,
+    "runnerUp": {
+     "name": "Keshavamurthy S",
+     "party": "INC"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:157",
+   "pid": "AEKA127868",
+   "basis": "winner of seat 157 in 2023",
+   "contests": 5,
+   "wins": 4,
+   "first": 2004,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Malleshwaram",
+    "party": "BJP",
+    "position": 1,
+    "candidates": 11,
+    "votes": 80606,
+    "voteShare": 63.72,
+    "margin": 41302,
+    "marginPct": 32.65,
+    "turnout": 55.11,
+    "runnerUp": {
+     "name": "Anoop Iyengar",
+     "party": "INC"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:158",
+   "pid": "AEKA129308+AEKA17385",
+   "basis": "winner of seat 158 in 2023, with earlier contests in the same seat joined by name",
+   "contests": 2,
+   "wins": 2,
+   "first": 2018,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Hebbal",
+    "party": "INC",
+    "position": 1,
+    "candidates": 14,
+    "votes": 91838,
+    "voteShare": 57.71,
+    "margin": 30754,
+    "marginPct": 19.33,
+    "turnout": 54.73,
+    "runnerUp": {
+     "name": "Jagdeesha Katta K S",
+     "party": "BJP"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:159",
+   "pid": "AEKA129317",
+   "basis": "winner of seat 159 in 2023",
+   "contests": 1,
+   "wins": 1,
+   "first": 2023,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Pulakeshinagar",
+    "party": "INC",
+    "position": 1,
+    "candidates": 15,
+    "votes": 87316,
+    "voteShare": 66.72,
+    "margin": 62210,
+    "marginPct": 47.54,
+    "turnout": 54.79,
+    "runnerUp": {
+     "name": "Akanda Srinivasa Murthy R",
+     "party": "BSP"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:160",
+   "pid": "AEKA129326+AEKA2697",
+   "basis": "winner of seat 160 in 2023, with earlier contests in the same seat joined by name",
+   "contests": 8,
+   "wins": 6,
+   "first": 1983,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Sarvagnanagar",
+    "party": "INC",
+    "position": 1,
+    "candidates": 15,
+    "votes": 118783,
+    "voteShare": 61.04,
+    "margin": 55768,
+    "marginPct": 28.66,
+    "turnout": 52,
+    "runnerUp": {
+     "name": "Padmanabha Reddy",
+     "party": "BJP"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:161",
+   "pid": "AEKA129334",
+   "basis": "winner of seat 161 in 2023",
+   "contests": 1,
+   "wins": 1,
+   "first": 2023,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "C.V. Raman Nagar",
+    "party": "BJP",
+    "position": 1,
+    "candidates": 10,
+    "votes": 69228,
+    "voteShare": 53.53,
+    "margin": 16395,
+    "marginPct": 12.68,
+    "turnout": 47.43,
+    "runnerUp": {
+     "name": "Anand Kumar. S",
+     "party": "INC"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:162",
+   "pid": "GEKA17194",
+   "basis": "winner of seat 162 in 2023",
+   "contests": 4,
+   "wins": 2,
+   "first": 2014,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Shivajinagar",
+    "party": "INC",
+    "position": 1,
+    "candidates": 15,
+    "votes": 64913,
+    "voteShare": 58.77,
+    "margin": 23194,
+    "marginPct": 21,
+    "turnout": 56.59,
+    "runnerUp": {
+     "name": "Chandra.N.",
+     "party": "BJP"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:163",
+   "pid": "AEKA129354+AEKA2741",
+   "basis": "winner of seat 163 in 2023, with earlier contests in the same seat joined by name",
+   "contests": 4,
+   "wins": 4,
+   "first": 2008,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Shanti Nagar",
+    "party": "INC",
+    "position": 1,
+    "candidates": 10,
+    "votes": 61030,
+    "voteShare": 50.87,
+    "margin": 7125,
+    "marginPct": 5.94,
+    "turnout": 54.33,
+    "runnerUp": {
+     "name": "K Shivakumar",
+     "party": "BJP"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:164",
+   "pid": "AEKA2756",
+   "basis": "winner of seat 164 in 2023",
+   "contests": 6,
+   "wins": 6,
+   "first": 1999,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Gandhi Nagar",
+    "party": "INC",
+    "position": 1,
+    "candidates": 15,
+    "votes": 54118,
+    "voteShare": 40.81,
+    "margin": 105,
+    "marginPct": 0.08,
+    "turnout": 57.28,
+    "runnerUp": {
+     "name": "Sapthagiri Gowda A R",
+     "party": "BJP"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:165",
+   "pid": "AEKA17503",
+   "basis": "winner of seat 165 in 2023",
+   "contests": 11,
+   "wins": 6,
+   "first": 1989,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Rajaji Nagar",
+    "party": "BJP",
+    "position": 1,
+    "candidates": 18,
+    "votes": 58624,
+    "voteShare": 49.6,
+    "margin": 8060,
+    "marginPct": 6.82,
+    "turnout": 56.55,
+    "runnerUp": {
+     "name": "Puttanna",
+     "party": "INC"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:166",
+   "pid": "AEKA176",
+   "basis": "winner of seat 166 in 2023",
+   "contests": 4,
+   "wins": 3,
+   "first": 2009,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Govindraj Nagar",
+    "party": "INC",
+    "position": 1,
+    "candidates": 14,
+    "votes": 82134,
+    "voteShare": 50.87,
+    "margin": 12516,
+    "marginPct": 7.75,
+    "turnout": 53.5,
+    "runnerUp": {
+     "name": "K. Umesh Shetty",
+     "party": "BJP"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:167",
+   "pid": "GEKA2941",
+   "basis": "winner of seat 167 in 2023",
+   "contests": 8,
+   "wins": 7,
+   "first": 2004,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Vijay Nagar",
+    "party": "INC",
+    "position": 1,
+    "candidates": 15,
+    "votes": 80157,
+    "voteShare": 50.5,
+    "margin": 7324,
+    "marginPct": 4.61,
+    "turnout": 51.96,
+    "runnerUp": {
+     "name": "H Ravindra",
+     "party": "BJP"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:168",
+   "pid": "GEKA252",
+   "basis": "winner of seat 168 in 2023",
+   "contests": 6,
+   "wins": 5,
+   "first": 2005,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Chamrajpet",
+    "party": "INC",
+    "position": 1,
+    "candidates": 12,
+    "votes": 77631,
+    "voteShare": 62.22,
+    "margin": 53953,
+    "marginPct": 43.24,
+    "turnout": 53.59,
+    "runnerUp": {
+     "name": "Bhaskar Rao",
+     "party": "BJP"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:169",
+   "pid": "AEKA127874",
+   "basis": "winner of seat 169 in 2023",
+   "contests": 3,
+   "wins": 2,
+   "first": 2013,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Chickpet",
+    "party": "BJP",
+    "position": 1,
+    "candidates": 15,
+    "votes": 57299,
+    "voteShare": 44.48,
+    "margin": 12113,
+    "marginPct": 9.4,
+    "turnout": 58.09,
+    "runnerUp": {
+     "name": "R. V. Devraj",
+     "party": "INC"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:170",
+   "pid": "AEKA127875",
+   "basis": "winner of seat 170 in 2023",
+   "contests": 4,
+   "wins": 4,
+   "first": 2008,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Basavanagudi",
+    "party": "BJP",
+    "position": 1,
+    "candidates": 12,
+    "votes": 78854,
+    "voteShare": 61.47,
+    "margin": 54978,
+    "marginPct": 42.86,
+    "turnout": 54.61,
+    "runnerUp": {
+     "name": "U.B.Venkatesh",
+     "party": "INC"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:171",
+   "pid": "AEKA397",
+   "basis": "winner of seat 171 in 2023",
+   "contests": 8,
+   "wins": 7,
+   "first": 1998,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Padmanaba Nagar",
+    "party": "BJP",
+    "position": 1,
+    "candidates": 13,
+    "votes": 98750,
+    "voteShare": 61.72,
+    "margin": 55175,
+    "marginPct": 34.49,
+    "turnout": 56.48,
+    "runnerUp": {
+     "name": "V. Raghunatha Naidu",
+     "party": "INC"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:172",
+   "pid": "AEKA129445+AEKA2894",
+   "basis": "winner of seat 172 in 2023, with earlier contests in the same seat joined by name",
+   "contests": 9,
+   "wins": 8,
+   "first": 1985,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "B.T.M Layout",
+    "party": "INC",
+    "position": 1,
+    "candidates": 12,
+    "votes": 68557,
+    "voteShare": 50.7,
+    "margin": 9222,
+    "marginPct": 6.82,
+    "turnout": 49.15,
+    "runnerUp": {
+     "name": "K.R.Sridhara",
+     "party": "BJP"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:173",
+   "pid": "AEKA129461",
+   "basis": "winner of seat 173 in 2023",
+   "contests": 1,
+   "wins": 1,
+   "first": 2023,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Jayanagar",
+    "party": "BJP",
+    "position": 1,
+    "candidates": 15,
+    "votes": 57797,
+    "voteShare": 47.87,
+    "margin": 16,
+    "marginPct": 0.01,
+    "turnout": 58,
+    "runnerUp": {
+     "name": "Sowmya Reddy",
+     "party": "INC"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:174",
+   "pid": "AEKA129471",
+   "basis": "winner of seat 174 in 2023",
+   "contests": 1,
+   "wins": 1,
+   "first": 2023,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Mahadevapura",
+    "party": "BJP",
+    "position": 1,
+    "candidates": 15,
+    "votes": 181731,
+    "voteShare": 54.31,
+    "margin": 44501,
+    "marginPct": 13.3,
+    "turnout": 55.04,
+    "runnerUp": {
+     "name": "H Nagesh",
+     "party": "INC"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:176",
+   "pid": "AEKA129495+GEKA2941",
+   "basis": "winner of seat 176 in 2023, with earlier contests in the same seat joined by name",
+   "contests": 9,
+   "wins": 8,
+   "first": 2004,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Bangalore South",
+    "party": "BJP",
+    "position": 1,
+    "candidates": 14,
+    "votes": 196220,
+    "voteShare": 51.35,
+    "margin": 49699,
+    "marginPct": 13.01,
+    "turnout": 51.6,
+    "runnerUp": {
+     "name": "R K Ramesh",
+     "party": "INC"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:177",
+   "pid": "GEKA15453",
+   "basis": "winner of seat 177 in 2023",
+   "contests": 12,
+   "wins": 6,
+   "first": 1978,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Anekal",
+    "party": "INC",
+    "position": 1,
+    "candidates": 11,
+    "votes": 134797,
+    "voteShare": 53.55,
+    "margin": 31325,
+    "marginPct": 12.45,
+    "turnout": 61.85,
+    "runnerUp": {
+     "name": "Srinivas. C. Hullahalli",
+     "party": "BJP"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:178",
+   "pid": "AEKA17671",
+   "basis": "winner of seat 178 in 2023",
+   "contests": 2,
+   "wins": 1,
+   "first": 2018,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Hosakote",
+    "party": "INC",
+    "position": 1,
+    "candidates": 23,
+    "votes": 107220,
+    "voteShare": 50.13,
+    "margin": 5075,
+    "marginPct": 2.37,
+    "turnout": 90.9,
+    "runnerUp": {
+     "name": "N Nagaraju",
+     "party": "BJP"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:179",
+   "pid": "GEKA15239",
+   "basis": "winner of seat 179 in 2023",
+   "contests": 9,
+   "wins": 8,
+   "first": 1991,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Devanahalli",
+    "party": "INC",
+    "position": 1,
+    "candidates": 11,
+    "votes": 73058,
+    "voteShare": 40.46,
+    "margin": 4631,
+    "marginPct": 2.56,
+    "turnout": 80,
+    "runnerUp": {
+     "name": "Nisarga Narayanaswamy L.N",
+     "party": "JD(S)"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:180",
+   "pid": "AEKA129539",
+   "basis": "winner of seat 180 in 2023",
+   "contests": 1,
+   "wins": 1,
+   "first": 2023,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Doddaballapur",
+    "party": "BJP",
+    "position": 1,
+    "candidates": 12,
+    "votes": 85144,
+    "voteShare": 46.69,
+    "margin": 31753,
+    "marginPct": 17.41,
+    "turnout": 84.5,
+    "runnerUp": {
+     "name": "T.Venkataramanaiah (Appakaranahalli T.Venkatesh)",
+     "party": "INC"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:181",
+   "pid": "AEKA129549",
+   "basis": "winner of seat 181 in 2023",
+   "contests": 1,
+   "wins": 1,
+   "first": 2023,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Nelamangala",
+    "party": "INC",
+    "position": 1,
+    "candidates": 10,
+    "votes": 84229,
+    "voteShare": 48.72,
+    "margin": 31978,
+    "marginPct": 18.5,
+    "turnout": 79,
+    "runnerUp": {
+     "name": "Dr. K.Srinivasamurthy",
+     "party": "JD(S)"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:182",
+   "pid": "AEKA3010",
+   "basis": "winner of seat 182 in 2023",
+   "contests": 7,
+   "wins": 5,
+   "first": 1994,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Magadi",
+    "party": "INC",
+    "position": 1,
+    "candidates": 15,
+    "votes": 94650,
+    "voteShare": 46.74,
+    "margin": 11839,
+    "marginPct": 5.85,
+    "turnout": 86.18,
+    "runnerUp": {
+     "name": "A. Manjunath.",
+     "party": "JD(S)"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:183",
+   "pid": "AEKA127832",
+   "basis": "winner of seat 183 in 2023",
+   "contests": 2,
+   "wins": 1,
+   "first": 2018,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Ramanagaram",
+    "party": "INC",
+    "position": 1,
+    "candidates": 14,
+    "votes": 87690,
+    "voteShare": 47.98,
+    "margin": 10715,
+    "marginPct": 5.86,
+    "turnout": 83.9,
+    "runnerUp": {
+     "name": "Nikhil Kumaraswamy",
+     "party": "JD(S)"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:184",
+   "pid": "AEKA3038",
+   "basis": "winner of seat 184 in 2023",
+   "contests": 10,
+   "wins": 8,
+   "first": 1985,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Kanakapura",
+    "party": "INC",
+    "position": 1,
+    "candidates": 15,
+    "votes": 143023,
+    "voteShare": 75.03,
+    "margin": 122392,
+    "marginPct": 64.21,
+    "turnout": 84.52,
+    "runnerUp": {
+     "name": "B Nagaraju",
+     "party": "JD(S)"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:186",
+   "pid": "AEKA3064",
+   "basis": "winner of seat 186 in 2023",
+   "contests": 6,
+   "wins": 3,
+   "first": 1999,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Malavalli",
+    "party": "INC",
+    "position": 1,
+    "candidates": 14,
+    "votes": 106498,
+    "voteShare": 53.79,
+    "margin": 46846,
+    "marginPct": 23.66,
+    "turnout": 78.33,
+    "runnerUp": {
+     "name": "Dr|| K. Annadani",
+     "party": "JD(S)"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:187",
+   "pid": "AEKA129606",
+   "basis": "winner of seat 187 in 2023",
+   "contests": 1,
+   "wins": 1,
+   "first": 2023,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Maddur",
+    "party": "INC",
+    "position": 1,
+    "candidates": 10,
+    "votes": 87019,
+    "voteShare": 47.45,
+    "margin": 24113,
+    "marginPct": 13.15,
+    "turnout": 86.1,
+    "runnerUp": {
+     "name": "D.C.Thammanna",
+     "party": "JD(S)"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:188",
+   "pid": "AEKA19045",
+   "basis": "winner of seat 188 in 2023",
+   "contests": 2,
+   "wins": 1,
+   "first": 2018,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Melukote",
+    "party": "Sarvodaya Karnataka Paksha",
+    "position": 1,
+    "candidates": 11,
+    "votes": 91151,
+    "voteShare": 49.57,
+    "margin": 10862,
+    "marginPct": 5.91,
+    "turnout": 90.93,
+    "runnerUp": {
+     "name": "C. S. Puttaraju",
+     "party": "JD(S)"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:189",
+   "pid": "AEKA129622",
+   "basis": "winner of seat 189 in 2023",
+   "contests": 1,
+   "wins": 1,
+   "first": 2023,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Mandya",
+    "party": "INC",
+    "position": 1,
+    "candidates": 15,
+    "votes": 61411,
+    "voteShare": 35.18,
+    "margin": 2019,
+    "marginPct": 1.16,
+    "turnout": 77.14,
+    "runnerUp": {
+     "name": "B.R. Ramachandra",
+     "party": "JD(S)"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:190",
+   "pid": "AEKA3119",
+   "basis": "winner of seat 190 in 2023",
+   "contests": 4,
+   "wins": 3,
+   "first": 2008,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Shrirangapattana",
+    "party": "INC",
+    "position": 1,
+    "candidates": 17,
+    "votes": 72817,
+    "voteShare": 39.32,
+    "margin": 11137,
+    "marginPct": 6.01,
+    "turnout": 86.27,
+    "runnerUp": {
+     "name": "Ravindra Srikantaiah",
+     "party": "JD(S)"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:191",
+   "pid": "GEKA3130",
+   "basis": "winner of seat 191 in 2023",
+   "contests": 7,
+   "wins": 5,
+   "first": 1999,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Nagamangala",
+    "party": "INC",
+    "position": 1,
+    "candidates": 14,
+    "votes": 90634,
+    "voteShare": 47.17,
+    "margin": 4414,
+    "marginPct": 2.3,
+    "turnout": 89,
+    "runnerUp": {
+     "name": "Sureshgowdaa",
+     "party": "JD(S)"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:192",
+   "pid": "AEKA129659",
+   "basis": "winner of seat 192 in 2023",
+   "contests": 1,
+   "wins": 1,
+   "first": 2023,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Krishnarajpet",
+    "party": "JD(S)",
+    "position": 1,
+    "candidates": 8,
+    "votes": 80646,
+    "voteShare": 42.55,
+    "margin": 22344,
+    "marginPct": 11.79,
+    "turnout": 84.5,
+    "runnerUp": {
+     "name": "B.L.Devaraja",
+     "party": "INC"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:193",
+   "pid": "AEKA3150",
+   "basis": "winner of seat 193 in 2023",
+   "contests": 3,
+   "wins": 3,
+   "first": 2013,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Shravanabelagola",
+    "party": "JD(S)",
+    "position": 1,
+    "candidates": 12,
+    "votes": 85668,
+    "voteShare": 48.93,
+    "margin": 6645,
+    "marginPct": 3.8,
+    "turnout": 84.34,
+    "runnerUp": {
+     "name": "M.A. Gopalaswamy",
+     "party": "INC"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:194",
+   "pid": "AEKA3161",
+   "basis": "winner of seat 194 in 2023",
+   "contests": 6,
+   "wins": 4,
+   "first": 1994,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Arsikere",
+    "party": "INC",
+    "position": 1,
+    "candidates": 7,
+    "votes": 98375,
+    "voteShare": 52.86,
+    "margin": 20177,
+    "marginPct": 10.84,
+    "turnout": 84.97,
+    "runnerUp": {
+     "name": "N.R. Santhosh",
+     "party": "JD(S)"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:195",
+   "pid": "AEKA129681+AEKA5081",
+   "basis": "winner of seat 195 in 2023, with earlier contests in the same seat joined by name",
+   "contests": 3,
+   "wins": 1,
+   "first": 2008,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Belur",
+    "party": "BJP",
+    "position": 1,
+    "candidates": 12,
+    "votes": 63571,
+    "voteShare": 38.76,
+    "margin": 7736,
+    "marginPct": 4.72,
+    "turnout": 81.93,
+    "runnerUp": {
+     "name": "B. Shivaramu",
+     "party": "INC"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:196",
+   "pid": "AEKA129692+AEKA3183",
+   "basis": "winner of seat 196 in 2023, with earlier contests in the same seat joined by name",
+   "contests": 7,
+   "wins": 5,
+   "first": 1994,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Hassan",
+    "party": "JD(S)",
+    "position": 1,
+    "candidates": 9,
+    "votes": 85176,
+    "voteShare": 49.8,
+    "margin": 7854,
+    "marginPct": 4.59,
+    "turnout": 73.57,
+    "runnerUp": {
+     "name": "Preetham J. Gowda",
+     "party": "BJP"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:197",
+   "pid": "AEKA129700+AEKA3197",
+   "basis": "winner of seat 197 in 2023, with earlier contests in the same seat joined by name",
+   "contests": 7,
+   "wins": 6,
+   "first": 1994,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Holenarasipur",
+    "party": "JD(S)",
+    "position": 1,
+    "candidates": 8,
+    "votes": 88103,
+    "voteShare": 47.51,
+    "margin": 3152,
+    "marginPct": 1.7,
+    "turnout": 83.56,
+    "runnerUp": {
+     "name": "Shreyas M Patel",
+     "party": "INC"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:198",
+   "pid": "AEKA3207",
+   "basis": "winner of seat 198 in 2023",
+   "contests": 10,
+   "wins": 4,
+   "first": 1989,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Arkalgud",
+    "party": "JD(S)",
+    "position": 1,
+    "candidates": 15,
+    "votes": 74643,
+    "voteShare": 38.49,
+    "margin": 19605,
+    "marginPct": 10.11,
+    "turnout": 84.37,
+    "runnerUp": {
+     "name": "M.T. Krishnegowda",
+     "party": "IND"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:199",
+   "pid": "AEKA129717",
+   "basis": "winner of seat 199 in 2023",
+   "contests": 1,
+   "wins": 1,
+   "first": 2023,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Sakleshpur",
+    "party": "BJP",
+    "position": 1,
+    "candidates": 10,
+    "votes": 58604,
+    "voteShare": 35.54,
+    "margin": 2056,
+    "marginPct": 1.25,
+    "turnout": 79.34,
+    "runnerUp": {
+     "name": "Kumaraswamy H.K",
+     "party": "JD(S)"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:200",
+   "pid": "AEKA18533",
+   "basis": "winner of seat 200 in 2023",
+   "contests": 2,
+   "wins": 2,
+   "first": 2018,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Belthangady",
+    "party": "BJP",
+    "position": 1,
+    "candidates": 8,
+    "votes": 101004,
+    "voteShare": 53.44,
+    "margin": 18216,
+    "marginPct": 9.64,
+    "turnout": 80.8,
+    "runnerUp": {
+     "name": "Rakshith Shivaram",
+     "party": "INC"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:201",
+   "pid": "AEKA3239",
+   "basis": "winner of seat 201 in 2023",
+   "contests": 3,
+   "wins": 2,
+   "first": 2013,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Moodabidri",
+    "party": "BJP",
+    "position": 1,
+    "candidates": 8,
+    "votes": 86925,
+    "voteShare": 54.77,
+    "margin": 22468,
+    "marginPct": 14.16,
+    "turnout": 76.11,
+    "runnerUp": {
+     "name": "Mithun M Rai",
+     "party": "INC"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:202",
+   "pid": "AEKA127823",
+   "basis": "winner of seat 202 in 2023",
+   "contests": 2,
+   "wins": 2,
+   "first": 2018,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Mangalore City North",
+    "party": "BJP",
+    "position": 1,
+    "candidates": 10,
+    "votes": 103531,
+    "voteShare": 56.77,
+    "margin": 32922,
+    "marginPct": 18.05,
+    "turnout": 72.32,
+    "runnerUp": {
+     "name": "Inayath Ali",
+     "party": "INC"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:203",
+   "pid": "AEKA18546",
+   "basis": "winner of seat 203 in 2023",
+   "contests": 2,
+   "wins": 2,
+   "first": 2018,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Mangalore City South",
+    "party": "BJP",
+    "position": 1,
+    "candidates": 8,
+    "votes": 91437,
+    "voteShare": 56.46,
+    "margin": 23962,
+    "marginPct": 14.8,
+    "turnout": 65.1,
+    "runnerUp": {
+     "name": "J.R.Lobo",
+     "party": "INC"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:204",
+   "pid": "AEKA129749+AEKA3266",
+   "basis": "winner of seat 204 in 2023, with earlier contests in the same seat joined by name",
+   "contests": 5,
+   "wins": 5,
+   "first": 2007,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Mangalore",
+    "party": "INC",
+    "position": 1,
+    "candidates": 5,
+    "votes": 83219,
+    "voteShare": 52.01,
+    "margin": 22790,
+    "marginPct": 14.24,
+    "turnout": 77.6,
+    "runnerUp": {
+     "name": "Sathish Kumpala",
+     "party": "BJP"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:205",
+   "pid": "AEKA127883",
+   "basis": "winner of seat 205 in 2023",
+   "contests": 3,
+   "wins": 2,
+   "first": 2013,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Bantval",
+    "party": "BJP",
+    "position": 1,
+    "candidates": 5,
+    "votes": 93324,
+    "voteShare": 50.29,
+    "margin": 8282,
+    "marginPct": 4.46,
+    "turnout": 80.17,
+    "runnerUp": {
+     "name": "B. Ramanath Rai",
+     "party": "INC"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:206",
+   "pid": "AEKA129757",
+   "basis": "winner of seat 206 in 2023",
+   "contests": 1,
+   "wins": 1,
+   "first": 2023,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Puttur",
+    "party": "INC",
+    "position": 1,
+    "candidates": 8,
+    "votes": 66607,
+    "voteShare": 38.55,
+    "margin": 4149,
+    "marginPct": 2.4,
+    "turnout": 80.02,
+    "runnerUp": {
+     "name": "Arun Kumar Puthila",
+     "party": "IND"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:207",
+   "pid": "AEKA129766",
+   "basis": "winner of seat 207 in 2023",
+   "contests": 1,
+   "wins": 1,
+   "first": 2023,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Sullia",
+    "party": "BJP",
+    "position": 1,
+    "candidates": 8,
+    "votes": 93911,
+    "voteShare": 57.01,
+    "margin": 30874,
+    "marginPct": 18.74,
+    "turnout": 78.94,
+    "runnerUp": {
+     "name": "G. Krishnappa Ramakunja.",
+     "party": "INC"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:208",
+   "pid": "AEKA129776",
+   "basis": "winner of seat 208 in 2023",
+   "contests": 1,
+   "wins": 1,
+   "first": 2023,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Madikeri",
+    "party": "INC",
+    "position": 1,
+    "candidates": 15,
+    "votes": 84879,
+    "voteShare": 47.84,
+    "margin": 4402,
+    "marginPct": 2.48,
+    "turnout": 75.39,
+    "runnerUp": {
+     "name": "Appachu Ranjan M. P",
+     "party": "BJP"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:209",
+   "pid": "AEKA129786",
+   "basis": "winner of seat 209 in 2023",
+   "contests": 1,
+   "wins": 1,
+   "first": 2023,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Virajpet",
+    "party": "INC",
+    "position": 1,
+    "candidates": 9,
+    "votes": 83791,
+    "voteShare": 49.94,
+    "margin": 4291,
+    "marginPct": 2.56,
+    "turnout": 74.07,
+    "runnerUp": {
+     "name": "K.G.Bopaiah",
+     "party": "BJP"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:210",
+   "pid": "AEKA129797+AEKA3325",
+   "basis": "winner of seat 210 in 2023, with earlier contests in the same seat joined by name",
+   "contests": 9,
+   "wins": 6,
+   "first": 1985,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Periyapatna",
+    "party": "INC",
+    "position": 1,
+    "candidates": 10,
+    "votes": 85944,
+    "voteShare": 52.02,
+    "margin": 19675,
+    "marginPct": 11.91,
+    "turnout": 84.42,
+    "runnerUp": {
+     "name": "K. Mahadeva",
+     "party": "JD(S)"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:211",
+   "pid": "AEKA19155",
+   "basis": "winner of seat 211 in 2023",
+   "contests": 2,
+   "wins": 1,
+   "first": 2018,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Krishnarajanagara",
+    "party": "INC",
+    "position": 1,
+    "candidates": 8,
+    "votes": 104502,
+    "voteShare": 55.34,
+    "margin": 25639,
+    "marginPct": 13.58,
+    "turnout": 85.1,
+    "runnerUp": {
+     "name": "Sa.Ra. Mahesh.",
+     "party": "JD(S)"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:212",
+   "pid": "AEKA129811",
+   "basis": "winner of seat 212 in 2023",
+   "contests": 1,
+   "wins": 1,
+   "first": 2023,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Hunsur",
+    "party": "JD(S)",
+    "position": 1,
+    "candidates": 12,
+    "votes": 94666,
+    "voteShare": 47.11,
+    "margin": 2412,
+    "marginPct": 1.2,
+    "turnout": 82.16,
+    "runnerUp": {
+     "name": "H.P.Manjunath",
+     "party": "INC"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:213",
+   "pid": "AEKA129819+AEKA19177",
+   "basis": "winner of seat 213 in 2023, with earlier contests in the same seat joined by name",
+   "contests": 2,
+   "wins": 2,
+   "first": 2018,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Heggadadevankote",
+    "party": "INC",
+    "position": 1,
+    "candidates": 12,
+    "votes": 84359,
+    "voteShare": 46.26,
+    "margin": 34939,
+    "marginPct": 19.16,
+    "turnout": 79.85,
+    "runnerUp": {
+     "name": "K.M. Krishnanayaka",
+     "party": "BJP"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:214",
+   "pid": "AEKA129831",
+   "basis": "winner of seat 214 in 2023",
+   "contests": 1,
+   "wins": 1,
+   "first": 2023,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Nanjangud",
+    "party": "INC",
+    "position": 1,
+    "candidates": 12,
+    "votes": 109125,
+    "voteShare": 62.05,
+    "margin": 47607,
+    "marginPct": 27.07,
+    "turnout": 80.67,
+    "runnerUp": {
+     "name": "B. Harshavardhan",
+     "party": "BJP"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:215",
+   "pid": "AEKA3374",
+   "basis": "winner of seat 215 in 2023",
+   "contests": 8,
+   "wins": 4,
+   "first": 1996,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Chamundeshwari",
+    "party": "JD(S)",
+    "position": 1,
+    "candidates": 14,
+    "votes": 104873,
+    "voteShare": 42.44,
+    "margin": 25500,
+    "marginPct": 10.32,
+    "turnout": 74.27,
+    "runnerUp": {
+     "name": "S. Siddegowda",
+     "party": "INC"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:216",
+   "pid": "AEKA129854",
+   "basis": "winner of seat 216 in 2023",
+   "contests": 1,
+   "wins": 1,
+   "first": 2023,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Krishnaraja",
+    "party": "BJP",
+    "position": 1,
+    "candidates": 17,
+    "votes": 73670,
+    "voteShare": 49.01,
+    "margin": 7213,
+    "marginPct": 4.8,
+    "turnout": 59.34,
+    "runnerUp": {
+     "name": "M.K. Somashekar",
+     "party": "INC"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:217",
+   "pid": "AEKA127843",
+   "basis": "winner of seat 217 in 2023",
+   "contests": 2,
+   "wins": 1,
+   "first": 2018,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Chamaraja",
+    "party": "INC",
+    "position": 1,
+    "candidates": 14,
+    "votes": 72931,
+    "voteShare": 48.42,
+    "margin": 4094,
+    "marginPct": 2.72,
+    "turnout": 61.12,
+    "runnerUp": {
+     "name": "L. Nagendra.",
+     "party": "BJP"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:218",
+   "pid": "AEKA302",
+   "basis": "winner of seat 218 in 2023",
+   "contests": 6,
+   "wins": 6,
+   "first": 2002,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Narasimharaja",
+    "party": "INC",
+    "position": 1,
+    "candidates": 17,
+    "votes": 83480,
+    "voteShare": 45.14,
+    "margin": 31120,
+    "marginPct": 16.83,
+    "turnout": 63.44,
+    "runnerUp": {
+     "name": "S. Satheesh Sandesh Swamy",
+     "party": "BJP"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:220",
+   "pid": "GEKA3467",
+   "basis": "winner of seat 220 in 2023",
+   "contests": 10,
+   "wins": 6,
+   "first": 1985,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "T.Narasipur",
+    "party": "INC",
+    "position": 1,
+    "candidates": 12,
+    "votes": 77884,
+    "voteShare": 48,
+    "margin": 18619,
+    "marginPct": 11.48,
+    "turnout": 78.77,
+    "runnerUp": {
+     "name": "Ashvin Kumar M",
+     "party": "JD(S)"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:221",
+   "pid": "AEKA127846",
+   "basis": "winner of seat 221 in 2023",
+   "contests": 2,
+   "wins": 1,
+   "first": 2018,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Hanur",
+    "party": "JD(S)",
+    "position": 1,
+    "candidates": 18,
+    "votes": 75632,
+    "voteShare": 41.93,
+    "margin": 17654,
+    "marginPct": 9.79,
+    "turnout": 80.02,
+    "runnerUp": {
+     "name": "R. Narendra",
+     "party": "INC"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:222",
+   "pid": "GEKA5261",
+   "basis": "winner of seat 222 in 2023",
+   "contests": 9,
+   "wins": 3,
+   "first": 1989,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Kollegal",
+    "party": "INC",
+    "position": 1,
+    "candidates": 13,
+    "votes": 108363,
+    "voteShare": 64.59,
+    "margin": 59519,
+    "marginPct": 35.47,
+    "turnout": 77.26,
+    "runnerUp": {
+     "name": "N.Mahesh",
+     "party": "BJP"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:223",
+   "pid": "AEKA3505",
+   "basis": "winner of seat 223 in 2023",
+   "contests": 4,
+   "wins": 4,
+   "first": 2008,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Chamarajanagar",
+    "party": "INC",
+    "position": 1,
+    "candidates": 15,
+    "votes": 83858,
+    "voteShare": 48.46,
+    "margin": 7533,
+    "marginPct": 4.35,
+    "turnout": 82.5,
+    "runnerUp": {
+     "name": "V.Somanna",
+     "party": "BJP"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  },
+  {
+   "seat": "karnataka:224",
+   "pid": "AEKA129938",
+   "basis": "winner of seat 224 in 2023",
+   "contests": 1,
+   "wins": 1,
+   "first": 2023,
+   "last": {
+    "year": 2023,
+    "house": "assembly",
+    "seat": "Gundlupet",
+    "party": "INC",
+    "position": 1,
+    "candidates": 15,
+    "votes": 107794,
+    "voteShare": 57.34,
+    "margin": 36675,
+    "marginPct": 19.51,
+    "turnout": 86.84,
+    "runnerUp": {
+     "name": "C.S. Niranjan Kumar",
+     "party": "BJP"
+    }
+   },
+   "sourceId": "tcpd-lok-dhaba-2023-06"
+  }
+ ],
+ "unmatched": [
+  {
+   "seat": "karnataka:24",
+   "name": "Umesh Hullappa Meti",
+   "why": "came in at a by-election after the archive ends"
+  },
+  {
+   "seat": "karnataka:36",
+   "name": "Raja Venugopal Naik",
+   "why": "came in at a by-election after the archive ends"
+  },
+  {
+   "seat": "karnataka:83",
+   "name": "Pathan Yasir Ahmed Khan",
+   "why": "came in at a by-election after the archive ends"
+  },
+  {
+   "seat": "karnataka:95",
+   "name": "E Annapoorna",
+   "why": "came in at a by-election after the archive ends"
+  },
+  {
+   "seat": "karnataka:100",
+   "why": "vacant"
+  },
+  {
+   "seat": "karnataka:107",
+   "name": "Samarth Shamanuru Mallikarjuna",
+   "why": "came in at a by-election after the archive ends"
+  },
+  {
+   "seat": "karnataka:144",
+   "name": "G K Venkatasiva Reddy",
+   "why": "the archive files two candidates of one election under this id"
+  },
+  {
+   "seat": "karnataka:175",
+   "name": "M Satish Reddy",
+   "why": "the archive files two candidates of one election under this id"
+  },
+  {
+   "seat": "karnataka:185",
+   "name": "C P Yogeeshwara",
+   "why": "came in at a by-election after the archive ends"
+  },
+  {
+   "seat": "karnataka:219",
+   "name": "Siddaramaiah",
+   "why": "the archive files two candidates of one election under this id"
+  }
+ ]
+}

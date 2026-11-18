@@ -27,7 +27,7 @@ import { useTheme } from '@/lib/theme';
 import Sheet, { PEEK_PX, useWide, type Snap } from './Sheet';
 import QuickSettings from './QuickSettings';
 import { addBasemap, paintBasemap, BASEMAP_GLYPHS, BASEMAP_PALETTE } from './basemap';
-import { PlaceView, RoadView, PersonView, RoadsView, SeatView, SpotView, ROLE, shortName, type MpladsInfo } from './PanelViews';
+import { PlaceView, RoadView, PersonView, RoadsView, SeatView, SpotView, ROLE, shortName, type MpladsInfo, type ElectionInfo } from './PanelViews';
 import { loadSeats, paintSeats, showLines, seatFillLayers, seatAt, pointIn, SEAT_PALETTE, SEAT_ZOOM, type SeatGeo, type SeatPrefix } from './seats';
 import { PLACE_ALIASES } from '@/lib/place-aliases';
 import { atlasPath, parseAtlasPath, parseAtlasHash, type AtlasRoute } from '@/lib/atlas-route';
@@ -146,7 +146,7 @@ interface AtlasProps {
 }
 
 export default function Atlas({ countryCode, countryName, data, initial }: AtlasProps) {
-    const { regions, roads, people, lokSabha, assemblies, mplads, localBodies } = data;
+    const { regions, roads, people, lokSabha, assemblies, mplads, localBodies, elections } = data;
     const { choice, dark, setTheme } = useTheme();
     const wide = useWide();
 
@@ -699,6 +699,14 @@ export default function Atlas({ countryCode, countryName, data, initial }: Atlas
         };
     }, [mplads]);
 
+    // A sitting member's election record, where they are matched to a person in the results archive.
+    const electionOf = useCallback((seat: { id: string; state: string; number?: number }): ElectionInfo | undefined => {
+        const summary = elections?.bySeat[seat.id];
+        if (!elections || !summary) return undefined;
+        const file = isAc(seat.id) ? `ac-${seat.number}` : `pc-${seat.id.slice(seat.id.lastIndexOf('-') + 1)}`;
+        return { summary, source: elections.source, url: `/data/elections/${seat.state}/${file}.json` };
+    }, [elections, isAc]);
+
     // Theme: repaint, don't rebuild.
     useEffect(() => {
         const map = mapRef.current;
@@ -800,7 +808,7 @@ export default function Atlas({ countryCode, countryName, data, initial }: Atlas
                 key: `spot:${spot.at.join(',')}`,
                 body: <SpotView stateName={spot.stateName ?? placeName(spot.stateSlug)} districtName={spot.districtName}
                     mp={spot.pc} mpHouse={lokSabha ?? undefined} fund={spot.pc ? fundOf(spot.pc) : undefined}
-                    mla={spot.ac} mlaHouse={house} loading={!seatGeo || (!!house && !acLoaded)}
+                    mla={spot.ac} mlaHouse={house} mlaElection={spot.ac ? electionOf(spot.ac) : undefined} loading={!seatGeo || (!!house && !acLoaded)}
                     cities={spot.ac ? localBodies.filter(b => b.seats.ids.includes(spot.ac!.id)) : []}
                     country={countryCode} onSeat={id => openSeat(id)}
                     onDistrict={district ? () => openPlace(district) : undefined}
@@ -824,7 +832,7 @@ export default function Atlas({ countryCode, countryName, data, initial }: Atlas
                 body: <SeatView seat={seat} house={house} stateName={placeName(seat.state)} country={countryCode}
                     districts={districts.map(d => ({ code: d.code!, name: d.name }))}
                     parent={parent} parentHouse={lokSabha ?? undefined} inside={inside} insideHouse={assemblies[seat.state]} cities={cities}
-                    mplads={ac ? undefined : fundOf(seat)}
+                    mplads={ac ? undefined : fundOf(seat)} election={electionOf(seat)}
                     onPlace={c => { const d = districts.find(x => x.code === c); if (d) openPlace(d); }} onSeat={id => openSeat(id)} />,
             };
         }

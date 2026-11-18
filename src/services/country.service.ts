@@ -6,7 +6,7 @@
  */
 
 import { getCountryData, findEntity } from '@/lib/data/store';
-import { CountryConfig, LegislatureSeat, LocalBody, MpladsRecord, MpladsSeat, Overview, Person, SourceCitation, TollRoad } from '@/types';
+import { CountryConfig, ElectionSummary, LegislatureSeat, LocalBody, MpladsRecord, MpladsSeat, Overview, Person, SourceCitation, TollRoad } from '@/types';
 
 export async function getCountryConfig(countryCode: string): Promise<CountryConfig> {
     const d = getCountryData(countryCode);
@@ -104,6 +104,8 @@ export interface AtlasData {
     assemblies: Record<string, HouseData>;
     /** Cities and other local bodies on record (data/in/local-bodies). */
     localBodies: LocalBody[];
+    /** Sitting members' election records in brief, by seat id (both houses; ids do not clash). */
+    elections: { bySeat: Record<string, Omit<ElectionSummary, 'seat' | 'sourceId'>>; source: SourceCitation; asOf: string } | null;
     /** MPLADS for the current Lok Sabha, by seat id. */
     mplads: { term: number; asOf: string; source: SourceCitation; totals: MpladsRecord['totals']; bySeat: Record<string, Omit<MpladsSeat, 'seat' | 'sourceId'>>; worksStates: string[] } | null;
 }
@@ -124,6 +126,11 @@ export async function getAtlasData(countryCode: string): Promise<AtlasData> {
         roads: d?.tollRoads ?? [],
         people: d?.persons ?? [],
         localBodies: d?.localBodies ?? [],
+        // Every record cites the same archive, so the source is sent once.
+        elections: d?.elections.length ? {
+            source: d.elections[0].sources[0], asOf: d.elections[0].asOf,
+            bySeat: Object.fromEntries(d.elections.flatMap(e => e.seats.map(({ seat, sourceId, ...rest }) => { void sourceId; return [seat, rest]; }))),
+        } : null,
         // Every seat cites the same member list, so it is sent once.
         lokSabha: ls ? houseData(ls) : null,
         mplads: mp ? {

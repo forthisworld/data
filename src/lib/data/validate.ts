@@ -3,7 +3,7 @@
  * the site, the contribution endpoint and scripts/validate-data.ts share them.
  */
 
-import type { AnalysisPoint, Entity, Legislature, LocalBody, MoneyValue, MpladsRecord, Overview, SourceCitation, TollRoad } from '@/types';
+import type { AnalysisPoint, ElectionHistoryRecord, Entity, Legislature, LocalBody, MoneyValue, MpladsRecord, Overview, SourceCitation, TollRoad } from '@/types';
 
 const ESTABLISHED = new Set(['court_finding', 'audit_finding', 'official_record', 'company_filing']);
 const BASES = new Set([...ESTABLISHED, 'reported', 'claim']);
@@ -131,6 +131,23 @@ export function validateLocalBody(b: LocalBody, today = new Date()): string[] {
     b.services.forEach(s => checkRef(s.sourceId, `${b.id} / ${s.service}`, ids, errors));
     checkRef(b.seats.sourceId, `${b.id} / seats`, ids, errors);
     if (!b.seats.ids.length) errors.push(`${b.id}: no seats, so it cannot be shown on the map`);
+    return errors;
+}
+
+/** Election records: every seat cites the source, and the counts are consistent. */
+export function validateElections(e: ElectionHistoryRecord): string[] {
+    const errors: string[] = [];
+    const ids = checkSources(e.sources, e.id, errors);
+    const seen = new Set<string>();
+    for (const s of e.seats) {
+        const where = `${e.id} / ${s.seat}`;
+        if (seen.has(s.seat)) errors.push(`${where}: duplicate seat`);
+        seen.add(s.seat);
+        checkRef(s.sourceId, where, ids, errors);
+        if (!s.pid || !s.basis) errors.push(`${where}: no person id or no basis for the match`);
+        if (s.wins > s.contests) errors.push(`${where}: more wins than contests`);
+        if (s.last && s.last.position !== 1) errors.push(`${where}: the last win is not a win`);
+    }
     return errors;
 }
 
