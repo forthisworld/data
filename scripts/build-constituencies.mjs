@@ -81,7 +81,23 @@ const clipped = await mapshaper.applyCommands(
     ].join(' '),
     { 'pc.json': JSON.stringify(kept), 'states.json': states },
 );
-const filled = await fillGaps({ seats: JSON.parse(clipped['clipped.json']), states: JSON.parse(states) });
+/**
+ * Uncovered pieces that the nearest-seat rules give to the wrong seat. Found by checking every filled
+ * piece over 5 km2: is the district it lies in one of the receiving seat's districts? For those that are
+ * not, the seat comes from DataMeet's assembly-seat file (India_AC.shp, pinned in lib/assembly-seats.mjs),
+ * which records each assembly seat's Lok Sabha seat.
+ */
+const GAP_SEATS = [
+    // Coast north of Surat (553 km2, Surat district). The assembly seat on this coast is Olpad (155), in Surat.
+    { at: [72.723, 21.546], key: 'gujarat:24-24' },
+    // Island at the mouth of the Tapi (16 km2, Surat district). The nearest assembly seat is Choryasi (168), in Navsari.
+    { at: [72.685, 21.131], key: 'gujarat:24-25' },
+    // Coast near Tuni (49 km2, East Godavari district). The assembly seat here is Tuni (154), in Kakinada.
+    { at: [82.435, 17.159], key: 'andhra-pradesh:37-6' },
+    // South Garo Hills district (5 km2), all of which is in Tura; the nearest Tura assembly seat is Rongara-Siju (58).
+    { at: [90.872, 25.160], key: 'meghalaya:17-2' },
+];
+const filled = await fillGaps({ seats: JSON.parse(clipped['clipped.json']), states: JSON.parse(states), assign: GAP_SEATS });
 // What is left should be only the states whose seats are not drawn at all.
 const drawn = new Set(filled.seats.features.map(f => f.properties.stateSlug));
 const leftKm2 = filled.left.filter(x => drawn.has(x.slug)).reduce((s, x) => s + x.km2, 0);

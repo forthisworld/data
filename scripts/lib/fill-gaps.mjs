@@ -8,20 +8,23 @@
  * the nearest seat of the same state, and is reported so the choice can be checked. Only a state with
  * no seats at all stays uncovered.
  *
+ * `assign` names the seat for a piece where the rules above pick the wrong one: a point inside the piece,
+ * and the seat's key. Each entry must match exactly one uncovered piece, so a stale entry fails the build.
+ *
  * `hold(key)` marks shapes that take part (so no neighbour grows into them) but never grow themselves:
  * areas the source draws without saying which seat they are.
  */
 import mapshaper from 'mapshaper';
 
 /**
- * @param {{ seats: GeoJSON.FeatureCollection, states: GeoJSON.FeatureCollection, hold?: (key: string) => boolean }} input
+ * @param {{ seats: GeoJSON.FeatureCollection, states: GeoJSON.FeatureCollection, hold?: (key: string) => boolean, assign?: { at: number[], key: string }[] }} input
  *   seats: properties.key and properties.stateSlug; states: properties.slug.
  * @returns {Promise<{ seats: GeoJSON.FeatureCollection, filledKm2: number, apart: { slug: string, km2: number, at: number[], key: string, km: number }[], left: { slug: string, km2: number, at: number[] }[] }>}
  *   seats: the same seats (all original properties), each with its gaps merged in.
  *   apart: pieces that touched no seat, with the seat each went to and how far away it is.
  *   left: pieces still in no seat (their state has none).
  */
-export async function fillGaps({ seats, states, hold = () => false }) {
+export async function fillGaps({ seats, states, hold = () => false, assign = [] }) {
     const props = new Map(seats.features.map(f => [f.properties.key, f.properties]));
     const strip = (fc, pick) => JSON.stringify({ type: 'FeatureCollection', features: fc.features.map(f => ({ type: 'Feature', properties: pick(f.properties), geometry: f.geometry })) });
 
@@ -30,7 +33,7 @@ export async function fillGaps({ seats, states, hold = () => false }) {
             '-i seats.json name=seats -i states.json name=states',
             '-union target=seats,states fields=key,st,slug name=pieces',
             '-explode target=pieces',
-            '-each target=pieces "km2 = this.area / 1e6, cx = this.centroidX, cy = this.centroidY"',
+            '-each target=pieces "km2 = this.area / 1e6, cx = this.centroidX, cy = this.centroidY, ix = this.innerX, iy = this.innerY"',
             '-o target=pieces pieces.json format=topojson no-quantization',
         ].join(' '),
         { 'seats.json': strip(seats, p => ({ key: p.key, st: p.stateSlug })), 'states.json': strip(states, p => ({ slug: p.slug })) },
@@ -58,6 +61,28 @@ export async function fillGaps({ seats, states, hold = () => false }) {
     const isGap = g => g.properties.key == null && g.properties.slug != null;
     let open = pieces.map((g, i) => i).filter(i => isGap(pieces[i]));
     let filledKm2 = 0;
+
+    // Pieces whose seat is named outright.
+    const ringOf = refs => refs.flatMap(a => (a < 0 ? [...topo.arcs[~a]].reverse() : topo.arcs[a]));
+    const inRing = ([px, py], ring) => {
+        let inside = false;
+        for (let i = 0, j = ring.length - 1; i < ring.length; j = i++) {
+            const [xi, yi] = ring[i], [xj, yj] = ring[j];
+            if ((yi > py) !== (yj > py) && px < ((xj - xi) * (py - yi)) / (yj - yi) + xi) inside = !inside;
+        }
+        return inside;
+    };
+    const holds = (g, pt) => (g.type === 'MultiPolygon' ? g.arcs : [g.arcs]).some(poly => inRing(pt, ringOf(poly[0])) && !poly.slice(1).some(h => inRing(pt, ringOf(h))));
+    if (process.env.GAP_DEBUG) for (const i of open) { const p = pieces[i].properties; if (p.km2 > 3 && assign.some(f => Math.hypot(f.at[0] - p.cx, f.at[1] - p.cy) < 0.5)) console.log('gap', p.slug, p.km2.toFixed(1), 'centroid', p.cx.toFixed(3), p.cy.toFixed(3), 'inner', p.ix.toFixed(3), p.iy.toFixed(3)); }
+    for (const fix of assign) {
+        if (!props.has(fix.key)) throw new Error(`fill-gaps: no seat ${fix.key}`);
+        const hit = open.filter(i => holds(pieces[i], fix.at));
+        if (hit.length !== 1) throw new Error(`fill-gaps: ${hit.length} uncovered pieces at ${fix.at} (expected 1) for ${fix.key}`);
+        pieces[hit[0]].properties.key = fix.key;
+        pieces[hit[0]].properties.st = pieces[hit[0]].properties.slug;
+        filledKm2 += pieces[hit[0]].properties.km2;
+    }
+    open = open.filter(i => isGap(pieces[i]));
     for (let changed = true; changed && open.length;) {
         changed = false;
         const given = [];
