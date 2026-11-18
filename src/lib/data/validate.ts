@@ -3,7 +3,7 @@
  * the site, the contribution endpoint and scripts/validate-data.ts share them.
  */
 
-import type { AnalysisPoint, Entity, Legislature, MoneyValue, MpladsRecord, Overview, SourceCitation, TollRoad } from '@/types';
+import type { AnalysisPoint, Entity, Legislature, LocalBody, MoneyValue, MpladsRecord, Overview, SourceCitation, TollRoad } from '@/types';
 
 const ESTABLISHED = new Set(['court_finding', 'audit_finding', 'official_record', 'company_filing']);
 const BASES = new Set([...ESTABLISHED, 'reported', 'claim']);
@@ -110,6 +110,27 @@ export function validateLegislature(l: Legislature, today = new Date()): string[
         if (seat.status === 'sitting' && (!seat.member?.name || !seat.member.party)) errors.push(`${where}: a sitting seat needs the member's name and party`);
         if (seat.status === 'vacant' && seat.member) errors.push(`${where}: a vacant seat has no member`);
     }
+    return errors;
+}
+
+/**
+ * A city's government: every sentence cites a source. It says who runs the city now, so its
+ * newest source must have been read in the last six months (rule 8).
+ */
+export function validateLocalBody(b: LocalBody, today = new Date()): string[] {
+    const errors: string[] = [];
+    const ids = checkSources(b.sources, b.id, errors);
+    const read = b.sources.map(s => s.retrievedAt).filter(Boolean).sort().pop();
+    if (read && (today.getTime() - new Date(read).getTime()) / 86_400_000 > 183) errors.push(`${b.id}: last read ${read}; who runs a city is a current fact and needs a source from the last six months`);
+    const cited = (t: { text: string; sourceIds: string[] }, where: string) => {
+        if (!t.sourceIds?.length) errors.push(`${where}: no source`);
+        for (const id of t.sourceIds ?? []) checkRef(id, where, ids, errors);
+    };
+    cited(b.does, `${b.id} / does`);
+    b.facts.forEach(f => cited(f, `${b.id} / ${f.label}`));
+    b.services.forEach(s => checkRef(s.sourceId, `${b.id} / ${s.service}`, ids, errors));
+    checkRef(b.seats.sourceId, `${b.id} / seats`, ids, errors);
+    if (!b.seats.ids.length) errors.push(`${b.id}: no seats, so it cannot be shown on the map`);
     return errors;
 }
 

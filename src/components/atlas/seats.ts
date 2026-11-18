@@ -48,20 +48,56 @@ function bboxOf(g: GeoJSON.Polygon | GeoJSON.MultiPolygon): Bounds {
 }
 
 /**
+ * Where to write a seat's name: a point well inside its largest part. (A name drawn from the
+ * polygon itself is repeated in every map tile the seat crosses.)
+ */
+function labelPoint(g: GeoJSON.Polygon | GeoJSON.MultiPolygon): [number, number] {
+    const size = (ring: GeoJSON.Position[]) => { let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity; for (const [x, y] of ring) { if (x < x0) x0 = x; if (y < y0) y0 = y; if (x > x1) x1 = x; if (y > y1) y1 = y; } return [x0, y0, x1, y1]; };
+    const outer = (g.type === 'Polygon' ? [g.coordinates] : g.coordinates).map(p => p[0])
+        .reduce((a, b) => { const p = size(a), q = size(b); return (q[2] - q[0]) * (q[3] - q[1]) > (p[2] - p[0]) * (p[3] - p[1]) ? b : a; });
+    const [x0, y0, x1, y1] = size(outer);
+    // A thinned ring is enough to find a roomy spot.
+    const step = Math.max(1, Math.floor(outer.length / 160));
+    const ring = outer.filter((_, i) => i % step === 0);
+    const inside = (px: number, py: number) => {
+        let inRing = false;
+        for (let i = 0, j = ring.length - 1; i < ring.length; j = i++) {
+            const [xi, yi] = ring[i], [xj, yj] = ring[j];
+            if ((yi > py) !== (yj > py) && px < ((xj - xi) * (py - yi)) / (yj - yi) + xi) inRing = !inRing;
+        }
+        return inRing;
+    };
+    let best: [number, number] = [(x0 + x1) / 2, (y0 + y1) / 2], room = -1;
+    const N = 12;
+    for (let i = 1; i < N; i++) for (let j = 1; j < N; j++) {
+        const px = x0 + ((x1 - x0) * i) / N, py = y0 + ((y1 - y0) * j) / N;
+        if (!inside(px, py)) continue;
+        let d = Infinity;
+        for (const [x, y] of ring) { const q = (x - px) ** 2 + (y - py) ** 2; if (q < d) d = q; }
+        if (d > room) { room = d; best = [px, py]; }
+    }
+    return best;
+}
+
+/**
  * Adds (or extends) a seat layer set, hidden, under `before`, and returns each seat's bounds and
  * districts. For assembly seats, call once per state: each state's file is added as its own source.
+ * `names` gives each seat's name as the member list spells it, so the map and the panel agree.
  */
-export async function loadSeats(map: maplibregl.Map, prefix: SeatPrefix, files: { polys: string; lines: string }, p: SeatPalette, before: string, sourceId: string = prefix): Promise<Map<string, SeatGeo>> {
+export async function loadSeats(map: maplibregl.Map, prefix: SeatPrefix, files: { polys: string; lines: string }, p: SeatPalette, before: string, sourceId: string = prefix, names?: Map<string, string>): Promise<Map<string, SeatGeo>> {
     const [polys, lines] = await Promise.all([files.polys, files.lines].map(u =>
         fetch(u).then(r => { if (!r.ok) throw new Error(`${u}: ${r.status}`); return r.json(); })));
     const geo = new Map<string, SeatGeo>();
+    const labels: GeoJSON.Feature<GeoJSON.Point>[] = [];
     for (const f of (polys as GeoJSON.FeatureCollection<GeoJSON.Polygon | GeoJSON.MultiPolygon>).features) {
         if (!f.geometry) continue;
         geo.set(f.properties!.key, { bounds: bboxOf(f.geometry), districts: f.properties!.districts ?? [], pcKey: f.properties!.pcKey });
+        labels.push({ type: 'Feature', properties: { name: names?.get(f.properties!.key) ?? f.properties!.name }, geometry: { type: 'Point', coordinates: labelPoint(f.geometry) } });
     }
     if (map.getSource(sourceId)) return geo;
     map.addSource(sourceId, { type: 'geojson', data: polys, promoteId: 'key' });
     map.addSource(`${sourceId}-lines`, { type: 'geojson', data: lines });
+    map.addSource(`${sourceId}-names`, { type: 'geojson', data: { type: 'FeatureCollection', features: labels } });
     const hidden = { visibility: 'none' as const };
     const id = (kind: string) => (sourceId === prefix ? `${prefix}-${kind}` : `${prefix}-${kind}--${sourceId}`);
     const from = SEAT_ZOOM[prefix];
@@ -72,7 +108,7 @@ export async function loadSeats(map: maplibregl.Map, prefix: SeatPrefix, files: 
     // The selected seat's own edge, as states and districts have.
     map.addLayer({ id: id('selected-line'), type: 'line', source: sourceId, layout: { ...hidden, 'line-join': 'round' }, paint: { 'line-width': ['case', ['boolean', ['feature-state', 'selected'], false], 2.5, 0] } }, before);
     map.addLayer({
-        id: id('labels'), type: 'symbol', source: sourceId, minzoom: SEAT_NAME_ZOOM[prefix],
+        id: id('labels'), type: 'symbol', source: `${sourceId}-names`, minzoom: SEAT_NAME_ZOOM[prefix],
         layout: { ...hidden, 'text-field': ['get', 'name'], 'text-font': ['Noto Sans Regular'], 'text-size': ['interpolate', ['linear'], ['zoom'], 5.6, 10, 10, 13], 'text-max-width': 7, 'text-padding': 3 },
         paint: {},
     });

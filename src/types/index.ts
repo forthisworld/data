@@ -602,6 +602,39 @@ export interface LegislatureSeat {
   sourceId: string;
 }
 
+/** A sentence of the record and the sources it rests on. */
+export interface CitedText {
+  text: string;
+  sourceIds: string[];
+}
+
+/**
+ * A city (or other local body): who governs it, whether it has an elected council, and which
+ * services other bodies run (data/<country>/local-bodies). Tied to the map through assembly seats
+ * until ward boundaries are drawn.
+ */
+export interface LocalBody {
+  id: string;
+  slug: string;
+  name: string;
+  state: string;
+  /** The date the facts were last read. */
+  asOf: string;
+  /** The governing body, in full and in two words. */
+  body: string;
+  bodyShort: string;
+  council: { status: 'elected' | 'none'; label: string; runBy?: string; /** YYYY-MM-DD */ lastElection?: string };
+  /** What the body is responsible for, in one line. */
+  does: CitedText;
+  facts: (CitedText & { label: string })[];
+  /** Services in the city that other bodies run. */
+  services: { service: string; body: string; bodyName: string; sourceId: string }[];
+  /** Assembly seats (LegislatureSeat ids) with part of the city in them. */
+  seats: { ids: string[]; note?: string; sourceId: string };
+  openQuestions: string[];
+  sources: SourceCitation[];
+}
+
 export interface Legislature {
   id: string;
   house: string;

@@ -136,7 +136,7 @@ interface AtlasProps {
 }
 
 export default function Atlas({ countryCode, countryName, data, initial }: AtlasProps) {
-    const { regions, roads, people, lokSabha, assemblies, mplads } = data;
+    const { regions, roads, people, lokSabha, assemblies, mplads, localBodies } = data;
     const { choice, dark, setTheme } = useTheme();
     const wide = useWide();
 
@@ -158,6 +158,9 @@ export default function Atlas({ countryCode, countryName, data, initial }: Atlas
     const [query, setQuery] = useState('');
     const [searchOpen, setSearchOpen] = useState(false);
     const [bearing, setBearing] = useState(0);
+    const [moving, setMoving] = useState(false);
+    // The mark's opening swing plays once; after the first map move it only settles gently.
+    const [intro, setIntro] = useState(true);
     // What the lines inside states show: 2011 districts, Lok Sabha seats (pc) or assembly seats (ac).
     const [mode, setMode] = useState<'districts' | SeatPrefix>('districts');
     const modeRef = useRef(mode);
@@ -278,16 +281,17 @@ export default function Atlas({ countryCode, countryName, data, initial }: Atlas
         if (!map) return Promise.reject(new Error('no map'));
         const pal = SEAT_PALETTE[darkRef.current ? 'dark' : 'light'];
         const merge = (geo: Map<string, SeatGeo>) => { setSeatGeo(prev => new Map([...(prev ?? []), ...geo])); return geo; };
+        const names = new Map([...seatById].map(([id, x]) => [id, x.name]));
         seatLoad.current[prefix] ??= (prefix === 'pc'
-            ? loadSeats(map, 'pc', { polys: geoUrl(countryCode, 'pc.geojson'), lines: geoUrl(countryCode, 'pc-lines.geojson') }, pal, 'states-line')
-            : Promise.all(Object.keys(assemblies).map(st => loadSeats(map, 'ac', { polys: geoUrl(countryCode, `ac/${st}.geojson`), lines: geoUrl(countryCode, `ac/${st}-lines.geojson`) }, pal, 'states-line', `ac-${st}`)))
+            ? loadSeats(map, 'pc', { polys: geoUrl(countryCode, 'pc.geojson'), lines: geoUrl(countryCode, 'pc-lines.geojson') }, pal, 'states-line', 'pc', names)
+            : Promise.all(Object.keys(assemblies).map(st => loadSeats(map, 'ac', { polys: geoUrl(countryCode, `ac/${st}.geojson`), lines: geoUrl(countryCode, `ac/${st}-lines.geojson`) }, pal, 'states-line', `ac-${st}`, names)))
                 .then(all => { setAcLoaded(true); return new Map(all.flatMap(g => [...g])); })
         ).then(geo => {
             seatHit.current[prefix] = { layers: seatFillLayers(map, prefix), states: new Set([...geo.keys()].map(k => k.slice(0, k.indexOf(':')))) };
             return merge(geo);
         });
         return seatLoad.current[prefix]!;
-    }, [countryCode, assemblies]);
+    }, [countryCode, assemblies, seatById]);
 
     const openSeat = useCallback((id: string, fly = true) => {
         const map = mapRef.current;
@@ -345,6 +349,8 @@ export default function Atlas({ countryCode, countryName, data, initial }: Atlas
         });
         map.addControl(new maplibregl.ScaleControl({ maxWidth: 96, unit: 'metric' }), 'bottom-right');
         map.on('rotate', () => setBearing(map.getBearing()));
+        map.on('movestart', () => { setMoving(true); setIntro(false); });
+        map.on('moveend', () => setMoving(false));
         mapRef.current = map;
         // Handle for automated checks in development only.
         if (process.env.NODE_ENV !== 'production') (window as unknown as { __atlasMap?: maplibregl.Map }).__atlasMap = map;
@@ -702,11 +708,14 @@ export default function Atlas({ countryCode, countryName, data, initial }: Atlas
             const districts = codes.map(c => places.find(p => p.kind === 'district' && p.code === c)).filter((p): p is Place => !!p);
             const parent = ac && seat.lokSabhaSeat ? seatById.get(seat.lokSabhaSeat) : undefined;
             const inside = ac ? undefined : (assemblies[seat.state]?.seats ?? []).filter(x => x.lokSabhaSeat === seat.id);
+            // Cities are tied to assembly seats until ward boundaries are drawn.
+            const acHere = ac ? [seat.id] : (inside ?? []).map(x => x.id);
+            const cities = localBodies.filter(b => acHere.some(id => b.seats.ids.includes(id)));
             return {
                 key: `seat:${seat.id}`,
                 body: <SeatView seat={seat} house={house} stateName={placeName(seat.state)} country={countryCode}
                     districts={districts.map(d => ({ code: d.code!, name: d.name }))}
-                    parent={parent} parentHouse={lokSabha ?? undefined} inside={inside} insideHouse={assemblies[seat.state]}
+                    parent={parent} parentHouse={lokSabha ?? undefined} inside={inside} insideHouse={assemblies[seat.state]} cities={cities}
                     mplads={!ac && mplads?.bySeat[seat.id] ? {
                         term: mplads.term, asOf: mplads.asOf, source: mplads.source, seat: mplads.bySeat[seat.id],
                         nationalPaidShare: Math.round((mplads.totals.paid / mplads.totals.allocated) * 100),
@@ -739,26 +748,41 @@ export default function Atlas({ countryCode, countryName, data, initial }: Atlas
         return {
             key: `place:${pl.kind}:${pl.code ?? pl.stateSlug}`,
             body: <PlaceView place={pl} region={regions[pl.stateSlug]} roads={inPlace} people={here} seats={seatsHere} seatsLoading={pl.kind === 'district' && (!seatGeo || (!!assembly && !acLoaded))}
-                lokSabha={lokSabha} mlas={mlasHere} assembly={assembly} country={countryCode} onRoad={s => openRoad(s)} onPerson={s => openPerson(s)} onSeat={id => openSeat(id)} />,
+                lokSabha={lokSabha} mlas={mlasHere} assembly={assembly} country={countryCode}
+                cities={pl.kind === 'district' ? localBodies.filter(b => mlasHere.some(x => b.seats.ids.includes(x.id))) : []} onRoad={s => openRoad(s)} onPerson={s => openPerson(s)} onSeat={id => openSeat(id)} />,
         };
     })();
 
     // Where the bottom-right controls sit: above the search bar, or above the drawer at peek.
     const drawerOpen = !wide && !!panel;
     const ctrlHidden = drawerOpen && snap !== 'peek';
-    const ctrlBottom = wide ? 16 : drawerOpen ? PEEK_PX + 12 : 100;
+    const ctrlBottom = wide ? 16 : drawerOpen ? PEEK_PX + 12 : 104;
     const north = Math.abs(bearing) > 0.5;
+    /** The mark is the compass: it points the map north if it is turned, otherwise shows the whole country. */
+    const goHome = (e: React.MouseEvent) => {
+        const map = mapRef.current;
+        if (!map || e.metaKey || e.ctrlKey || e.shiftKey) return; // no map yet, or "open in a new tab": follow the link
+        e.preventDefault();
+        if (north) return void map.easeTo({ bearing: 0, duration: 500 });
+        closeView();
+        map.fitBounds(INDIA_BOUNDS, { padding: { top: 80, bottom: 110, left: 20, right: 20 }, duration: 900 });
+    };
 
     return (
         <div className="atlas relative h-[100dvh] w-full overflow-hidden bg-ftw-bg text-ftw-text"
-            style={{ ['--ctrl-bottom' as string]: `${ctrlBottom}px`, ['--ctrl-visible' as string]: ctrlHidden ? 'hidden' : 'visible' }}>
+            style={{ ['--ctrl-bottom' as string]: `${ctrlBottom}px`, ['--ctrl-right' as string]: wide ? '72px' : '12px', ['--ctrl-visible' as string]: ctrlHidden ? 'hidden' : 'visible' }}>
             {/* h-full, not absolute: maplibre-gl.css sets .maplibregl-map { position: relative } */}
             <div ref={container} className="h-full w-full" />
 
             {/* Brand */}
             <div className="pointer-events-none absolute inset-x-3 top-3 z-20 flex items-start justify-between sm:inset-x-4 sm:top-4">
-                <a href={`/${countryCode}`} className="pointer-events-auto flex h-11 items-center gap-2.5 rounded-full border border-ftw-line bg-ftw-surface/95 pl-2 pr-4 shadow-sm backdrop-blur">
-                    <CompassMark className="h-7 w-7 text-ftw-text" />
+                <a href={`/${countryCode}`} onClick={goHome}
+                    title={north ? 'Point the map north' : `Show all of ${countryName}`} aria-label={`data.ftw, ${countryName}: ${north ? 'point the map north' : 'show the whole country'}`}
+                    className="pointer-events-auto flex h-11 items-center gap-2.5 rounded-full border border-ftw-line bg-ftw-surface/95 pl-2 pr-4 shadow-sm backdrop-blur hover:bg-ftw-surface">
+                    {/* The mark turns with the map, so its red needle always points north. */}
+                    <span className="block transition-transform duration-150" style={{ transform: `rotate(${-bearing}deg)` }}>
+                        <CompassMark live intro={intro} moving={moving} className="h-7 w-7 text-ftw-text" />
+                    </span>
                     <span className="text-[15px] font-semibold tracking-tight">data.ftw</span>
                     <span className="hidden h-4 w-px bg-ftw-line sm:block" />
                     <span className="hidden text-sm text-ftw-muted sm:block">{countryName}</span>
@@ -792,41 +816,25 @@ export default function Atlas({ countryCode, countryName, data, initial }: Atlas
             {panel && (
                 <Sheet wide={wide} snap={snap} onSnap={setSnap} onClose={closeView} viewKey={panel.key}>
                     {panel.body}
-                    <p className="border-t border-ftw-line px-5 py-3 text-[11px] text-ftw-faint"><MapCredit /></p>
+                    {/* Phones hide the search bar (and its credit line) while the drawer is open, so the credit goes here. */}
+                    {!wide && <p className="border-t border-ftw-line px-5 py-3 text-[11px] text-ftw-faint"><MapCredit /></p>}
                 </Sheet>
             )}
 
-            {/* Zoom, compass (north / home) */}
-            <div className="absolute right-3 z-20 flex flex-col items-center gap-2 transition-[bottom] duration-200 sm:right-4"
-                style={{ bottom: ctrlBottom, visibility: ctrlHidden ? 'hidden' : 'visible' }}>
-                {wide && (
-                    <div className="flex flex-col overflow-hidden rounded-full border border-ftw-line bg-ftw-surface/95 shadow-sm backdrop-blur">
-                        <button onClick={() => mapRef.current?.zoomIn()} aria-label="Zoom in" className="flex h-10 w-11 items-center justify-center text-ftw-text hover:bg-ftw-raised"><Plus className="h-4 w-4" /></button>
-                        <span className="mx-2.5 h-px bg-ftw-line" />
-                        <button onClick={() => mapRef.current?.zoomOut()} aria-label="Zoom out" className="flex h-10 w-11 items-center justify-center text-ftw-text hover:bg-ftw-raised"><Minus className="h-4 w-4" /></button>
-                    </div>
-                )}
-                <button
-                    onClick={() => {
-                        const map = mapRef.current;
-                        if (!map) return;
-                        if (north) map.easeTo({ bearing: 0, duration: 500 });
-                        else map.fitBounds(INDIA_BOUNDS, { padding: { top: 80, bottom: 110, left: wide && panel ? 496 : 20, right: 20 }, duration: 900 });
-                    }}
-                    title={north ? 'Point north' : `Show all of ${countryName}`}
-                    aria-label={north ? 'Point the map north' : `Show all of ${countryName}`}
-                    className="flex h-12 w-12 items-center justify-center rounded-full border border-ftw-line bg-ftw-surface/95 shadow-md backdrop-blur hover:bg-ftw-raised">
-                    {/* The mark turns with the map, so its red needle always points north. */}
-                    <span className="block" style={{ transform: `rotate(${-bearing}deg)` }}>
-                        <CompassMark className="h-9 w-9 text-ftw-text" />
-                    </span>
-                </button>
-            </div>
+            {/* Zoom (wide screens; phones pinch). North and "whole country" are on the mark, top left. */}
+            {wide && (
+                <div className="absolute right-3 z-20 flex flex-col overflow-hidden rounded-full border border-ftw-line bg-ftw-surface/95 shadow-sm backdrop-blur transition-[bottom] duration-200 sm:right-4"
+                    style={{ bottom: ctrlBottom, visibility: ctrlHidden ? 'hidden' : 'visible' }}>
+                    <button onClick={() => mapRef.current?.zoomIn()} aria-label="Zoom in" className="flex h-10 w-11 items-center justify-center text-ftw-text hover:bg-ftw-raised"><Plus className="h-4 w-4" /></button>
+                    <span className="mx-2.5 h-px bg-ftw-line" />
+                    <button onClick={() => mapRef.current?.zoomOut()} aria-label="Zoom out" className="flex h-10 w-11 items-center justify-center text-ftw-text hover:bg-ftw-raised"><Minus className="h-4 w-4" /></button>
+                </div>
+            )}
 
             {/* Search, at the bottom (phones: hidden while the drawer is open) */}
             {!drawerOpen && (
                 <div className="absolute bottom-[max(1rem,env(safe-area-inset-bottom))] z-30 flex justify-center px-3"
-                    style={{ left: wide && panel ? 472 : 0, right: wide ? 76 : 0 }}>
+                    style={{ left: wide && panel ? 472 : 0, right: wide ? 72 : 0 }}>
                     <div className="w-full max-w-xl">
                         {searchOpen && query.trim().length >= 2 && (
                             <div className="mb-2 max-h-[50dvh] overflow-y-auto rounded-2xl border border-ftw-line bg-ftw-surface p-1.5 text-sm shadow-[0_8px_40px_rgba(0,0,0,0.15)]">
@@ -866,7 +874,7 @@ export default function Atlas({ countryCode, countryName, data, initial }: Atlas
                                 <button onClick={() => setQuery('')} aria-label="Clear search" className="absolute right-4 top-1/2 -translate-y-1/2 text-ftw-muted"><X className="h-5 w-5" /></button>
                             )}
                         </div>
-                        <p className="mt-1.5 text-center text-[10px] text-ftw-faint"><MapCredit /></p>
+                        <p className="mt-1.5 text-center text-[10px] leading-none text-ftw-muted"><span className="inline-block rounded-full bg-ftw-surface/85 px-2.5 py-1 backdrop-blur"><MapCredit /></span></p>
                     </div>
                 </div>
             )}

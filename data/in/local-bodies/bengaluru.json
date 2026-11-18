@@ -1,0 +1,261 @@
+{
+ "id": "bengaluru",
+ "slug": "bengaluru",
+ "name": "Bengaluru",
+ "state": "karnataka",
+ "asOf": "2026-11-18",
+ "body": "Greater Bengaluru Authority and five city corporations",
+ "bodyShort": "City corporation",
+ "council": {
+  "status": "none",
+  "label": "No elected council since September 2020",
+  "runBy": "Run by appointed officials",
+  "lastElection": "2015-08-22"
+ },
+ "does": {
+  "text": "Streets, solid waste, building rules and property tax.",
+  "sourceIds": [
+   "prs-gbg-bill"
+  ]
+ },
+ "facts": [
+  {
+   "label": "Who runs the city",
+   "text": "On 2 September 2025 Karnataka notified five city corporations under the Greater Bengaluru Governance Act, 2024, to replace the Bruhat Bengaluru Mahanagara Palike (BBMP): Bengaluru Central, North, South, East and West. Above them is the Greater Bengaluru Authority, headed by the Chief Minister as ex officio chairperson.",
+   "sourceIds": [
+    "theweek-2025-09-02"
+   ]
+  },
+  {
+   "label": "Elected council",
+   "text": "None. The five-year term of the last BBMP council ended in September 2020, and an IAS officer took charge as administrator until new corporators are elected. No election has been held since.",
+   "sourceIds": [
+    "tnm-2020-09-10",
+    "siasat-2026-11-13"
+   ]
+  },
+  {
+   "label": "Last election",
+   "text": "Held on 22 August 2015, for 198 wards. The BJP won 100, the Congress 76, the JD(S) 14 and others 8.",
+   "sourceIds": [
+    "millenniumpost-2015-08-26",
+    "tnm-2015-08-25"
+   ]
+  },
+  {
+   "label": "Next election",
+   "text": "On 17 July 2026 the Supreme Court directed that elections to all five corporations be held in December 2026. In November 2026 the State Election Commission asked the Court to extend this to 31 January 2027.",
+   "sourceIds": [
+    "etv-2026-07-17",
+    "siasat-2026-11-13"
+   ]
+  },
+  {
+   "label": "Wards",
+   "text": "369 wards, in the final delimitation notified on 19 November 2025: Central 63, North 72, South 72, East 50, West 112.",
+   "sourceIds": [
+    "southfirst-2025-11-20"
+   ]
+  },
+  {
+   "label": "What a corporation does",
+   "text": "All functions related to public streets, building bye-laws, disposal of municipal solid waste, and taxes including property tax. Each ward is to have a ward committee chaired by its councillor, to ensure the upkeep of civic services such as solid waste management, sewerage, water supply and street lighting.",
+   "sourceIds": [
+    "prs-gbg-bill"
+   ]
+  }
+ ],
+ "services": [
+  {
+   "service": "Water and sewerage",
+   "body": "BWSSB",
+   "bodyName": "Bengaluru Water Supply and Sewerage Board",
+   "sourceId": "bwssb-site"
+  },
+  {
+   "service": "Electricity",
+   "body": "BESCOM",
+   "bodyName": "Bangalore Electricity Supply Company",
+   "sourceId": "bescom-site"
+  },
+  {
+   "service": "City buses",
+   "body": "BMTC",
+   "bodyName": "Bengaluru Metropolitan Transport Corporation",
+   "sourceId": "bmtc-site"
+  },
+  {
+   "service": "Metro",
+   "body": "BMRCL",
+   "bodyName": "Bangalore Metro Rail Corporation",
+   "sourceId": "bmrcl-site"
+  },
+  {
+   "service": "Traffic",
+   "body": "Traffic Police",
+   "bodyName": "Bengaluru Traffic Police",
+   "sourceId": "btp-site"
+  }
+ ],
+ "seats": {
+  "ids": [
+   "karnataka:150",
+   "karnataka:151",
+   "karnataka:152",
+   "karnataka:153",
+   "karnataka:154",
+   "karnataka:155",
+   "karnataka:156",
+   "karnataka:157",
+   "karnataka:158",
+   "karnataka:159",
+   "karnataka:160",
+   "karnataka:161",
+   "karnataka:162",
+   "karnataka:163",
+   "karnataka:164",
+   "karnataka:165",
+   "karnataka:166",
+   "karnataka:167",
+   "karnataka:168",
+   "karnataka:169",
+   "karnataka:170",
+   "karnataka:171",
+   "karnataka:172",
+   "karnataka:173",
+   "karnataka:174",
+   "karnataka:175",
+   "karnataka:176"
+  ],
+  "note": "Assembly seats that held wards of the BBMP. On the city's edge, part of a seat lies outside the city.",
+  "sourceId": "bbmp-198-wards"
+ },
+ "openQuestions": [
+  "Which of the five corporations, and which of the 369 wards, covers each address: the ward map is not drawn here yet.",
+  "Who heads each corporation today, and what each one spends.",
+  "The ward-by-ward result of the 2015 election, and who the corporators were."
+ ],
+ "sources": [
+  {
+   "id": "theweek-2025-09-02",
+   "title": "Karnataka govt notifies formation of five city corporations in Bengaluru",
+   "publisher": "PTI, in The Week",
+   "type": "news",
+   "url": "https://www.theweek.in/wire-updates/national/2025/09/02/srg2-ka-new-corporations.html",
+   "date": "2025-09-02",
+   "retrievedAt": "2026-11-18"
+  },
+  {
+   "id": "millenniumpost-2015-08-26",
+   "title": "BJP retains power in B'luru civic polls, setback for Cong",
+   "publisher": "Millennium Post",
+   "type": "news",
+   "url": "https://www.millenniumpost.in/bjp-retains-power-in-bluru-civic-polls-setback-for-cong-102891",
+   "date": "2015-08-26",
+   "retrievedAt": "2026-11-18"
+  },
+  {
+   "id": "tnm-2015-08-25",
+   "title": "BBMP Results: BJP to rule Bengaluru for second consecutive term",
+   "publisher": "The News Minute",
+   "type": "news",
+   "url": "https://www.thenewsminute.com/article/bbmp-results-bjp-rule-bengaluru-second-consecutive-term-33666",
+   "date": "2015-08-25",
+   "retrievedAt": "2026-11-18"
+  },
+  {
+   "id": "tnm-2020-09-10",
+   "title": "IAS officer to take over Bengaluru administration until new BBMP council is elected",
+   "publisher": "The News Minute",
+   "type": "news",
+   "url": "https://www.thenewsminute.com/karnataka/ias-officer-take-over-bengaluru-administration-until-new-bbmp-council-elected-132781",
+   "date": "2020-09-10",
+   "retrievedAt": "2026-11-18"
+  },
+  {
+   "id": "etv-2026-07-17",
+   "title": "SC Agrees To Extend Elections For Five Municipal Corporations Within The GBA By December End",
+   "publisher": "ETV Bharat",
+   "type": "news",
+   "url": "https://www.etvbharat.com/en/bharat/supreme-court-agrees-to-extend-elections-five-municipal-corporations-within-the-gba-by-december-end-enn26071703845",
+   "date": "2026-07-17",
+   "retrievedAt": "2026-11-18"
+  },
+  {
+   "id": "siasat-2026-11-13",
+   "title": "Karnataka SEC seeks SC nod to extend GBA civic polls deadline",
+   "publisher": "The Siasat Daily",
+   "type": "news",
+   "url": "https://www.siasat.com/karnataka-sec-seeks-sc-nod-to-extend-gba-civic-polls-deadline-3576594/",
+   "date": "2026-11-13",
+   "retrievedAt": "2026-11-18"
+  },
+  {
+   "id": "southfirst-2025-11-20",
+   "title": "Karnataka approves 369 wards under GBA, raising hopes for long-delayed civic polls",
+   "publisher": "The South First",
+   "type": "news",
+   "url": "https://thesouthfirst.com/karnataka/karnataka-approves-369-wards-under-gba-raising-hopes-for-long-delayed-civic-polls",
+   "date": "2025-11-20",
+   "retrievedAt": "2026-11-18"
+  },
+  {
+   "id": "prs-gbg-bill",
+   "title": "The Greater Bengaluru Governance Bill, 2024: summary",
+   "publisher": "PRS Legislative Research",
+   "type": "legislative_record",
+   "url": "https://prsindia.org/bills/states/the-greater-bengaluru-governance-bill-2024",
+   "retrievedAt": "2026-11-18",
+   "note": "A summary of the Bill as passed on 10 March 2025, not the text of the Act."
+  },
+  {
+   "id": "bbmp-198-wards",
+   "title": "BBMP wards (198), with the assembly constituency of each ward",
+   "publisher": "DataMeet, Municipal_Spatial_Data (Bangalore/BBMP_oldWards.geojson)",
+   "type": "statistics",
+   "url": "https://github.com/datameet/Municipal_Spatial_Data/tree/master/Bangalore",
+   "retrievedAt": "2026-11-18",
+   "note": "The file names the assembly constituency of each ward."
+  },
+  {
+   "id": "bwssb-site",
+   "title": "Bengaluru Water Supply and Sewerage Board",
+   "publisher": "BWSSB, Government of Karnataka",
+   "type": "government_portal",
+   "url": "https://bwssb.karnataka.gov.in/english",
+   "retrievedAt": "2026-11-18"
+  },
+  {
+   "id": "bescom-site",
+   "title": "Bangalore Electricity Supply Company",
+   "publisher": "BESCOM, Government of Karnataka",
+   "type": "government_portal",
+   "url": "https://bescom.karnataka.gov.in/english",
+   "retrievedAt": "2026-11-18"
+  },
+  {
+   "id": "bmtc-site",
+   "title": "Bengaluru Metropolitan Transport Corporation",
+   "publisher": "BMTC, Government of Karnataka",
+   "type": "government_portal",
+   "url": "https://mybmtc.karnataka.gov.in/english",
+   "retrievedAt": "2026-11-18"
+  },
+  {
+   "id": "bmrcl-site",
+   "title": "Bangalore Metro Rail Corporation",
+   "publisher": "BMRCL",
+   "type": "government_portal",
+   "url": "https://english.bmrc.co.in/",
+   "retrievedAt": "2026-11-18"
+  },
+  {
+   "id": "btp-site",
+   "title": "Bengaluru Traffic Police",
+   "publisher": "Bengaluru Traffic Police, Government of Karnataka",
+   "type": "government_portal",
+   "url": "https://btp.karnataka.gov.in/en",
+   "retrievedAt": "2026-11-18"
+  }
+ ]
+}

@@ -205,20 +205,45 @@
   .atlas-label-state { font-size: 9px; letter-spacing: 0.08em; }
 }
 
-/* MapLibre's scale bar: left of the compass, moving with it */
+/* MapLibre's scale bar: in the bottom-right corner, left of the zoom buttons where there are any */
 .atlas .maplibregl-ctrl-bottom-right {
   bottom: var(--ctrl-bottom, 16px);
-  right: 76px;
+  right: var(--ctrl-right, 12px);
   visibility: var(--ctrl-visible, visible);
   transition: bottom 200ms;
 }
-.atlas .maplibregl-ctrl-bottom-right .maplibregl-ctrl { margin: 0 0 4px 0; }
-@media (max-width: 640px) { .atlas .maplibregl-ctrl-bottom-right { right: 70px; } }
-/* MapLibre's scale bar, restyled */
+.atlas .maplibregl-ctrl-bottom-right .maplibregl-ctrl { margin: 0; }
+/* MapLibre's scale bar, restyled: on a plate, so map names under it do not show through */
 .maplibregl-ctrl-scale {
-  background: transparent !important;
+  background: color-mix(in srgb, var(--ftw-surface) 85%, transparent) !important;
   border-color: var(--ftw-muted) !important;
+  border-radius: 0 0 4px 4px;
   color: var(--ftw-muted) !important;
   font: 500 10px var(--font-geist-sans), system-ui, sans-serif !important;
-  text-shadow: 0 0 2px var(--ftw-halo);
+  padding: 1px 6px !important;
+}
+
+/* The mark as a live compass (CompassMark): the needle swings in and settles, and trembles while the map moves */
+.ftw-compass .ftw-needle { transform-box: view-box; transform-origin: 32px 32px; animation: ftw-needle-rest 0.7s ease-out both; }
+.ftw-compass-intro .ftw-needle { animation: ftw-needle-settle 1.8s cubic-bezier(0.3, 0.7, 0.3, 1) both; }
+.ftw-compass-moving .ftw-needle { animation: ftw-needle-tremble 0.9s ease-in-out infinite; }
+@keyframes ftw-needle-rest {
+  0% { transform: rotate(5deg); }
+  45% { transform: rotate(-3deg); }
+  75% { transform: rotate(1.5deg); }
+  100% { transform: rotate(0deg); }
+}
+@keyframes ftw-needle-settle {
+  0% { transform: rotate(-70deg); }
+  35% { transform: rotate(22deg); }
+  60% { transform: rotate(-9deg); }
+  80% { transform: rotate(4deg); }
+  100% { transform: rotate(0deg); }
+}
+@keyframes ftw-needle-tremble {
+  0%, 100% { transform: rotate(-5deg); }
+  50% { transform: rotate(5deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ftw-compass .ftw-needle, .ftw-compass-intro .ftw-needle, .ftw-compass-moving .ftw-needle { animation: none; }
 }

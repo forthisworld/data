@@ -1,15 +1,20 @@
 'use client';
 
 /**
- * What the atlas's side panel (phone: drawer) shows for a road, a place or a
+ * What the atlas's side panel (phone: drawer) shows for a road, a place, a seat or a
  * person. Every figure carries its grade and a link to its source; what is not
  * known is shown as a gap, not left out.
+ *
+ * Places and seats lead with one ladder, "Who governs here": the Union tier (the MP), the
+ * State tier (the MLA) and the City tier (the local body), with what each is responsible for.
+ * Sources and the list of what is not on record sit behind a fold, so the answer comes first.
  */
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { ArrowUpRight, ChevronRight, CircleHelp, FileText, Plus, User, Route as RouteIcon, PenLine, Landmark } from 'lucide-react';
-import type { FactBasis, LegislatureSeat, MoneyValue, MpladsSeat, Person, SourceCitation, TollRoad } from '@/types';
+import { ArrowUpRight, Building2, ChevronDown, ChevronRight, CircleHelp, FileText, Plus, User, Route as RouteIcon, PenLine } from 'lucide-react';
+import type { FactBasis, LegislatureSeat, LocalBody, MoneyValue, MpladsSeat, Person, SourceCitation, TollRoad } from '@/types';
+import { partyColour } from '@/lib/parties';
 import type { AtlasRegion } from '@/services/country.service';
 import { estimateRecoveryProgress, getDataGaps, isEstablished, REVENUE_ASSUMPTIONS } from '@/services/toll-road-analytics';
 
@@ -88,6 +93,7 @@ function Cite({ ids, sources }: { ids?: (string | undefined)[]; sources: SourceC
                         onClick={e => {
                             e.preventDefault();
                             const el = document.getElementById(`src-${id}`);
+                            el?.closest('details')?.setAttribute('open', '');
                             el?.scrollIntoView({ behavior: 'smooth', block: 'center' });
                             el?.classList.add('bg-ftw-accent/10');
                             setTimeout(() => el?.classList.remove('bg-ftw-accent/10'), 1600);
@@ -101,9 +107,9 @@ function Cite({ ids, sources }: { ids?: (string | undefined)[]; sources: SourceC
     );
 }
 
-function Sources({ sources, lastVerified }: { sources: SourceCitation[]; lastVerified?: string }) {
-    return (
-        <Section title="Sources">
+function Sources({ sources, lastVerified, fold, note }: { sources: SourceCitation[]; lastVerified?: string; fold?: boolean; note?: string }) {
+    const list = (
+        <>
             <ol className="space-y-2.5">
                 {sources.map((s, i) => (
                     <li key={s.id} id={`src-${s.id}`} className="-mx-2 flex gap-2.5 rounded-md px-2 py-1 text-[13px] transition-colors">
@@ -121,8 +127,48 @@ function Sources({ sources, lastVerified }: { sources: SourceCitation[]; lastVer
                     </li>
                 ))}
             </ol>
+            {note && <p className="mt-3 text-xs leading-snug text-ftw-faint">{note}</p>}
             {lastVerified && <p className="mt-3 text-xs text-ftw-faint">Last checked {fmtDate(lastVerified)}</p>}
-        </Section>
+        </>
+    );
+    if (!fold) return <Section title="Sources">{list}</Section>;
+    return <Fold title={`Sources (${sources.length})`} aside={lastVerified ? `checked ${fmtDate(lastVerified)}` : undefined}>{list}</Fold>;
+}
+
+/** A section that starts closed: its title is the button. */
+function Fold({ title, aside, children }: { title: string; aside?: string; children: React.ReactNode }) {
+    return (
+        <details className="group border-t border-ftw-line">
+            <summary className="flex cursor-pointer list-none items-center justify-between gap-3 px-5 py-3.5 hover:bg-ftw-raised [&::-webkit-details-marker]:hidden">
+                <span className="text-[11px] font-semibold uppercase tracking-[0.12em] text-ftw-muted">{title}</span>
+                <span className="flex items-center gap-2 text-xs text-ftw-faint">{aside}<ChevronDown className="h-4 w-4 transition-transform group-open:rotate-180" /></span>
+            </summary>
+            <div className="px-5 pb-4">{children}</div>
+        </details>
+    );
+}
+
+/** A smaller fold inside a section. */
+function More({ label, children }: { label: string; children: React.ReactNode }) {
+    return (
+        <details className="group mt-2">
+            <summary className="inline-flex cursor-pointer list-none items-center gap-1 text-xs font-medium text-ftw-accent hover:underline [&::-webkit-details-marker]:hidden">
+                {label}<ChevronDown className="h-3.5 w-3.5 transition-transform group-open:rotate-180" />
+            </summary>
+            <div className="mt-2">{children}</div>
+        </details>
+    );
+}
+
+/** What is not on record, folded, with the ways to help fill it. */
+function Unknowns({ items, country }: { items: (React.ReactNode | false | undefined)[]; country: string }) {
+    const list = items.filter(Boolean);
+    if (!list.length) return null;
+    return (
+        <Fold title={`Not on record yet (${list.length})`}>
+            <ul className="space-y-2">{list.map((x, i) => <Gap key={i}>{x}</Gap>)}</ul>
+            <Actions country={country} />
+        </Fold>
     );
 }
 
@@ -402,7 +448,7 @@ export interface PlaceInfo {
     code?: string;
 }
 
-export function PlaceView({ place, region, roads, people, seats, seatsLoading, lokSabha, mlas, assembly, country, onRoad, onPerson, onSeat }: {
+export function PlaceView({ place, region, roads, people, seats, seatsLoading, lokSabha, mlas, assembly, cities, country, onRoad, onPerson, onSeat }: {
     place: PlaceInfo;
     region?: AtlasRegion;
     roads: TollRoad[];
@@ -414,6 +460,8 @@ export function PlaceView({ place, region, roads, people, seats, seatsLoading, l
     /** Assembly seats in (or overlapping) this place, if we have this state's assembly. */
     mlas: Seat[];
     assembly: HouseInfo | null;
+    /** Cities on record with part of this place in them. */
+    cities: LocalBody[];
     country: string;
     onRoad: (slug: string) => void;
     onPerson: (slug: string) => void;
@@ -421,18 +469,53 @@ export function PlaceView({ place, region, roads, people, seats, seatsLoading, l
 }) {
     const eyebrow = place.kind === 'district' ? `District · ${place.state}` : region?.level === 'union_territory' ? 'Union territory' : 'State';
     const questions = roads.flatMap(r => (r.analysis?.openQuestions ?? []).map(q => ({ q, road: shortName(r.name) }))).slice(0, 4);
-    const known = roads.length + people.length + seats.filter(x => x.member).length + mlas.filter(x => x.member).length;
-    const [allMlas, setAllMlas] = useState(false);
-    const [allSeats, setAllSeats] = useState(false);
-    const shown = allSeats ? seats : seats.slice(0, 8);
+    const part = place.kind === 'district';
+    const sources = [...(lokSabha && seats.length ? [lokSabha.source] : []), ...(assembly && mlas.length ? [assembly.source] : []), ...cities.flatMap(c => c.sources)];
+    const count = (n: number, one: string) => `${n} ${one}${n === 1 ? '' : 's'}`;
 
     return (
         <article>
             <Header eyebrow={eyebrow} title={place.name}
-                sub={known ? [seats.length && `${seats.length} Lok Sabha seat${seats.length === 1 ? '' : 's'}`, mlas.length && `${mlas.length} assembly seat${mlas.length === 1 ? '' : 's'}`, roads.length && `${roads.length} road${roads.length === 1 ? '' : 's'}`, people.length && `${people.length} other office-holder${people.length === 1 ? '' : 's'}`].filter(Boolean).join(', ') + ' on record' : 'Nothing on record here yet'} />
+                sub={[seats.length && count(seats.length, 'MP'), mlas.length && count(mlas.length, 'MLA'), roads.length && count(roads.length, 'toll road')].filter(Boolean).join(' · ') || 'Nothing on record here yet'} />
+
+            <Section title="Who governs here">
+                <ol>
+                    <Tier tag="Union" name="Lok Sabha" does="Union law and budget">
+                        {seatsLoading && <p className="text-xs text-ftw-faint">Loading Lok Sabha seats…</p>}
+                        <SeatGroup seats={seats} role="MP" onSeat={onSeat} part={part} />
+                        {!seats.length && !seatsLoading && <Missing>The MPs for {place.name} are not on record yet (seat boundaries here were redrawn after the map we use).</Missing>}
+                    </Tier>
+                    <Tier tag="State" name={assembly?.house ?? 'State assembly'} does="State law and budget" last={!cities.length && !part}>
+                        {people.length > 0 && (
+                            <ul className="mb-1 space-y-0.5">
+                                {people.map(p => (
+                                    <li key={p.slug}>
+                                        <button onClick={() => onPerson(p.slug)} className="group flex w-full items-center gap-3 rounded-lg p-1.5 text-left hover:bg-ftw-raised">
+                                            <Avatar name={p.name} />
+                                            <span className="min-w-0 flex-1">
+                                                <span className="block truncate text-sm font-semibold">{p.name}</span>
+                                                <span className="block truncate text-xs text-ftw-muted">{[ROLE[p.role] || p.role, p.party].filter(Boolean).join(' · ')}</span>
+                                            </span>
+                                            <ChevronRight className="h-4 w-4 shrink-0 text-ftw-faint group-hover:text-ftw-text" />
+                                        </button>
+                                    </li>
+                                ))}
+                            </ul>
+                        )}
+                        <SeatGroup seats={mlas} role="MLA" onSeat={onSeat} part={part} />
+                        {!mlas.length && <Missing>The MLAs elected from {place.name} are not on record yet.</Missing>}
+                    </Tier>
+                    {cities.map((c, i) => <CityTier key={c.id} city={c} sources={sources} last={i === cities.length - 1} among={mlas} />)}
+                    {part && !cities.length && (
+                        <Tier tag="Local" name="District and local bodies" last>
+                            <Missing>Who runs the district administration and the local bodies here is not on record yet.</Missing>
+                        </Tier>
+                    )}
+                </ol>
+            </Section>
 
             {roads.length > 0 && (
-                <Section title="Roads on record">
+                <Section title="Toll roads here">
                     <ul className="space-y-2">
                         {roads.map(r => {
                             const free = r.tolling?.status === 'toll_free';
@@ -455,70 +538,14 @@ export function PlaceView({ place, region, roads, people, seats, seatsLoading, l
                 </Section>
             )}
 
-            <Section title="Who answers for it" aside={seats.length > 8 && (
-                <button onClick={() => setAllSeats(v => !v)} className="text-xs font-medium text-ftw-accent hover:underline">{allSeats ? 'Fewer' : `All ${seats.length} MPs`}</button>
-            )}>
-                {seatsLoading && <p className="mb-2 text-xs text-ftw-faint">Loading Lok Sabha seats…</p>}
-                {seats.length > 0 && (
-                    <>
-                        {place.kind === 'state' && seats.length > 3 && <PartySplit seats={seats} />}
-                        <ul className="mb-3 space-y-1">
-                            {shown.map(x => <SeatRow key={x.id} seat={x} onSeat={onSeat} role="MP" />)}
-                        </ul>
-                        {lokSabha && <p className="mb-3 text-[11px] text-ftw-faint">Members of the {lokSabha.term}th Lok Sabha, as listed by the {lokSabha.source.publisher}, read {fmtDate(lokSabha.asOf)}.{place.kind === 'district' ? ' Seats that cover part of this district.' : ''}</p>}
-                    </>
-                )}
-                {people.length > 0 && (
-                    <ul className="mb-3 space-y-2">
-                        {people.map(p => (
-                            <li key={p.slug}>
-                                <button onClick={() => onPerson(p.slug)} className="group flex w-full items-center gap-3 rounded-lg p-1.5 text-left hover:bg-ftw-raised">
-                                    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-ftw-raised"><User className="h-4 w-4 text-ftw-muted" /></span>
-                                    <span className="min-w-0 flex-1">
-                                        <span className="block truncate text-sm font-semibold">{p.name}</span>
-                                        <span className="block text-xs text-ftw-muted">{[ROLE[p.role] || p.role, p.party, p.tenure?.start && `since ${fmtDate(p.tenure.start)}`].filter(Boolean).join(' · ')}</span>
-                                    </span>
-                                    <ChevronRight className="h-4 w-4 text-ftw-faint group-hover:text-ftw-text" />
-                                </button>
-                            </li>
-                        ))}
-                    </ul>
-                )}
-                {mlas.length > 0 && assembly && (
-                    <>
-                        <div className="mb-2 mt-4 flex items-baseline justify-between">
-                            <p className="text-xs font-semibold text-ftw-muted">MLAs ({mlas.length})</p>
-                            {mlas.length > 8 && <button onClick={() => setAllMlas(v => !v)} className="text-xs font-medium text-ftw-accent hover:underline">{allMlas ? 'Fewer' : `All ${mlas.length}`}</button>}
-                        </div>
-                        {mlas.length > 3 && <PartySplit seats={mlas} />}
-                        <ul className="mb-3 space-y-1">
-                            {(allMlas ? mlas : mlas.slice(0, 8)).map(x => <SeatRow key={x.id} seat={x} onSeat={onSeat} role="MLA" />)}
-                        </ul>
-                        <p className="mb-3 text-[11px] text-ftw-faint">Members of the {assembly.house}, as listed by the {assembly.source.publisher}, read {fmtDate(assembly.asOf)}.{place.kind === 'district' ? ' Seats that cover part of this district.' : ''}</p>
-                    </>
-                )}
-                <ul className="space-y-2">
-                    {!seats.length && !seatsLoading && <Gap>The MPs for {place.name} are not on record yet (seat boundaries here were redrawn after the map we use).</Gap>}
-                    {!mlas.length && <Gap>The MLAs elected from {place.name} are not on record yet.</Gap>}
-                    <Gap>Every representative&apos;s declared assets and criminal cases are not on record yet.</Gap>
-                    {place.kind === 'district' && <Gap>Who runs the district administration and the local bodies here is not on record yet.</Gap>}
-                </ul>
-            </Section>
-
-            {questions.length > 0 ? (
-                <Section title="Open questions here">
-                    <ul className="space-y-2">{questions.map(x => <Gap key={x.q}>{x.q} <span className="text-ftw-faint">({x.road})</span></Gap>)}</ul>
-                    <Actions country={country} />
-                </Section>
-            ) : (
-                <Section title="Still blank">
-                    <ul className="space-y-2">
-                        <Gap>What is being built in {place.name} with public money, by whom, and at what cost.</Gap>
-                        <Gap>Tolls, contracts and budgets for {place.name}.</Gap>
-                    </ul>
-                    <Actions country={country} />
-                </Section>
-            )}
+            <Unknowns country={country} items={[
+                ...questions.map(x => <>{x.q} <span className="text-ftw-faint">({x.road})</span></>),
+                ...cities.flatMap(c => c.openQuestions),
+                'Declared assets and criminal cases of every representative here.',
+                `What is being built in ${place.name} with public money, by whom, and at what cost.`,
+            ]} />
+            {sources.length > 0 && <Sources fold sources={sources} lastVerified={[lokSabha?.asOf, assembly?.asOf].filter(Boolean).sort().pop()}
+                note={part ? 'Seats listed are those that cover part of this district.' : undefined} />}
 
             <footer className="border-t border-ftw-line px-5 py-4 text-xs leading-relaxed text-ftw-faint">
                 {place.kind === 'district' ? (
@@ -602,18 +629,41 @@ const isAssembly = (h: HouseInfo) => h.house !== 'Lok Sabha';
 
 const ordinal = (n: number) => `${n}${n % 100 >= 11 && n % 100 <= 13 ? 'th' : ['th', 'st', 'nd', 'rd'][n % 10] ?? 'th'}`;
 
+/** A person's initials on their party's colour. */
+function Avatar({ name, party, large }: { name?: string; party?: string; large?: boolean }) {
+    const words = (name ?? '').replace(/\(.*?\)/g, '').split(/\s+/).filter(w => /[A-Za-z]/.test(w));
+    const initials = words.length > 1 ? words[0][0] + words[words.length - 1][0] : (words[0] ?? '').slice(0, 2);
+    const colour = party ? partyColour(party) : undefined;
+    return (
+        <span className={`flex shrink-0 items-center justify-center rounded-full bg-ftw-raised font-semibold uppercase text-ftw-text ${large ? 'h-12 w-12 text-sm' : 'h-9 w-9 text-[11px]'}`}
+            style={colour ? { backgroundColor: `color-mix(in srgb, ${colour} 16%, var(--ftw-surface))`, boxShadow: `inset 0 0 0 1.5px ${colour}` } : undefined} aria-hidden>
+            {initials || <User className="h-4 w-4 text-ftw-muted" />}
+        </span>
+    );
+}
+
+function PartyChip({ short, title }: { short?: string; title?: string }) {
+    if (!short) return null;
+    return (
+        <span title={title} className="inline-flex shrink-0 items-center gap-1 rounded-full border border-ftw-line px-1.5 py-px text-[10px] font-semibold text-ftw-muted">
+            <span className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: partyColour(short) }} />{short}
+        </span>
+    );
+}
+
+const partyOf = (seat: Seat) => seat.member?.partyShort ?? seat.member?.party;
+
 function SeatRow({ seat, onSeat, role }: { seat: Seat; onSeat: (id: string) => void; role?: 'MP' | 'MLA' }) {
     return (
         <li>
             <button onClick={() => onSeat(seat.id)} className="group flex w-full items-center gap-3 rounded-lg p-1.5 text-left hover:bg-ftw-raised">
-                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-ftw-raised"><User className="h-4 w-4 text-ftw-muted" /></span>
+                <Avatar name={seat.member?.name} party={partyOf(seat)} />
                 <span className="min-w-0 flex-1">
                     <span className="block truncate text-sm font-semibold">{seat.member?.name ?? 'Vacant'}</span>
-                    <span className="block truncate text-xs text-ftw-muted">
-                        {[role && `${role} for ${seat.name}`, seat.member?.partyShort ?? seat.member?.party].filter(Boolean).join(' · ')}
-                    </span>
+                    <span className="block truncate text-xs text-ftw-muted">{role ? `${role} for ${seat.name}` : seat.name}</span>
                 </span>
-                <ChevronRight className="h-4 w-4 text-ftw-faint group-hover:text-ftw-text" />
+                <PartyChip short={partyOf(seat)} title={seat.member?.party} />
+                <ChevronRight className="h-4 w-4 shrink-0 text-ftw-faint group-hover:text-ftw-text" />
             </button>
         </li>
     );
@@ -622,19 +672,105 @@ function SeatRow({ seat, onSeat, role }: { seat: Seat; onSeat: (id: string) => v
 function PartySplit({ seats }: { seats: Seat[] }) {
     const counts = new Map<string, number>();
     for (const x of seats) {
-        const k = x.member ? (x.member.partyShort ?? x.member.party) : 'Vacant';
+        const k = x.member ? (partyOf(x) ?? 'Other') : 'Vacant';
         counts.set(k, (counts.get(k) ?? 0) + 1);
     }
     const rows = [...counts].sort((a, b) => b[1] - a[1]);
     return (
-        <div className="mb-3">
+        <div>
             <div className="flex h-2 overflow-hidden rounded-full bg-ftw-raised">
-                {rows.map(([k, n], i) => (
-                    <span key={k} title={`${k}: ${n}`} style={{ width: `${(n / seats.length) * 100}%`, opacity: 1 - Math.min(i, 6) * 0.13 }} className="h-full border-r border-ftw-surface bg-ftw-accent last:border-0" />
+                {rows.map(([k, n]) => (
+                    <span key={k} title={`${k}: ${n}`} style={{ width: `${(n / seats.length) * 100}%`, backgroundColor: partyColour(k) }} className="h-full border-r border-ftw-surface last:border-0" />
                 ))}
             </div>
-            <p className="mt-1.5 text-xs text-ftw-muted">{rows.map(([k, n]) => `${k} ${n}`).join(' · ')}</p>
+            <p className="mt-1.5 flex flex-wrap gap-x-3 gap-y-0.5 text-xs text-ftw-muted">
+                {rows.map(([k, n]) => <span key={k} className="inline-flex items-center gap-1"><span className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: partyColour(k) }} />{k} {n}</span>)}
+            </p>
         </div>
+    );
+}
+
+/** One or a few seats as rows; many seats as a party bar with the list behind a fold. */
+function SeatGroup({ seats, role, onSeat, part }: { seats: Seat[]; role: 'MP' | 'MLA'; onSeat: (id: string) => void; part?: boolean }) {
+    if (!seats.length) return null;
+    const rows = <ul className="space-y-0.5">{seats.map(x => <SeatRow key={x.id} seat={x} onSeat={onSeat} role={role} />)}</ul>;
+    if (seats.length <= 3) return rows;
+    return (
+        <>
+            <p className="mb-1.5 text-sm font-semibold">{seats.length} {role}s{part ? <span className="font-normal text-ftw-muted"> with seats in part of it</span> : null}</p>
+            <PartySplit seats={seats} />
+            <More label={`All ${seats.length} ${role}s`}>{rows}</More>
+        </>
+    );
+}
+
+/** One rung of "Who governs here": a level of government, what it does, and who holds it here. */
+function Tier({ tag, name, does, here, last, children }: { tag: string; name: string; does?: React.ReactNode; here?: boolean; last?: boolean; children: React.ReactNode }) {
+    return (
+        <li className={`relative pl-6 ${last ? '' : 'pb-5'}`}>
+            {!last && <span className="absolute bottom-0 left-[5px] top-3 w-px bg-ftw-line" />}
+            <span className={`absolute left-0 top-[3px] h-[11px] w-[11px] rounded-full border-2 ${here ? 'border-ftw-accent bg-ftw-accent' : 'border-ftw-faint bg-ftw-surface'}`} />
+            <p className="flex flex-wrap items-baseline gap-x-2 text-[11px] leading-tight">
+                <span className={`font-semibold uppercase tracking-[0.12em] ${here ? 'text-ftw-accent' : 'text-ftw-text'}`}>{tag}</span>
+                <span className="text-ftw-muted">{name}</span>
+            </p>
+            {does && <p className="mt-0.5 text-xs text-ftw-faint">{does}</p>}
+            <div className="mt-2">{children}</div>
+        </li>
+    );
+}
+
+function Missing({ children }: { children: React.ReactNode }) {
+    return <p className="flex gap-2 text-[13px] leading-snug text-ftw-muted"><CircleHelp className="mt-0.5 h-4 w-4 shrink-0 text-ftw-faint" /><span>{children}</span></p>;
+}
+
+/** The city rung: the body, whether anyone was elected to it, what it does, and who runs the rest. */
+function CityTier({ city, sources, last, among }: { city: LocalBody; sources: SourceCitation[]; last?: boolean; among?: Seat[] }) {
+    // Of the assembly seats in view, how many have part of the city in them.
+    const n = among?.filter(x => city.seats.ids.includes(x.id)).length ?? 0;
+    const partly = among && n < among.length ? `${n} of the ${among.length} assembly seats here ${n === 1 ? 'is' : 'are'} in ${city.name}. The rest of this area has other local bodies, not on record yet.` : undefined;
+    return (
+        <Tier tag="City" name={city.name} does={<>{city.does.text}<Cite ids={city.does.sourceIds} sources={sources} /></>} last={last}>
+            <div className="flex items-start gap-3 p-1.5">
+                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-ftw-raised"><Building2 className="h-4 w-4 text-ftw-muted" /></span>
+                <div className="min-w-0">
+                    <p className="text-sm font-semibold leading-snug">{city.body}</p>
+                    <p className="mt-1">
+                        <span className={`inline-flex items-center gap-1.5 rounded-full px-2 py-0.5 text-[11px] font-semibold ${city.council.status === 'none' ? 'bg-amber-500/15 text-amber-700 dark:text-amber-300' : 'bg-emerald-500/10 text-emerald-700 dark:text-emerald-300'}`}>
+                            <span className="h-1.5 w-1.5 rounded-full bg-current" />{city.council.label}
+                        </span>
+                    </p>
+                    <p className="mt-1 text-xs text-ftw-muted">
+                        {city.council.runBy}{city.council.lastElection ? `${city.council.runBy ? ' · ' : ''}last election ${fmtDate(city.council.lastElection)}` : ''}
+                    </p>
+                    {partly && <p className="mt-1.5 text-xs leading-snug text-ftw-text">{partly}</p>}
+                </div>
+            </div>
+            <More label="Elections, wards and who runs what">
+                <dl className="space-y-2.5 text-[13px] leading-snug">
+                    {city.facts.map(x => (
+                        <div key={x.label}>
+                            <dt className="text-xs font-semibold text-ftw-muted">{x.label}</dt>
+                            <dd>{x.text}<Cite ids={x.sourceIds} sources={sources} /></dd>
+                        </div>
+                    ))}
+                    <div>
+                        <dt className="text-xs font-semibold text-ftw-muted">Run by other bodies, not the corporation</dt>
+                        <dd>
+                            <ul className="mt-1 space-y-1">
+                                {city.services.map(x => (
+                                    <li key={x.service} className="flex justify-between gap-3">
+                                        <span className="text-ftw-muted">{x.service}</span>
+                                        <span className="text-right font-medium" title={x.bodyName}>{x.body}<Cite ids={[x.sourceId]} sources={sources} /></span>
+                                    </li>
+                                ))}
+                            </ul>
+                        </dd>
+                    </div>
+                </dl>
+                {city.seats.note && <p className="mt-2.5 text-[11px] leading-snug text-ftw-faint">{city.seats.note}<Cite ids={[city.seats.sourceId]} sources={sources} /></p>}
+            </More>
+        </Tier>
     );
 }
 
@@ -644,7 +780,7 @@ const vacancy = (v?: Seat['vacatedBy']) => {
     return `: ${v.name} ${how}${v.date ? ` on ${fmtDate(v.date)}` : ''}`;
 };
 
-export function SeatView({ seat, house, stateName, districts, parent, parentHouse, inside, insideHouse, mplads, country, onPlace, onSeat }: {
+export function SeatView({ seat, house, stateName, districts, parent, parentHouse, inside, insideHouse, cities, mplads, country, onPlace, onSeat }: {
     seat: Seat;
     house: HouseInfo;
     stateName: string;
@@ -656,6 +792,8 @@ export function SeatView({ seat, house, stateName, districts, parent, parentHous
     /** For a Lok Sabha seat: the assembly seats inside it, if we have the state's assembly. */
     inside?: Seat[];
     insideHouse?: HouseInfo;
+    /** Cities on record with part of this seat in them. */
+    cities: LocalBody[];
     /** Lok Sabha seats: the seat's MPLADS figures, if the portal has them. */
     mplads?: MpladsInfo;
     country: string;
@@ -665,51 +803,56 @@ export function SeatView({ seat, house, stateName, districts, parent, parentHous
     const m = seat.member;
     const assembly = isAssembly(house);
     const terms = m?.lokSabhaTerms ?? [];
-    const sources = [house.source, ...(parent && parentHouse ? [parentHouse.source] : []), ...(inside?.length && insideHouse ? [insideHouse.source] : []), ...(mplads ? [mplads.source] : [])];
+    const sources = [house.source, ...(parent && parentHouse ? [parentHouse.source] : []), ...(inside?.length && insideHouse ? [insideHouse.source] : []), ...(mplads ? [mplads.source] : []), ...cities.flatMap(c => c.sources)];
     const cite = <Cite ids={[house.source.id]} sources={sources} />;
+    // The holder of this seat, on its own rung of the ladder.
+    const holder = m ? (
+        <div className="flex items-start gap-3 p-1.5">
+            <Avatar name={m.name} party={partyOf(seat)} large />
+            <div className="min-w-0">
+                <p className="text-lg font-semibold leading-tight">{m.name}{cite}</p>
+                <p className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-1 text-[13px] text-ftw-muted">
+                    <PartyChip short={m.partyShort} title={m.party} /><span>{m.party}{m.note ? ` · ${m.note}` : ''}</span>
+                </p>
+                <p className="mt-1 text-xs text-ftw-muted">
+                    {assembly ? 'MLA' : 'MP'} for {seat.name}
+                    {terms.length > 0 && <> · {terms.length === 1 ? 'first term' : `${terms.length} terms (${terms.map(ordinal).join(', ')} Lok Sabha)`}</>}
+                    {m.since && <> · won a by-election, member since {fmtDate(m.since)}</>}
+                </p>
+            </div>
+        </div>
+    ) : <p className="p-1.5 text-[13px]">Vacant{vacancy(seat.vacatedBy)}, according to the member list.{cite}</p>;
+
     return (
         <article>
             <Header eyebrow={assembly ? `Assembly seat${seat.number ? ` ${seat.number}` : ''} · ${stateName}` : `Lok Sabha seat · ${stateName}`} title={seat.name}
                 sub={m ? undefined : 'No sitting member'} />
-            <Section title={assembly ? 'Member of the Legislative Assembly' : 'Member of Parliament'}>
-                {m ? (
-                    <div className="flex items-start gap-3">
-                        <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-ftw-raised"><Landmark className="h-5 w-5 text-ftw-muted" /></span>
-                        <div className="min-w-0">
-                            <p className="text-lg font-semibold leading-tight">{m.name}{cite}</p>
-                            <p className="text-[13px] text-ftw-muted">{m.party}{m.note ? ` · ${m.note}` : ''}</p>
-                            {m.since && <p className="mt-1 text-xs text-ftw-muted">Won a by-election; member since {fmtDate(m.since)}</p>}
-                            {terms.length > 0 && (
-                                <p className="mt-1 text-xs text-ftw-muted">
-                                    {terms.length === 1 ? `First term (${ordinal(terms[0])} Lok Sabha)` : `${terms.length} terms: ${terms.map(ordinal).join(', ')} Lok Sabha`}
-                                </p>
-                            )}
-                        </div>
-                    </div>
-                ) : (
-                    <p className="text-[13px]">Vacant{vacancy(seat.vacatedBy)}, according to the member list.{cite}</p>
-                )}
-                <p className="mt-3 text-[11px] text-ftw-faint">
-                    As listed by the {house.source.publisher}, read {fmtDate(house.asOf)}.
-                    {assembly ? ' The list marks by-election winners and members who left.' : ' A by-election held since may not be reflected yet.'}
-                </p>
+
+            <Section title="Who governs here">
+                <ol>
+                    <Tier tag="Union" name="Lok Sabha" does="Union law and budget" here={!assembly}>
+                        {!assembly ? holder
+                            : parent ? <ul><SeatRow seat={parent} onSeat={onSeat} role="MP" /></ul>
+                            : <Missing>The Lok Sabha seat this assembly seat lies in is not on record yet.</Missing>}
+                    </Tier>
+                    <Tier tag="State" name={assembly ? house.house : insideHouse?.house ?? 'State assembly'} does="State law and budget" here={assembly} last={!cities.length}>
+                        {assembly ? holder
+                            : inside?.length ? (
+                                <>
+                                    <p className="mb-1.5 text-sm font-semibold">{inside.length} assembly seats inside</p>
+                                    <PartySplit seats={inside} />
+                                    <More label={`All ${inside.length} MLAs`}><ul className="space-y-0.5">{inside.map(x => <SeatRow key={x.id} seat={x} onSeat={onSeat} role="MLA" />)}</ul></More>
+                                </>
+                            ) : <Missing>The assembly seats (and MLAs) inside {seat.name} are not on record yet.</Missing>}
+                    </Tier>
+                    {cities.map((c, i) => <CityTier key={c.id} city={c} sources={sources} last={i === cities.length - 1} among={assembly ? undefined : inside} />)}
+                </ol>
             </Section>
 
             {mplads && <MpladsSection info={mplads} sources={sources} />}
 
-            {parent && (
-                <Section title="Lok Sabha seat">
-                    <ul><SeatRow seat={parent} onSeat={onSeat} role="MP" /></ul>
-                </Section>
-            )}
-            {inside && inside.length > 0 && (
-                <Section title={`Assembly seats inside (${inside.length})`}>
-                    <ul className="space-y-1">{inside.map(x => <SeatRow key={x.id} seat={x} onSeat={onSeat} role="MLA" />)}</ul>
-                </Section>
-            )}
-
             {districts.length > 0 && (
-                <Section title="Covers (2011 districts)">
+                <Section title="Districts it covers (2011)">
                     <div className="flex flex-wrap gap-1.5">
                         {districts.map(d => (
                             <button key={d.code} onClick={() => onPlace(d.code)} className="rounded-full border border-ftw-line px-2.5 py-1 text-xs font-medium hover:bg-ftw-raised">{d.name}</button>
@@ -723,26 +866,20 @@ export function SeatView({ seat, house, stateName, districts, parent, parentHous
                 </Section>
             )}
 
-            <Section title="Not on record yet">
-                <ul className="space-y-2">
-                    <Gap>Declared assets, liabilities, education and criminal cases, from the election affidavit.</Gap>
-                    {assembly ? (
-                        <>
-                            <Gap>Local area development funds: the works this MLA recommended in {seat.name}, what they cost and whether they were finished.</Gap>
-                            <Gap>Attendance and questions asked in the Assembly.</Gap>
-                        </>
-                    ) : (
-                        <>
-                            {!mplads && <Gap>MPLADS: the works this MP recommended in {seat.name}, what they cost and whether they were finished.</Gap>}
-                            {mplads && !mplads.worksUrl && <Gap>The individual MPLADS works in {seat.name}, and whether each one exists on the ground.</Gap>}
-                            <Gap>Attendance, questions asked and debates taken part in.</Gap>
-                            {!inside?.length && <Gap>The assembly seats (and MLAs) inside {seat.name}.</Gap>}
-                        </>
-                    )}
-                </ul>
-                <Actions country={country} />
-            </Section>
-            <Sources sources={sources} lastVerified={house.asOf} />
+            <Unknowns country={country} items={[
+                'Declared assets, liabilities, education and criminal cases, from the election affidavit.',
+                ...(assembly ? [
+                    `Local area development funds: the works this MLA recommended in ${seat.name}, what they cost and whether they were finished.`,
+                    'Attendance and questions asked in the Assembly.',
+                ] : [
+                    !mplads && `MPLADS: the works this MP recommended in ${seat.name}, what they cost and whether they were finished.`,
+                    mplads && !mplads.worksUrl && `The individual MPLADS works in ${seat.name}, and whether each one exists on the ground.`,
+                    'Attendance, questions asked and debates taken part in.',
+                ]),
+                ...cities.flatMap(c => c.openQuestions),
+            ]} />
+            <Sources fold sources={sources} lastVerified={house.asOf}
+                note={assembly ? 'The member list marks by-election winners and members who left.' : 'A by-election held since the member list was read may not be reflected yet.'} />
         </article>
     );
 }
