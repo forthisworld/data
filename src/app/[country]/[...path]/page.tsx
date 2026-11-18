@@ -20,6 +20,7 @@ function describe(country: string, route: AtlasRoute, data: AtlasData): { title:
     const known = places[country];
     switch (route.kind) {
         case 'home':
+        case 'spot': // only ever in the URL fragment, which the server does not see
             return { title: 'Atlas', summary: '' };
         case 'roads':
             return { title: 'Toll roads', summary: data.roads.map(r => r.name).join('; ') };

@@ -11,6 +11,11 @@
  *   /in/infrastructure/toll-roads        all toll roads
  *   /in/infrastructure/toll-roads/<slug> a toll road
  *
+ *   /in#at=12.9410,77.6410              a spot on the map (who governs this point)
+ *
+ * A spot is kept in the fragment, not the path: the fragment never leaves the browser, so the
+ * server and its logs never see where someone tapped or where "my location" is.
+ *
  * /in/info-requests is a separate page (a form, not a record).
  */
 
@@ -22,7 +27,8 @@ export type AtlasRoute =
     | { kind: 'assembly'; state: string; number: string }
     | { kind: 'person'; slug: string }
     | { kind: 'roads' }
-    | { kind: 'road'; slug: string };
+    | { kind: 'road'; slug: string }
+    | { kind: 'spot'; lat: number; lng: number };
 
 const SLUG = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 
@@ -55,7 +61,14 @@ export function atlasPath(country: string, r: AtlasRoute): string {
         case 'person': return `/${country}/person/${r.slug}`;
         case 'roads': return `/${country}/infrastructure/toll-roads`;
         case 'road': return `/${country}/infrastructure/toll-roads/${r.slug}`;
+        case 'spot': return `/${country}#at=${r.lat},${r.lng}`;
     }
+}
+
+/** "#at=12.9410,77.6410" → a spot, or null. */
+export function parseAtlasHash(hash: string): AtlasRoute | null {
+    const m = hash.match(/^#at=(-?\d{1,2}(?:\.\d+)?),(-?\d{1,3}(?:\.\d+)?)$/);
+    return m ? { kind: 'spot', lat: Number(m[1]), lng: Number(m[2]) } : null;
 }
 
 /** Is this URL path shown by the full-screen atlas (so the site header and footer stay hidden)? */

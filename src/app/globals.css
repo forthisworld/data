@@ -181,6 +181,15 @@
   color: var(--ftw-text);
 }
 .atlas-zoomed .atlas-label-state { opacity: 0.5; font-size: 13px; }
+/* The tapped spot */
+.atlas-spot {
+  width: 14px;
+  height: 14px;
+  border-radius: 9999px;
+  background: var(--ftw-accent);
+  box-shadow: 0 0 0 3px var(--ftw-halo), 0 0 0 9px color-mix(in srgb, var(--ftw-accent) 22%, transparent);
+  pointer-events: none;
+}
 .atlas-road {
   display: flex;
   align-items: center;

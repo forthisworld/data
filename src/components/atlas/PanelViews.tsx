@@ -884,6 +884,108 @@ export function SeatView({ seat, house, stateName, districts, parent, parentHous
     );
 }
 
+// ---------- this spot ----------
+
+/** One level of government for a spot: who holds it, and the one thing on record to know about them. */
+function SpotCard({ tier, avatar, name, chip, onClick, children }: { tier: string; avatar: React.ReactNode; name: React.ReactNode; chip?: React.ReactNode; onClick?: () => void; children: React.ReactNode }) {
+    const body = (
+        <>
+            {avatar}
+            <span className="min-w-0 flex-1">
+                <span className="block text-[10px] font-semibold uppercase tracking-[0.12em] text-ftw-muted">{tier}</span>
+                <span className="mt-0.5 flex flex-wrap items-center gap-x-2 gap-y-0.5"><span className="text-[15px] font-semibold leading-snug">{name}</span>{chip}</span>
+                <span className="mt-1 block text-[13px] leading-snug text-ftw-muted">{children}</span>
+            </span>
+            {onClick && <ChevronRight className="mt-2.5 h-4 w-4 shrink-0 text-ftw-faint group-hover:text-ftw-text" />}
+        </>
+    );
+    const cls = 'flex w-full items-start gap-3 rounded-xl border border-ftw-line p-3 text-left';
+    return onClick ? <button onClick={onClick} className={`group ${cls} hover:bg-ftw-raised`}>{body}</button> : <div className={cls}>{body}</div>;
+}
+
+/** The one line about an MP's local fund: what the MP has proposed, against all seats. */
+function FundLine({ info }: { info: MpladsInfo }) {
+    const m = info.seat;
+    return <><b className="font-semibold text-ftw-text">{pct(m.recommended.amount, m.allocated)}%</b> of this seat&apos;s local fund proposed as works so far. All seats together: {info.nationalProposedShare}%.</>;
+}
+
+export function SpotView({ stateName, districtName, mp, mpHouse, fund, mla, mlaHouse, loading, cities, country, onSeat, onDistrict, onState }: {
+    stateName: string;
+    districtName?: string;
+    /** The Lok Sabha seat the spot lies in, if its boundary is drawn. */
+    mp?: Seat;
+    mpHouse?: HouseInfo;
+    fund?: MpladsInfo;
+    /** The assembly seat the spot lies in, if we have this state's assembly. */
+    mla?: Seat;
+    mlaHouse?: HouseInfo;
+    /** Seat shapes are still loading. */
+    loading?: boolean;
+    /** Cities with part of this spot's assembly seat in them. */
+    cities: LocalBody[];
+    country: string;
+    onSeat: (id: string) => void;
+    onDistrict?: () => void;
+    onState: () => void;
+}) {
+    const sources = [...(mp && mpHouse ? [mpHouse.source] : []), ...(fund ? [fund.source] : []), ...(mla && mlaHouse ? [mlaHouse.source] : []), ...cities.flatMap(c => c.sources)];
+    const blank = <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-ftw-raised"><CircleHelp className="h-4 w-4 text-ftw-faint" /></span>;
+    return (
+        <article>
+            <Header eyebrow="This spot" title={mla?.name ?? mp?.name ?? districtName ?? stateName}
+                sub={[districtName && `${districtName} district`, stateName].filter(Boolean).join(' · ')} />
+            <div className="space-y-2 px-5 pb-5">
+                {mp ? (
+                    <SpotCard tier="MP · Lok Sabha" avatar={<Avatar name={mp.member?.name} party={partyOf(mp)} />} name={mp.member?.name ?? 'Vacant'}
+                        chip={<PartyChip short={partyOf(mp)} title={mp.member?.party} />} onClick={() => onSeat(mp.id)}>
+                        {fund ? <FundLine info={fund} /> : <>For {mp.name}. Nothing measurable on record yet.</>}
+                    </SpotCard>
+                ) : (
+                    <SpotCard tier="MP · Lok Sabha" avatar={blank} name={loading ? 'Finding the seat…' : 'Not on the map yet'}>
+                        {loading ? 'Loading Lok Sabha seats.' : 'The Lok Sabha seats here were redrawn after the map we use, so we cannot say which seat this spot is in.'}
+                    </SpotCard>
+                )}
+                {mla ? (
+                    <SpotCard tier={`MLA · ${mlaHouse?.house ?? 'State assembly'}`} avatar={<Avatar name={mla.member?.name} party={partyOf(mla)} />} name={mla.member?.name ?? 'Vacant'}
+                        chip={<PartyChip short={partyOf(mla)} title={mla.member?.party} />} onClick={() => onSeat(mla.id)}>
+                        For {mla.name}. Nothing measurable on record yet.
+                    </SpotCard>
+                ) : (
+                    <SpotCard tier="MLA · State assembly" avatar={blank} name={loading ? 'Finding the seat…' : 'Not on record yet'}>
+                        {loading ? 'Loading assembly seats.' : `The assembly seats of ${stateName} are not on record here yet.`}
+                    </SpotCard>
+                )}
+                {cities.map(c => (
+                    <SpotCard key={c.id} tier="City" avatar={<span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-ftw-raised"><Building2 className="h-4 w-4 text-ftw-muted" /></span>}
+                        name={c.name} onClick={mla ? () => onSeat(mla.id) : undefined}>
+                        <span className="font-semibold text-amber-700 dark:text-amber-300">{c.council.label}.</span>{' '}
+                        {c.council.lastElection && <>Last election {fmtDate(c.council.lastElection)}. </>}
+                        This assembly seat includes part of {c.name}; the city&apos;s edge is not drawn here yet.
+                    </SpotCard>
+                ))}
+                {!cities.length && !loading && (
+                    <SpotCard tier="Local body" avatar={blank} name="Not on record yet">The city, town or panchayat that governs this spot is not on record here yet.</SpotCard>
+                )}
+            </div>
+
+            <Section title="The wider area">
+                <div className="flex flex-wrap gap-1.5">
+                    {onDistrict && districtName && <button onClick={onDistrict} className="rounded-full border border-ftw-line px-2.5 py-1 text-xs font-medium hover:bg-ftw-raised">{districtName} district</button>}
+                    <button onClick={onState} className="rounded-full border border-ftw-line px-2.5 py-1 text-xs font-medium hover:bg-ftw-raised">{stateName}</button>
+                </div>
+            </Section>
+
+            <Unknowns country={country} items={[
+                'Declared assets and criminal cases of the MP and the MLA, from their election affidavits.',
+                mla && 'What the MLA has done with the local area fund, and attendance in the Assembly.',
+                'Attendance and questions asked by the MP in Parliament.',
+                ...cities.flatMap(c => c.openQuestions),
+            ]} />
+            {sources.length > 0 && <Sources fold sources={sources} lastVerified={[mpHouse?.asOf, mlaHouse?.asOf].filter(Boolean).sort().pop()} />}
+        </article>
+    );
+}
+
 // ---------- MPLADS ----------
 
 export interface MpladsInfo {
@@ -891,8 +993,12 @@ export interface MpladsInfo {
     asOf: string;
     source: SourceCitation;
     seat: Omit<MpladsSeat, 'seat' | 'sourceId'>;
-    /** Share of the allocation paid out, across all MPs (for comparison). */
+    /** Share of the allocation paid out, all seats together (for comparison). */
     nationalPaidShare: number;
+    /** Share of the allocation proposed as works, all seats together. */
+    nationalProposedShare: number;
+    /** Where the seat stands in its state on the share proposed (1 is the highest). */
+    rank?: { n: number; of: number };
     /** A per-work list for this seat (public/data/mplads/...), where we have one. */
     worksUrl?: string;
 }

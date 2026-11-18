@@ -24,6 +24,7 @@ const SEAT_NAME_ZOOM: Record<SeatPrefix, number> = { pc: 5.6, ac: 7.6 };
 
 export interface SeatGeo {
     bounds: Bounds;
+    geometry: GeoJSON.Polygon | GeoJSON.MultiPolygon;
     /** Census 2011 district codes the seat overlaps meaningfully. */
     districts: string[];
     /** Assembly seats: the Lok Sabha seat they lie in. */
@@ -91,7 +92,7 @@ export async function loadSeats(map: maplibregl.Map, prefix: SeatPrefix, files: 
     const labels: GeoJSON.Feature<GeoJSON.Point>[] = [];
     for (const f of (polys as GeoJSON.FeatureCollection<GeoJSON.Polygon | GeoJSON.MultiPolygon>).features) {
         if (!f.geometry) continue;
-        geo.set(f.properties!.key, { bounds: bboxOf(f.geometry), districts: f.properties!.districts ?? [], pcKey: f.properties!.pcKey });
+        geo.set(f.properties!.key, { bounds: bboxOf(f.geometry), geometry: f.geometry, districts: f.properties!.districts ?? [], pcKey: f.properties!.pcKey });
         labels.push({ type: 'Feature', properties: { name: names?.get(f.properties!.key) ?? f.properties!.name }, geometry: { type: 'Point', coordinates: labelPoint(f.geometry) } });
     }
     if (map.getSource(sourceId)) return geo;
@@ -114,6 +115,29 @@ export async function loadSeats(map: maplibregl.Map, prefix: SeatPrefix, files: 
     });
     paintSeats(map, p);
     return geo;
+}
+
+/** Is the point inside the shape? (Ray casting; holes count as outside.) */
+export function pointIn(g: GeoJSON.Polygon | GeoJSON.MultiPolygon, [px, py]: [number, number]): boolean {
+    const inRing = (ring: GeoJSON.Position[]) => {
+        let inside = false;
+        for (let i = 0, j = ring.length - 1; i < ring.length; j = i++) {
+            const [xi, yi] = ring[i], [xj, yj] = ring[j];
+            if ((yi > py) !== (yj > py) && px < ((xj - xi) * (py - yi)) / (yj - yi) + xi) inside = !inside;
+        }
+        return inside;
+    };
+    return (g.type === 'Polygon' ? [g.coordinates] : g.coordinates).some(poly => inRing(poly[0]) && !poly.slice(1).some(inRing));
+}
+
+/** The key of the seat the point lies in, among the seats `accept` allows. */
+export function seatAt(geo: Map<string, SeatGeo>, at: [number, number], accept: (key: string) => boolean): string | undefined {
+    for (const [key, s] of geo) {
+        if (!accept(key)) continue;
+        const [[x0, y0], [x1, y1]] = s.bounds;
+        if (at[0] < x0 || at[0] > x1 || at[1] < y0 || at[1] > y1) continue;
+        if (pointIn(s.geometry, at)) return key;
+    }
 }
 
 /** Every seat layer on the map, of one kind or all. */

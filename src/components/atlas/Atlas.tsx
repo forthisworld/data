@@ -4,6 +4,8 @@
  * The app: a full-screen map of India with everything else on top of it.
  *   - Zooming in reveals more: states, then districts and their names, then roads up close.
  *   - Toll roads are drawn on the map (OpenStreetMap geometry, coloured tolled / toll-free).
+ *   - A tap on the map opens "this spot": the MP, the MLA and the city for that exact point,
+ *     whichever lines are showing. (At country zoom the first tap opens the state.)
  *   - Selecting a place, road or person opens the panel: a tall card on the left on wide
  *     screens, a drawer from the bottom on phones. The selection is kept in the URL (?v=...).
  *   - Search at the bottom covers places, roads and people, client-side, so it works offline.
@@ -18,17 +20,17 @@ import Link from 'next/link';
 import maplibregl, { type LngLatBoundsLike, type MapGeoJSONFeature } from 'maplibre-gl';
 import 'maplibre-gl/dist/maplibre-gl.css';
 import Fuse from 'fuse.js';
-import { Search, X, MapPin, User, Route as RouteIcon, Plus, Minus } from 'lucide-react';
+import { Search, X, MapPin, User, Route as RouteIcon, Plus, Minus, LocateFixed } from 'lucide-react';
 import type { AtlasData } from '@/services/country.service';
 import CompassMark from '@/components/CompassMark';
 import { useTheme } from '@/lib/theme';
 import Sheet, { PEEK_PX, useWide, type Snap } from './Sheet';
 import QuickSettings from './QuickSettings';
 import { addBasemap, paintBasemap, BASEMAP_GLYPHS, BASEMAP_PALETTE } from './basemap';
-import { PlaceView, RoadView, PersonView, RoadsView, SeatView, ROLE, shortName } from './PanelViews';
-import { loadSeats, paintSeats, showLines, seatFillLayers, SEAT_PALETTE, SEAT_ZOOM, type SeatGeo, type SeatPrefix } from './seats';
+import { PlaceView, RoadView, PersonView, RoadsView, SeatView, SpotView, ROLE, shortName, type MpladsInfo } from './PanelViews';
+import { loadSeats, paintSeats, showLines, seatFillLayers, seatAt, pointIn, SEAT_PALETTE, SEAT_ZOOM, type SeatGeo, type SeatPrefix } from './seats';
 import { PLACE_ALIASES } from '@/lib/place-aliases';
-import { atlasPath, parseAtlasPath, type AtlasRoute } from '@/lib/atlas-route';
+import { atlasPath, parseAtlasPath, parseAtlasHash, type AtlasRoute } from '@/lib/atlas-route';
 import { geoUrl } from '@/lib/geo-url';
 
 type Geom = GeoJSON.Polygon | GeoJSON.MultiPolygon;
@@ -45,6 +47,7 @@ interface Place {
 
 type View =
     | { kind: 'roads' }
+    | { kind: 'spot'; at: [number, number] }
     | { kind: 'seat'; id: string }
     | { kind: 'place'; place: Place }
     | { kind: 'road'; slug: string }
@@ -76,6 +79,13 @@ const CITY_ZOOM = 8.5;
  * map always means "this can be selected".
  */
 const UNIT_ZOOM: Record<'districts' | SeatPrefix, number> = { districts: DISTRICT_ZOOM, ...SEAT_ZOOM };
+/**
+ * From this zoom a tap means "this spot". Below it a tap means the state, unless that state is
+ * already open: then the second tap is the spot. So nobody has to zoom to a number to get an answer.
+ */
+const SPOT_ZOOM = 7;
+type Shape = { f: GeoJSON.Feature<Geom, Record<string, string>>; b: Bounds };
+const shapeAt = (list: Shape[], at: [number, number]) => list.find(({ f, b }) => at[0] >= b[0][0] && at[0] <= b[1][0] && at[1] >= b[0][1] && at[1] <= b[1][1] && pointIn(f.geometry, at))?.f;
 
 const PALETTE = {
     light: {
@@ -172,6 +182,12 @@ export default function Atlas({ countryCode, countryName, data, initial }: Atlas
     const relayout = useRef<() => void>(() => {});
     // Per kind of seat, once loaded: the fill layers to hit-test and the states that have seat shapes.
     const seatHit = useRef<Partial<Record<SeatPrefix, { layers: string[]; states: Set<string> }>>>({});
+    // State and district shapes, kept to answer "which one is this point in".
+    const shapes = useRef<{ states: Shape[]; districts: Shape[] }>({ states: [], districts: [] });
+    const spotMarker = useRef<maplibregl.Marker | null>(null);
+    /** The state the open panel is about, if any: a tap inside it means "this spot". */
+    const focusState = useRef<string | null>(null);
+    const [locating, setLocating] = useState<'no' | 'busy' | 'failed' | 'outside'>('no');
 
     const roadBySlug = useMemo(() => new Map(roads.map(r => [r.slug, r])), [roads]);
     const personBySlug = useMemo(() => new Map(people.map(p => [p.slug, p])), [people]);
@@ -317,6 +333,34 @@ export default function Atlas({ countryCode, countryName, data, initial }: Atlas
         }).catch(() => {});
     }, [clearHighlights, ensureSeats, isAc, padding, places, seatById]);
 
+    /** "This spot": who governs the point. Coordinates are kept to 4 decimals (about 11 m). */
+    const openSpot = useCallback((at: [number, number], fly = true) => {
+        const map = mapRef.current;
+        if (!map) return;
+        clearHighlights();
+        setView({ kind: 'spot', at: [Math.round(at[0] * 1e4) / 1e4, Math.round(at[1] * 1e4) / 1e4] });
+        setSnap('half');
+        setQuery('');
+        setSearchOpen(false);
+        if (fly) map.flyTo({ center: at, zoom: Math.max(map.getZoom(), 11), padding: padding(), duration: 900 });
+    }, [clearHighlights, padding]);
+
+    /** "Use my location": asked of the browser only when the button is pressed, and never sent anywhere. */
+    const locate = useCallback(() => {
+        if (!navigator.geolocation) return setLocating('failed');
+        setLocating('busy');
+        navigator.geolocation.getCurrentPosition(
+            pos => {
+                const at: [number, number] = [pos.coords.longitude, pos.coords.latitude];
+                if (!shapeAt(shapes.current.states, at)) return setLocating('outside');
+                setLocating('no');
+                openSpot(at);
+            },
+            () => setLocating('failed'),
+            { enableHighAccuracy: false, timeout: 10000, maximumAge: 300000 },
+        );
+    }, [openSpot]);
+
     const openRoads = useCallback(() => {
         clearHighlights();
         setView({ kind: 'roads' });
@@ -330,8 +374,8 @@ export default function Atlas({ countryCode, countryName, data, initial }: Atlas
     }, [clearHighlights]);
 
     // Map callbacks are bound once; route them to the latest handlers.
-    const handlers = useRef({ openPlace, openRoad, openSeat, closeView });
-    handlers.current = { openPlace, openRoad, openSeat, closeView };
+    const handlers = useRef({ openPlace, openRoad, openSeat, openSpot, closeView });
+    handlers.current = { openPlace, openRoad, openSeat, openSpot, closeView };
 
     // ---------- the map ----------
     useEffect(() => {
@@ -392,6 +436,8 @@ export default function Atlas({ countryCode, countryName, data, initial }: Atlas
                 });
             }
 
+            const withBounds = (fc: GeoJSON.FeatureCollection) => (fc.features as Shape['f'][]).filter(x => x.geometry).map(x => ({ f: x, b: bboxOf(x.geometry) }));
+            shapes.current = { states: withBounds(states), districts: withBounds(districts).filter(x => x.f.properties.census2011Code && x.f.properties.census2011Code !== '0') };
             map.addSource('states', { type: 'geojson', data: states, promoteId: 'slug' });
             map.addSource('districts', { type: 'geojson', data: districts, promoteId: 'census2011Code' });
             map.addSource('india', { type: 'geojson', data: india });
@@ -562,18 +608,14 @@ export default function Atlas({ countryCode, countryName, data, initial }: Atlas
             });
             map.on('mouseout', clearHover);
             map.on('click', e => {
-                const f = hit(e.point);
-                if (!f) return handlers.current.closeView();
-                const p = f.properties as Record<string, string>;
-                if (f.layer.id === 'routes-hit') return handlers.current.openRoad(p.slug, false);
-                if (/^(pc|ac)-fill/.test(f.layer.id)) return handlers.current.openSeat(p.key, false);
-                const geom = f.geometry as Geom;
-                handlers.current.openPlace(
-                    f.layer.id === 'districts-fill'
-                        ? { kind: 'district', name: p.name, state: p.state, stateSlug: p.stateSlug, code: p.census2011Code, bounds: bboxOf(geom) }
-                        : { kind: 'state', name: p.name, stateSlug: p.slug, bounds: bboxOf(geom) },
-                    false
-                );
+                const road = map.queryRenderedFeatures(e.point, { layers: ['routes-hit'] })[0];
+                if (road) return handlers.current.openRoad((road.properties as Record<string, string>).slug, false);
+                const state = map.queryRenderedFeatures(e.point, { layers: ['hover-shade'] })[0];
+                if (!state) return handlers.current.closeView(); // the sea, or another country
+                const p = state.properties as Record<string, string>;
+                // Zoomed in, or inside the state already open: this spot. Otherwise the state first.
+                if (map.getZoom() >= SPOT_ZOOM || focusState.current === p.slug) return handlers.current.openSpot([e.lngLat.lng, e.lngLat.lat], false);
+                handlers.current.openPlace({ kind: 'state', name: p.name, stateSlug: p.slug, bounds: bboxOf(state.geometry as Geom) }, false);
             });
 
             map.resize();
@@ -604,10 +646,58 @@ export default function Atlas({ countryCode, countryName, data, initial }: Atlas
 
     // Place and seat panels list the representatives whose seats cover them, so they need the seat files.
     useEffect(() => {
-        if (!ready || !view || (view.kind !== 'place' && view.kind !== 'seat')) return;
+        if (!ready || !view || (view.kind !== 'place' && view.kind !== 'seat' && view.kind !== 'spot')) return;
         ensureSeats('pc').catch(() => {});
         if (Object.keys(assemblies).length) ensureSeats('ac').catch(() => {});
     }, [view, ready, ensureSeats, assemblies]);
+
+    // ---------- this spot ----------
+    // Every level of government for the tapped point. The MP comes from the assembly seat's own Lok Sabha
+    // seat where we have one, so the two always agree; otherwise from the Lok Sabha seat shapes.
+    const spot = useMemo(() => {
+        if (view?.kind !== 'spot' || !ready) return null;
+        const at = view.at;
+        const state = shapeAt(shapes.current.states, at)?.properties;
+        const district = shapeAt(shapes.current.districts, at)?.properties;
+        const acKey = seatGeo ? seatAt(seatGeo, at, isAc) : undefined;
+        const ac = acKey ? seatById.get(acKey) : undefined;
+        const pcKey = ac?.lokSabhaSeat ?? (seatGeo ? seatAt(seatGeo, at, k => !isAc(k)) : undefined);
+        return { at, stateSlug: state?.slug, stateName: state?.name, districtCode: district?.census2011Code, districtName: district?.name, ac, pc: pcKey ? seatById.get(pcKey) : undefined };
+    }, [view, ready, seatGeo, isAc, seatById]);
+
+    // Mark the spot, and outline the unit it lies in for the lines now showing.
+    useEffect(() => {
+        const map = mapRef.current;
+        if (!map || !ready) return;
+        if (!spot) { spotMarker.current?.remove(); spotMarker.current = null; return; }
+        if (!spotMarker.current) {
+            const el = document.createElement('div');
+            el.className = 'atlas-spot';
+            spotMarker.current = new maplibregl.Marker({ element: el, anchor: 'center' }).setLngLat(spot.at).addTo(map);
+        } else spotMarker.current.setLngLat(spot.at);
+        if (selectedRef.current) map.setFeatureState(selectedRef.current, { selected: false });
+        const seat = mode === 'pc' ? spot.pc : spot.ac ?? spot.pc;
+        const target = mode === 'districts' || !seat
+            ? (spot.districtCode ? { source: 'districts', id: spot.districtCode } : null)
+            : { source: isAc(seat.id) ? `ac-${seat.state}` : 'pc', id: seat.id };
+        selectedRef.current = target && map.getSource(target.source) ? target : null;
+        if (selectedRef.current) map.setFeatureState(selectedRef.current, { selected: true });
+    }, [spot, mode, ready, isAc]);
+
+    // The MPLADS figures of a seat, with how it stands among the seats of its state.
+    const fundOf = useCallback((seat: { id: string; state: string }): MpladsInfo | undefined => {
+        const m = mplads?.bySeat[seat.id];
+        if (!mplads || !m) return undefined;
+        const share = (x: { allocated: number; recommended: { amount: number } }) => (x.allocated > 0 ? x.recommended.amount / x.allocated : 0);
+        const peers = Object.entries(mplads.bySeat).filter(([id]) => id.startsWith(`${seat.state}:`)).map(([, x]) => share(x)).sort((a, b) => b - a);
+        return {
+            term: mplads.term, asOf: mplads.asOf, source: mplads.source, seat: m,
+            nationalPaidShare: Math.round((mplads.totals.paid / mplads.totals.allocated) * 100),
+            nationalProposedShare: Math.round((mplads.totals.recommended.amount / mplads.totals.allocated) * 100),
+            rank: { n: peers.indexOf(share(m)) + 1, of: peers.length },
+            worksUrl: mplads.worksStates.includes(seat.state) ? `/data/mplads/lok-sabha-${mplads.term}/${seat.state}/${seat.id.slice(seat.id.indexOf(':') + 1)}.json` : undefined,
+        };
+    }, [mplads]);
 
     // Theme: repaint, don't rebuild.
     useEffect(() => {
@@ -628,6 +718,7 @@ export default function Atlas({ countryCode, countryName, data, initial }: Atlas
     const routeOf = useCallback((v: View | null): AtlasRoute =>
         !v ? { kind: 'home' }
             : v.kind === 'roads' ? { kind: 'roads' }
+            : v.kind === 'spot' ? { kind: 'spot', lat: v.at[1], lng: v.at[0] }
             : v.kind === 'seat' ? (isAc(v.id)
                 ? { kind: 'assembly', state: v.id.slice(0, v.id.indexOf(':')), number: v.id.slice(v.id.indexOf(':') + 1) }
                 : { kind: 'seat', state: v.id.slice(0, v.id.indexOf(':')), seat: v.id.slice(v.id.indexOf(':') + 1) })
@@ -643,6 +734,7 @@ export default function Atlas({ countryCode, countryName, data, initial }: Atlas
         switch (r.kind) {
             case 'home': return closeView();
             case 'roads': return openRoads();
+            case 'spot': return openSpot([r.lng, r.lat]);
             case 'seat': return openSeat(`${r.state}:${r.seat}`);
             case 'assembly': return openSeat(`${r.state}:${r.number}`);
             case 'road': return openRoad(r.slug);
@@ -655,7 +747,7 @@ export default function Atlas({ countryCode, countryName, data, initial }: Atlas
                 return p ? openPlace(p) : closeView();
             }
         }
-    }, [closeView, openPlace, openPerson, openRoad, openRoads, openSeat, places]);
+    }, [closeView, openPlace, openPerson, openRoad, openRoads, openSeat, openSpot, places]);
 
     // First load: the route the server was asked for (or an old ?v= link).
     useEffect(() => {
@@ -668,7 +760,7 @@ export default function Atlas({ countryCode, countryName, data, initial }: Atlas
                 : kind === 'district' ? { kind: 'district', state: places.find(p => p.code === id)?.stateSlug ?? '', code: id } : null;
             if (legacy) return applyRoute(legacy);
         }
-        const here = parseAtlasPath(window.location.pathname.split('/').filter(Boolean).slice(1));
+        const here = parseAtlasHash(window.location.hash) ?? parseAtlasPath(window.location.pathname.split('/').filter(Boolean).slice(1));
         applyRoute(here ?? initial ?? { kind: 'home' });
         // Only on first load.
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -677,7 +769,7 @@ export default function Atlas({ countryCode, countryName, data, initial }: Atlas
     useEffect(() => {
         const onPop = () => {
             const segs = window.location.pathname.split('/').filter(Boolean).slice(1);
-            applyRoute(parseAtlasPath(segs) ?? { kind: 'home' });
+            applyRoute(parseAtlasHash(window.location.hash) ?? parseAtlasPath(segs) ?? { kind: 'home' });
         };
         window.addEventListener('popstate', onPop);
         return () => window.removeEventListener('popstate', onPop);
@@ -688,7 +780,8 @@ export default function Atlas({ countryCode, countryName, data, initial }: Atlas
         const path = atlasPath(countryCode, routeOf(view));
         const replace = fromUrl.current;
         fromUrl.current = false;
-        if (path === window.location.pathname && !window.location.search) return; // already there (first load, Back/Forward)
+        const here = window.location.pathname + (parseAtlasHash(window.location.hash) ? window.location.hash : '');
+        if (path === here && !window.location.search) return; // already there (first load, Back/Forward)
         if (replace) window.history.replaceState(null, '', path);
         else window.history.pushState(null, '', path);
     }, [view, ready, countryCode, routeOf]);
@@ -698,6 +791,21 @@ export default function Atlas({ countryCode, countryName, data, initial }: Atlas
         if (!view) return null;
         if (view.kind === 'roads') {
             return { key: 'roads', body: <RoadsView roads={roads} placeName={placeName} onRoad={s => openRoad(s)} /> };
+        }
+        if (view.kind === 'spot') {
+            if (!spot?.stateSlug) return null;
+            const district = spot.districtCode ? places.find(p => p.kind === 'district' && p.code === spot.districtCode) : undefined;
+            const house = assemblies[spot.stateSlug];
+            return {
+                key: `spot:${spot.at.join(',')}`,
+                body: <SpotView stateName={spot.stateName ?? placeName(spot.stateSlug)} districtName={spot.districtName}
+                    mp={spot.pc} mpHouse={lokSabha ?? undefined} fund={spot.pc ? fundOf(spot.pc) : undefined}
+                    mla={spot.ac} mlaHouse={house} loading={!seatGeo || (!!house && !acLoaded)}
+                    cities={spot.ac ? localBodies.filter(b => b.seats.ids.includes(spot.ac!.id)) : []}
+                    country={countryCode} onSeat={id => openSeat(id)}
+                    onDistrict={district ? () => openPlace(district) : undefined}
+                    onState={() => { const st = places.find(p => p.kind === 'state' && p.stateSlug === spot.stateSlug); if (st) openPlace(st); }} />,
+            };
         }
         if (view.kind === 'seat') {
             const seat = seatById.get(view.id);
@@ -716,11 +824,7 @@ export default function Atlas({ countryCode, countryName, data, initial }: Atlas
                 body: <SeatView seat={seat} house={house} stateName={placeName(seat.state)} country={countryCode}
                     districts={districts.map(d => ({ code: d.code!, name: d.name }))}
                     parent={parent} parentHouse={lokSabha ?? undefined} inside={inside} insideHouse={assemblies[seat.state]} cities={cities}
-                    mplads={!ac && mplads?.bySeat[seat.id] ? {
-                        term: mplads.term, asOf: mplads.asOf, source: mplads.source, seat: mplads.bySeat[seat.id],
-                        nationalPaidShare: Math.round((mplads.totals.paid / mplads.totals.allocated) * 100),
-                        worksUrl: mplads.worksStates.includes(seat.state) ? `/data/mplads/lok-sabha-${mplads.term}/${seat.state}/${seat.id.slice(seat.id.indexOf(':') + 1)}.json` : undefined,
-                    } : undefined}
+                    mplads={ac ? undefined : fundOf(seat)}
                     onPlace={c => { const d = districts.find(x => x.code === c); if (d) openPlace(d); }} onSeat={id => openSeat(id)} />,
             };
         }
@@ -752,6 +856,12 @@ export default function Atlas({ countryCode, countryName, data, initial }: Atlas
                 cities={pl.kind === 'district' ? localBodies.filter(b => mlasHere.some(x => b.seats.ids.includes(x.id))) : []} onRoad={s => openRoad(s)} onPerson={s => openPerson(s)} onSeat={id => openSeat(id)} />,
         };
     })();
+
+    focusState.current = !view ? null
+        : view.kind === 'place' ? view.place.stateSlug
+        : view.kind === 'seat' ? seatById.get(view.id)?.state ?? null
+        : view.kind === 'spot' ? spot?.stateSlug ?? null
+        : null;
 
     // Where the bottom-right controls sit: above the search bar, or above the drawer at peek.
     const drawerOpen = !wide && !!panel;
@@ -867,14 +977,26 @@ export default function Atlas({ countryCode, countryName, data, initial }: Atlas
                                         if (m.type === 'place') openPlace(m.place!); else if (m.type === 'road') openRoad(m.slug!); else if (m.type === 'seat') openSeat(m.slug!); else openPerson(m.slug!);
                                     }
                                 }}
-                                placeholder="Search a place, MP, MLA, road or person"
+                                placeholder="Find your area, MP, MLA or a road"
                                 aria-label="Search the atlas"
                                 className="h-14 w-full rounded-full border border-ftw-line bg-ftw-surface pl-12 pr-12 text-base text-ftw-text shadow-[0_4px_24px_rgba(0,0,0,0.10)] placeholder:text-ftw-faint focus:border-ftw-accent focus:outline-none"
                             />
-                            {query && (
+                            {query ? (
                                 <button onClick={() => setQuery('')} aria-label="Clear search" className="absolute right-4 top-1/2 -translate-y-1/2 text-ftw-muted"><X className="h-5 w-5" /></button>
+                            ) : (
+                                <button onClick={locate} disabled={locating === 'busy'} title="Who governs where I am" aria-label="Use my location: who governs where I am"
+                                    className="absolute right-2 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full text-ftw-accent hover:bg-ftw-raised disabled:opacity-50">
+                                    <LocateFixed className={`h-5 w-5 ${locating === 'busy' ? 'animate-pulse' : ''}`} />
+                                </button>
                             )}
                         </div>
+                        {(locating === 'failed' || locating === 'outside') && (
+                            <p role="status" className="mt-1.5 text-center text-xs text-ftw-muted">
+                                <span className="inline-block rounded-full bg-ftw-surface px-3 py-1 shadow-sm">
+                                    {locating === 'outside' ? `Your location is outside ${countryName}.` : 'Your location could not be read. Tap the map instead.'}
+                                </span>
+                            </p>
+                        )}
                         <p className="mt-1.5 text-center text-[10px] leading-none text-ftw-muted"><span className="inline-block rounded-full bg-ftw-surface/85 px-2.5 py-1 backdrop-blur"><MapCredit /></span></p>
                     </div>
                 </div>
