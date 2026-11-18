@@ -814,10 +814,10 @@ export default function Atlas({ countryCode, countryName, data, initial }: Atlas
 
             {/* Panel / drawer */}
             {panel && (
-                <Sheet wide={wide} snap={snap} onSnap={setSnap} onClose={closeView} viewKey={panel.key}>
+                <Sheet wide={wide} snap={snap} onSnap={setSnap} onClose={closeView} viewKey={panel.key}
+                    // Phones hide the search bar and its credit line while the drawer is open, so the credit rides above the drawer.
+                    above={<span className="inline-block whitespace-nowrap rounded-full bg-ftw-surface/85 px-2.5 py-1 text-[10px] leading-none text-ftw-muted backdrop-blur"><MapCredit short /></span>}>
                     {panel.body}
-                    {/* Phones hide the search bar (and its credit line) while the drawer is open, so the credit goes here. */}
-                    {!wide && <p className="border-t border-ftw-line px-5 py-3 text-[11px] text-ftw-faint"><MapCredit /></p>}
                 </Sheet>
             )}
 
@@ -891,14 +891,17 @@ export default function Atlas({ countryCode, countryName, data, initial }: Atlas
 
 /**
  * Map credits, shown wherever the map is. OpenFreeMap asks for exactly
- * "OpenFreeMap © OpenMapTiles Data from OpenStreetMap", with links.
+ * "OpenFreeMap © OpenMapTiles Data from OpenStreetMap", with links. `short` (phones, above the
+ * drawer) keeps that line and puts the boundary credit behind "more", on the licences page.
  */
-function MapCredit() {
+function MapCredit({ short }: { short?: boolean }) {
     const a = (href: string, text: string) => <a href={href} target="_blank" rel="noopener noreferrer" className="underline">{text}</a>;
     return (
         <>
             {a('https://openfreemap.org', 'OpenFreeMap')} {a('https://www.openmaptiles.org/', '© OpenMapTiles')} Data from {a('https://www.openstreetmap.org/copyright', 'OpenStreetMap')}
-            {' · '}boundaries {a('https://github.com/datameet/maps', 'DataMeet')}{' · '}<Link href="/licences" className="underline">licences</Link>
+            {short
+                ? <>{' · '}<Link href="/licences" className="underline">more</Link></>
+                : <>{' · '}boundaries {a('https://github.com/datameet/maps', 'DataMeet')}{' · '}<Link href="/licences" className="underline">licences</Link></>}
         </>
     );
 }

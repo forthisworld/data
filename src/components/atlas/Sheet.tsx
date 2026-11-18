@@ -25,13 +25,15 @@ export function useWide() {
     return wide;
 }
 
-export default function Sheet({ wide, snap, onSnap, onClose, viewKey, children }: {
+export default function Sheet({ wide, snap, onSnap, onClose, viewKey, above, children }: {
     wide: boolean;
     snap: Snap;
     onSnap: (s: Snap) => void;
     onClose: () => void;
     /** Changes when the content changes, to scroll back to the top. */
     viewKey: string;
+    /** Phones: a small line that rides on the map just above the drawer (the map credit). */
+    above?: React.ReactNode;
     children: React.ReactNode;
 }) {
     const scroller = useRef<HTMLDivElement>(null);
@@ -87,6 +89,12 @@ export default function Sheet({ wide, snap, onSnap, onClose, viewKey, children }
     };
 
     return (
+        <>
+        {above && snap !== 'full' && (
+            <div style={{ bottom: h + 6 }} className={`pointer-events-none absolute inset-x-0 z-20 flex justify-center px-3 ${drag === null ? 'transition-[bottom] duration-200 ease-out' : ''}`}>
+                <span className="pointer-events-auto">{above}</span>
+            </div>
+        )}
         <aside style={{ height: h }}
             className={`absolute inset-x-0 bottom-0 z-30 flex flex-col overflow-hidden rounded-t-2xl border-t border-ftw-line bg-ftw-surface text-ftw-text shadow-[0_-8px_30px_rgba(0,0,0,0.15)] ${drag === null ? 'transition-[height] duration-200 ease-out' : ''}`}>
             <div onPointerDown={onDown} onPointerMove={onMove} onPointerUp={onUp} onPointerCancel={onUp}
@@ -98,5 +106,6 @@ export default function Sheet({ wide, snap, onSnap, onClose, viewKey, children }
                 {children}
             </div>
         </aside>
+        </>
     );
 }
