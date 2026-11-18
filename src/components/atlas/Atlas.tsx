@@ -756,7 +756,8 @@ export default function Atlas({ countryCode, countryName, data, initial }: Atlas
     // Where the bottom-right controls sit: above the search bar, or above the drawer at peek.
     const drawerOpen = !wide && !!panel;
     const ctrlHidden = drawerOpen && snap !== 'peek';
-    const ctrlBottom = wide ? 16 : drawerOpen ? PEEK_PX + 12 : 104;
+    // Phones with the drawer at peek: above the credit line that rides on the drawer.
+    const ctrlBottom = wide ? 16 : drawerOpen ? PEEK_PX + 34 : 104;
     const north = Math.abs(bearing) > 0.5;
     /** The mark is the compass: it points the map north if it is turned, otherwise shows the whole country. */
     const goHome = (e: React.MouseEvent) => {

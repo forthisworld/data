@@ -826,7 +826,7 @@ export function SeatView({ seat, house, stateName, districts, parent, parentHous
     return (
         <article>
             <Header eyebrow={assembly ? `Assembly seat${seat.number ? ` ${seat.number}` : ''} · ${stateName}` : `Lok Sabha seat · ${stateName}`} title={seat.name}
-                sub={m ? undefined : 'No sitting member'} />
+                sub={m ? `${assembly ? 'MLA' : 'MP'}: ${m.name} · ${m.partyShort ?? m.party}` : 'No sitting member'} />
 
             <Section title="Who governs here">
                 <ol>
