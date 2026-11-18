@@ -828,6 +828,8 @@ export function SeatView({ seat, house, stateName, districts, parent, parentHous
             <Header eyebrow={assembly ? `Assembly seat${seat.number ? ` ${seat.number}` : ''} · ${stateName}` : `Lok Sabha seat · ${stateName}`} title={seat.name}
                 sub={m ? `${assembly ? 'MLA' : 'MP'}: ${m.name} · ${m.partyShort ?? m.party}` : 'No sitting member'} />
 
+            {mplads && <MpladsSection info={mplads} sources={sources} country={country} seatName={seat.name} stateName={stateName} />}
+
             <Section title="Who governs here">
                 <ol>
                     <Tier tag="Union" name="Lok Sabha" does="Union law and budget" here={!assembly}>
@@ -848,8 +850,6 @@ export function SeatView({ seat, house, stateName, districts, parent, parentHous
                     {cities.map((c, i) => <CityTier key={c.id} city={c} sources={sources} last={i === cities.length - 1} among={assembly ? undefined : inside} />)}
                 </ol>
             </Section>
-
-            {mplads && <MpladsSection info={mplads} sources={sources} />}
 
             {districts.length > 0 && (
                 <Section title="Districts it covers (2011)">
@@ -958,9 +958,8 @@ export function SpotView({ stateName, districtName, mp, mpHouse, fund, mla, mlaH
                 {cities.map(c => (
                     <SpotCard key={c.id} tier="City" avatar={<span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-ftw-raised"><Building2 className="h-4 w-4 text-ftw-muted" /></span>}
                         name={c.name} onClick={mla ? () => onSeat(mla.id) : undefined}>
-                        <span className="font-semibold text-amber-700 dark:text-amber-300">{c.council.label}.</span>{' '}
-                        {c.council.lastElection && <>Last election {fmtDate(c.council.lastElection)}. </>}
-                        This assembly seat includes part of {c.name}; the city&apos;s edge is not drawn here yet.
+                        This seat includes part of {c.name}. <span className="font-semibold text-amber-700 dark:text-amber-300">{c.council.label}</span>
+                        {c.council.lastElection && <>; last election {fmtDate(c.council.lastElection)}</>}.
                     </SpotCard>
                 ))}
                 {!cities.length && !loading && (
@@ -1020,12 +1019,13 @@ interface MpladsWork {
 const pct = (a: number, b: number) => (b > 0 ? Math.round((a / b) * 100) : 0);
 const rupees = (n: number) => fmtInr({ value: n, currency: 'INR' });
 
-function MpladsSection({ info, sources }: { info: MpladsInfo; sources: SourceCitation[] }) {
+function MpladsSection({ info, sources, country, seatName, stateName }: { info: MpladsInfo; sources: SourceCitation[]; country: string; seatName: string; stateName: string }) {
     const m = info.seat;
-    const share = pct(m.paid, m.allocated);
+    // The headline is the step the MP controls: what has been proposed. Sanction and payment come after, and are not the MP's.
+    const proposed = pct(m.recommended.amount, m.allocated);
+    const paid = pct(m.paid, m.allocated);
     const cite = <Cite ids={[info.source.id]} sources={sources} />;
     const [works, setWorks] = useState<MpladsWork[] | null>(null);
-    const [all, setAll] = useState(false);
     useEffect(() => {
         setWorks(null);
         if (!info.worksUrl) return;
@@ -1033,39 +1033,60 @@ function MpladsSection({ info, sources }: { info: MpladsInfo; sources: SourceCit
         fetch(info.worksUrl).then(r => (r.ok ? r.json() : null)).then(j => { if (live && j) setWorks(j.works); }).catch(() => {});
         return () => { live = false; };
     }, [info.worksUrl]);
+    const ask = `/${country}/info-requests?${new URLSearchParams({
+        subject: `MPLADS works recommended for ${seatName} Lok Sabha constituency, ${ordinal(info.term)} Lok Sabha`,
+        body: [
+            `For the MPLADS funds of the ${seatName} Lok Sabha constituency (${stateName}) during the ${ordinal(info.term)} Lok Sabha, please provide:`,
+            '1. The list of works recommended by the Member of Parliament, with the date and amount of each recommendation.',
+            '2. For each work: whether it was sanctioned, the date and amount sanctioned, or the reason it is pending or was not sanctioned.',
+            '3. For each work: the amount released and paid, and the name of the implementing agency.',
+            '4. For each work: its present status, and the completion certificate where it is complete.',
+        ].join('\n'),
+    })}`;
 
     return (
-        <Section title={`MP's local area fund (MPLADS), ${ordinal(info.term)} Lok Sabha`}>
-            <div className="flex items-baseline gap-2">
-                <span className="text-3xl font-semibold tabular-nums tracking-tight">{share}%</span>
-                <span className="text-xs text-ftw-muted">of the allocation paid out so far{cite}</span>
+        <Section title={`Local fund (MPLADS), ${ordinal(info.term)} Lok Sabha`}>
+            <div className="flex items-end gap-3">
+                <span className="text-4xl font-semibold tabular-nums leading-none tracking-tight">{proposed}%</span>
+                <span className="pb-0.5 text-[13px] leading-snug text-ftw-muted">of the seat&apos;s {rupees(m.allocated)} fund<br />proposed as works so far{cite}</span>
             </div>
-            <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-ftw-raised">
-                <div className="h-full rounded-full bg-ftw-accent" style={{ width: `${Math.min(100, share)}%` }} />
+            <div className="relative mt-3 h-2 rounded-full bg-ftw-raised" role="img" aria-label={`${proposed}% proposed; all seats together ${info.nationalProposedShare}%`}>
+                <div className="absolute inset-y-0 left-0 rounded-full bg-ftw-accent" style={{ width: `${Math.min(100, proposed)}%` }} />
+                <div className="absolute -bottom-1 -top-1 w-0.5 rounded bg-ftw-text" style={{ left: `${Math.min(100, info.nationalProposedShare)}%` }} />
             </div>
-            <p className="mt-1.5 text-xs text-ftw-muted">
-                {rupees(m.paid)} paid of {rupees(m.allocated)} allocated. Across all MPs: {info.nationalPaidShare}%.
+            <p className="mt-2 text-xs leading-snug text-ftw-muted">
+                The line marks all seats together ({info.nationalProposedShare}%).
+                {info.rank && info.rank.of > 1 && <> In {stateName}: {ordinal(info.rank.n)} of {info.rank.of} seats, highest share first.</>}
             </p>
-            <dl className="mt-3 grid grid-cols-3 gap-2 text-center">
-                {([['Recommended', m.recommended], ['Sanctioned', m.sanctioned], ['Completed', m.completed]] as const).map(([label, v]) => (
+
+            <dl className="mt-4 grid grid-cols-3 gap-2 text-center">
+                {([['Proposed', m.recommended], ['Sanctioned', m.sanctioned], ['Completed', m.completed]] as const).map(([label, v]) => (
                     <div key={label} className="rounded-lg bg-ftw-raised p-2">
-                        <dt className="text-[11px] text-ftw-muted">{label}</dt>
-                        <dd className="text-base font-semibold tabular-nums">{v.count.toLocaleString('en-IN')}</dd>
-                        <dd className="text-[11px] tabular-nums text-ftw-muted">{rupees(v.amount)}</dd>
+                        <dd className="text-lg font-semibold tabular-nums leading-tight">{v.count.toLocaleString('en-IN')}</dd>
+                        <dt className="text-[11px] text-ftw-muted">works {label.toLowerCase()}</dt>
+                        <dd className="mt-0.5 text-[11px] tabular-nums text-ftw-faint">{rupees(v.amount)}</dd>
                     </div>
                 ))}
             </dl>
-            {m.mps.length > 1 && <p className="mt-2 text-xs text-ftw-muted">Includes works by {m.mps.join(' and ')} this term.</p>}
+            <p className="mt-3 text-[13px] leading-snug">
+                Paid out so far: <b className="font-semibold">{rupees(m.paid)}</b>, {paid}% of the fund. All seats together: {info.nationalPaidShare}%.
+            </p>
+            <p className="mt-1.5 text-xs leading-snug text-ftw-muted">
+                {m.mps.length > 1 ? `This seat has had more than one MP this term (${m.mps.join(', ')}); the figures cover all of them. ` : ''}
+                The MP proposes the works. Sanction and payment are recorded by the portal for each work, and are not the MP&apos;s own steps.
+            </p>
+
+            <div className="mt-3 flex flex-wrap gap-2">
+                <Link href={ask} className="inline-flex items-center gap-1.5 rounded-full bg-ftw-text px-3 py-1.5 text-xs font-semibold text-ftw-surface hover:opacity-90">
+                    <FileText className="h-3.5 w-3.5" /> Ask about these works (RTI draft)
+                </Link>
+            </div>
 
             {info.worksUrl && (
-                <div className="mt-4">
-                    <p className="mb-2 flex items-baseline justify-between text-xs font-semibold text-ftw-muted">
-                        <span>Works, largest first</span>
-                        {works && works.length > 6 && <button onClick={() => setAll(v => !v)} className="font-medium text-ftw-accent hover:underline">{all ? 'Fewer' : `All ${works.length}`}</button>}
-                    </p>
+                <More label={works ? `See the ${works.length} works, largest first` : 'See the works'}>
                     {!works && <p className="text-xs text-ftw-faint">Loading works…</p>}
                     <ul className="space-y-2">
-                        {(works ?? []).slice(0, all ? undefined : 6).map(w => (
+                        {(works ?? []).map(w => (
                             <li key={w.id} className="rounded-lg border border-ftw-line p-2.5 text-[13px] leading-snug">
                                 <p className="font-medium">{w.description || w.activity}</p>
                                 <p className="mt-0.5 text-xs text-ftw-muted">{w.activity}{w.agency ? ` · ${w.agency}` : ''}</p>
@@ -1073,14 +1094,14 @@ function MpladsSection({ info, sources }: { info: MpladsInfo; sources: SourceCit
                                     <p className="mt-0.5 text-xs text-ftw-muted">Paid to {w.vendors.map(v => `${v.name} (${rupees(v.paid)})`).join(', ')}</p>
                                 )}
                                 <p className="mt-1 flex flex-wrap gap-x-3 text-xs tabular-nums">
-                                    <span>{rupees(w.sanctioned?.amount ?? w.recommended.amount)} {w.sanctioned ? 'sanctioned' : 'recommended'}</span>
+                                    <span>{rupees(w.sanctioned?.amount ?? w.recommended.amount)} {w.sanctioned ? 'sanctioned' : 'proposed'}</span>
                                     <span className={w.paid ? '' : 'text-ftw-faint'}>{rupees(w.paid)} paid</span>
                                     <span className="text-ftw-muted">{w.completed ? `completed ${fmtDate(w.completed.date)}` : w.stage ?? ''}</span>
                                 </p>
                             </li>
                         ))}
                     </ul>
-                </div>
+                </More>
             )}
             <p className="mt-3 text-[11px] leading-snug text-ftw-faint">
                 From MoSPI&apos;s e-SAKSHI portal, read {fmtDate(info.asOf)}. &quot;Paid&quot; is what the portal calls expenditure on

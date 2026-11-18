@@ -665,7 +665,7 @@ export default function Atlas({ countryCode, countryName, data, initial }: Atlas
         return { at, stateSlug: state?.slug, stateName: state?.name, districtCode: district?.census2011Code, districtName: district?.name, ac, pc: pcKey ? seatById.get(pcKey) : undefined };
     }, [view, ready, seatGeo, isAc, seatById]);
 
-    // Mark the spot, and outline the unit it lies in for the lines now showing.
+    // Mark the spot, and outline the most local seat it lies in (the Lok Sabha seat when those lines show).
     useEffect(() => {
         const map = mapRef.current;
         if (!map || !ready) return;
@@ -677,7 +677,7 @@ export default function Atlas({ countryCode, countryName, data, initial }: Atlas
         } else spotMarker.current.setLngLat(spot.at);
         if (selectedRef.current) map.setFeatureState(selectedRef.current, { selected: false });
         const seat = mode === 'pc' ? spot.pc : spot.ac ?? spot.pc;
-        const target = mode === 'districts' || !seat
+        const target = !seat
             ? (spot.districtCode ? { source: 'districts', id: spot.districtCode } : null)
             : { source: isAc(seat.id) ? `ac-${seat.state}` : 'pc', id: seat.id };
         selectedRef.current = target && map.getSource(target.source) ? target : null;
