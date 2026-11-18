@@ -1,20 +1,16 @@
 /*
  * data.ftw service worker: makes the atlas installable and usable offline.
- *  - map boundaries, icons and built assets: cache first (they are versioned or rarely change)
+ *  - map boundaries, icons and built assets: cache first. Map files carry a hash of their content
+ *    in the URL (src/lib/geo-url.ts), so a rebuilt file is a new URL and is fetched again.
  *  - pages: network first, falling back to the last cached copy, then to the cached atlas
  *  - API calls: network only (search, MCP, contributions must be live)
  * Bump VERSION to drop old caches.
  */
-const VERSION = 'v7';
+const VERSION = 'v8';
 const STATIC = `ftw-static-${VERSION}`;
 const PAGES = `ftw-pages-${VERSION}`;
 const PRECACHE = [
     '/in',
-    '/geo/in/states.geojson',
-    '/geo/in/districts.geojson',
-    '/geo/in/india.geojson',
-    '/geo/in/labels.geojson',
-    '/geo/in/routes.geojson',
     '/icons/icon-192.png',
     '/icons/icon-512.png',
 ];

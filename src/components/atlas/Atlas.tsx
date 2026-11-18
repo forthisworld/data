@@ -29,6 +29,7 @@ import { PlaceView, RoadView, PersonView, RoadsView, SeatView, ROLE, shortName }
 import { loadSeats, paintSeats, showLines, seatFillLayers, SEAT_PALETTE, SEAT_ZOOM, type SeatGeo, type SeatPrefix } from './seats';
 import { PLACE_ALIASES } from '@/lib/place-aliases';
 import { atlasPath, parseAtlasPath, type AtlasRoute } from '@/lib/atlas-route';
+import { geoUrl } from '@/lib/geo-url';
 
 type Geom = GeoJSON.Polygon | GeoJSON.MultiPolygon;
 type Bounds = [[number, number], [number, number]];
@@ -278,8 +279,8 @@ export default function Atlas({ countryCode, countryName, data, initial }: Atlas
         const pal = SEAT_PALETTE[darkRef.current ? 'dark' : 'light'];
         const merge = (geo: Map<string, SeatGeo>) => { setSeatGeo(prev => new Map([...(prev ?? []), ...geo])); return geo; };
         seatLoad.current[prefix] ??= (prefix === 'pc'
-            ? loadSeats(map, 'pc', { polys: `/geo/${countryCode}/pc.geojson`, lines: `/geo/${countryCode}/pc-lines.geojson` }, pal, 'states-line')
-            : Promise.all(Object.keys(assemblies).map(st => loadSeats(map, 'ac', { polys: `/geo/${countryCode}/ac/${st}.geojson`, lines: `/geo/${countryCode}/ac/${st}-lines.geojson` }, pal, 'states-line', `ac-${st}`)))
+            ? loadSeats(map, 'pc', { polys: geoUrl(countryCode, 'pc.geojson'), lines: geoUrl(countryCode, 'pc-lines.geojson') }, pal, 'states-line')
+            : Promise.all(Object.keys(assemblies).map(st => loadSeats(map, 'ac', { polys: geoUrl(countryCode, `ac/${st}.geojson`), lines: geoUrl(countryCode, `ac/${st}-lines.geojson`) }, pal, 'states-line', `ac-${st}`)))
                 .then(all => { setAcLoaded(true); return new Map(all.flatMap(g => [...g])); })
         ).then(geo => {
             seatHit.current[prefix] = { layers: seatFillLayers(map, prefix), states: new Set([...geo.keys()].map(k => k.slice(0, k.indexOf(':')))) };
@@ -352,14 +353,14 @@ export default function Atlas({ countryCode, countryName, data, initial }: Atlas
             let india: GeoJSON.FeatureCollection, states: GeoJSON.FeatureCollection, districts: GeoJSON.FeatureCollection;
             try {
                 [india, states, districts] = await Promise.all(['india', 'states', 'districts'].map(f =>
-                    fetch(`/geo/${countryCode}/${f}.geojson`).then(r => { if (!r.ok) throw new Error(String(r.status)); return r.json(); })
+                    fetch(geoUrl(countryCode, `${f}.geojson`)).then(r => { if (!r.ok) throw new Error(String(r.status)); return r.json(); })
                 ));
             } catch {
                 setLoadError(true);
                 return;
             }
             const [labelJson, routeJson] = await Promise.all(['labels', 'routes'].map(f =>
-                fetch(`/geo/${countryCode}/${f}.geojson`).then(r => (r.ok ? r.json() : null)).catch(() => null)
+                fetch(geoUrl(countryCode, `${f}.geojson`)).then(r => (r.ok ? r.json() : null)).catch(() => null)
             ));
             const labels: Label[] = (labelJson?.features ?? []).map((f: GeoJSON.Feature<GeoJSON.Point, Record<string, string | number>>) => ({
                 name: String(f.properties.name), kind: f.properties.kind as 'state' | 'district', stateSlug: String(f.properties.stateSlug),
